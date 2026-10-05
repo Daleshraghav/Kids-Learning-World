@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Kids Learning World 🌈</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}?v=2">
+</head>
+
+<body>
+
+    <!-- Animated Background -->
+    <div class="background-shapes">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+
+    <!-- ================= HEADER ================= -->
+
+    <header class="navbar">
+
+        <div class="brand">
+            <div class="brand-icon">🌈</div>
+
+            <div>
+                <h2>Kids Learning</h2>
+                <span>Learn • Play • Grow</span>
+            </div>
+        </div>
+
+        <div class="header-badge">
+            🚀 Let's Learn!
+        </div>
+
+    </header>
+
+
+    <!-- ================= HOME ================= -->
+
+    <main id="homePage">
+
+        <section class="hero">
+
+            <div class="hero-left">
+
+                <div class="welcome-pill">
+                    ✨ Welcome little learner!
+                </div>
+
+                <h1>
+                    Make Learning
+                    <span>Fun & Magical!</span>
+                </h1>
+
+                <p>
+                    Explore alphabets, numbers, fruits,
+                    animals, colours and much more
+                    through fun interactive activities.
+                </p>
+
+                <button class="start-button"
+                        onclick="showCategory('abc')">
+
+                    🚀 Start Learning
+
+                    <span>→</span>
+
+                </button>
+
+            </div>
+
+
+            <div class="hero-right">
+
+                <div class="hero-orbit orbit-one"></div>
+                <div class="hero-orbit orbit-two"></div>
+
+                <div class="hero-kid">
+                    👦
+                </div>
+
+                <div class="floating-item book">
+                    📚
+                </div>
+
+                <div class="floating-item pencil">
+                    ✏️
+                </div>
+
+                <div class="floating-item star">
+                    ⭐
+                </div>
+
+                <div class="floating-item rocket">
+                    🚀
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= CATEGORY ================= -->
+
+        <section class="category-section">
+
+            <div class="section-heading">
+
+                <span>🎯</span>
+
+                <h2>
+                    What do you want to learn?
+                </h2>
+
+                <p>
+                    Pick a topic and let's explore!
+                </p>
+
+            </div>
+
+
+            <div class="category-grid">
+
+                <button class="category-card card-blue"
+                        onclick="showCategory('abc')">
+
+                    <div class="category-icon">
+                        🔤
+                    </div>
+
+                    <h3>ABC</h3>
+
+                    <p>Learn A to Z</p>
+
+                    <span class="arrow">→</span>
+
+                </button>
+
+
+                <button class="category-card card-purple"
+                        onclick="showCategory('days')">
+
+                    <div class="category-icon">
+                        📅
+                    </div>
+
+                    <h3>Days</h3>
+
+                    <p>Days of the week</p>
+
+                    <span class="arrow">→</span>
+
+                </button>
+
+
+                <button class="category-card card-pink"
+                        onclick="showCategory('months')">
+
+                    <div class="category-icon">
+                        🗓️
+                    </div>
+
+                    <h3>Months</h3>
+
+                    <p>Months of the year</p>
+
+                    <span class="arrow">→</span>
+
+                </button>
+
+
+                <button class="category-card card-orange"
+                        onclick="showCategory('tables')">
+
+                    <div class="category-icon">
+                        ✖️
+                    </div>
+
+                    <h3>Tables</h3>
+
+                    <p>Learn multiplication</p>
+
+                    <span class="arrow">→</span>
+
+                </button>
+
+
+                <button class="category-card card-red"
+                        onclick="showCategory('fruits')">
+
+                    <div class="category-icon">
+                        🍎
+                    </div>
+
+                    <h3>Fruits</h3>
+
+                    <p>Yummy fruits</p>
+
+                    <span class="arrow">→</span>
+
+                </button>
+
+
+                <button class="category-card card-green"
+                        onclick="showCategory('bodyparts')">
+
+                    <div class="category-icon">
+                        👦
+                    </div>
+
+                    <h3>Body Parts</h3>
+
+                    <p>Know your body</p>
+
+                    <span class="arrow">→</span>
+
+                </button>
+
+
+                <button class="category-card card-yellow"
+                        onclick="showCategory('animals')">
+
+                    <div class="category-icon">
+                        🐶
+                    </div>
+
+                    <h3>Animals</h3>
+
+                    <p>Meet the animals</p>
+
+                    <span class="arrow">→</span>
+
+                </button>
+
+
+                <button class="category-card card-cyan"
+                        onclick="showCategory('colours')">
+
+                    <div class="category-icon">
+                        🎨
+                    </div>
+
+                    <h3>Colours</h3>
+
+                    <p>Explore colours</p>
+
+                    <span class="arrow">→</span>
+
+                </button>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- ================= LEARNING PAGE ================= -->
+
+    <section id="learningPage" class="learning-page">
+
+        <div class="learning-top">
+
+            <button class="back-button"
+                    onclick="goHome()">
+
+                ← Back
+
+            </button>
+
+            <div id="learningIcon">
+                🔤
+            </div>
+
+            <div>
+                <h1 id="learningTitle">
+                    Learn A to Z
+                </h1>
+
+                <p id="learningSubtitle">
+                    Let's learn together!
+                </p>
+            </div>
+
+        </div>
+
+
+        <div id="learningContent"
+             class="learning-content">
+        </div>
+
+    </section>
+
+
+    <!-- JS -->
+
+    <script src="{{ url_for('static', filename='script.js') }}?v=2"></script>
+
+</body>
+</html>
