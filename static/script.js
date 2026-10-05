@@ -696,384 +696,477 @@ function speak(text) {
 
     window.speechSynthesis.speak(speech);
 }
-/* =====================================================
-   HINDI ALPHABET DATA
-   ===================================================== */
 
-const hindiAlphabets = [
+/* =========================================================
+   HINDI ALPHABET LEARNING SYSTEM
+   ========================================================= */
+
+const hindiAlphabet = [
 
     {
         letter: "अ",
         word: "अनार",
-        meaning: "Pomegranate",
-        sound: "अ से अनार"
+        meaning: "अनार एक स्वादिष्ट फल है।",
+        english: "Pomegranate",
+        emoji: "🍎"
     },
 
     {
         letter: "आ",
         word: "आम",
-        meaning: "Mango",
-        sound: "आ से आम"
+        meaning: "आम एक मीठा और स्वादिष्ट फल है।",
+        english: "Mango",
+        emoji: "🥭"
     },
 
     {
         letter: "इ",
         word: "इमली",
-        meaning: "Tamarind",
-        sound: "इ से इमली"
+        meaning: "इमली का स्वाद खट्टा होता है।",
+        english: "Tamarind",
+        emoji: "🌿"
     },
 
     {
         letter: "ई",
         word: "ईख",
-        meaning: "Sugarcane",
-        sound: "ई से ईख"
+        meaning: "ईख से गन्ने का रस बनाया जाता है।",
+        english: "Sugarcane",
+        emoji: "🌱"
     },
 
     {
         letter: "उ",
         word: "उल्लू",
-        meaning: "Owl",
-        sound: "उ से उल्लू"
+        meaning: "उल्लू एक पक्षी है जो रात में जागता है।",
+        english: "Owl",
+        emoji: "🦉"
     },
 
     {
         letter: "ऊ",
         word: "ऊन",
-        meaning: "Wool",
-        sound: "ऊ से ऊन"
+        meaning: "ऊन भेड़ से मिलने वाला मुलायम रेशा है।",
+        english: "Wool",
+        emoji: "🧶"
     },
 
     {
         letter: "ऋ",
         word: "ऋषि",
-        meaning: "Sage",
-        sound: "ऋ से ऋषि"
+        meaning: "ऋषि ज्ञानी और तपस्वी व्यक्ति को कहा जाता है।",
+        english: "Sage",
+        emoji: "🧘"
     },
 
     {
         letter: "ए",
         word: "एड़ी",
-        meaning: "Heel",
-        sound: "ए से एड़ी"
+        meaning: "एड़ी पैर का पिछला हिस्सा होती है।",
+        english: "Heel",
+        emoji: "🦶"
     },
 
     {
         letter: "ऐ",
         word: "ऐनक",
-        meaning: "Spectacles",
-        sound: "ऐ से ऐनक"
+        meaning: "ऐनक आँखों की सहायता के लिए पहनी जाती है।",
+        english: "Glasses",
+        emoji: "👓"
     },
 
     {
         letter: "ओ",
         word: "ओखली",
-        meaning: "Mortar",
-        sound: "ओ से ओखली"
+        meaning: "ओखली में अनाज या मसाले कूटे जाते हैं।",
+        english: "Mortar",
+        emoji: "🥣"
     },
 
     {
         letter: "औ",
         word: "औरत",
-        meaning: "Woman",
-        sound: "औ से औरत"
+        meaning: "औरत एक वयस्क महिला को कहा जाता है।",
+        english: "Woman",
+        emoji: "👩"
     },
 
     {
         letter: "अं",
         word: "अंगूर",
-        meaning: "Grapes",
-        sound: "अं से अंगूर"
+        meaning: "अंगूर छोटे और मीठे फल होते हैं।",
+        english: "Grapes",
+        emoji: "🍇"
     },
 
     {
         letter: "अः",
         word: "दुःख",
-        meaning: "Sorrow",
-        sound: "अः का उदाहरण दुःख"
+        meaning: "दुःख का अर्थ है मन में उदासी या परेशानी।",
+        english: "Sorrow",
+        emoji: "💙"
     },
-
-
-    /* ================= व्यंजन ================= */
 
     {
         letter: "क",
         word: "कमल",
-        meaning: "Lotus",
-        sound: "क से कमल"
+        meaning: "कमल एक सुंदर फूल है।",
+        english: "Lotus",
+        emoji: "🌸"
     },
 
     {
         letter: "ख",
         word: "खरगोश",
-        meaning: "Rabbit",
-        sound: "ख से खरगोश"
+        meaning: "खरगोश एक छोटा और तेज दौड़ने वाला जानवर है।",
+        english: "Rabbit",
+        emoji: "🐇"
     },
 
     {
         letter: "ग",
         word: "गमला",
-        meaning: "Flower Pot",
-        sound: "ग से गमला"
+        meaning: "गमले में पौधे लगाए जाते हैं।",
+        english: "Flower Pot",
+        emoji: "🪴"
     },
 
     {
         letter: "घ",
         word: "घर",
-        meaning: "House",
-        sound: "घ से घर"
+        meaning: "घर वह स्थान है जहाँ हम रहते हैं।",
+        english: "House",
+        emoji: "🏠"
     },
 
     {
         letter: "ङ",
-        word: "गंगा",
-        meaning: "Ganga River",
-        sound: "ङ का प्रयोग गंगा शब्द में"
+        word: "ङ",
+        meaning: "यह हिंदी वर्णमाला का एक व्यंजन है।",
+        english: "Hindi letter",
+        emoji: "🔤"
     },
 
     {
         letter: "च",
         word: "चम्मच",
-        meaning: "Spoon",
-        sound: "च से चम्मच"
+        meaning: "चम्मच से भोजन खाया जाता है।",
+        english: "Spoon",
+        emoji: "🥄"
     },
 
     {
         letter: "छ",
-        word: "छतरी",
-        meaning: "Umbrella",
-        sound: "छ से छतरी"
+        word: "छाता",
+        meaning: "छाता बारिश से बचने के लिए इस्तेमाल होता है।",
+        english: "Umbrella",
+        emoji: "☂️"
     },
 
     {
         letter: "ज",
         word: "जहाज",
-        meaning: "Ship",
-        sound: "ज से जहाज"
+        meaning: "जहाज पानी में चलने वाला बड़ा वाहन है।",
+        english: "Ship",
+        emoji: "🚢"
     },
 
     {
         letter: "झ",
         word: "झंडा",
-        meaning: "Flag",
-        sound: "झ से झंडा"
+        meaning: "झंडा किसी देश या संस्था का प्रतीक हो सकता है।",
+        english: "Flag",
+        emoji: "🇮🇳"
     },
 
     {
         letter: "ञ",
-        word: "ज्ञान",
-        meaning: "Knowledge",
-        sound: "ञ का प्रयोग ज्ञान शब्द में"
+        word: "ञ",
+        meaning: "यह हिंदी वर्णमाला का एक व्यंजन है।",
+        english: "Hindi letter",
+        emoji: "🔤"
     },
 
     {
         letter: "ट",
         word: "टमाटर",
-        meaning: "Tomato",
-        sound: "ट से टमाटर"
+        meaning: "टमाटर एक लाल रंग की सब्जी है।",
+        english: "Tomato",
+        emoji: "🍅"
     },
 
     {
         letter: "ठ",
         word: "ठेला",
-        meaning: "Cart",
-        sound: "ठ से ठेला"
+        meaning: "ठेला सामान ले जाने के लिए इस्तेमाल होता है।",
+        english: "Cart",
+        emoji: "🛒"
     },
 
     {
         letter: "ड",
         word: "डमरू",
-        meaning: "Small Drum",
-        sound: "ड से डमरू"
+        meaning: "डमरू एक छोटा वाद्य यंत्र है।",
+        english: "Drum",
+        emoji: "🥁"
     },
 
     {
         letter: "ढ",
         word: "ढक्कन",
-        meaning: "Lid",
-        sound: "ढ से ढक्कन"
+        meaning: "ढक्कन किसी बर्तन को ढकने के लिए होता है।",
+        english: "Lid",
+        emoji: "🥣"
     },
 
     {
         letter: "ण",
-        word: "गणेश",
-        meaning: "Ganesha",
-        sound: "ण का प्रयोग गणेश शब्द में"
+        word: "ण",
+        meaning: "यह हिंदी वर्णमाला का एक व्यंजन है।",
+        english: "Hindi letter",
+        emoji: "🔤"
     },
 
     {
         letter: "त",
         word: "तरबूज",
-        meaning: "Watermelon",
-        sound: "त से तरबूज"
+        meaning: "तरबूज गर्मियों में खाया जाने वाला रसदार फल है।",
+        english: "Watermelon",
+        emoji: "🍉"
     },
 
     {
         letter: "थ",
-        word: "थर्मस",
-        meaning: "Thermos",
-        sound: "थ से थर्मस"
+        word: "थैला",
+        meaning: "थैले में सामान रखा जाता है।",
+        english: "Bag",
+        emoji: "👜"
     },
 
     {
         letter: "द",
         word: "दवात",
-        meaning: "Inkpot",
-        sound: "द से दवात"
+        meaning: "दवात में स्याही रखी जाती थी।",
+        english: "Ink Pot",
+        emoji: "🖋️"
     },
 
     {
         letter: "ध",
         word: "धनुष",
-        meaning: "Bow",
-        sound: "ध से धनुष"
+        meaning: "धनुष एक प्राचीन हथियार है।",
+        english: "Bow",
+        emoji: "🏹"
     },
 
     {
         letter: "न",
         word: "नल",
-        meaning: "Tap",
-        sound: "न से नल"
+        meaning: "नल से पानी आता है।",
+        english: "Tap",
+        emoji: "🚰"
     },
 
     {
         letter: "प",
         word: "पतंग",
-        meaning: "Kite",
-        sound: "प से पतंग"
+        meaning: "पतंग हवा में उड़ाई जाती है।",
+        english: "Kite",
+        emoji: "🪁"
     },
 
     {
         letter: "फ",
         word: "फल",
-        meaning: "Fruit",
-        sound: "फ से फल"
+        meaning: "फल हमारे लिए पौष्टिक भोजन हैं।",
+        english: "Fruit",
+        emoji: "🍎"
     },
 
     {
         letter: "ब",
-        word: "बकरी",
-        meaning: "Goat",
-        sound: "ब से बकरी"
+        word: "बतख",
+        meaning: "बतख एक पक्षी है जो पानी में तैर सकती है।",
+        english: "Duck",
+        emoji: "🦆"
     },
 
     {
         letter: "भ",
         word: "भालू",
-        meaning: "Bear",
-        sound: "भ से भालू"
+        meaning: "भालू एक बड़ा जंगली जानवर है।",
+        english: "Bear",
+        emoji: "🐻"
     },
 
     {
         letter: "म",
         word: "मछली",
-        meaning: "Fish",
-        sound: "म से मछली"
+        meaning: "मछली पानी में रहने वाला जीव है।",
+        english: "Fish",
+        emoji: "🐟"
     },
 
     {
         letter: "य",
-        word: "यमराज",
-        meaning: "Yamraj",
-        sound: "य से यमराज"
+        word: "यज्ञ",
+        meaning: "यज्ञ एक धार्मिक अनुष्ठान है।",
+        english: "Sacred Ritual",
+        emoji: "🔥"
     },
 
     {
         letter: "र",
         word: "रथ",
-        meaning: "Chariot",
-        sound: "र से रथ"
+        meaning: "रथ पहियों वाला एक वाहन है।",
+        english: "Chariot",
+        emoji: "🏇"
     },
 
     {
         letter: "ल",
         word: "लट्टू",
-        meaning: "Spinning Top",
-        sound: "ल से लट्टू"
+        meaning: "लट्टू बच्चों का एक घूमने वाला खिलौना है।",
+        english: "Spinning Top",
+        emoji: "🌀"
     },
 
     {
         letter: "व",
         word: "वन",
-        meaning: "Forest",
-        sound: "व से वन"
+        meaning: "वन में बहुत सारे पेड़ और पौधे होते हैं।",
+        english: "Forest",
+        emoji: "🌳"
     },
 
     {
         letter: "श",
         word: "शेर",
-        meaning: "Lion",
-        sound: "श से शेर"
+        meaning: "शेर एक शक्तिशाली जंगली जानवर है।",
+        english: "Lion",
+        emoji: "🦁"
     },
 
     {
         letter: "ष",
         word: "षट्कोण",
-        meaning: "Hexagon",
-        sound: "ष से षट्कोण"
+        meaning: "षट्कोण छह भुजाओं वाली आकृति है।",
+        english: "Hexagon",
+        emoji: "⬡"
     },
 
     {
         letter: "स",
         word: "सूरज",
-        meaning: "Sun",
-        sound: "स से सूरज"
+        meaning: "सूरज हमें प्रकाश और गर्मी देता है।",
+        english: "Sun",
+        emoji: "☀️"
     },
 
     {
         letter: "ह",
         word: "हाथी",
-        meaning: "Elephant",
-        sound: "ह से हाथी"
+        meaning: "हाथी एक बहुत बड़ा जानवर है।",
+        english: "Elephant",
+        emoji: "🐘"
     },
 
     {
         letter: "क्ष",
         word: "क्षमा",
-        meaning: "Forgiveness",
-        sound: "क्ष से क्षमा"
+        meaning: "क्षमा का अर्थ है किसी की गलती को माफ करना।",
+        english: "Forgiveness",
+        emoji: "❤️"
     },
 
     {
         letter: "त्र",
         word: "त्रिशूल",
-        meaning: "Trident",
-        sound: "त्र से त्रिशूल"
+        meaning: "त्रिशूल तीन नुकीले सिरों वाला प्रतीक है।",
+        english: "Trident",
+        emoji: "🔱"
     },
 
     {
         letter: "ज्ञ",
         word: "ज्ञान",
-        meaning: "Knowledge",
-        sound: "ज्ञ से ज्ञान"
+        meaning: "ज्ञान का अर्थ है किसी विषय की समझ और जानकारी।",
+        english: "Knowledge",
+        emoji: "📚"
     }
 
 ];
 
 
-/* =====================================================
-   CREATE HINDI CARDS
-   ===================================================== */
+/* =========================================================
+   OPEN HINDI ALPHABET
+   ========================================================= */
 
-const hindiGrid = document.getElementById("hindiGrid");
+function openHindiAlphabet() {
+
+    const homePage = document.getElementById("homePage");
+    const learningPage = document.getElementById("learningPage");
+
+    if (homePage) {
+        homePage.style.display = "none";
+    }
+
+    if (learningPage) {
+        learningPage.style.display = "block";
+    }
+
+    const icon = document.getElementById("learningIcon");
+    const title = document.getElementById("learningTitle");
+    const subtitle = document.getElementById("learningSubtitle");
+    const content = document.getElementById("learningContent");
+
+    if (icon) {
+        icon.textContent = "🇮🇳";
+    }
+
+    if (title) {
+        title.textContent = "हिंदी वर्णमाला";
+    }
+
+    if (subtitle) {
+        subtitle.textContent = "अ से ज्ञ तक हिंदी अक्षर सीखें!";
+    }
+
+    if (!content) return;
+
+    content.innerHTML = "";
+
+    const heading = document.createElement("div");
+
+    heading.className = "hindi-learning-heading";
+
+    heading.innerHTML = `
+        <h2>🌈 हिंदी अक्षर सीखें</h2>
+        <p>किसी भी अक्षर पर क्लिक करें और उसका उच्चारण सुनें 🔊</p>
+    `;
+
+    content.appendChild(heading);
 
 
-if (hindiGrid) {
+    const grid = document.createElement("div");
 
-    hindiAlphabets.forEach((item) => {
+    grid.className = "hindi-grid";
+
+
+    hindiAlphabet.forEach((item) => {
 
         const card = document.createElement("div");
 
         card.className = "hindi-card";
 
-        card.innerHTML = `
 
+        card.innerHTML = `
             <div class="hindi-letter">
                 ${item.letter}
             </div>
 
             <div class="hindi-word">
-                ${item.word}
+                ${item.emoji} ${item.word}
             </div>
 
             <div class="hindi-meaning">
@@ -1082,57 +1175,68 @@ if (hindiGrid) {
 
             <button
                 class="hindi-sound-btn"
-                onclick="speakHindi('${item.sound}')"
-                aria-label="Listen to ${item.sound}"
-            >
-                🔊
-            </button>
+                onclick="speakHindi('${item.letter}', '${item.word}')"
+                aria-label="उच्चारण सुनें">
 
+                🔊
+
+            </button>
         `;
 
-        hindiGrid.appendChild(card);
+
+        /* Card par click karne par bhi sound */
+
+        card.addEventListener("click", function(event) {
+
+            if (event.target.closest(".hindi-sound-btn")) {
+                return;
+            }
+
+            speakHindi(item.letter, item.word);
+
+        });
+
+
+        grid.appendChild(card);
 
     });
 
+
+    content.appendChild(grid);
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
 }
 
 
-/* =====================================================
-   HINDI TEXT TO SPEECH
-   ===================================================== */
+/* =========================================================
+   HINDI PRONUNCIATION
+   ========================================================= */
 
-function speakHindi(text) {
+function speakHindi(letter, word) {
 
     if (!("speechSynthesis" in window)) {
 
-        alert(
-            "Sorry! Your browser does not support voice playback."
-        );
+        alert("Aapke browser mein voice support available nahi hai.");
 
         return;
     }
 
 
-    // Agar pehle se koi sound chal raha hai
     window.speechSynthesis.cancel();
+
+
+    const text = `${letter} से ${word}`;
 
 
     const speech = new SpeechSynthesisUtterance(text);
 
 
-    // Hindi language
     speech.lang = "hi-IN";
-
-
-    // Natural child-friendly speed
-    speech.rate = 0.85;
-
-
-    // Normal pitch
-    speech.pitch = 1;
-
-
-    // Volume
+    speech.rate = 0.75;
+    speech.pitch = 1.05;
     speech.volume = 1;
 
 
