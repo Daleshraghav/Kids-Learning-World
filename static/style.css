@@ -1577,3 +1577,194 @@ body {
     .start-button {
         margin-left: auto;}
         margin-righ
+
+   /* =========================================
+   HINDI ALPHABET LEARNING SECTION
+   ========================================= */
+
+.hindi-section {
+    width: 100%;
+    max-width: 1200px;
+    margin: 70px auto 40px;
+    padding: 30px 20px;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.hindi-header {
+    margin-bottom: 30px;
+}
+
+.hindi-badge {
+    display: inline-block;
+    padding: 8px 16px;
+    border-radius: 25px;
+    background: linear-gradient(135deg, #fff0f7, #f0edff);
+    color: #7b4bb7;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+.hindi-header h2 {
+    margin: 5px 0 8px;
+    font-size: clamp(28px, 5vw, 42px);
+    font-weight: 800;
+    color: #243f73;
+}
+
+.hindi-header p {
+    margin: 0 auto;
+    color: #7c8aa5;
+    font-size: 15px;
+    max-width: 600px;
+}
+
+
+/* Hindi alphabet cards */
+
+.hindi-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+    width: 100%;
+    max-width: 1050px;
+    margin: 0 auto;
+}
+
+.hindi-card {
+    position: relative;
+    min-height: 175px;
+    padding: 22px 15px;
+    border-radius: 24px;
+    background: linear-gradient(145deg, #ffffff, #f8f7ff);
+    border: 1px solid rgba(120, 130, 180, 0.12);
+    box-shadow: 0 10px 30px rgba(70, 80, 130, 0.10);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.25s ease;
+    overflow: hidden;
+}
+
+.hindi-card::before {
+    content: "";
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: rgba(255, 105, 180, 0.08);
+    top: -35px;
+    right: -30px;
+}
+
+.hindi-card:hover {
+    transform: translateY(-7px);
+    box-shadow: 0 16px 35px rgba(70, 80, 130, 0.16);
+}
+
+.hindi-letter {
+    position: relative;
+    z-index: 1;
+    font-size: 48px;
+    line-height: 1.1;
+    font-weight: 800;
+    color: #e84c9a;
+    margin-bottom: 8px;
+}
+
+.hindi-word {
+    position: relative;
+    z-index: 1;
+    font-size: 19px;
+    font-weight: 700;
+    color: #294474;
+    margin-bottom: 4px;
+}
+
+.hindi-meaning {
+    position: relative;
+    z-index: 1;
+    font-size: 13px;
+    color: #7d879d;
+    margin-bottom: 12px;
+}
+
+
+/* Sound button */
+
+.hindi-sound-btn {
+    position: relative;
+    z-index: 2;
+    border: none;
+    cursor: pointer;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #ff4fa3, #a84de8);
+    color: white;
+    font-size: 19px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 6px 15px rgba(190, 70, 180, 0.25);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.hindi-sound-btn:hover {
+    transform: scale(1.08);
+    box-shadow: 0 8px 20px rgba(190, 70, 180, 0.35);
+}
+
+.hindi-sound-btn:active {
+    transform: scale(0.94);
+}
+
+
+/* Mobile */
+
+@media (max-width: 800px) {
+    .hindi-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 14px;
+    }
+
+    .hindi-card {
+        min-height: 160px;
+        padding: 18px 10px;
+    }
+
+    .hindi-letter {
+        font-size: 42px;
+    }
+}
+
+@media (max-width: 550px) {
+    .hindi-section {
+        padding: 25px 12px;
+        margin-top: 45px;
+    }
+
+    .hindi-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+
+    .hindi-card {
+        min-height: 155px;
+        border-radius: 20px;
+    }
+
+    .hindi-letter {
+        font-size: 40px;
+    }
+
+    .hindi-word {
+        font-size: 17px;
+    }
+
+    .hindi-meaning {
+        font-size: 12px;
+    }
+}
