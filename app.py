@@ -1,46 +1,13 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, jsonify
 
 app = Flask(__name__)
 
-
-@app.route("/")
-def home():
-    return render_template("index.html")
-
-
-if __name__ == "__main__":
-    app.run(debug=True)
-@app.route("/api/table/<int:number>")
-def get_table(number):
-    if number < 2 or number > 220:
-        return jsonify({
-            "error": "Table must be between 2 and 220"
-        }), 400
-
-    table = []
-
-    for i in range(1, 11):
-        table.append({
-            "question": f"{number} × {i}",
-            "answer": number * i
-        })
-
-    return jsonify(table)
-
-
-if __name__ == "__main__":
-    app.run(
-        host="127.0.0.1",
-        port=5000,
-        debug=True,
-        use_reloader=False
-    )
 
 # -----------------------------
 # ALPHABETS
 # -----------------------------
 
-alphabet_data = [
+alphabet = [
     {"letter": "A", "small": "a", "word": "Apple", "emoji": "🍎"},
     {"letter": "B", "small": "b", "word": "Ball", "emoji": "⚽"},
     {"letter": "C", "small": "c", "word": "Cat", "emoji": "🐱"},
@@ -122,9 +89,9 @@ fruits = [
     {"name": "Peach", "emoji": "🍑"},
     {"name": "Pear", "emoji": "🍐"},
     {"name": "Kiwi", "emoji": "🥝"},
-    {"name": "Papaya", "emoji": "🥭"},
     {"name": "Coconut", "emoji": "🥥"},
-    {"name": "Lemon", "emoji": "🍋"}
+    {"name": "Lemon", "emoji": "🍋"},
+    {"name": "Papaya", "emoji": "🧡"}
 ]
 
 
@@ -195,7 +162,16 @@ colors = [
 
 @app.route("/")
 def home():
-    return render_template("index.html")
+    return render_template(
+        "index.html",
+        alphabet=alphabet,
+        days=days,
+        months=months,
+        fruits=fruits,
+        body_parts=body_parts,
+        animals=animals,
+        colors=colors
+    )
 
 
 # -----------------------------
@@ -204,7 +180,7 @@ def home():
 
 @app.route("/api/alphabet")
 def get_alphabet():
-    return jsonify(alphabet_data)
+    return jsonify(alphabet)
 
 
 @app.route("/api/days")
@@ -243,9 +219,10 @@ def get_colors():
 
 @app.route("/api/table/<int:number>")
 def get_table(number):
-
     if number < 2 or number > 220:
-        return jsonify({"error": "Table must be between 2 and 220"}), 400
+        return jsonify({
+            "error": "Table must be between 2 and 220"
+        }), 400
 
     table = []
 
