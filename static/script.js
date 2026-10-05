@@ -1183,27 +1183,15 @@ function openHindiAlphabet() {
             </button>
         `;
 
-
-        /* Card par click karne par bhi sound */
-
 card.addEventListener("click", function(event) {
 
     if (event.target.closest(".hindi-sound-btn")) {
         return;
     }
 
-    // ✨ Card animation
-    card.classList.remove("card-active");
-
-    void card.offsetWidth;
-
-    card.classList.add("card-active");
-
-    // 🔊 Hindi pronunciation
     speakHindi(item.letter, item.word);
 
-});
-        content.appendChild(grid);
+}); content.appendChild(grid);
 
     window.scrollTo({
         top: 0,
