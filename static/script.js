@@ -773,21 +773,27 @@ const hindiAlphabet = [
 // SHOW CATEGORY
 // ============================================================
 
-function showCategory(category) {
+function startLearning() {
 
-    currentCategory = category;
+    const categorySection =
+        document.getElementById("categorySection");
 
-    if (!elementExists(homePage) ||
-        !elementExists(learningPage)) {
+    if (categorySection) {
 
-        console.error(
-            "Learning page elements not found."
-        );
+        categorySection.style.display = "block";
 
-        return;
+        setTimeout(() => {
+
+            categorySection.scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
+
+        }, 100);
 
     }
 
+}
 
     homePage.style.display = "none";
 
