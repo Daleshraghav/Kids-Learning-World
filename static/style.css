@@ -7085,3 +7085,1628 @@ button:focus-visible {
 /* =========================================================
    FINAL
    ========================================================= */
+
+/* =========================================================
+   🚀 KIDS LEARNING WORLD - COMPLETE VISUAL UPGRADE
+   Add this at the VERY END of style.css
+========================================================= */
+
+
+/* =========================================================
+   GLOBAL SMOOTH EFFECTS
+========================================================= */
+
+button,
+.category-card,
+.learning-menu-card,
+.adventure-card,
+.hindi-card,
+.learning-card {
+    -webkit-tap-highlight-color: transparent;
+}
+
+button:focus-visible,
+.category-card:focus-visible,
+.learning-menu-card:focus-visible,
+.adventure-card:focus-visible {
+    outline: 4px solid rgba(123, 97, 255, 0.25);
+    outline-offset: 4px;
+}
+
+
+/* =========================================================
+   LEARNING TOP UPGRADE
+========================================================= */
+
+.learning-top {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+
+    max-width: 1400px;
+    margin: 0 auto 35px;
+
+    padding: 20px 25px;
+
+    border-radius: 30px;
+
+    background: rgba(255, 255, 255, 0.78);
+    backdrop-filter: blur(18px);
+
+    box-shadow:
+        0 15px 45px rgba(70, 80, 120, 0.10);
+
+    animation: learningTopIn 0.7s ease both;
+}
+
+@keyframes learningTopIn {
+    from {
+        opacity: 0;
+        transform: translateY(-25px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* =========================================================
+   BACK BUTTON
+========================================================= */
+
+.back-button {
+    border: none;
+    cursor: pointer;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 100px;
+
+    padding: 12px 18px;
+
+    border-radius: 16px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #eef2ff,
+            #e7ddff
+        );
+
+    color: #5b4b9a;
+
+    font-size: 15px;
+    font-weight: 800;
+
+    box-shadow:
+        0 8px 20px rgba(90, 70, 150, 0.10);
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease,
+        background 0.3s ease;
+}
+
+.back-button:hover {
+    transform: translateX(-5px) scale(1.03);
+
+    box-shadow:
+        0 12px 25px rgba(90, 70, 150, 0.16);
+}
+
+.back-button:active {
+    transform: scale(0.96);
+}
+
+
+/* =========================================================
+   LEARNING ICON
+========================================================= */
+
+#learningIcon {
+    width: 72px;
+    height: 72px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 23px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #fff1f7,
+            #eee5ff,
+            #e2f6ff
+        );
+
+    font-size: 38px;
+
+    box-shadow:
+        0 12px 28px rgba(80, 70, 130, 0.12);
+
+    animation:
+        learningIconFloat 3s ease-in-out infinite;
+}
+
+@keyframes learningIconFloat {
+    0%,
+    100% {
+        transform: translateY(0) rotate(0deg);
+    }
+
+    50% {
+        transform: translateY(-6px) rotate(3deg);
+    }
+}
+
+
+#learningTitle {
+    color: #273c75;
+
+    font-size: clamp(26px, 4vw, 40px);
+
+    font-weight: 900;
+
+    line-height: 1.1;
+}
+
+#learningSubtitle {
+    margin-top: 5px;
+
+    color: #7b8498;
+
+    font-size: 15px;
+
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   LEARNING MENU PAGE
+========================================================= */
+
+.learning-menu-page {
+    position: relative;
+}
+
+.learning-menu-page::before {
+    content: "✨";
+
+    position: fixed;
+
+    top: 18%;
+    left: 4%;
+
+    font-size: 28px;
+
+    opacity: 0.6;
+
+    animation: sparkleFloat 4s ease-in-out infinite;
+
+    pointer-events: none;
+}
+
+.learning-menu-page::after {
+    content: "⭐";
+
+    position: fixed;
+
+    right: 5%;
+    bottom: 18%;
+
+    font-size: 30px;
+
+    opacity: 0.6;
+
+    animation:
+        sparkleFloat 4s ease-in-out infinite 1s;
+
+    pointer-events: none;
+}
+
+@keyframes sparkleFloat {
+    0%,
+    100% {
+        transform:
+            translateY(0)
+            rotate(0deg);
+    }
+
+    50% {
+        transform:
+            translateY(-18px)
+            rotate(15deg);
+    }
+}
+
+
+/* =========================================================
+   ADVENTURE SECTION
+========================================================= */
+
+.adventure-heading {
+    text-align: center;
+
+    max-width: 800px;
+
+    margin: 15px auto 30px;
+
+    animation:
+        adventureTitle 0.8s ease both;
+}
+
+@keyframes adventureTitle {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.adventure-heading h2 {
+    margin: 0;
+
+    color: #273c75;
+
+    font-size: clamp(28px, 4vw, 42px);
+
+    font-weight: 900;
+}
+
+.adventure-heading p {
+    margin-top: 8px;
+
+    color: #7b8498;
+
+    font-size: 16px;
+
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   ADVENTURE GRID
+========================================================= */
+
+.adventure-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 25px;
+
+    max-width: 1400px;
+
+    margin: 0 auto 55px;
+}
+
+
+/* =========================================================
+   ADVENTURE CARD
+========================================================= */
+
+.adventure-card {
+    position: relative;
+
+    min-height: 245px;
+
+    padding: 30px;
+
+    border: none;
+
+    border-radius: 32px;
+
+    overflow: hidden;
+
+    cursor: pointer;
+
+    text-align: left;
+
+    box-shadow:
+        0 15px 35px rgba(60, 70, 110, 0.12);
+
+    transition:
+        transform 0.4s cubic-bezier(.2,.8,.2,1),
+        box-shadow 0.4s ease;
+}
+
+
+/* BIG DECORATIVE CIRCLE */
+
+.adventure-card::before {
+    content: "";
+
+    position: absolute;
+
+    width: 180px;
+    height: 180px;
+
+    right: -60px;
+    top: -60px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255,255,255,0.35);
+
+    transition:
+        transform 0.5s ease;
+}
+
+
+/* SECOND CIRCLE */
+
+.adventure-card::after {
+    content: "";
+
+    position: absolute;
+
+    width: 90px;
+    height: 90px;
+
+    left: -30px;
+    bottom: -30px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255,255,255,0.22);
+
+    transition:
+        transform 0.5s ease;
+}
+
+
+.adventure-card:hover {
+    transform:
+        translateY(-12px)
+        scale(1.02);
+
+    box-shadow:
+        0 28px 55px rgba(50,60,100,0.20);
+}
+
+.adventure-card:hover::before {
+    transform: scale(1.5);
+}
+
+.adventure-card:hover::after {
+    transform: scale(1.4);
+}
+
+
+/* =========================================================
+   ADVENTURE ICON
+========================================================= */
+
+.adventure-icon {
+    position: relative;
+
+    z-index: 3;
+
+    width: 82px;
+    height: 82px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 25px;
+
+    background:
+        rgba(255,255,255,0.72);
+
+    font-size: 44px;
+
+    box-shadow:
+        0 12px 25px rgba(60,70,100,0.10);
+
+    transition:
+        transform 0.4s ease;
+}
+
+.adventure-card:hover .adventure-icon {
+    transform:
+        rotate(-7deg)
+        scale(1.12);
+}
+
+
+/* =========================================================
+   ADVENTURE TEXT
+========================================================= */
+
+.adventure-card h3 {
+    position: relative;
+
+    z-index: 3;
+
+    margin-top: 22px;
+
+    color: #273c75;
+
+    font-size: 26px;
+
+    font-weight: 900;
+}
+
+.adventure-card p {
+    position: relative;
+
+    z-index: 3;
+
+    margin-top: 7px;
+
+    max-width: 300px;
+
+    color: #5e6982;
+
+    font-size: 14px;
+
+    line-height: 1.55;
+
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   ADVENTURE ARROW
+========================================================= */
+
+.adventure-arrow {
+    position: absolute;
+
+    z-index: 4;
+
+    right: 24px;
+    bottom: 22px;
+
+    width: 43px;
+    height: 43px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255,255,255,0.75);
+
+    color: #4d5874;
+
+    font-size: 22px;
+
+    transition:
+        transform 0.3s ease;
+}
+
+.adventure-card:hover .adventure-arrow {
+    transform: translateX(7px);
+}
+
+
+/* =========================================================
+   ADVENTURE COLORS
+========================================================= */
+
+.adventure-language {
+    background:
+        linear-gradient(
+            135deg,
+            #ffd6e7,
+            #ffc1dc
+        );
+}
+
+.adventure-maths {
+    background:
+        linear-gradient(
+            135deg,
+            #d9ebff,
+            #bcdcff
+        );
+}
+
+.adventure-gk {
+    background:
+        linear-gradient(
+            135deg,
+            #fff2b8,
+            #ffe28a
+        );
+}
+
+.adventure-science {
+    background:
+        linear-gradient(
+            135deg,
+            #d9f7df,
+            #bdeec8
+        );
+}
+
+.adventure-games {
+    background:
+        linear-gradient(
+            135deg,
+            #e3d9ff,
+            #cfc0ff
+        );
+}
+
+.adventure-creativity {
+    background:
+        linear-gradient(
+            135deg,
+            #ffe1bd,
+            #ffc98f
+        );
+}
+
+
+/* =========================================================
+   ADVENTURE CARD ENTRY ANIMATION
+========================================================= */
+
+.adventure-card {
+    opacity: 0;
+
+    animation:
+        adventureCardIn 0.65s ease forwards;
+}
+
+.adventure-card:nth-child(1) {
+    animation-delay: 0.05s;
+}
+
+.adventure-card:nth-child(2) {
+    animation-delay: 0.12s;
+}
+
+.adventure-card:nth-child(3) {
+    animation-delay: 0.19s;
+}
+
+.adventure-card:nth-child(4) {
+    animation-delay: 0.26s;
+}
+
+.adventure-card:nth-child(5) {
+    animation-delay: 0.33s;
+}
+
+.adventure-card:nth-child(6) {
+    animation-delay: 0.40s;
+}
+
+@keyframes adventureCardIn {
+    from {
+        opacity: 0;
+        transform:
+            translateY(35px)
+            scale(0.94);
+    }
+
+    to {
+        opacity: 1;
+        transform:
+            translateY(0)
+            scale(1);
+    }
+}
+
+
+/* =========================================================
+   MORE LEARNING
+========================================================= */
+
+.learning-menu-existing-title {
+    text-align: center;
+
+    margin:
+        10px auto 25px;
+
+    animation:
+        adventureTitle 0.8s ease both;
+}
+
+.learning-menu-existing-title h2 {
+    margin: 0;
+
+    color: #40507a;
+
+    font-size: 30px;
+
+    font-weight: 900;
+}
+
+.learning-menu-existing-title p {
+    margin: 7px 0 0;
+
+    color: #7b8498;
+
+    font-weight: 600;
+}
+
+.existing-learning-grid {
+    margin-top: 0;
+}
+
+
+/* =========================================================
+   LEARNING MENU OLD CARDS UPGRADE
+========================================================= */
+
+.learning-menu-card {
+    position: relative;
+
+    overflow: hidden;
+
+    transition:
+        transform 0.35s ease,
+        box-shadow 0.35s ease;
+}
+
+.learning-menu-card:hover {
+    transform:
+        translateY(-9px)
+        scale(1.02);
+
+    box-shadow:
+        0 22px 45px rgba(60,70,110,0.16);
+}
+
+.learning-menu-card::after {
+    content: "✨";
+
+    position: absolute;
+
+    right: 15px;
+    top: 12px;
+
+    font-size: 18px;
+
+    opacity: 0;
+
+    transform:
+        scale(0.5)
+        rotate(-20deg);
+
+    transition:
+        0.35s ease;
+}
+
+.learning-menu-card:hover::after {
+    opacity: 1;
+
+    transform:
+        scale(1)
+        rotate(10deg);
+}
+
+
+/* =========================================================
+   LEARNING CONTENT
+========================================================= */
+
+.learning-content {
+    position: relative;
+
+    max-width: 1400px;
+
+    margin: 0 auto;
+}
+
+
+/* =========================================================
+   GENERIC LEARNING CARDS
+========================================================= */
+
+.learning-card {
+    transition:
+        transform 0.35s ease,
+        box-shadow 0.35s ease;
+}
+
+.learning-card:hover {
+    transform:
+        translateY(-8px)
+        scale(1.02);
+
+    box-shadow:
+        0 20px 40px rgba(60,70,110,0.16);
+}
+
+
+/* =========================================================
+   5 COLUMN DESKTOP GRID
+========================================================= */
+
+.category-grid,
+.learning-menu-grid,
+.cards-grid,
+.hindi-grid {
+    display: grid !important;
+
+    grid-template-columns:
+        repeat(5, minmax(0, 1fr)) !important;
+
+    gap: 22px !important;
+
+    max-width: 1400px !important;
+}
+
+
+/* =========================================================
+   HOME CATEGORY CARD EXTRA ANIMATION
+========================================================= */
+
+.category-card {
+    animation:
+        categoryCardFloat 0.7s ease both;
+}
+
+.category-card:nth-child(1) {
+    animation-delay: 0.05s;
+}
+
+.category-card:nth-child(2) {
+    animation-delay: 0.10s;
+}
+
+.category-card:nth-child(3) {
+    animation-delay: 0.15s;
+}
+
+.category-card:nth-child(4) {
+    animation-delay: 0.20s;
+}
+
+.category-card:nth-child(5) {
+    animation-delay: 0.25s;
+}
+
+.category-card:nth-child(6) {
+    animation-delay: 0.30s;
+}
+
+.category-card:nth-child(7) {
+    animation-delay: 0.35s;
+}
+
+.category-card:nth-child(8) {
+    animation-delay: 0.40s;
+}
+
+.category-card:nth-child(9) {
+    animation-delay: 0.45s;
+}
+
+@keyframes categoryCardFloat {
+    from {
+        opacity: 0;
+        transform:
+            translateY(25px)
+            scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform:
+            translateY(0)
+            scale(1);
+    }
+}
+
+
+/* =========================================================
+   HIDE OLD ARROWS IF DESIRED
+   ========================================================= */
+
+.category-card .arrow {
+    transition:
+        transform 0.3s ease,
+        opacity 0.3s ease;
+}
+
+
+/* =========================================================
+   SPEECH BUTTON
+========================================================= */
+
+.hindi-sound-btn {
+    cursor: pointer;
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.hindi-sound-btn:hover {
+    transform:
+        scale(1.12)
+        rotate(-5deg);
+
+    box-shadow:
+        0 10px 25px rgba(80,70,130,0.15);
+}
+
+.hindi-sound-btn:active {
+    transform:
+        scale(0.90);
+}
+
+
+/* =========================================================
+   BUTTON PRESS EFFECT
+========================================================= */
+
+.start-button:active,
+.category-card:active,
+.learning-menu-card:active,
+.adventure-card:active {
+    transform: scale(0.96);
+}
+
+
+/* =========================================================
+   TABLE / MATH VISUAL STYLE
+========================================================= */
+
+table {
+    border-collapse: separate;
+    border-spacing: 0;
+
+    overflow: hidden;
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 15px 35px rgba(60,70,110,0.10);
+}
+
+table th,
+table td {
+    padding: 13px 16px;
+}
+
+table tr {
+    transition:
+        background 0.25s ease;
+}
+
+table tr:hover {
+    background:
+        rgba(123,97,255,0.06);
+}
+
+
+/* =========================================================
+   QUIZ / GAME CARD SUPPORT
+========================================================= */
+
+.quiz-card,
+.game-card,
+.question-card {
+    position: relative;
+
+    max-width: 850px;
+
+    margin: 25px auto;
+
+    padding: 30px;
+
+    border-radius: 30px;
+
+    background:
+        rgba(255,255,255,0.88);
+
+    backdrop-filter: blur(15px);
+
+    box-shadow:
+        0 18px 45px rgba(60,70,110,0.12);
+
+    animation:
+        quizCardIn 0.6s ease both;
+}
+
+@keyframes quizCardIn {
+    from {
+        opacity: 0;
+        transform:
+            translateY(25px)
+            scale(0.97);
+    }
+
+    to {
+        opacity: 1;
+        transform:
+            translateY(0)
+            scale(1);
+    }
+}
+
+
+.quiz-option,
+.answer-button,
+.game-option {
+    width: 100%;
+
+    margin-top: 12px;
+
+    padding: 15px 20px;
+
+    border: 2px solid transparent;
+
+    border-radius: 18px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #f7f8ff,
+            #ffffff
+        );
+
+    color: #3f4a68;
+
+    font-size: 16px;
+
+    font-weight: 800;
+
+    cursor: pointer;
+
+    transition:
+        0.3s ease;
+}
+
+.quiz-option:hover,
+.answer-button:hover,
+.game-option:hover {
+    transform:
+        translateY(-3px);
+
+    border-color:
+        rgba(123,97,255,0.25);
+
+    box-shadow:
+        0 12px 25px rgba(70,70,120,0.10);
+}
+
+
+/* =========================================================
+   CORRECT / WRONG ANSWER
+========================================================= */
+
+.correct-answer {
+    animation:
+        correctPop 0.6s ease;
+}
+
+.wrong-answer {
+    animation:
+        wrongShake 0.5s ease;
+}
+
+@keyframes correctPop {
+    0% {
+        transform: scale(1);
+    }
+
+    40% {
+        transform:
+            scale(1.08)
+            rotate(-2deg);
+    }
+
+    70% {
+        transform:
+            scale(0.98)
+            rotate(2deg);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes wrongShake {
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-8px);
+    }
+
+    50% {
+        transform: translateX(8px);
+    }
+
+    75% {
+        transform: translateX(-5px);
+    }
+}
+
+
+/* =========================================================
+   SCORE / STARS
+========================================================= */
+
+.score-box,
+.stars-box,
+.progress-box {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    padding: 10px 18px;
+
+    border-radius: 30px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #fff8d9,
+            #ffe9a6
+        );
+
+    color: #765900;
+
+    font-weight: 900;
+
+    box-shadow:
+        0 8px 20px rgba(150,120,40,0.10);
+
+    animation:
+        scorePulse 2s infinite ease-in-out;
+}
+
+@keyframes scorePulse {
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.04);
+    }
+}
+
+
+/* =========================================================
+   DRAWING CANVAS
+========================================================= */
+
+.drawing-area {
+    max-width: 900px;
+
+    margin: 25px auto;
+
+    padding: 20px;
+
+    border-radius: 30px;
+
+    background:
+        rgba(255,255,255,0.90);
+
+    box-shadow:
+        0 18px 45px rgba(60,70,110,0.12);
+}
+
+.drawing-area canvas,
+#drawingCanvas {
+    display: block;
+
+    width: 100%;
+
+    max-width: 850px;
+
+    height: auto;
+
+    min-height: 400px;
+
+    margin: auto;
+
+    border-radius: 22px;
+
+    background: white;
+
+    border: 3px dashed #d9def0;
+
+    cursor: crosshair;
+
+    touch-action: none;
+}
+
+
+/* =========================================================
+   COLOR PICKER
+========================================================= */
+
+.color-picker,
+.paint-colors {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    justify-content: center;
+
+    gap: 10px;
+
+    margin: 18px auto;
+}
+
+.color-picker button,
+.paint-colors button {
+    width: 42px;
+    height: 42px;
+
+    border: 4px solid white;
+
+    border-radius: 50%;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 5px 15px rgba(50,60,100,0.15);
+
+    transition:
+        transform 0.25s ease;
+}
+
+.color-picker button:hover,
+.paint-colors button:hover {
+    transform:
+        scale(1.18);
+}
+
+
+/* =========================================================
+   LAMP INTRO - DO NOT BREAK EXISTING ANIMATION
+========================================================= */
+
+#studyIntro {
+    transition:
+        opacity 0.8s ease,
+        transform 0.8s ease,
+        filter 0.8s ease;
+}
+
+#studyIntro.lamp-on {
+    animation:
+        lampGlow 1.4s ease both;
+}
+
+#studyIntro.hide-intro {
+    opacity: 0;
+
+    transform:
+        translateY(-20px)
+        scale(0.96);
+
+    pointer-events: none;
+}
+
+@keyframes lampGlow {
+    0% {
+        filter:
+            brightness(0.7)
+            drop-shadow(0 0 0 transparent);
+    }
+
+    45% {
+        filter:
+            brightness(1.15)
+            drop-shadow(
+                0 0 25px
+                rgba(255,214,59,0.75)
+            );
+    }
+
+    100% {
+        filter:
+            brightness(1)
+            drop-shadow(0 0 0 transparent);
+    }
+}
+
+
+/* =========================================================
+   RESPONSIVE - TABLET
+========================================================= */
+
+@media (max-width: 1100px) {
+
+    .adventure-grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+    .category-grid,
+    .learning-menu-grid,
+    .cards-grid,
+    .hindi-grid {
+        grid-template-columns:
+            repeat(3, minmax(0, 1fr)) !important;
+    }
+
+    .hero {
+        grid-template-columns:
+            1fr 0.8fr;
+
+        gap: 25px;
+    }
+
+    .hero-kid {
+        width: 190px;
+        height: 190px;
+
+        font-size: 110px;
+    }
+
+    .orbit-one {
+        width: 300px;
+        height: 300px;
+    }
+
+    .orbit-two {
+        width: 380px;
+        height: 380px;
+    }
+}
+
+
+/* =========================================================
+   RESPONSIVE - MOBILE
+========================================================= */
+
+@media (max-width: 700px) {
+
+    .navbar {
+        padding:
+            12px 5%;
+    }
+
+    .brand-icon {
+        width: 45px;
+        height: 45px;
+
+        font-size: 24px;
+    }
+
+    .brand h2 {
+        font-size: 17px;
+    }
+
+    .header-badge {
+        display: none;
+    }
+
+
+    .hero {
+        min-height: auto;
+
+        grid-template-columns: 1fr;
+
+        padding:
+            55px 6%
+            65px;
+
+        text-align: center;
+    }
+
+    .hero-left {
+        display: flex;
+
+        flex-direction: column;
+
+        align-items: center;
+    }
+
+    .hero h1 {
+        font-size:
+            clamp(38px, 12vw, 58px);
+
+        letter-spacing: -1px;
+    }
+
+    .hero p {
+        font-size: 15px;
+    }
+
+    .hero-right {
+        min-height: 320px;
+    }
+
+    .hero-kid {
+        width: 160px;
+        height: 160px;
+
+        font-size: 90px;
+    }
+
+    .orbit-one {
+        width: 250px;
+        height: 250px;
+    }
+
+    .orbit-two {
+        width: 310px;
+        height: 310px;
+    }
+
+    .floating-item {
+        width: 52px;
+        height: 52px;
+
+        font-size: 25px;
+    }
+
+
+    .category-section {
+        padding:
+            50px 5%
+            70px;
+    }
+
+    .section-heading h2 {
+        font-size: 29px;
+    }
+
+
+    .category-grid,
+    .learning-menu-grid,
+    .cards-grid,
+    .hindi-grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr)) !important;
+
+        gap: 14px !important;
+    }
+
+
+    .category-card {
+        min-height: 190px;
+
+        padding: 18px;
+
+        border-radius: 22px;
+    }
+
+    .category-icon {
+        width: 58px;
+        height: 58px;
+
+        border-radius: 17px;
+
+        font-size: 30px;
+    }
+
+    .category-card h3 {
+        margin-top: 14px;
+
+        font-size: 18px;
+    }
+
+    .category-card p {
+        font-size: 12px;
+    }
+
+
+    .learning-page {
+        padding:
+            20px 5%
+            70px;
+    }
+
+
+    .learning-top {
+        gap: 10px;
+
+        padding: 14px;
+
+        border-radius: 23px;
+    }
+
+    .back-button {
+        min-width: 78px;
+
+        padding:
+            10px 12px;
+
+        font-size: 13px;
+    }
+
+    #learningIcon {
+        width: 55px;
+        height: 55px;
+
+        border-radius: 18px;
+
+        font-size: 28px;
+    }
+
+    #learningTitle {
+        font-size: 23px;
+    }
+
+    #learningSubtitle {
+        font-size: 12px;
+    }
+
+
+    .adventure-grid {
+        grid-template-columns: 1fr;
+
+        gap: 16px;
+
+        padding:
+            0 5px;
+    }
+
+    .adventure-card {
+        min-height: 205px;
+
+        padding: 23px;
+
+        border-radius: 25px;
+    }
+
+    .adventure-icon {
+        width: 68px;
+        height: 68px;
+
+        border-radius: 20px;
+
+        font-size: 36px;
+    }
+
+    .adventure-card h3 {
+        margin-top: 16px;
+
+        font-size: 22px;
+    }
+
+    .adventure-card p {
+        font-size: 13px;
+    }
+
+
+    .adventure-heading h2 {
+        font-size: 29px;
+    }
+
+    .adventure-heading p {
+        font-size: 14px;
+    }
+
+
+    .learning-menu-existing-title h2 {
+        font-size: 25px;
+    }
+
+
+    .quiz-card,
+    .game-card,
+    .question-card {
+        padding: 20px;
+
+        border-radius: 23px;
+    }
+
+
+    .drawing-area {
+        padding: 12px;
+
+        border-radius: 23px;
+    }
+
+    .drawing-area canvas,
+    #drawingCanvas {
+        min-height: 300px;
+    }
+}
+
+
+/* =========================================================
+   VERY SMALL MOBILE
+========================================================= */
+
+@media (max-width: 390px) {
+
+    .category-grid,
+    .learning-menu-grid,
+    .cards-grid,
+    .hindi-grid {
+        gap: 10px !important;
+    }
+
+    .category-card {
+        min-height: 175px;
+
+        padding: 14px;
+    }
+
+    .category-icon {
+        width: 52px;
+        height: 52px;
+
+        font-size: 27px;
+    }
+
+    .category-card h3 {
+        font-size: 16px;
+    }
+
+    .category-card p {
+        font-size: 11px;
+    }
+
+    .arrow {
+        right: 12px;
+        bottom: 12px;
+
+        width: 30px;
+        height: 30px;
+
+        font-size: 16px;
+    }
+
+
+    .adventure-card {
+        min-height: 190px;
+
+        padding: 20px;
+    }
+
+    .adventure-icon {
+        width: 60px;
+        height: 60px;
+
+        font-size: 32px;
+    }
+
+    .adventure-card h3 {
+        font-size: 20px;
+    }
+
+    .adventure-card p {
+        font-size: 12px;
+    }
+}
+
+
+/* =========================================================
+   REDUCE MOTION FOR USERS WHO PREFER IT
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+    }
+}
