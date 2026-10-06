@@ -3,41 +3,34 @@
 
 <head>
 
-    <!-- ================= BASIC META ================= -->
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-
-
-    <!-- ================= SEO ================= -->
-
-    <title>
-        Kids Learning World | Fun Learning for Kids | Dalesh Raghav
-    </title>
-
-    <meta name="description"
-          content="Kids Learning World by Dalesh Raghav is a fun and interactive educational website for kids. Learn ABC, Hindi alphabet, numbers, fruits, animals, colours, days, months, body parts and multiplication tables.">
-
-    <meta name="robots"
-          content="index, follow">
-
-    <meta name="language"
-          content="English">
-
-
-    <!-- ================= CANONICAL ================= -->
-
-    <link rel="canonical"
-          href="{{ request.base_url }}">
-
 
     <!-- ================= GOOGLE SEARCH CONSOLE ================= -->
 
     <meta name="google-site-verification"
           content="qdf1gDGP_H9S0GLtDLyZLcQrHVrXSeW7sQ7JsZn0v0Q">
 
+    <!-- ================= SEO TITLE ================= -->
+
+    <title>
+        Kids Learning World | Fun Learning for Kids | Dalesh Raghav
+    </title>
+
+    <!-- ================= SEO DESCRIPTION ================= -->
+
+    <meta name="description"
+          content="Kids Learning World by Dalesh Raghav is a fun and interactive educational website for kids. Learn ABC, Hindi alphabet, numbers, fruits, animals, colours, days, months, body parts and multiplication tables.">
+
+    <!-- ================= SEARCH ENGINE ================= -->
+
+    <meta name="robots"
+          content="index, follow">
+
+    <!-- ================= CANONICAL ================= -->
+
+    <link rel="canonical"
+          href="{{ request.base_url }}">
 
     <!-- ================= OPEN GRAPH ================= -->
 
@@ -53,11 +46,15 @@
     <meta property="og:url"
           content="{{ request.base_url }}">
 
+    <!-- ================= LANGUAGE ================= -->
+
+    <meta name="language"
+          content="English">
 
     <!-- ================= CSS ================= -->
 
     <link rel="stylesheet"
-          href="{{ url_for('static', filename='style.css') }}?v=4">
+          href="{{ url_for('static', filename='style.css') }}?v=3">
 
 </head>
 
@@ -65,83 +62,140 @@
 <body>
 
 
-    <!-- =====================================================
-         ANIMATED BACKGROUND
-    ====================================================== -->
+    <!-- =========================================================
+         STUDY INTRO
+    ========================================================== -->
 
-    <div class="background-shapes">
+    <div id="studyIntro">
 
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
+        <!-- Night stars -->
+
+        <div class="night-stars">
+
+            <span>✦</span>
+            <span>✧</span>
+            <span>✦</span>
+            <span>✧</span>
+            <span>✦</span>
+
+        </div>
+
+
+        <!-- Moon -->
+
+        <div class="night-moon"></div>
+
+
+        <!-- Tap message -->
+
+        <div class="lamp-message">
+
+            💡 Tap the lamp to start learning
+
+        </div>
+
+
+        <!-- =====================================================
+             LUXURY TABLE LAMP
+        ====================================================== -->
+
+        <button
+            id="studyLamp"
+            class="luxury-lamp"
+            type="button"
+            onclick="turnLampOn()"
+            aria-label="Turn on lamp">
+
+            <div class="lamp-light"></div>
+
+
+            <div class="lamp-shade">
+
+                <div class="shade-top"></div>
+
+
+                <div class="shade-lines">
+
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+
+                </div>
+
+
+                <div class="lamp-bulb"></div>
+
+            </div>
+
+
+            <div class="lamp-neck-top"></div>
+
+
+            <div class="lamp-decor decor-one"></div>
+
+
+            <div class="lamp-body"></div>
+
+
+            <div class="lamp-decor decor-two"></div>
+
+
+            <div class="lamp-neck-bottom"></div>
+
+
+            <div class="lamp-base"></div>
+
+        </button>
 
     </div>
 
 
 
-    <!-- =====================================================
-         NAVBAR
-    ====================================================== -->
+    <!-- =========================================================
+         PREMIUM BRAND
+    ========================================================== -->
 
-    <header class="navbar">
+    <div class="premium-text">
 
-        <div class="brand">
+        <div class="brand-title">
 
-            <div class="brand-icon">
-                🌈
-            </div>
-
-            <div>
-
-                <h2>
-                    Kids Learning
-                </h2>
-
-                <span>
-                    Learn • Play • Grow
-                </span>
-
-            </div>
+            📚 Kids Learning World 📚
 
         </div>
 
 
-        <div class="header-badge">
-            🚀 Let's Learn!
+        <div class="brand-owner">
+
+            by <span>Dalesh Raghav💫</span>
+
         </div>
 
-    </header>
+    </div>
 
 
 
-    <!-- =====================================================
+    <!-- =========================================================
          HOME PAGE
-    ====================================================== -->
+    ========================================================== -->
 
     <main id="homePage">
 
 
-        <!-- =================================================
+        <!-- =====================================================
              HERO SECTION
-        ================================================== -->
+        ====================================================== -->
 
         <section class="hero">
 
 
-            <!-- HERO LEFT -->
-
             <div class="hero-left">
 
 
-                <div class="welcome-pill">
-
-                    ✨ Kids Learning World by Dalesh Raghav
-
-                </div>
-
+                <!-- MAIN SEO HEADING -->
 
                 <h1>
 
@@ -153,6 +207,8 @@
 
                 </h1>
 
+
+                <!-- INTRODUCTION -->
 
                 <p>
 
@@ -166,8 +222,14 @@
                 </p>
 
 
-                <button class="start-button"
-                        onclick="showCategory('abc')">
+                <!-- =================================================
+                     START LEARNING
+                ================================================== -->
+
+                <button
+                    class="start-button"
+                    onclick="openLearningMenu()"
+                    type="button">
 
                     🚀 Start Learning
 
@@ -182,9 +244,9 @@
 
 
 
-            <!-- =================================================
+            <!-- =====================================================
                  HERO RIGHT
-            ================================================== -->
+            ====================================================== -->
 
             <div class="hero-right">
 
@@ -195,84 +257,88 @@
 
 
                 <div class="hero-kid">
+
                     👦
+
                 </div>
 
 
                 <div class="floating-item book">
+
                     📚
+
                 </div>
 
 
                 <div class="floating-item pencil">
+
                     ✏️
+
                 </div>
 
 
                 <div class="floating-item star">
+
                     ⭐
+
                 </div>
 
 
                 <div class="floating-item rocket">
+
                     🚀
+
                 </div>
 
 
             </div>
+
 
         </section>
 
 
 
-        <!-- =====================================================
-             CATEGORY SECTION
-        ====================================================== -->
+        <!-- =========================================================
+             HOME CATEGORY SECTION
+             
+             Ye section home par rahega.
+             Start Learning button isko directly open nahi karega.
+             Start Learning → Learning Categories page.
+        ========================================================== -->
 
         <section class="category-section">
 
 
-            <div class="section-heading">
-
-                <span>
-                    🎯
-                </span>
-
-                <h2>
-                    What do you want to learn?
-                </h2>
-
-                <p>
-                    Pick a topic and let's explore!
-                </p>
-
-            </div>
-
-
-
-            <!-- =================================================
+            <!-- =====================================================
                  CATEGORY GRID
-            ================================================== -->
+            ====================================================== -->
 
             <div class="category-grid">
 
 
                 <!-- ================= ABC ================= -->
 
-                <button class="category-card card-blue"
-                        onclick="showCategory('abc')">
+                <button
+                    class="category-card card-blue"
+                    onclick="showCategory('abc')"
+                    type="button">
 
                     <div class="category-icon">
+
                         🔤
+
                     </div>
+
 
                     <h3>
                         ABC
                     </h3>
 
+
                     <p>
                         Learn A to Z
                     </p>
+
 
                     <span class="arrow">
                         →
@@ -284,20 +350,27 @@
 
                 <!-- ================= HINDI ================= -->
 
-                <button class="category-card card-hindi"
-                        onclick="openHindiAlphabet()">
+                <button
+                    class="category-card card-hindi"
+                    onclick="openHindiAlphabet()"
+                    type="button">
 
                     <div class="category-icon">
+
                         🇮🇳
+
                     </div>
+
 
                     <h3>
                         Hindi Alphabet
                     </h3>
 
+
                     <p>
                         हिंदी वर्णमाला सीखें
                     </p>
+
 
                     <span class="arrow">
                         →
@@ -309,20 +382,27 @@
 
                 <!-- ================= DAYS ================= -->
 
-                <button class="category-card card-purple"
-                        onclick="showCategory('days')">
+                <button
+                    class="category-card card-purple"
+                    onclick="showCategory('days')"
+                    type="button">
 
                     <div class="category-icon">
+
                         📅
+
                     </div>
+
 
                     <h3>
                         Days
                     </h3>
 
+
                     <p>
                         Days of the week
                     </p>
+
 
                     <span class="arrow">
                         →
@@ -334,20 +414,27 @@
 
                 <!-- ================= MONTHS ================= -->
 
-                <button class="category-card card-pink"
-                        onclick="showCategory('months')">
+                <button
+                    class="category-card card-pink"
+                    onclick="showCategory('months')"
+                    type="button">
 
                     <div class="category-icon">
+
                         🗓️
+
                     </div>
+
 
                     <h3>
                         Months
                     </h3>
 
+
                     <p>
                         Months of the year
                     </p>
+
 
                     <span class="arrow">
                         →
@@ -359,20 +446,27 @@
 
                 <!-- ================= TABLES ================= -->
 
-                <button class="category-card card-orange"
-                        onclick="showCategory('tables')">
+                <button
+                    class="category-card card-orange"
+                    onclick="showCategory('tables')"
+                    type="button">
 
                     <div class="category-icon">
+
                         ✖️
+
                     </div>
+
 
                     <h3>
                         Tables
                     </h3>
 
+
                     <p>
                         Learn multiplication
                     </p>
+
 
                     <span class="arrow">
                         →
@@ -384,20 +478,27 @@
 
                 <!-- ================= FRUITS ================= -->
 
-                <button class="category-card card-red"
-                        onclick="showCategory('fruits')">
+                <button
+                    class="category-card card-red"
+                    onclick="showCategory('fruits')"
+                    type="button">
 
                     <div class="category-icon">
+
                         🍎
+
                     </div>
+
 
                     <h3>
                         Fruits
                     </h3>
 
+
                     <p>
                         Yummy fruits
                     </p>
+
 
                     <span class="arrow">
                         →
@@ -409,20 +510,27 @@
 
                 <!-- ================= BODY PARTS ================= -->
 
-                <button class="category-card card-green"
-                        onclick="showCategory('bodyparts')">
+                <button
+                    class="category-card card-green"
+                    onclick="showCategory('bodyparts')"
+                    type="button">
 
                     <div class="category-icon">
+
                         👦
+
                     </div>
+
 
                     <h3>
                         Body Parts
                     </h3>
 
+
                     <p>
                         Know your body
                     </p>
+
 
                     <span class="arrow">
                         →
@@ -434,20 +542,27 @@
 
                 <!-- ================= ANIMALS ================= -->
 
-                <button class="category-card card-yellow"
-                        onclick="showCategory('animals')">
+                <button
+                    class="category-card card-yellow"
+                    onclick="showCategory('animals')"
+                    type="button">
 
                     <div class="category-icon">
+
                         🐶
+
                     </div>
+
 
                     <h3>
                         Animals
                     </h3>
 
+
                     <p>
                         Meet the animals
                     </p>
+
 
                     <span class="arrow">
                         →
@@ -459,20 +574,27 @@
 
                 <!-- ================= COLOURS ================= -->
 
-                <button class="category-card card-cyan"
-                        onclick="showCategory('colours')">
+                <button
+                    class="category-card card-cyan"
+                    onclick="showCategory('colours')"
+                    type="button">
 
                     <div class="category-icon">
+
                         🎨
+
                     </div>
+
 
                     <h3>
                         Colours
                     </h3>
 
+
                     <p>
                         Explore colours
                     </p>
+
 
                     <span class="arrow">
                         →
@@ -487,14 +609,19 @@
 
 
 
-        <!-- =====================================================
+        <!-- =========================================================
              ABOUT SECTION
-        ====================================================== -->
+        ========================================================== -->
 
-        <section class="about-section">
+        <section
+            class="about-section"
+            style="max-width: 1000px; margin: 50px auto; padding: 30px; text-align: center;">
+
 
             <h2>
+
                 📚 About Kids Learning World
+
             </h2>
 
 
@@ -528,6 +655,7 @@
 
             </p>
 
+
         </section>
 
 
@@ -535,42 +663,89 @@
 
 
 
-    <!-- =====================================================
+    <!-- =========================================================
          LEARNING PAGE
-    ====================================================== -->
+         
+         IMPORTANT:
+         Same page is used for:
+         
+         1. Learning Categories
+         2. ABC
+         3. Hindi
+         4. Days
+         5. Months
+         6. Tables
+         7. Fruits
+         8. Body Parts
+         9. Animals
+         10. Colours
+         
+         Back button uses goBackFromLearning().
+         
+         If currentCategory === "menu"
+             → Home
+         
+         Otherwise
+             → Learning Categories
+    ========================================================== -->
 
-    <section id="learningPage"
-             class="learning-page">
+    <section
+        id="learningPage"
+        class="learning-page">
 
 
-        <!-- =================================================
+        <!-- =====================================================
              LEARNING HEADER
-        ================================================== -->
+        ====================================================== -->
 
         <div class="learning-top">
 
 
-            <button class="back-button"
-                    onclick="backToLearningMenu()">
+            <!-- DYNAMIC BACK BUTTON -->
 
-                ← Back
+            <button
+                class="back-button"
+                onclick="goBackFromLearning()"
+                type="button"
+                aria-label="Go back">
+
+                <span class="back-arrow">
+                    ←
+                </span>
+
+                <span class="back-text">
+                    Back
+                </span>
 
             </button>
 
 
+
+            <!-- LEARNING ICON -->
+
             <div id="learningIcon">
+
                 🔤
+
             </div>
 
+
+
+            <!-- LEARNING TITLE -->
 
             <div>
 
                 <h1 id="learningTitle">
+
                     Learn A to Z
+
                 </h1>
 
+
                 <p id="learningSubtitle">
+
                     Let's learn together!
+
                 </p>
 
             </div>
@@ -580,29 +755,26 @@
 
 
 
-        <!-- =================================================
-             DYNAMIC LEARNING CONTENT
-
+        <!-- =====================================================
+             LEARNING CONTENT
+             
              JavaScript will generate:
+             - Learning Categories
              - ABC
              - Hindi
              - Days
              - Months
              - Tables
              - Fruits
-             - Animals
              - Body Parts
+             - Animals
              - Colours
-             - Language World
-             - Maths World
-             - GK World
-             - Science World
-             - Games
-             - Creativity
-        ================================================== -->
+        ====================================================== -->
 
-        <div id="learningContent"
-             class="learning-content">
+        <div
+            id="learningContent"
+            class="learning-content">
+
         </div>
 
 
@@ -610,11 +782,13 @@
 
 
 
-    <!-- =====================================================
+    <!-- =========================================================
          JAVASCRIPT
-    ====================================================== -->
+    ========================================================== -->
 
-    <script src="{{ url_for('static', filename='script.js') }}?v=4"></script>
+    <script
+        src="{{ url_for('static', filename='script.js') }}?v=4">
+    </script>
 
 
 </body>
