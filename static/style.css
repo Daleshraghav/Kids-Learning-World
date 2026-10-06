@@ -3363,3 +3363,876 @@ body {
     }
 
 }
+
+/* =========================================================
+   🌙 LUXURY STUDY ROOM INTRO
+   ========================================================= */
+
+#studyIntro {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 999999;
+
+    overflow: hidden;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background:
+        radial-gradient(
+            circle at 50% 45%,
+            #29345d 0%,
+            #151a35 35%,
+            #080b1d 75%,
+            #03040d 100%
+        );
+
+    transition:
+        opacity 1.2s ease,
+        visibility 1.2s ease;
+}
+
+
+/* =========================================================
+   STARS
+   ========================================================= */
+
+.night-stars span {
+    position: absolute;
+
+    color: #fff4a3;
+
+    font-size: 18px;
+
+    opacity: 0.8;
+
+    animation: twinkle 2s infinite alternate;
+}
+
+.night-stars span:nth-child(1) {
+    top: 12%;
+    left: 15%;
+}
+
+.night-stars span:nth-child(2) {
+    top: 20%;
+    right: 18%;
+
+    animation-delay: .5s;
+}
+
+.night-stars span:nth-child(3) {
+    top: 35%;
+    left: 8%;
+
+    animation-delay: 1s;
+}
+
+.night-stars span:nth-child(4) {
+    top: 30%;
+    right: 8%;
+
+    animation-delay: 1.5s;
+}
+
+.night-stars span:nth-child(5) {
+    top: 10%;
+    left: 48%;
+
+    animation-delay: .8s;
+}
+
+@keyframes twinkle {
+
+    from {
+        opacity: .25;
+        transform: scale(.8);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1.25);
+    }
+
+}
+
+
+/* =========================================================
+   MOON
+   ========================================================= */
+
+.intro-moon {
+    position: absolute;
+
+    width: 100px;
+    height: 100px;
+
+    top: 8%;
+    right: 13%;
+
+    border-radius: 50%;
+
+    background: #fff4c7;
+
+    box-shadow:
+        0 0 40px rgba(255,244,199,.35),
+        0 0 100px rgba(255,244,199,.15);
+}
+
+
+/* =========================================================
+   WINDOW
+   ========================================================= */
+
+.study-window {
+    position: absolute;
+
+    top: 8%;
+    left: 8%;
+
+    width: 170px;
+    height: 130px;
+
+    border: 8px solid #242944;
+
+    background:
+        linear-gradient(
+            135deg,
+            #101631,
+            #27355d
+        );
+
+    box-shadow:
+        0 10px 30px rgba(0,0,0,.5);
+}
+
+.study-window::before {
+    content: "";
+
+    position: absolute;
+
+    left: 50%;
+
+    top: 0;
+
+    width: 5px;
+    height: 100%;
+
+    background: #242944;
+}
+
+.study-window::after {
+    content: "";
+
+    position: absolute;
+
+    top: 50%;
+
+    left: 0;
+
+    width: 100%;
+    height: 5px;
+
+    background: #242944;
+}
+
+
+/* =========================================================
+   TABLE
+   ========================================================= */
+
+.study-table {
+    position: absolute;
+
+    bottom: 0;
+
+    left: 0;
+
+    width: 100%;
+
+    height: 34%;
+
+    background:
+        linear-gradient(
+            180deg,
+            #6b3c27,
+            #3b1f17
+        );
+
+    box-shadow:
+        0 -15px 35px rgba(0,0,0,.35);
+}
+
+
+/* Table shine */
+
+.study-table::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 8px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #b97948,
+            #e0a36c,
+            #b97948
+        );
+}
+
+
+/* =========================================================
+   BOOKS
+   ========================================================= */
+
+.study-books {
+    position: absolute;
+
+    bottom: 35px;
+    left: 12%;
+
+    display: flex;
+
+    flex-direction: column-reverse;
+
+    width: 170px;
+}
+
+.book {
+    height: 25px;
+
+    margin-top: 3px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 4px;
+
+    color: white;
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    letter-spacing: 1px;
+
+    box-shadow:
+        0 4px 8px rgba(0,0,0,.35);
+}
+
+.book-one {
+    background: #913c68;
+}
+
+.book-two {
+    background: #284d91;
+}
+
+.book-three {
+    background: #b97835;
+}
+
+
+/* =========================================================
+   PEN HOLDER
+   ========================================================= */
+
+.pen-holder {
+    position: absolute;
+
+    bottom: 38px;
+    right: 14%;
+
+    width: 60px;
+    height: 65px;
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 4px;
+
+    padding-top: 8px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #202532,
+            #05060a
+        );
+
+    border-radius: 5px 5px 12px 12px;
+
+    box-shadow:
+        0 8px 15px rgba(0,0,0,.4);
+}
+
+.pen-holder span {
+    font-size: 22px;
+
+    transform: rotate(
+        var(--rotation, -8deg)
+    );
+}
+
+
+/* =========================================================
+   FLOWER VASE
+   ========================================================= */
+
+.flower-vase {
+    position: absolute;
+
+    bottom: 34px;
+
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    text-align: center;
+}
+
+.flower {
+    position: absolute;
+
+    font-size: 28px;
+
+    animation:
+        flowerMove 3s ease-in-out infinite;
+}
+
+.flower-one {
+    bottom: 45px;
+    left: -45px;
+}
+
+.flower-two {
+    bottom: 60px;
+    left: -5px;
+
+    animation-delay: .5s;
+}
+
+.flower-three {
+    bottom: 42px;
+    left: 30px;
+
+    animation-delay: 1s;
+}
+
+.vase {
+    width: 65px;
+    height: 75px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #6b2f65,
+            #b85c91,
+            #54224f
+        );
+
+    border-radius:
+        10px 10px 25px 25px;
+
+    box-shadow:
+        0 8px 20px rgba(0,0,0,.35);
+}
+
+@keyframes flowerMove {
+
+    0%,100% {
+        transform: rotate(-3deg);
+    }
+
+    50% {
+        transform: rotate(3deg);
+    }
+
+}
+
+
+/* =========================================================
+   💡 LAMP
+   ========================================================= */
+
+.study-lamp {
+    position: absolute;
+
+    bottom: 34px;
+
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    width: 180px;
+    height: 250px;
+
+    border: none;
+
+    background: none;
+
+    cursor: pointer;
+
+    z-index: 20;
+}
+
+
+/* Lamp shade */
+
+.lamp-shade {
+    position: absolute;
+
+    top: 10px;
+    left: 25px;
+
+    width: 130px;
+    height: 80px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #34394a,
+            #121520
+        );
+
+    clip-path:
+        polygon(
+            20% 0,
+            80% 0,
+            100% 100%,
+            0 100%
+        );
+
+    border-radius: 8px;
+
+    box-shadow:
+        0 12px 25px rgba(0,0,0,.55);
+}
+
+
+/* Bulb */
+
+.lamp-bulb {
+    position: absolute;
+
+    left: 50%;
+    bottom: -12px;
+
+    transform: translateX(-50%);
+
+    width: 35px;
+    height: 35px;
+
+    border-radius: 50%;
+
+    background: #fff4b0;
+
+    box-shadow:
+        0 0 15px rgba(255,235,120,.2);
+}
+
+
+/* Neck */
+
+.lamp-neck {
+    position: absolute;
+
+    top: 90px;
+    left: 50%;
+
+    width: 14px;
+    height: 95px;
+
+    transform: translateX(-50%);
+
+    background:
+        linear-gradient(
+            90deg,
+            #151922,
+            #626878,
+            #151922
+        );
+
+    border-radius: 20px;
+}
+
+
+/* Base */
+
+.lamp-base {
+    position: absolute;
+
+    bottom: 0;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    width: 100px;
+    height: 25px;
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            180deg,
+            #535967,
+            #11141b
+        );
+
+    box-shadow:
+        0 8px 12px rgba(0,0,0,.45);
+}
+
+
+/* =========================================================
+   💛 LAMP ON STATE
+   ========================================================= */
+
+#studyIntro.lamp-on .lamp-bulb {
+
+    background: #fff4a3;
+
+    box-shadow:
+        0 0 25px #fff4a3,
+        0 0 60px #ffd84d,
+        0 0 120px rgba(255,210,50,.75);
+
+    animation:
+        bulbPulse 1s infinite alternate;
+}
+
+
+#studyIntro.lamp-on .lamp-shade {
+
+    background:
+        linear-gradient(
+            145deg,
+            #655d43,
+            #252014
+        );
+
+    box-shadow:
+        0 0 45px rgba(255,215,90,.45);
+}
+
+
+/* Big warm light */
+
+#studyIntro.lamp-on::after {
+
+    content: "";
+
+    position: absolute;
+
+    left: 50%;
+    bottom: 18%;
+
+    transform: translateX(-50%);
+
+    width: 600px;
+    height: 450px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            ellipse,
+            rgba(255,222,100,.35),
+            rgba(255,190,60,.12) 40%,
+            transparent 70%
+        );
+
+    pointer-events: none;
+
+    animation:
+        roomLight 1.5s ease forwards;
+}
+
+
+@keyframes bulbPulse {
+
+    from {
+        transform: translateX(-50%) scale(.9);
+    }
+
+    to {
+        transform: translateX(-50%) scale(1.15);
+    }
+
+}
+
+
+@keyframes roomLight {
+
+    from {
+        opacity: 0;
+        transform: translateX(-50%) scale(.5);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(-50%) scale(1);
+    }
+
+}
+
+
+/* =========================================================
+   INTRO TEXT
+   ========================================================= */
+
+.intro-content {
+    position: absolute;
+
+    z-index: 30;
+
+    top: 12%;
+
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    text-align: center;
+
+    width: 90%;
+}
+
+.intro-small {
+
+    font-size: 13px;
+
+    letter-spacing: 5px;
+
+    color: #ffe58a;
+
+    font-weight: 800;
+}
+
+.intro-content h1 {
+
+    margin: 10px 0;
+
+    font-size: 46px;
+
+    font-weight: 900;
+
+    color: white;
+
+    text-shadow:
+        0 4px 20px rgba(255,210,70,.25);
+}
+
+.intro-content p {
+
+    margin: 0;
+
+    color: #c9d2ef;
+
+    font-size: 17px;
+}
+
+.tap-lamp {
+
+    margin-top: 22px;
+
+    display: inline-block;
+
+    padding: 12px 22px;
+
+    border-radius: 30px;
+
+    background:
+        rgba(255,255,255,.10);
+
+    border:
+        1px solid rgba(255,255,255,.25);
+
+    color: #ffe993;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    backdrop-filter: blur(8px);
+
+    animation:
+        tapPulse 2s infinite;
+}
+
+@keyframes tapPulse {
+
+    0%,100% {
+        box-shadow: 0 0 0 rgba(255,220,80,0);
+    }
+
+    50% {
+        box-shadow:
+            0 0 25px rgba(255,220,80,.25);
+    }
+
+}
+
+
+/* =========================================================
+   EXIT ANIMATION
+   ========================================================= */
+
+#studyIntro.hide-intro {
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   📱 MOBILE
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    .intro-moon {
+        width: 55px;
+        height: 55px;
+
+        right: 10%;
+    }
+
+    .study-window {
+        width: 100px;
+        height: 80px;
+
+        left: 5%;
+        top: 8%;
+    }
+
+    .intro-content {
+        top: 11%;
+    }
+
+    .intro-small {
+        font-size: 9px;
+        letter-spacing: 3px;
+    }
+
+    .intro-content h1 {
+        font-size: 28px;
+
+        margin: 7px 0;
+    }
+
+    .intro-content p {
+        font-size: 12px;
+    }
+
+    .tap-lamp {
+        margin-top: 14px;
+
+        padding: 9px 15px;
+
+        font-size: 11px;
+    }
+
+    .study-table {
+        height: 31%;
+    }
+
+    .study-books {
+        left: 5%;
+        bottom: 25px;
+
+        width: 100px;
+    }
+
+    .book {
+        height: 18px;
+
+        font-size: 7px;
+    }
+
+    .pen-holder {
+        right: 5%;
+
+        width: 42px;
+        height: 45px;
+
+        bottom: 25px;
+    }
+
+    .pen-holder span {
+        font-size: 14px;
+    }
+
+    .flower-vase {
+        bottom: 25px;
+    }
+
+    .vase {
+        width: 45px;
+        height: 50px;
+    }
+
+    .flower {
+        font-size: 21px;
+    }
+
+    .flower-one {
+        left: -35px;
+    }
+
+    .flower-two {
+        left: -5px;
+    }
+
+    .flower-three {
+        left: 22px;
+    }
+
+    .study-lamp {
+        width: 130px;
+        height: 190px;
+
+        bottom: 25px;
+    }
+
+    .lamp-shade {
+        width: 95px;
+        height: 60px;
+
+        left: 18px;
+    }
+
+    .lamp-neck {
+        top: 68px;
+
+        height: 75px;
+    }
+
+    .lamp-base {
+        width: 75px;
+        height: 19px;
+    }
+
+    #studyIntro.lamp-on::after {
+        width: 400px;
+        height: 350px;
+    }
+
+}
