@@ -61,118 +61,57 @@
 
 
 <body>
-    <!-- =====================================================
-     LUXURY STUDY ROOM INTRO
+   <!-- =====================================================
+     LUXURY LAMP INTRO
      ===================================================== -->
 
 <div id="studyIntro">
 
-    <div class="night-stars">
+    <!-- Night sky -->
+    <div class="intro-stars">
         <span>✦</span>
         <span>✧</span>
         <span>✦</span>
         <span>✧</span>
         <span>✦</span>
+        <span>✧</span>
     </div>
-
 
     <!-- Moon -->
     <div class="intro-moon"></div>
 
 
-    <!-- Window -->
-    <div class="study-window">
-        <div class="window-moon"></div>
-    </div>
+    <!-- Only Lamp -->
+    <button
+        id="studyLamp"
+        class="luxury-lamp"
+        type="button"
+        onclick="turnLampOn()"
+        aria-label="Turn on lamp">
 
+        <div class="lamp-light"></div>
 
-    <!-- Main Table -->
-    <div class="study-table">
-
-
-        <!-- Books -->
-        <div class="study-books">
-
-            <div class="book book-one">
-                LEARN
-            </div>
-
-            <div class="book book-two">
-                CREATE
-            </div>
-
-            <div class="book book-three">
-                GROW
-            </div>
-
+        <div class="lamp-shade">
+            <div class="lamp-bulb"></div>
         </div>
 
+        <div class="lamp-stand"></div>
 
-        <!-- Pen Holder -->
-        <div class="pen-holder">
+        <div class="lamp-base"></div>
 
-            <span>✏️</span>
-            <span>🖊️</span>
-            <span>✒️</span>
-
-        </div>
+    </button>
 
 
-        <!-- Flower Vase -->
-        <div class="flower-vase">
+    <!-- Only instruction -->
+    <div class="lamp-message">
 
-            <div class="flower flower-one">🌸</div>
-            <div class="flower flower-two">🌷</div>
-            <div class="flower flower-three">🌼</div>
-
-            <div class="vase"></div>
-
-        </div>
-
-
-        <!-- Luxury Lamp -->
-        <button id="studyLamp" class="study-lamp">
-
-            <div class="lamp-glow"></div>
-
-            <div class="lamp-shade">
-                <div class="lamp-bulb"></div>
-            </div>
-
-            <div class="lamp-neck"></div>
-
-            <div class="lamp-base"></div>
-
-        </button>
-
-
-    </div>
-
-
-    <!-- Intro Text -->
-
-    <div class="intro-content">
-
-        <div class="intro-small">
-            ✨ WELCOME ✨
-        </div>
-
-        <h1>
-            Kids Learning World
-        </h1>
-
-        <p>
-            Your journey of learning begins here
-        </p>
-
-        <div class="tap-lamp">
+        <div class="tap-title">
             💡 Tap the lamp to start learning
         </div>
 
     </div>
 
 </div>
-
     <!-- ================= ANIMATED BACKGROUND ================= -->
 
     <div class="background-shapes">
