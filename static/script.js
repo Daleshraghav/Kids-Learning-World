@@ -2451,8 +2451,6 @@ function renderLearningMenu() {
 
         <div class="learning-menu-intro">
 
-            <div class="learning-menu-stars">
-                ✦ ✧ ✦ ✧ ✦
             </div>
 
             <h2>
