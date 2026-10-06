@@ -2781,83 +2781,50 @@ function renderLearningMenu() {
 /* =========================================================
    🔙 BACK TO LEARNING MENU
    ========================================================= */
-
 function backToLearningMenu() {
 
     stopSpeech();
 
     currentCategory = "menu";
 
-
-    // Home hidden
-    if (elementExists(homePage)) {
-
-        homePage.style.display = "none";
-
-    }
-
-
-    // Learning page visible
     if (elementExists(learningPage)) {
-
-        learningPage.classList.remove(
-            "learning-menu-page"
-        );
-
-        // Restart page animation
-        void learningPage.offsetWidth;
-
-        learningPage.classList.add(
-            "active"
-        );
-
-        learningPage.classList.add(
-            "learning-menu-page"
-        );
-
-        learningPage.style.display =
-            "block";
-
+        learningPage.classList.add("active");
+        learningPage.classList.add("learning-menu-page");
+        learningPage.style.display = "block";
     }
 
-
-    // Header
     if (elementExists(learningIcon)) {
-
-        learningIcon.textContent =
-            "🎯";
-
+        learningIcon.textContent = "🚀";
     }
-
 
     if (elementExists(learningTitle)) {
-
-        learningTitle.textContent =
-            "What do you want to learn?";
-
+        learningTitle.textContent = "Choose Your Learning";
     }
-
 
     if (elementExists(learningSubtitle)) {
-
         learningSubtitle.textContent =
-            "Choose a topic and let's start learning! ✨";
-
+            "Pick a topic and let's start learning! ✨";
     }
 
+    if (elementExists(learningContent)) {
+        learningContent.innerHTML = renderLearningMenu();
+    }
 
-    // Show categories again
-    renderLearningMenu();
+    requestAnimationFrame(() => {
 
+        document
+            .querySelectorAll(".learning-choice-card")
+            .forEach((card, index) => {
 
-    // Scroll top
-    window.scrollTo({
+                card.style.animationDelay =
+                    `${index * 70}ms`;
 
-        top: 0,
-
-        behavior: "smooth"
+            });
 
     });
 
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
 }
-  
