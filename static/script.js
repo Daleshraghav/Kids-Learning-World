@@ -2388,3 +2388,31 @@ function openLearningMenu() {
 
     }, 100);
 }
+
+function openLearningMenu() {
+
+    const categorySection =
+        document.querySelector(".category-section");
+
+    const aboutSection =
+        document.querySelector(".about-section");
+
+    if (categorySection) {
+        categorySection.classList.add("show-learning-menu");
+    }
+
+    if (aboutSection) {
+        aboutSection.classList.add("show-learning-menu");
+    }
+
+    setTimeout(function () {
+
+        if (categorySection) {
+            categorySection.scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
+        }
+
+    }, 100);
+}
