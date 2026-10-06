@@ -1,7 +1,7 @@
 // ============================================================
 // KIDS LEARNING WORLD 🌈
 // COMPLETE LEARNING SYSTEM
-// FIXED + SMOOTH NAVIGATION + ANIMATIONS
+// 30+ ITEMS + SMOOTH NAVIGATION + ANIMATIONS
 // ============================================================
 
 
@@ -12,13 +12,10 @@
 const APP_SETTINGS = {
 
     speechRate: 0.72,
-
     speechPitch: 1.05,
-
     speechVolume: 1,
 
     animationDuration: 600,
-
     cardAnimationDelay: 45,
 
     scrollBehavior: "smooth"
@@ -185,7 +182,7 @@ const months = [
 
 
 // ============================================================
-// FRUITS DATA
+// FRUITS DATA — 30
 // ============================================================
 
 const fruits = [
@@ -200,34 +197,76 @@ const fruits = [
     ["Strawberry", "🍓"],
     ["Papaya", "🥭"],
     ["Coconut", "🥥"],
+
     ["Cherry", "🍒"],
-    ["Peach", "🍑"]
+    ["Peach", "🍑"],
+    ["Pear", "🍐"],
+    ["Guava", "🍈"],
+    ["Kiwi", "🥝"],
+    ["Lemon", "🍋"],
+    ["Lime", "🍋"],
+    ["Pomegranate", "❤️"],
+    ["Plum", "🫐"],
+    ["Apricot", "🍑"],
+
+    ["Fig", "🫐"],
+    ["Dragon Fruit", "🐉"],
+    ["Lychee", "🍒"],
+    ["Jackfruit", "🍈"],
+    ["Muskmelon", "🍈"],
+    ["Blueberry", "🫐"],
+    ["Raspberry", "🍓"],
+    ["Blackberry", "🫐"],
+    ["Custard Apple", "🍏"],
+    ["Dates", "🌴"]
 
 ];
 
 
 // ============================================================
-// BODY PARTS DATA
+// BODY PARTS DATA — 30
 // ============================================================
 
 const bodyParts = [
 
+    ["Head", "🙂"],
+    ["Hair", "💇"],
     ["Eyes", "👀"],
+    ["Eyebrow", "🤨"],
+    ["Eyelashes", "👁️"],
     ["Ears", "👂"],
     ["Nose", "👃"],
+    ["Cheeks", "😊"],
     ["Mouth", "👄"],
-    ["Hand", "✋"],
-    ["Leg", "🦵"],
-    ["Foot", "🦶"],
-    ["Head", "🙂"],
+    ["Lips", "💋"],
+
+    ["Teeth", "🦷"],
+    ["Tongue", "👅"],
+    ["Neck", "🧣"],
+    ["Shoulder", "💪"],
     ["Arm", "💪"],
-    ["Teeth", "🦷"]
+    ["Elbow", "💪"],
+    ["Hand", "✋"],
+    ["Finger", "☝️"],
+    ["Thumb", "👍"],
+    ["Chest", "🫁"],
+
+    ["Stomach", "🫃"],
+    ["Back", "🔙"],
+    ["Waist", "🧍"],
+    ["Leg", "🦵"],
+    ["Knee", "🦵"],
+    ["Ankle", "🦶"],
+    ["Foot", "🦶"],
+    ["Toe", "🦶"],
+    ["Skin", "🧴"],
+    ["Heart", "❤️"]
 
 ];
 
 
 // ============================================================
-// ANIMALS DATA
+// ANIMALS DATA — 30
 // ============================================================
 
 const animals = [
@@ -242,14 +281,34 @@ const animals = [
     ["Horse", "🐴"],
     ["Cow", "🐮"],
     ["Giraffe", "🦒"],
+
     ["Panda", "🐼"],
-    ["Bear", "🐻"]
+    ["Bear", "🐻"],
+    ["Zebra", "🦓"],
+    ["Fox", "🦊"],
+    ["Wolf", "🐺"],
+    ["Deer", "🦌"],
+    ["Goat", "🐐"],
+    ["Sheep", "🐑"],
+    ["Pig", "🐷"],
+    ["Donkey", "🫏"],
+
+    ["Camel", "🐪"],
+    ["Kangaroo", "🦘"],
+    ["Koala", "🐨"],
+    ["Leopard", "🐆"],
+    ["Cheetah", "🐆"],
+    ["Hippopotamus", "🦛"],
+    ["Rhinoceros", "🦏"],
+    ["Crocodile", "🐊"],
+    ["Snake", "🐍"],
+    ["Turtle", "🐢"]
 
 ];
 
 
 // ============================================================
-// COLOURS DATA
+// COLOURS DATA — 30
 // ============================================================
 
 const colours = [
@@ -263,7 +322,29 @@ const colours = [
     ["Pink", "#ff70a6", "💗"],
     ["Brown", "#9c6644", "🤎"],
     ["Black", "#222222", "🖤"],
-    ["White", "#ffffff", "🤍"]
+    ["White", "#ffffff", "🤍"],
+
+    ["Grey", "#808080", "🩶"],
+    ["Violet", "#8a2be2", "💜"],
+    ["Indigo", "#4b0082", "💙"],
+    ["Gold", "#ffd700", "✨"],
+    ["Silver", "#c0c0c0", "🌟"],
+    ["Sky Blue", "#87ceeb", "🩵"],
+    ["Navy Blue", "#000080", "💙"],
+    ["Light Green", "#90ee90", "💚"],
+    ["Dark Green", "#006400", "💚"],
+    ["Light Pink", "#ffb6c1", "💗"],
+
+    ["Magenta", "#ff00ff", "💖"],
+    ["Cyan", "#00ffff", "🩵"],
+    ["Turquoise", "#40e0d0", "💎"],
+    ["Teal", "#008080", "🩵"],
+    ["Maroon", "#800000", "❤️"],
+    ["Beige", "#f5f5dc", "🤎"],
+    ["Cream", "#fffdd0", "🤍"],
+    ["Peach", "#ffcba4", "🍑"],
+    ["Lavender", "#e6e6fa", "💜"],
+    ["Mint", "#98ff98", "💚"]
 
 ];
 
@@ -680,7 +761,9 @@ function playPageAnimation() {
     }
 
     learningPage.style.opacity = "0";
-    learningPage.style.transform = "translateY(18px) scale(0.985)";
+
+    learningPage.style.transform =
+        "translateY(18px) scale(0.985)";
 
     requestAnimationFrame(() => {
 
@@ -690,6 +773,7 @@ function playPageAnimation() {
                 "opacity 0.45s ease, transform 0.45s ease";
 
             learningPage.style.opacity = "1";
+
             learningPage.style.transform =
                 "translateY(0) scale(1)";
 
@@ -749,7 +833,6 @@ function showCategory(category) {
     learningPage.classList.add("active");
 
     learningPage.style.display = "block";
-
 
     playPageAnimation();
 
@@ -813,7 +896,7 @@ function showCategory(category) {
         setupLearning(
             "🍎",
             "Yummy Fruits",
-            "Let's learn fruit names!",
+            "Let's learn 30 fruit names!",
             showFruits()
         );
 
@@ -824,7 +907,7 @@ function showCategory(category) {
         setupLearning(
             "👦",
             "Body Parts",
-            "Let's learn about our body!",
+            "Let's learn 30 body parts!",
             showBodyParts()
         );
 
@@ -835,7 +918,7 @@ function showCategory(category) {
         setupLearning(
             "🐶",
             "Amazing Animals",
-            "Meet some amazing animals!",
+            "Meet 30 amazing animals!",
             showAnimals()
         );
 
@@ -846,7 +929,7 @@ function showCategory(category) {
         setupLearning(
             "🎨",
             "Beautiful Colours",
-            "Explore the world of colours!",
+            "Explore 30 beautiful colours!",
             showColours()
         );
 
@@ -906,7 +989,6 @@ function setupLearning(
     learningContent.innerHTML =
         content;
 
-
     animateLearningCards();
 
 }
@@ -933,6 +1015,7 @@ function animateLearningCards() {
                     `${index * APP_SETTINGS.cardAnimationDelay}ms`;
 
                 card.style.opacity = "0";
+
                 card.style.transform =
                     "translateY(18px) scale(0.96)";
 
@@ -954,7 +1037,6 @@ function animateLearningCards() {
 
             }
         );
-
 
     }, 50);
 
@@ -1024,7 +1106,6 @@ function showAlphabet() {
 
 
     html += `</div>`;
-
 
     return html;
 
@@ -1110,7 +1191,6 @@ function showDays() {
 
     html += `</div>`;
 
-
     return html;
 
 }
@@ -1172,7 +1252,6 @@ function showMonths() {
 
     html += `</div>`;
 
-
     return html;
 
 }
@@ -1227,9 +1306,7 @@ function handleCardKey(
 function animateCard(card) {
 
     if (!card) {
-
         return;
-
     }
 
 
@@ -1344,9 +1421,7 @@ function speak(text) {
 function stopSpeech() {
 
     if (!speechSupported) {
-
         return;
-
     }
 
 
@@ -1367,9 +1442,7 @@ function stopSpeech() {
 function pauseSpeech() {
 
     if (!speechSupported) {
-
         return;
-
     }
 
 
@@ -1391,9 +1464,7 @@ function pauseSpeech() {
 function resumeSpeech() {
 
     if (!speechSupported) {
-
         return;
-
     }
 
 
@@ -1477,9 +1548,7 @@ function showTable(number) {
 
 
     if (!result) {
-
         return;
-
     }
 
 
@@ -1571,7 +1640,7 @@ function showTable(number) {
 function showFruits() {
 
     let html =
-        `<div class="cards-grid">`;
+        `<div class="cards-grid fruits-grid">`;
 
 
     fruits.forEach(
@@ -1620,7 +1689,6 @@ function showFruits() {
 
     html += `</div>`;
 
-
     return html;
 
 }
@@ -1633,7 +1701,7 @@ function showFruits() {
 function showBodyParts() {
 
     let html =
-        `<div class="cards-grid">`;
+        `<div class="cards-grid bodyparts-grid">`;
 
 
     bodyParts.forEach(
@@ -1649,7 +1717,7 @@ function showBodyParts() {
             html += `
 
                 <div
-                    class="learning-card"
+                    class="learning-card bodypart-card"
                     tabindex="0"
                     role="button"
                     onclick="handleSimpleCardClick(this, '${name}')"
@@ -1678,7 +1746,6 @@ function showBodyParts() {
 
     html += `</div>`;
 
-
     return html;
 
 }
@@ -1691,7 +1758,7 @@ function showBodyParts() {
 function showAnimals() {
 
     let html =
-        `<div class="cards-grid">`;
+        `<div class="cards-grid animals-grid">`;
 
 
     animals.forEach(
@@ -1740,7 +1807,6 @@ function showAnimals() {
 
     html += `</div>`;
 
-
     return html;
 
 }
@@ -1753,7 +1819,7 @@ function showAnimals() {
 function showColours() {
 
     let html =
-        `<div class="cards-grid">`;
+        `<div class="cards-grid colours-grid">`;
 
 
     colours.forEach(
@@ -1805,7 +1871,6 @@ function showColours() {
 
 
     html += `</div>`;
-
 
     return html;
 
@@ -1943,9 +2008,7 @@ function openHindiAlphabet() {
 function renderHindiAlphabet() {
 
     if (!elementExists(learningContent)) {
-
         return;
-
     }
 
 
@@ -1967,7 +2030,6 @@ function renderHindiAlphabet() {
             </p>
 
         </div>
-
 
         <div class="hindi-grid">
 
@@ -2018,12 +2080,6 @@ function createHindiCard(
     const word =
         escapeHTML(item.word);
 
-    const meaning =
-        escapeHTML(item.meaning);
-
-    const english =
-        escapeHTML(item.english);
-
     const emoji =
         escapeHTML(item.emoji);
 
@@ -2048,15 +2104,7 @@ function createHindiCard(
             </div>
 
             <div class="hindi-word">
-                ${word}
-            </div>
-
-            <div class="hindi-english">
-                ${english}
-            </div>
-
-            <div class="hindi-meaning">
-                ${meaning}
+                ${letter} — ${word}
             </div>
 
             <button
@@ -2097,8 +2145,10 @@ function animateHindiCards() {
             (card, index) => {
 
                 card.style.opacity = "0";
+
                 card.style.transform =
                     "translateY(16px) scale(0.97)";
+
 
                 setTimeout(() => {
 
@@ -2135,9 +2185,7 @@ function handleHindiCardClick(
 
 
     if (!item) {
-
         return;
-
     }
 
 
@@ -2187,9 +2235,7 @@ function handleHindiKey(
 function animateHindiCard(card) {
 
     if (!card) {
-
         return;
-
     }
 
 
@@ -2317,9 +2363,7 @@ function turnLampOn() {
 
 
     if (!intro) {
-
         return;
-
     }
 
 
@@ -2441,9 +2485,7 @@ function openLearningMenu() {
 function renderLearningMenu() {
 
     if (!elementExists(learningContent)) {
-
         return;
-
     }
 
 
@@ -2451,15 +2493,9 @@ function renderLearningMenu() {
 
         <div class="learning-menu-intro">
 
-            </div>
-
             <h2>
                 🎓 Choose Your Learning Adventure
             </h2>
-
-            <p>
-                Pick any topic below and let's learn something amazing!
-            </p>
 
         </div>
 
@@ -2488,10 +2524,6 @@ function renderLearningMenu() {
 
                 </div>
 
-                <span class="menu-card-arrow">
-                    →
-                </span>
-
             </button>
 
 
@@ -2515,10 +2547,6 @@ function renderLearningMenu() {
                     </p>
 
                 </div>
-
-                <span class="menu-card-arrow">
-                    →
-                </span>
 
             </button>
 
@@ -2544,10 +2572,6 @@ function renderLearningMenu() {
 
                 </div>
 
-                <span class="menu-card-arrow">
-                    →
-                </span>
-
             </button>
 
 
@@ -2571,10 +2595,6 @@ function renderLearningMenu() {
                     </p>
 
                 </div>
-
-                <span class="menu-card-arrow">
-                    →
-                </span>
 
             </button>
 
@@ -2600,10 +2620,6 @@ function renderLearningMenu() {
 
                 </div>
 
-                <span class="menu-card-arrow">
-                    →
-                </span>
-
             </button>
 
 
@@ -2623,14 +2639,10 @@ function renderLearningMenu() {
                     </h3>
 
                     <p>
-                        Discover yummy fruits
+                        Discover 30 yummy fruits
                     </p>
 
                 </div>
-
-                <span class="menu-card-arrow">
-                    →
-                </span>
 
             </button>
 
@@ -2651,14 +2663,10 @@ function renderLearningMenu() {
                     </h3>
 
                     <p>
-                        Learn about your body
+                        Learn 30 body parts
                     </p>
 
                 </div>
-
-                <span class="menu-card-arrow">
-                    →
-                </span>
 
             </button>
 
@@ -2679,14 +2687,10 @@ function renderLearningMenu() {
                     </h3>
 
                     <p>
-                        Meet amazing animals
+                        Meet 30 amazing animals
                     </p>
 
                 </div>
-
-                <span class="menu-card-arrow">
-                    →
-                </span>
 
             </button>
 
@@ -2707,14 +2711,10 @@ function renderLearningMenu() {
                     </h3>
 
                     <p>
-                        Explore beautiful colours
+                        Explore 30 beautiful colours
                     </p>
 
                 </div>
-
-                <span class="menu-card-arrow">
-                    →
-                </span>
 
             </button>
 
@@ -2750,12 +2750,6 @@ function renderLearningMenu() {
                 "translateY(25px) scale(0.94)";
 
 
-            card.style.setProperty(
-                "--menu-delay",
-                `${index * 80}ms`
-            );
-
-
             setTimeout(
                 function() {
 
@@ -2780,16 +2774,6 @@ function renderLearningMenu() {
 // ============================================================
 // 🔙 BACK BUTTON SYSTEM
 // ============================================================
-//
-// IMPORTANT:
-//
-// Topic page:
-// ABC → Back → Learning Categories
-//
-// Learning Categories:
-// Categories → Back → Home
-//
-// ============================================================
 
 function backToLearningMenu() {
 
@@ -2797,7 +2781,7 @@ function backToLearningMenu() {
 
 
     // --------------------------------------------------------
-    // IF ALREADY ON LEARNING MENU → GO HOME
+    // MENU → HOME
     // --------------------------------------------------------
 
     if (
@@ -2812,7 +2796,7 @@ function backToLearningMenu() {
 
 
     // --------------------------------------------------------
-    // OTHERWISE TOPIC → LEARNING MENU
+    // TOPIC → MENU
     // --------------------------------------------------------
 
     currentCategory = "menu";
@@ -2874,15 +2858,6 @@ function backToLearningMenu() {
     }
 
 
-    // IMPORTANT:
-    // renderLearningMenu() already writes
-    // HTML into learningContent.
-    //
-    // DO NOT WRITE:
-    // learningContent.innerHTML = renderLearningMenu();
-    //
-    // That causes undefined.
-
     renderLearningMenu();
 
 
@@ -2898,12 +2873,7 @@ function backToLearningMenu() {
 
 
 // ============================================================
-// OPTIONAL: DIRECT BACK ROUTER
-// ============================================================
-//
-// Agar future mein HTML button ko
-// onclick="goBackFromLearning()"
-// karna ho, ye function ready hai.
+// OPTIONAL BACK ROUTER
 // ============================================================
 
 function goBackFromLearning() {
@@ -2938,6 +2908,7 @@ document.addEventListener(
         if (elementExists(learningPage)) {
 
             learningPage.style.opacity = "1";
+
             learningPage.style.transform =
                 "translateY(0) scale(1)";
 
