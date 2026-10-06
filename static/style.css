@@ -3365,7 +3365,7 @@ body {
 }
 
 /* =========================================================
-   🌙 LUXURY LAMP INTRO
+   🌙 PURE DARK NIGHT LUXURY INTRO
    ========================================================= */
 
 #studyIntro {
@@ -3381,19 +3381,19 @@ body {
 
     overflow: hidden;
 
+    background:
+        radial-gradient(
+            ellipse at 50% 45%,
+            #171717 0%,
+            #0b0b0b 45%,
+            #030303 78%,
+            #000000 100%
+        );
+
     display: flex;
 
     align-items: center;
     justify-content: center;
-
-    background:
-        radial-gradient(
-            circle at 50% 55%,
-            #27345f 0%,
-            #151c3b 35%,
-            #080c20 72%,
-            #03040d 100%
-        );
 
     transition:
         opacity 1.2s ease,
@@ -3402,106 +3402,152 @@ body {
 
 
 /* =========================================================
-   ⭐ STARS
+   ✦ VERY DARK NIGHT STARS
    ========================================================= */
 
-.intro-stars span {
+.night-stars span {
 
     position: absolute;
 
-    color: #ffe99a;
+    color: #e7d9a2;
 
-    font-size: 18px;
+    font-size: 14px;
 
-    opacity: .75;
+    opacity: .55;
 
-    animation:
-        starGlow 2.5s ease-in-out infinite alternate;
+    animation: starBlink 3s infinite alternate;
 }
 
-.intro-stars span:nth-child(1) {
+.night-stars span:nth-child(1) {
     top: 12%;
     left: 12%;
 }
 
-.intro-stars span:nth-child(2) {
-    top: 20%;
+.night-stars span:nth-child(2) {
+    top: 18%;
     right: 15%;
-    animation-delay: .5s;
+    animation-delay: .7s;
 }
 
-.intro-stars span:nth-child(3) {
-    top: 35%;
-    left: 7%;
-    animation-delay: 1s;
-}
-
-.intro-stars span:nth-child(4) {
+.night-stars span:nth-child(3) {
     top: 30%;
+    left: 8%;
+    animation-delay: 1.3s;
+}
+
+.night-stars span:nth-child(4) {
+    top: 25%;
     right: 8%;
-    animation-delay: 1.5s;
+    animation-delay: 1.8s;
 }
 
-.intro-stars span:nth-child(5) {
-    top: 10%;
-    left: 48%;
-    animation-delay: .8s;
+.night-stars span:nth-child(5) {
+    top: 9%;
+    left: 50%;
+    animation-delay: .4s;
 }
 
-.intro-stars span:nth-child(6) {
-    top: 45%;
-    right: 20%;
-    animation-delay: 1.2s;
-}
-
-
-@keyframes starGlow {
+@keyframes starBlink {
 
     from {
-        opacity: .25;
+        opacity: .15;
         transform: scale(.8);
     }
 
     to {
-        opacity: 1;
-        transform: scale(1.25);
+        opacity: .8;
+        transform: scale(1.15);
     }
-
 }
 
 
 /* =========================================================
-   🌕 MOON
+   🌕 SUBTLE MOON
    ========================================================= */
 
-.intro-moon {
+.night-moon {
 
     position: absolute;
 
-    width: 95px;
-    height: 95px;
+    top: 7%;
+    right: 10%;
 
-    top: 9%;
-    right: 12%;
+    width: 70px;
+    height: 70px;
 
     border-radius: 50%;
 
-    background:
-        radial-gradient(
-            circle at 35% 30%,
-            #fffde5,
-            #fff1ae 70%,
-            #f6d978
-        );
+    background: #ded7b9;
+
+    opacity: .75;
 
     box-shadow:
-        0 0 35px rgba(255,240,160,.4),
-        0 0 100px rgba(255,230,120,.12);
+        0 0 25px rgba(255,240,180,.15);
 }
 
 
 /* =========================================================
-   💡 LAMP
+   💡 TAP MESSAGE
+   ========================================================= */
+
+.lamp-message {
+
+    position: absolute;
+
+    top: 23%;
+
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    z-index: 100;
+
+    padding: 12px 24px;
+
+    border-radius: 35px;
+
+    color: #e8d8a1;
+
+    background:
+        rgba(15,15,15,.82);
+
+    border:
+        1px solid rgba(218,190,105,.35);
+
+    font-size: 17px;
+
+    font-weight: 700;
+
+    letter-spacing: .4px;
+
+    white-space: nowrap;
+
+    box-shadow:
+        0 8px 25px rgba(0,0,0,.55),
+        inset 0 1px rgba(255,255,255,.08);
+
+    animation:
+        messageFloat 2.5s ease-in-out infinite;
+}
+
+@keyframes messageFloat {
+
+    0%,100% {
+        transform:
+            translateX(-50%)
+            translateY(0);
+    }
+
+    50% {
+        transform:
+            translateX(-50%)
+            translateY(-5px);
+    }
+}
+
+
+/* =========================================================
+   🏮 LUXURY LAMP
    ========================================================= */
 
 .luxury-lamp {
@@ -3509,37 +3555,41 @@ body {
     position: absolute;
 
     left: 50%;
-    bottom: 7%;
+
+    bottom: 5%;
 
     transform: translateX(-50%);
 
-    width: 240px;
-    height: 390px;
+    width: 280px;
+    height: 450px;
 
     border: none;
+
+    padding: 0;
 
     background: transparent;
 
     cursor: pointer;
 
-    padding: 0;
-
-    z-index: 20;
+    z-index: 50;
 
     -webkit-tap-highlight-color: transparent;
 
-    transition:
-        transform .3s ease;
-}
+    filter:
+        drop-shadow(
+            0 25px 25px rgba(0,0,0,.75)
+        );
 
+    transition:
+        transform .25s ease;
+}
 
 .luxury-lamp:hover {
 
     transform:
         translateX(-50%)
-        scale(1.03);
+        scale(1.025);
 }
-
 
 .luxury-lamp:active {
 
@@ -3550,71 +3600,126 @@ body {
 
 
 /* =========================================================
-   LAMP SHADE
+   🏮 FABRIC LAMP SHADE
    ========================================================= */
 
 .lamp-shade {
 
     position: absolute;
 
-    top: 5px;
-    left: 25px;
+    top: 0;
 
-    width: 190px;
-    height: 120px;
+    left: 30px;
+
+    width: 220px;
+    height: 155px;
 
     background:
         linear-gradient(
-            145deg,
-            #555b69 0%,
-            #272c38 45%,
-            #10131b 100%
+            90deg,
+            #3b3022 0%,
+            #806b4b 12%,
+            #b09a6e 30%,
+            #8b7655 50%,
+            #b5a074 70%,
+            #67543a 88%,
+            #30271c 100%
         );
 
     clip-path:
         polygon(
-            17% 0%,
-            83% 0%,
+            18% 0%,
+            82% 0%,
             100% 100%,
             0% 100%
         );
 
-    border-radius: 14px;
+    border-radius:
+        14px 14px 8px 8px;
+
+    border-top:
+        5px solid #2b2117;
+
+    border-bottom:
+        7px solid #271c12;
 
     box-shadow:
-        0 18px 30px rgba(0,0,0,.55);
+        inset 8px 0 15px rgba(255,255,255,.15),
+        inset -8px 0 15px rgba(0,0,0,.3),
+        0 15px 30px rgba(0,0,0,.65);
 
     transition:
-        background .8s ease,
-        box-shadow .8s ease;
+        .7s ease;
 }
 
 
-/* Shade top shine */
+/* Top metal ring */
 
-.lamp-shade::before {
-
-    content: "";
+.shade-top {
 
     position: absolute;
 
-    left: 25%;
-    top: 5px;
+    top: -7px;
 
-    width: 50%;
-    height: 4px;
+    left: 18%;
+
+    width: 64%;
+
+    height: 11px;
 
     border-radius: 50%;
 
     background:
-        rgba(255,255,255,.25);
+        linear-gradient(
+            90deg,
+            #49351c,
+            #c29a4a,
+            #e0bf72,
+            #7b5726
+        );
 
-    filter: blur(2px);
+    box-shadow:
+        0 2px 5px rgba(0,0,0,.6);
 }
 
 
 /* =========================================================
-   BULB
+   VERTICAL FABRIC DETAILS
+   ========================================================= */
+
+.shade-lines {
+
+    position: absolute;
+
+    inset: 0;
+
+    display: flex;
+
+    justify-content: space-evenly;
+
+    overflow: hidden;
+
+    opacity: .45;
+}
+
+.shade-lines span {
+
+    width: 2px;
+
+    height: 100%;
+
+    background:
+        linear-gradient(
+            180deg,
+            #3e2c1a,
+            #e0c487,
+            #4c361e
+        );
+}
+
+
+/* =========================================================
+   💡 BULB - OFF
    ========================================================= */
 
 .lamp-bulb {
@@ -3622,59 +3727,209 @@ body {
     position: absolute;
 
     left: 50%;
+
     bottom: -16px;
 
     transform:
         translateX(-50%);
 
-    width: 43px;
-    height: 43px;
+    width: 44px;
+    height: 44px;
 
     border-radius: 50%;
 
     background:
-        #b9b3a0;
+        #4a4439;
+
+    border:
+        3px solid #776b51;
+
+    box-shadow:
+        0 2px 5px rgba(0,0,0,.6);
 
     transition:
-        .7s ease;
+        all .7s ease;
 }
 
 
 /* =========================================================
-   LAMP STAND
+   🪵 LAMP NECK
    ========================================================= */
 
-.lamp-stand {
+.lamp-neck-top {
 
     position: absolute;
 
     left: 50%;
-    top: 112px;
+
+    top: 145px;
 
     transform:
         translateX(-50%);
 
-    width: 18px;
-    height: 210px;
+    width: 48px;
+    height: 35px;
 
-    border-radius: 20px;
+    border-radius:
+        8px 8px 14px 14px;
 
     background:
         linear-gradient(
             90deg,
-            #10131a,
-            #727887,
-            #252a34,
-            #0c0f15
+            #3d2916,
+            #b58a48,
+            #e1bd70,
+            #805b27,
+            #34220f
         );
-
-    box-shadow:
-        5px 10px 20px rgba(0,0,0,.45);
 }
 
 
 /* =========================================================
-   LAMP BASE
+   🟤 DECORATIVE COLLARS
+   ========================================================= */
+
+.lamp-decor {
+
+    position: absolute;
+
+    left: 50%;
+
+    transform:
+        translateX(-50%);
+
+    background:
+        linear-gradient(
+            90deg,
+            #392411,
+            #c39a50,
+            #e6c477,
+            #795221,
+            #2e1c0c
+        );
+
+    border-radius: 50%;
+}
+
+.decor-one {
+
+    top: 174px;
+
+    width: 70px;
+    height: 20px;
+}
+
+.decor-two {
+
+    top: 310px;
+
+    width: 66px;
+    height: 18px;
+}
+
+
+/* =========================================================
+   🪵 CARVED WOODEN BODY
+   ========================================================= */
+
+.lamp-body {
+
+    position: absolute;
+
+    left: 50%;
+
+    top: 188px;
+
+    transform:
+        translateX(-50%);
+
+    width: 70px;
+    height: 135px;
+
+    border-radius:
+        35% 35% 45% 45%;
+
+    background:
+        linear-gradient(
+            90deg,
+            #24160c,
+            #654521,
+            #a47738,
+            #5c3c1a,
+            #201309
+        );
+
+    box-shadow:
+        inset 8px 0 12px rgba(255,255,255,.08),
+        inset -8px 0 12px rgba(0,0,0,.35),
+        0 10px 15px rgba(0,0,0,.5);
+}
+
+
+/* Carved wood shine */
+
+.lamp-body::before {
+
+    content: "";
+
+    position: absolute;
+
+    left: 50%;
+
+    transform:
+        translateX(-50%);
+
+    width: 8px;
+    height: 85%;
+
+    top: 8%;
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            180deg,
+            transparent,
+            rgba(255,220,130,.3),
+            transparent
+        );
+}
+
+
+/* =========================================================
+   BASE NECK
+   ========================================================= */
+
+.lamp-neck-bottom {
+
+    position: absolute;
+
+    left: 50%;
+
+    top: 320px;
+
+    transform:
+        translateX(-50%);
+
+    width: 70px;
+    height: 30px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #2a190c,
+            #a97934,
+            #e0b960,
+            #65421b,
+            #251508
+        );
+
+    border-radius: 8px;
+}
+
+
+/* =========================================================
+   ⚫ LUXURY BASE
    ========================================================= */
 
 .lamp-base {
@@ -3682,31 +3937,37 @@ body {
     position: absolute;
 
     left: 50%;
+
     bottom: 0;
 
     transform:
         translateX(-50%);
 
-    width: 145px;
-    height: 35px;
+    width: 170px;
+    height: 48px;
 
     border-radius: 50%;
 
     background:
         linear-gradient(
             180deg,
-            #5d6471,
-            #20242d 55%,
-            #080a0e
+            #a98447 0%,
+            #60431e 25%,
+            #2a1a0b 60%,
+            #080604 100%
         );
 
+    border:
+        3px solid #9d793b;
+
     box-shadow:
-        0 12px 20px rgba(0,0,0,.5);
+        0 15px 25px rgba(0,0,0,.75),
+        inset 0 4px 6px rgba(255,220,140,.2);
 }
 
 
 /* =========================================================
-   ✨ LIGHT OFF -> ON
+   💛 LIGHT OFF → ON
    ========================================================= */
 
 .lamp-light {
@@ -3714,23 +3975,25 @@ body {
     position: absolute;
 
     left: 50%;
-    top: 75px;
+
+    top: 30px;
 
     transform:
         translateX(-50%)
-        scale(.3);
+        scale(.15);
 
-    width: 500px;
-    height: 500px;
+    width: 700px;
+    height: 700px;
 
     border-radius: 50%;
 
     background:
         radial-gradient(
             circle,
-            rgba(255,232,125,.48) 0%,
-            rgba(255,211,70,.20) 30%,
-            rgba(255,190,40,.08) 52%,
+            rgba(255,250,185,.8) 0%,
+            rgba(255,229,105,.5) 18%,
+            rgba(255,205,55,.25) 35%,
+            rgba(255,180,30,.1) 55%,
             transparent 72%
         );
 
@@ -3740,57 +4003,37 @@ body {
 
     transition:
         opacity 1s ease,
-        transform 1.2s ease;
+        transform 1.3s ease;
+
+    z-index: -1;
 }
 
 
 /* =========================================================
-   💛 LAMP ON
+   🔥 LAMP ON
    ========================================================= */
-
-#studyIntro.lamp-on .lamp-light {
-
-    opacity: 1;
-
-    transform:
-        translateX(-50%)
-        scale(1);
-
-    animation:
-        lightPulse 2s ease-in-out infinite alternate;
-}
-
 
 #studyIntro.lamp-on .lamp-bulb {
 
     background:
-        #fff5a8;
+        #fffbd5;
+
+    border-color:
+        #fff5a2;
 
     box-shadow:
-        0 0 15px #fff5a8,
-        0 0 40px #ffd83d,
-        0 0 90px rgba(255,207,55,.9);
+        0 0 20px #fffbd5,
+        0 0 50px #fff16a,
+        0 0 100px #ffd83d,
+        0 0 180px rgba(255,200,35,.95),
+        0 0 260px rgba(255,180,20,.7);
 
     animation:
-        bulbGlow 1.2s ease-in-out infinite alternate;
+        bulbExplosion .7s ease-in-out infinite alternate;
 }
 
 
-#studyIntro.lamp-on .lamp-shade {
-
-    background:
-        linear-gradient(
-            145deg,
-            #806f42,
-            #3c321d
-        );
-
-    box-shadow:
-        0 0 35px rgba(255,214,85,.45);
-}
-
-
-@keyframes bulbGlow {
+@keyframes bulbExplosion {
 
     from {
         transform:
@@ -3801,102 +4044,68 @@ body {
     to {
         transform:
             translateX(-50%)
-            scale(1.12);
+            scale(1.25);
     }
-
 }
 
 
-@keyframes lightPulse {
+#studyIntro.lamp-on .lamp-light {
 
-    from {
-        opacity: .65;
+    opacity: 1;
+
+    transform:
+        translateX(-50%)
+        scale(1);
+
+    animation:
+        roomLight 1.8s ease-out forwards;
+}
+
+
+@keyframes roomLight {
+
+    0% {
+        opacity: 0;
+        transform:
+            translateX(-50%)
+            scale(.1);
     }
 
-    to {
+    40% {
         opacity: 1;
     }
 
+    100% {
+        opacity: 1;
+        transform:
+            translateX(-50%)
+            scale(1);
+    }
 }
 
 
-/* =========================================================
-   💡 MESSAGE
-   ========================================================= */
+/* Shade glows after ON */
 
-.lamp-message {
-
-    position: absolute;
-
-    z-index: 50;
-
-    top: 18%;
-
-    left: 50%;
-
-    transform:
-        translateX(-50%);
-
-    text-align: center;
-
-    width: 90%;
-
-    pointer-events: none;
-}
-
-
-.tap-title {
-
-    display: inline-block;
-
-    padding: 14px 28px;
-
-    border-radius: 40px;
-
-    color: #ffe98a;
-
-    font-size: 20px;
-
-    font-weight: 800;
-
-    letter-spacing: .5px;
-
-    background:
-        rgba(255,255,255,.08);
-
-    border:
-        1px solid rgba(255,255,255,.22);
+#studyIntro.lamp-on .lamp-shade {
 
     box-shadow:
-        0 8px 30px rgba(0,0,0,.25);
+        0 0 40px rgba(255,220,100,.6),
+        0 0 100px rgba(255,200,50,.35);
 
-    backdrop-filter:
-        blur(12px);
-
-    animation:
-        messagePulse 2s ease-in-out infinite;
-}
-
-
-@keyframes messagePulse {
-
-    0%,100% {
-        transform: scale(1);
-        box-shadow:
-            0 8px 30px rgba(0,0,0,.25);
-    }
-
-    50% {
-        transform: scale(1.04);
-        box-shadow:
-            0 0 30px rgba(255,220,90,.18);
-    }
-
+    background:
+        linear-gradient(
+            90deg,
+            #6e4b21,
+            #d6ad5b,
+            #fff0a0,
+            #c89d4b,
+            #5b3b19
+        );
 }
 
 
 /* =========================================================
-   EXIT
+   🚪 INTRO EXIT
    ========================================================= */
 
 #studyIntro.hide-intro {
@@ -3915,34 +4124,30 @@ body {
 
 @media (max-width: 600px) {
 
-    .intro-moon {
+    .night-moon {
 
-        width: 58px;
-        height: 58px;
+        width: 50px;
+        height: 50px;
 
-        top: 8%;
-        right: 9%;
+        top: 7%;
+        right: 8%;
     }
 
 
     .lamp-message {
 
-        top: 15%;
-    }
+        top: 22%;
 
+        font-size: 13px;
 
-    .tap-title {
-
-        padding: 11px 17px;
-
-        font-size: 14px;
+        padding: 10px 15px;
     }
 
 
     .luxury-lamp {
 
-        width: 190px;
-        height: 310px;
+        width: 210px;
+        height: 335px;
 
         bottom: 8%;
     }
@@ -3950,28 +4155,48 @@ body {
 
     .lamp-shade {
 
-        left: 20px;
+        width: 165px;
+        height: 115px;
 
-        width: 150px;
-        height: 95px;
+        left: 22px;
     }
 
 
-    .lamp-stand {
+    .lamp-neck-top {
+        top: 105px;
+    }
 
-        top: 90px;
 
-        height: 170px;
+    .decor-one {
+        top: 132px;
+    }
 
-        width: 15px;
+
+    .lamp-body {
+
+        top: 145px;
+
+        width: 54px;
+        height: 105px;
+    }
+
+
+    .decor-two {
+        top: 245px;
+    }
+
+
+    .lamp-neck-bottom {
+        top: 255px;
+
+        width: 55px;
     }
 
 
     .lamp-base {
 
-        width: 115px;
-
-        height: 29px;
+        width: 130px;
+        height: 36px;
     }
 
 
@@ -3984,385 +4209,7 @@ body {
 
     .lamp-light {
 
-        top: 50px;
-
-        width: 400px;
-        height: 400px;
-    }
-
-}
-
-/* =========================================================
-   🌙 FINAL LUXURY NIGHT INTRO
-   ========================================================= */
-
-#studyIntro {
-    background:
-        radial-gradient(
-            ellipse at 50% 45%,
-            #111a38 0%,
-            #070d20 42%,
-            #02040d 78%,
-            #000106 100%
-        );
-
-    color: white;
-}
-
-
-/* Deep night effect */
-
-#studyIntro::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-
-    background:
-        radial-gradient(
-            circle at 20% 25%,
-            rgba(70,90,160,.08),
-            transparent 25%
-        ),
-        radial-gradient(
-            circle at 80% 20%,
-            rgba(80,100,180,.06),
-            transparent 25%
-        );
-
-    pointer-events: none;
-}
-
-
-/* =========================================================
-   💡 MOVE MESSAGE CLOSER TO LAMP
-   ========================================================= */
-
-.lamp-message {
-    top: 25%;
-}
-
-.tap-title {
-    font-size: 18px;
-
-    padding: 12px 24px;
-
-    color: #fff1a8;
-
-    background:
-        rgba(12,17,39,.72);
-
-    border: 1px solid rgba(255,225,110,.35);
-
-    box-shadow:
-        0 0 20px rgba(255,210,70,.08),
-        inset 0 1px 0 rgba(255,255,255,.12);
-
-    backdrop-filter: blur(12px);
-}
-
-
-/* =========================================================
-   ✨ LUXURY GOLD LAMP
-   ========================================================= */
-
-.luxury-lamp {
-    width: 250px;
-    height: 390px;
-
-    bottom: 6%;
-
-    filter:
-        drop-shadow(
-            0 20px 25px rgba(0,0,0,.65)
-        );
-}
-
-
-/* Premium golden shade */
-
-.lamp-shade {
-
-    width: 200px;
-    height: 125px;
-
-    left: 25px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #f5d77b 0%,
-            #b98524 28%,
-            #5e3b0e 55%,
-            #d7a93c 78%,
-            #fff0a3 100%
-        );
-
-    border: 2px solid rgba(255,230,135,.65);
-
-    box-shadow:
-        inset 0 3px 8px rgba(255,255,255,.35),
-        0 15px 35px rgba(0,0,0,.65);
-}
-
-
-/* Gold shade shine */
-
-.lamp-shade::before {
-
-    background:
-        linear-gradient(
-            90deg,
-            transparent,
-            rgba(255,255,255,.75),
-            transparent
-        );
-
-    height: 5px;
-
-    animation:
-        shadeShine 3s ease-in-out infinite;
-}
-
-
-@keyframes shadeShine {
-
-    0%,100% {
-        opacity: .2;
-        transform: translateX(-20px);
-    }
-
-    50% {
-        opacity: 1;
-        transform: translateX(20px);
-    }
-}
-
-
-/* =========================================================
-   GOLDEN STAND
-   ========================================================= */
-
-.lamp-stand {
-
-    width: 18px;
-
-    background:
-        linear-gradient(
-            90deg,
-            #4a2c08,
-            #f4d06f 25%,
-            #fff0a0 50%,
-            #b67d1c 75%,
-            #3a2105
-        );
-
-    box-shadow:
-        3px 5px 15px rgba(0,0,0,.65),
-        inset 1px 0 rgba(255,255,255,.5);
-}
-
-
-/* =========================================================
-   GOLDEN BASE
-   ========================================================= */
-
-.lamp-base {
-
-    width: 155px;
-    height: 38px;
-
-    background:
-        linear-gradient(
-            180deg,
-            #ffe18a 0%,
-            #b98221 35%,
-            #5b3508 70%,
-            #1d1204 100%
-        );
-
-    border:
-        2px solid #e4bd58;
-
-    box-shadow:
-        0 12px 25px rgba(0,0,0,.7),
-        inset 0 3px 5px rgba(255,255,255,.35);
-}
-
-
-/* =========================================================
-   💛 BULB
-   ========================================================= */
-
-.lamp-bulb {
-
-    width: 45px;
-    height: 45px;
-
-    background:
-        #8b8368;
-
-    border:
-        2px solid #b7a56d;
-
-    transition:
-        all .6s ease;
-}
-
-
-/* =========================================================
-   🔥 SUPER BRIGHT LIGHT WHEN CLICKED
-   ========================================================= */
-
-#studyIntro.lamp-on .lamp-bulb {
-
-    background:
-        #fffbd0;
-
-    border-color:
-        #fff6a0;
-
-    box-shadow:
-        0 0 20px #fffbd0,
-        0 0 45px #fff16b,
-        0 0 90px #ffd83d,
-        0 0 160px rgba(255,205,45,.95),
-        0 0 250px rgba(255,190,30,.7);
-
-    animation:
-        superBulb 0.65s ease-in-out infinite alternate;
-}
-
-
-@keyframes superBulb {
-
-    from {
-        transform:
-            translateX(-50%)
-            scale(.9);
-    }
-
-    to {
-        transform:
-            translateX(-50%)
-            scale(1.22);
-    }
-}
-
-
-/* =========================================================
-   🌟 HUGE WARM LIGHT
-   ========================================================= */
-
-#studyIntro.lamp-on .lamp-light {
-
-    width: 850px;
-    height: 850px;
-
-    top: -80px;
-
-    opacity: 1;
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(255,250,190,.72) 0%,
-            rgba(255,230,100,.45) 18%,
-            rgba(255,210,55,.25) 35%,
-            rgba(255,190,30,.12) 52%,
-            transparent 72%
-        );
-
-    filter:
-        blur(2px);
-
-    animation:
-        massiveLight 1.8s ease-out forwards;
-}
-
-
-@keyframes massiveLight {
-
-    0% {
-        opacity: 0;
-        transform:
-            translateX(-50%)
-            scale(.2);
-    }
-
-    45% {
-        opacity: 1;
-    }
-
-    100% {
-        opacity: 1;
-        transform:
-            translateX(-50%)
-            scale(1);
-    }
-}
-
-
-/* =========================================================
-   ✨ GOLDEN SHADE WHEN ON
-   ========================================================= */
-
-#studyIntro.lamp-on .lamp-shade {
-
-    background:
-        linear-gradient(
-            135deg,
-            #fff0a0,
-            #e3b84d,
-            #9c6710,
-            #f7d66e
-        );
-
-    box-shadow:
-        0 0 30px rgba(255,220,90,.7),
-        0 0 70px rgba(255,205,50,.45);
-}
-
-
-/* =========================================================
-   📱 MOBILE
-   ========================================================= */
-
-@media (max-width: 600px) {
-
-    .lamp-message {
-        top: 24%;
-    }
-
-    .tap-title {
-        font-size: 14px;
-        padding: 10px 17px;
-    }
-
-    .luxury-lamp {
-        width: 200px;
-        height: 315px;
-        bottom: 8%;
-    }
-
-    .lamp-shade {
-        width: 160px;
-        height: 100px;
-        left: 20px;
-    }
-
-    .lamp-stand {
-        top: 94px;
-        height: 170px;
-    }
-
-    .lamp-base {
-        width: 125px;
-        height: 30px;
-    }
-
-    #studyIntro.lamp-on .lamp-light {
         width: 500px;
         height: 500px;
-        top: -20px;
     }
 }
