@@ -5265,3 +5265,17 @@ body {
     }
 
 }
+
+.back-btn {
+    color: #9b7a3c !important;
+    font-family: "Georgia", serif;
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.back-btn span,
+.back-btn i {
+    color: #9b7a3c !important;
+    font-size: 24px;
+}
