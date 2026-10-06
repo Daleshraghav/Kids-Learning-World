@@ -5787,3 +5787,459 @@ body {
     color: #52617d !important;
     font-size: 18px;
 }
+
+/* =========================================================
+   LEARNING CATEGORIES - 5 CARDS PER ROW
+   High Level Animation + Mobile Responsive
+   ========================================================= */
+
+.learning-menu-grid {
+    width: 100%;
+    max-width: 1500px;
+    margin: 0 auto;
+    padding: 20px 24px 70px;
+
+    display: grid;
+
+    /* 5 cards in one row */
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+
+    gap: 24px;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   CATEGORY CARD
+   ========================================================= */
+
+.learning-menu-card {
+    position: relative;
+    min-height: 235px;
+
+    padding: 28px 18px;
+
+    border-radius: 28px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    cursor: pointer;
+
+    overflow: hidden;
+
+    transform: translateY(0) scale(1);
+
+    transition:
+        transform 0.45s cubic-bezier(.22, 1, .36, 1),
+        box-shadow 0.45s ease,
+        filter 0.45s ease;
+
+    will-change: transform;
+}
+
+
+/* =========================================================
+   PREMIUM HOVER
+   ========================================================= */
+
+.learning-menu-card:hover {
+    transform: translateY(-14px) scale(1.035);
+
+    box-shadow:
+        0 25px 55px rgba(0, 0, 0, 0.16),
+        0 8px 20px rgba(0, 0, 0, 0.08);
+
+    filter: brightness(1.04);
+}
+
+
+/* =========================================================
+   CARD LIGHT / GLOW
+   ========================================================= */
+
+.learning-menu-card::before {
+    content: "";
+
+    position: absolute;
+
+    width: 150px;
+    height: 150px;
+
+    top: -75px;
+    right: -75px;
+
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.35);
+
+    transition:
+        transform 0.7s ease,
+        opacity 0.7s ease;
+}
+
+
+.learning-menu-card:hover::before {
+    transform: scale(2.2);
+    opacity: 0.8;
+}
+
+
+/* =========================================================
+   SHINE EFFECT
+   ========================================================= */
+
+.learning-menu-card::after {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: -130%;
+
+    width: 65%;
+    height: 100%;
+
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.38),
+        transparent
+    );
+
+    transform: skewX(-20deg);
+
+    transition: left 0.75s ease;
+
+    pointer-events: none;
+}
+
+
+.learning-menu-card:hover::after {
+    left: 140%;
+}
+
+
+/* =========================================================
+   ICON
+   ========================================================= */
+
+.learning-menu-card .menu-card-icon {
+    position: relative;
+    z-index: 2;
+
+    font-size: 62px;
+
+    margin-bottom: 16px;
+
+    display: inline-block;
+
+    transform: translateY(0) rotate(0deg) scale(1);
+
+    transition:
+        transform 0.55s cubic-bezier(.22, 1, .36, 1),
+        filter 0.4s ease;
+}
+
+
+.learning-menu-card:hover .menu-card-icon {
+    transform:
+        translateY(-8px)
+        rotate(-6deg)
+        scale(1.18);
+
+    filter:
+        drop-shadow(0 12px 12px rgba(0, 0, 0, 0.16));
+}
+
+
+/* =========================================================
+   CARD TITLE
+   ========================================================= */
+
+.learning-menu-card .menu-card-title {
+    position: relative;
+    z-index: 2;
+
+    font-size: 21px;
+    font-weight: 800;
+
+    transition:
+        transform 0.4s ease,
+        letter-spacing 0.4s ease;
+}
+
+
+.learning-menu-card:hover .menu-card-title {
+    transform: translateY(-3px);
+
+    letter-spacing: 0.5px;
+}
+
+
+/* =========================================================
+   CARD DESCRIPTION
+   ========================================================= */
+
+.learning-menu-card .menu-card-description {
+    position: relative;
+    z-index: 2;
+
+    margin-top: 7px;
+
+    font-size: 13px;
+
+    opacity: 0.75;
+
+    transition:
+        opacity 0.4s ease,
+        transform 0.4s ease;
+}
+
+
+.learning-menu-card:hover .menu-card-description {
+    opacity: 1;
+
+    transform: translateY(-2px);
+}
+
+
+/* =========================================================
+   CLICK / PRESS EFFECT
+   ========================================================= */
+
+.learning-menu-card:active {
+    transform: scale(0.94);
+
+    transition: transform 0.12s ease;
+}
+
+
+/* =========================================================
+   HIGH LEVEL ENTRY ANIMATION
+   ========================================================= */
+
+@keyframes categoryPremiumEnter {
+
+    0% {
+        opacity: 0;
+        transform:
+            translateY(45px)
+            scale(0.82)
+            rotateX(20deg);
+        filter: blur(8px);
+    }
+
+    60% {
+        opacity: 1;
+        transform:
+            translateY(-7px)
+            scale(1.025)
+            rotateX(0deg);
+        filter: blur(0);
+    }
+
+    100% {
+        opacity: 1;
+        transform:
+            translateY(0)
+            scale(1)
+            rotateX(0deg);
+        filter: blur(0);
+    }
+}
+
+
+/* Cards enter one by one */
+
+.learning-menu-card {
+    animation:
+        categoryPremiumEnter
+        0.85s
+        cubic-bezier(.22, 1, .36, 1)
+        both;
+}
+
+
+/* Stagger animation */
+
+.learning-menu-card:nth-child(1) {
+    animation-delay: 0.05s;
+}
+
+.learning-menu-card:nth-child(2) {
+    animation-delay: 0.12s;
+}
+
+.learning-menu-card:nth-child(3) {
+    animation-delay: 0.19s;
+}
+
+.learning-menu-card:nth-child(4) {
+    animation-delay: 0.26s;
+}
+
+.learning-menu-card:nth-child(5) {
+    animation-delay: 0.33s;
+}
+
+.learning-menu-card:nth-child(6) {
+    animation-delay: 0.40s;
+}
+
+.learning-menu-card:nth-child(7) {
+    animation-delay: 0.47s;
+}
+
+.learning-menu-card:nth-child(8) {
+    animation-delay: 0.54s;
+}
+
+.learning-menu-card:nth-child(9) {
+    animation-delay: 0.61s;
+}
+
+
+/* =========================================================
+   ICON FLOATING ANIMATION
+   ========================================================= */
+
+@keyframes categoryIconFloat {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-7px);
+    }
+}
+
+
+.learning-menu-card .menu-card-icon {
+    animation:
+        categoryIconFloat
+        3s
+        ease-in-out
+        infinite;
+}
+
+
+/* =========================================================
+   MOBILE / TABLET
+   ========================================================= */
+
+/* Tablet */
+
+@media (max-width: 1100px) {
+
+    .learning-menu-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+
+        gap: 18px;
+
+        padding-left: 18px;
+        padding-right: 18px;
+    }
+
+    .learning-menu-card {
+        min-height: 215px;
+    }
+}
+
+
+/* Mobile */
+
+@media (max-width: 700px) {
+
+    .learning-menu-grid {
+        width: 100%;
+
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+        gap: 13px;
+
+        padding:
+            12px
+            10px
+            45px;
+    }
+
+    .learning-menu-card {
+        min-height: 185px;
+
+        padding: 20px 10px;
+
+        border-radius: 22px;
+    }
+
+    .learning-menu-card .menu-card-icon {
+        font-size: 48px;
+
+        margin-bottom: 10px;
+    }
+
+    .learning-menu-card .menu-card-title {
+        font-size: 17px;
+    }
+
+    .learning-menu-card .menu-card-description {
+        font-size: 11px;
+    }
+}
+
+
+/* Small mobile */
+
+@media (max-width: 420px) {
+
+    .learning-menu-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+
+        gap: 10px;
+
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+    .learning-menu-card {
+        min-height: 165px;
+
+        padding: 15px 7px;
+
+        border-radius: 19px;
+    }
+
+    .learning-menu-card .menu-card-icon {
+        font-size: 42px;
+    }
+
+    .learning-menu-card .menu-card-title {
+        font-size: 15px;
+    }
+
+    .learning-menu-card .menu-card-description {
+        font-size: 10px;
+    }
+}
+
+
+/* =========================================================
+   ACCESSIBILITY
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .learning-menu-card,
+    .learning-menu-card .menu-card-icon {
+        animation: none !important;
+        transition: none !important;
+    }
+}
