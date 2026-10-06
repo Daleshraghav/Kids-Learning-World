@@ -8729,3 +8729,10 @@ table tr:hover {
     }
 }
 
+/* Language World + Maths World + General Knowledge
+   + Science World + Games & Quizzes + Drawing & Creativity */
+
+EXACT-CLASS-NAME {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
