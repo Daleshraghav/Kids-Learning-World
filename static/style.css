@@ -6243,3 +6243,845 @@ body {
         transition: none !important;
     }
 }
+
+/* =========================================================
+   KIDS LEARNING WORLD
+   FINAL DESIGN OVERRIDES
+   ========================================================= */
+
+
+/* =========================================================
+   1. LEARNING CATEGORY MENU
+   ========================================================= */
+
+.learning-menu-intro {
+    text-align: center;
+    margin: 10px auto 35px;
+    padding: 0 15px;
+}
+
+.learning-menu-intro h2 {
+    margin: 0;
+    font-size: 36px;
+    font-weight: 900;
+    color: #273c75;
+}
+
+
+/* 5 CARDS PER ROW */
+
+.learning-menu-grid {
+    width: 100%;
+    max-width: 1250px;
+    margin: 0 auto;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(5, minmax(0, 1fr));
+
+    gap: 22px;
+
+    padding: 10px 20px 40px;
+
+    box-sizing: border-box;
+}
+
+
+/* Learning menu card */
+
+.menu-card {
+    position: relative;
+
+    min-height: 190px;
+
+    padding: 25px 18px;
+
+    border: none;
+    border-radius: 28px;
+
+    cursor: pointer;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    overflow: hidden;
+
+    transition:
+        transform 0.35s ease,
+        box-shadow 0.35s ease;
+
+    box-shadow:
+        0 12px 30px rgba(50, 60, 100, 0.12);
+}
+
+
+/* Menu card hover */
+
+.menu-card:hover {
+    transform:
+        translateY(-10px)
+        scale(1.03);
+
+    box-shadow:
+        0 20px 40px rgba(50, 60, 100, 0.18);
+}
+
+
+/* Menu card click */
+
+.menu-card:active {
+    transform:
+        translateY(-2px)
+        scale(0.97);
+}
+
+
+/* Menu icon */
+
+.menu-card-icon {
+    font-size: 48px;
+
+    margin-bottom: 12px;
+
+    animation:
+        menuIconFloat 3s ease-in-out infinite;
+}
+
+
+@keyframes menuIconFloat {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-7px);
+    }
+
+}
+
+
+/* Menu heading */
+
+.menu-card h3 {
+    margin: 5px 0;
+
+    font-size: 22px;
+    font-weight: 900;
+
+    color: #273c75;
+}
+
+
+/* Menu description */
+
+.menu-card p {
+    margin: 5px 0 0;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    color: #69758a;
+}
+
+
+/* REMOVE ALL ARROWS */
+
+.menu-card-arrow,
+.menu-card .arrow,
+.category-card .arrow {
+    display: none !important;
+}
+
+
+/* Footer */
+
+.learning-menu-footer {
+    text-align: center;
+
+    margin: 20px auto 50px;
+
+    font-size: 16px;
+    font-weight: 700;
+
+    color: #8992a8;
+}
+
+
+/* =========================================================
+   2. CATEGORY CARDS ON HOME PAGE
+   ========================================================= */
+
+.category-grid {
+
+    grid-template-columns:
+        repeat(5, minmax(0, 1fr)) !important;
+
+    gap: 22px;
+}
+
+
+/* Existing category cards */
+
+.category-card {
+    min-height: 220px;
+
+    transition:
+        transform 0.35s ease,
+        box-shadow 0.35s ease;
+}
+
+
+.category-card:hover {
+    transform:
+        translateY(-10px)
+        scale(1.025);
+
+    box-shadow:
+        0 20px 40px rgba(50, 60, 100, 0.15);
+}
+
+
+/* =========================================================
+   3. GENERAL LEARNING CARDS
+   ========================================================= */
+
+.cards-grid {
+
+    grid-template-columns:
+        repeat(5, minmax(0, 1fr)) !important;
+
+    gap: 20px;
+
+    max-width: 1250px;
+}
+
+
+/* Normal learning cards */
+
+.learning-card {
+
+    min-height: 210px;
+
+    border-radius: 26px;
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+
+.learning-card:hover {
+
+    transform:
+        translateY(-8px)
+        scale(1.025);
+
+    box-shadow:
+        0 18px 35px rgba(50, 60, 100, 0.15);
+}
+
+
+/* =========================================================
+   4. HINDI ALPHABET
+   ========================================================= */
+
+.hindi-grid {
+
+    grid-template-columns:
+        repeat(5, minmax(0, 1fr)) !important;
+
+    gap: 20px;
+}
+
+
+/* New Hindi card design */
+
+.hindi-card {
+
+    min-height: 300px;
+
+    border-radius: 28px;
+
+    transition:
+        transform 0.35s ease,
+        box-shadow 0.35s ease;
+}
+
+
+.hindi-card:hover {
+
+    transform:
+        translateY(-10px)
+        scale(1.025);
+
+    box-shadow:
+        0 20px 40px rgba(67, 55, 90, 0.18);
+}
+
+
+/* Hindi letter */
+
+.hindi-letter {
+
+    font-family:
+        "Noto Sans Devanagari",
+        "Mangal",
+        sans-serif;
+
+    font-weight: 900;
+}
+
+
+/* Hindi word */
+
+.hindi-word {
+
+    font-family:
+        "Noto Sans Devanagari",
+        "Mangal",
+        sans-serif;
+
+    font-size: 24px;
+
+    font-weight: 900;
+
+    color: #273c75;
+
+    margin-top: 5px;
+}
+
+
+/* Hindi sound button */
+
+.hindi-sound-btn {
+
+    border: none;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+
+.hindi-sound-btn:hover {
+
+    transform:
+        scale(1.12)
+        rotate(5deg);
+
+    box-shadow:
+        0 8px 20px rgba(100, 80, 160, 0.2);
+}
+
+
+/* =========================================================
+   5. FRUITS / BODY PARTS / ANIMALS / COLOURS
+   ========================================================= */
+
+
+/*
+   JavaScript generated cards normally use
+   .learning-card.
+
+   These rules keep all cards equal and beautiful.
+*/
+
+.fruit-card,
+.body-part-card,
+.animal-card,
+.colour-card {
+
+    border-radius: 26px;
+
+    min-height: 210px;
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+
+.fruit-card:hover,
+.body-part-card:hover,
+.animal-card:hover,
+.colour-card:hover {
+
+    transform:
+        translateY(-8px)
+        scale(1.025);
+
+    box-shadow:
+        0 18px 35px rgba(50, 60, 100, 0.15);
+}
+
+
+/* =========================================================
+   6. COLOUR CARDS
+   ========================================================= */
+
+.colour-circle {
+
+    width: 90px;
+    height: 90px;
+
+    border-radius: 50%;
+
+    margin-bottom: 15px;
+
+    border:
+        5px solid
+        rgba(255, 255, 255, 0.9);
+
+    box-shadow:
+        0 10px 25px rgba(50, 50, 80, 0.15);
+
+    transition:
+        transform 0.3s ease;
+}
+
+
+.colour-card:hover .colour-circle {
+
+    transform:
+        scale(1.15)
+        rotate(8deg);
+}
+
+
+/* =========================================================
+   7. BACK BUTTON
+   ========================================================= */
+
+.back-button {
+
+    border: none;
+
+    padding:
+        12px 20px;
+
+    border-radius: 15px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #f0ecff,
+            #e6ddff
+        );
+
+    color: #7355c7;
+
+    font-size: 15px;
+
+    font-weight: 800;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        background 0.25s ease;
+}
+
+
+.back-button:hover {
+
+    transform:
+        translateX(-5px);
+
+    background:
+        linear-gradient(
+            135deg,
+            #e5dcff,
+            #dcd0ff
+        );
+
+    box-shadow:
+        0 8px 20px rgba(100, 80, 160, 0.15);
+}
+
+
+/* =========================================================
+   8. LEARNING PAGE
+   ========================================================= */
+
+.learning-page {
+
+    min-height: 100vh;
+
+    padding:
+        35px 5% 100px;
+
+    box-sizing: border-box;
+}
+
+
+.learning-content {
+
+    width: 100%;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   9. ANIMATION
+   ========================================================= */
+
+@keyframes finalCardShow {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(25px)
+            scale(0.95);
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+    }
+
+}
+
+
+.menu-card,
+.learning-card,
+.hindi-card {
+
+    animation:
+        finalCardShow
+        0.6s
+        ease both;
+}
+
+
+/* =========================================================
+   10. TABLES
+   ========================================================= */
+
+.table-number {
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+
+.table-number:hover {
+
+    transform:
+        translateY(-5px)
+        scale(1.05);
+
+    box-shadow:
+        0 10px 25px rgba(80, 60, 150, 0.15);
+}
+
+
+/* =========================================================
+   11. TABLET
+   ========================================================= */
+
+@media (max-width: 1100px) {
+
+    .learning-menu-grid {
+
+        grid-template-columns:
+            repeat(3, minmax(0, 1fr));
+
+        gap: 18px;
+    }
+
+
+    .category-grid {
+
+        grid-template-columns:
+            repeat(3, minmax(0, 1fr)) !important;
+    }
+
+
+    .cards-grid {
+
+        grid-template-columns:
+            repeat(3, minmax(0, 1fr)) !important;
+    }
+
+
+    .hindi-grid {
+
+        grid-template-columns:
+            repeat(3, minmax(0, 1fr)) !important;
+    }
+
+}
+
+
+/* =========================================================
+   12. MOBILE
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+    .learning-menu-grid {
+
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+        gap: 14px;
+
+        padding:
+            10px 10px 35px;
+    }
+
+
+    .category-grid {
+
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr)) !important;
+
+        gap: 14px;
+    }
+
+
+    .cards-grid {
+
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr)) !important;
+
+        gap: 14px;
+    }
+
+
+    .hindi-grid {
+
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr)) !important;
+
+        gap: 14px;
+
+        padding:
+            10px 10px 40px;
+    }
+
+
+    .menu-card {
+
+        min-height: 170px;
+
+        padding: 18px 12px;
+
+        border-radius: 22px;
+    }
+
+
+    .menu-card-icon {
+
+        font-size: 40px;
+    }
+
+
+    .menu-card h3 {
+
+        font-size: 18px;
+    }
+
+
+    .menu-card p {
+
+        font-size: 12px;
+    }
+
+
+    .learning-menu-intro h2 {
+
+        font-size: 28px;
+    }
+
+
+    .learning-top {
+
+        flex-wrap: wrap;
+
+        gap: 12px;
+
+        padding: 18px;
+
+        margin-bottom: 25px;
+    }
+
+
+    #learningTitle {
+
+        font-size: 27px;
+    }
+
+
+    #learningSubtitle {
+
+        font-size: 14px;
+    }
+
+
+    #learningIcon {
+
+        width: 58px;
+        height: 58px;
+
+        border-radius: 18px;
+
+        font-size: 30px;
+    }
+
+
+    .back-button {
+
+        padding:
+            10px 15px;
+
+        font-size: 14px;
+    }
+
+
+    .hindi-card {
+
+        min-height: 270px;
+
+        padding: 18px 10px;
+
+        border-radius: 22px;
+    }
+
+
+    .hindi-letter {
+
+        width: 75px;
+        height: 75px;
+
+        font-size: 44px;
+    }
+
+
+    .hindi-word {
+
+        font-size: 19px;
+    }
+
+
+    .hindi-sound-btn {
+
+        width: 50px;
+        height: 50px;
+
+        font-size: 21px;
+    }
+
+}
+
+
+/* =========================================================
+   13. VERY SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 390px) {
+
+    .learning-menu-grid {
+
+        gap: 10px;
+    }
+
+
+    .category-grid {
+
+        gap: 10px;
+    }
+
+
+    .cards-grid {
+
+        gap: 10px;
+    }
+
+
+    .hindi-grid {
+
+        gap: 10px;
+    }
+
+
+    .menu-card {
+
+        min-height: 155px;
+
+        padding: 14px 8px;
+    }
+
+
+    .menu-card-icon {
+
+        font-size: 34px;
+    }
+
+
+    .menu-card h3 {
+
+        font-size: 16px;
+    }
+
+
+    .menu-card p {
+
+        font-size: 11px;
+    }
+
+
+    .learning-menu-intro h2 {
+
+        font-size: 24px;
+    }
+
+}
+
+
+/* =========================================================
+   14. ACCESSIBILITY
+   ========================================================= */
+
+button:focus-visible {
+
+    outline:
+        3px solid #9b5de5;
+
+    outline-offset: 3px;
+}
+
+
+/* =========================================================
+   15. REMOVE MENU ARROWS COMPLETELY
+   ========================================================= */
+
+.learning-menu-grid .arrow,
+.learning-menu-grid .menu-card-arrow,
+.learning-menu-grid span[class*="arrow"] {
+
+    display: none !important;
+}
+
+
+/* =========================================================
+   FINAL
+   ========================================================= */
