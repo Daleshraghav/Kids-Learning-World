@@ -95,43 +95,59 @@
 
         <!-- LUXURY TABLE LAMP -->
 
-        <button id="studyLamp"
-        class="luxury-lamp"
-        type="button"
-        onclick="turnLampOn()"
-        aria-label="Turn on lamp">
+        <button
+            id="studyLamp"
+            class="luxury-lamp"
+            type="button"
+            onclick="turnLampOn()"
+            aria-label="Turn on lamp">
 
-    <div class="lamp-light"></div>
+            <div class="lamp-light"></div>
 
-    <div class="lamp-shade">
-        <div class="shade-top"></div>
 
-        <div class="shade-lines">
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
+            <div class="lamp-shade">
 
-        <div class="lamp-bulb"></div>
+                <div class="shade-top"></div>
+
+
+                <div class="shade-lines">
+
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+
+                </div>
+
+
+                <div class="lamp-bulb"></div>
+
+            </div>
+
+
+            <div class="lamp-neck-top"></div>
+
+
+            <div class="lamp-decor decor-one"></div>
+
+
+            <div class="lamp-body"></div>
+
+
+            <div class="lamp-decor decor-two"></div>
+
+
+            <div class="lamp-neck-bottom"></div>
+
+
+            <div class="lamp-base"></div>
+
+        </button>
+
     </div>
-
-    <div class="lamp-neck-top"></div>
-
-    <div class="lamp-decor decor-one"></div>
-
-    <div class="lamp-body"></div>
-
-    <div class="lamp-decor decor-two"></div>
-
-    <div class="lamp-neck-bottom"></div>
-
-    <div class="lamp-base"></div>
-
-</button>
 
 
 
@@ -199,15 +215,15 @@
                 <!-- ================= START BUTTON ================= -->
 
                 <button class="start-button"
-        onclick="openLearningMenu()">
+                        onclick="openLearningMenu()">
 
-    🚀 Start Learning
+                    🚀 Start Learning
 
-    <span>
-        →
-    </span>
+                    <span>
+                        →
+                    </span>
 
-</button>
+                </button>
 
 
             </div>
@@ -705,14 +721,13 @@
         <div class="learning-top">
 
 
-           <button
-    class="back-button premium-back"
-    onclick="backToLearningMenu()"
-    type="button"
->
-    <span class="back-icon">←</span>
-    <span class="back-text">Back</span>
-</button>
+            <button class="back-button"
+                    onclick="goHome()">
+
+                ← Back
+
+            </button>
+
 
             <div id="learningIcon">
 
@@ -752,6 +767,13 @@
 
 
     </section>
+
+
+
+    <!-- ================= JAVASCRIPT ================= -->
+
+    <script src="{{ url_for('static', filename='script.js') }}?v=3"></script>
+
 
 </body>
 
