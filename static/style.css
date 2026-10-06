@@ -4222,14 +4222,20 @@ body {
 }
 
 
-/* Show after Start Learning */
+/* ================= START LEARNING MENU ================= */
 
+/* Initially hide categories and about */
+.category-section,
+.about-section {
+    display: none;
+}
+
+/* Show categories and about after Start Learning */
 .category-section.show-learning-menu,
 .about-section.show-learning-menu {
     display: block;
     animation: learningMenuOpen 0.7s ease;
 }
-
 
 @keyframes learningMenuOpen {
     from {
