@@ -2,10 +2,9 @@
 <html lang="en">
 
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta charset="UTF-8">
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
 
     <!-- ================= GOOGLE SEARCH CONSOLE ================= -->
 
@@ -61,81 +60,117 @@
 
 
 <body>
- <div id="studyIntro">
 
-    <!-- Night stars -->
-    <div class="night-stars">
-        <span>✦</span>
-        <span>✧</span>
-        <span>✦</span>
-        <span>✧</span>
-        <span>✦</span>
-    </div>
 
-    <!-- Moon -->
-    <div class="night-moon"></div>
+    <!-- ================= STUDY INTRO ================= -->
 
-    <!-- Tap message -->
-    <div class="lamp-message">
-        💡 Tap the lamp to start learning
-    </div>
+    <div id="studyIntro">
 
-    <!-- LUXURY TABLE LAMP -->
-    <button
-        id="studyLamp"
-        class="luxury-lamp"
-        type="button"
-        onclick="turnLampOn()"
-        aria-label="Turn on lamp">
+        <!-- Night stars -->
 
-        <div class="lamp-light"></div>
+        <div class="night-stars">
 
-        <div class="lamp-shade">
-
-            <div class="shade-top"></div>
-
-            <div class="shade-lines">
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-
-            <div class="lamp-bulb"></div>
+            <span>✦</span>
+            <span>✧</span>
+            <span>✦</span>
+            <span>✧</span>
+            <span>✦</span>
 
         </div>
 
-        <div class="lamp-neck-top"></div>
 
-        <div class="lamp-decor decor-one"></div>
+        <!-- Moon -->
 
-        <div class="lamp-body"></div>
-
-        <div class="lamp-decor decor-two"></div>
-
-        <div class="lamp-neck-bottom"></div>
-
-        <div class="lamp-base"></div>
-
-    </button>
-
-</div>
+        <div class="night-moon"></div>
 
 
-<div class="premium-text">
+        <!-- Tap message -->
 
-    <div class="brand-title">
-        📚 Kids Learning World 📚
+        <div class="lamp-message">
+
+            💡 Tap the lamp to start learning
+
+        </div>
+
+
+        <!-- LUXURY TABLE LAMP -->
+
+        <button
+            id="studyLamp"
+            class="luxury-lamp"
+            type="button"
+            onclick="turnLampOn()"
+            aria-label="Turn on lamp">
+
+            <div class="lamp-light"></div>
+
+
+            <div class="lamp-shade">
+
+                <div class="shade-top"></div>
+
+
+                <div class="shade-lines">
+
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+
+                </div>
+
+
+                <div class="lamp-bulb"></div>
+
+            </div>
+
+
+            <div class="lamp-neck-top"></div>
+
+
+            <div class="lamp-decor decor-one"></div>
+
+
+            <div class="lamp-body"></div>
+
+
+            <div class="lamp-decor decor-two"></div>
+
+
+            <div class="lamp-neck-bottom"></div>
+
+
+            <div class="lamp-base"></div>
+
+        </button>
+
     </div>
 
-    <div class="brand-owner">
-        by <span>Dalesh Raghav💫</span>
+
+
+    <!-- ================= PREMIUM BRAND ================= -->
+
+    <div class="premium-text">
+
+        <div class="brand-title">
+
+            📚 Kids Learning World 📚
+
+        </div>
+
+
+        <div class="brand-owner">
+
+            by <span>Dalesh Raghav💫</span>
+
+        </div>
+
     </div>
 
-</div>
+
 
     <!-- ================= HOME ================= -->
 
@@ -148,9 +183,6 @@
 
 
             <div class="hero-left">
-
-
-                <!-- Website / Creator Identity -->
 
 
                 <!-- MAIN SEO HEADING -->
@@ -180,10 +212,10 @@
                 </p>
 
 
-                <!-- START BUTTON -->
+                <!-- ================= START BUTTON ================= -->
 
                 <button class="start-button"
-                        onclick="showCategory('abc')">
+                        onclick="openLearningMenu()">
 
                     🚀 Start Learning
 
@@ -282,29 +314,37 @@
             <div class="category-grid">
 
 
-                <!-- ABC -->
+                <!-- ================= ABC ================= -->
 
                 <button class="category-card card-blue"
-                       onclick="openLearningMenu()"
+                        onclick="showCategory('abc')">
 
 
                     <div class="category-icon">
+
                         🔤
+
                     </div>
 
 
                     <h3>
+
                         ABC
+
                     </h3>
 
 
                     <p>
+
                         Learn A to Z
+
                     </p>
 
 
                     <span class="arrow">
+
                         →
+
                     </span>
 
 
@@ -319,22 +359,30 @@
 
 
                     <div class="category-icon">
+
                         🇮🇳
+
                     </div>
 
 
                     <h3>
+
                         Hindi Alphabet
+
                     </h3>
 
 
                     <p>
+
                         हिंदी वर्णमाला सीखें
+
                     </p>
 
 
                     <span class="arrow">
+
                         →
+
                     </span>
 
 
@@ -342,29 +390,37 @@
 
 
 
-                <!-- DAYS -->
+                <!-- ================= DAYS ================= -->
 
                 <button class="category-card card-purple"
                         onclick="showCategory('days')">
 
 
                     <div class="category-icon">
+
                         📅
+
                     </div>
 
 
                     <h3>
+
                         Days
+
                     </h3>
 
 
                     <p>
+
                         Days of the week
+
                     </p>
 
 
                     <span class="arrow">
+
                         →
+
                     </span>
 
 
@@ -372,29 +428,37 @@
 
 
 
-                <!-- MONTHS -->
+                <!-- ================= MONTHS ================= -->
 
                 <button class="category-card card-pink"
                         onclick="showCategory('months')">
 
 
                     <div class="category-icon">
+
                         🗓️
+
                     </div>
 
 
                     <h3>
+
                         Months
+
                     </h3>
 
 
                     <p>
+
                         Months of the year
+
                     </p>
 
 
                     <span class="arrow">
+
                         →
+
                     </span>
 
 
@@ -402,29 +466,37 @@
 
 
 
-                <!-- TABLES -->
+                <!-- ================= TABLES ================= -->
 
                 <button class="category-card card-orange"
                         onclick="showCategory('tables')">
 
 
                     <div class="category-icon">
+
                         ✖️
+
                     </div>
 
 
                     <h3>
+
                         Tables
+
                     </h3>
 
 
                     <p>
+
                         Learn multiplication
+
                     </p>
 
 
                     <span class="arrow">
+
                         →
+
                     </span>
 
 
@@ -432,29 +504,37 @@
 
 
 
-                <!-- FRUITS -->
+                <!-- ================= FRUITS ================= -->
 
                 <button class="category-card card-red"
                         onclick="showCategory('fruits')">
 
 
                     <div class="category-icon">
+
                         🍎
+
                     </div>
 
 
                     <h3>
+
                         Fruits
+
                     </h3>
 
 
                     <p>
+
                         Yummy fruits
+
                     </p>
 
 
                     <span class="arrow">
+
                         →
+
                     </span>
 
 
@@ -462,29 +542,37 @@
 
 
 
-                <!-- BODY PARTS -->
+                <!-- ================= BODY PARTS ================= -->
 
                 <button class="category-card card-green"
                         onclick="showCategory('bodyparts')">
 
 
                     <div class="category-icon">
+
                         👦
+
                     </div>
 
 
                     <h3>
+
                         Body Parts
+
                     </h3>
 
 
                     <p>
+
                         Know your body
+
                     </p>
 
 
                     <span class="arrow">
+
                         →
+
                     </span>
 
 
@@ -492,29 +580,37 @@
 
 
 
-                <!-- ANIMALS -->
+                <!-- ================= ANIMALS ================= -->
 
                 <button class="category-card card-yellow"
                         onclick="showCategory('animals')">
 
 
                     <div class="category-icon">
+
                         🐶
+
                     </div>
 
 
                     <h3>
+
                         Animals
+
                     </h3>
 
 
                     <p>
+
                         Meet the animals
+
                     </p>
 
 
                     <span class="arrow">
+
                         →
+
                     </span>
 
 
@@ -522,29 +618,37 @@
 
 
 
-                <!-- COLOURS -->
+                <!-- ================= COLOURS ================= -->
 
                 <button class="category-card card-cyan"
                         onclick="showCategory('colours')">
 
 
                     <div class="category-icon">
+
                         🎨
+
                     </div>
 
 
                     <h3>
+
                         Colours
+
                     </h3>
 
 
                     <p>
+
                         Explore colours
+
                     </p>
 
 
                     <span class="arrow">
+
                         →
+
                     </span>
 
 
@@ -562,8 +666,11 @@
         <section class="about-section"
                  style="max-width: 1000px; margin: 50px auto; padding: 30px; text-align: center;">
 
+
             <h2>
+
                 📚 About Kids Learning World
+
             </h2>
 
 
@@ -596,6 +703,7 @@
                 that children can explore while learning.
 
             </p>
+
 
         </section>
 
@@ -654,6 +762,7 @@
 
         <div id="learningContent"
              class="learning-content">
+
         </div>
 
 
