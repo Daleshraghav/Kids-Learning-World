@@ -1243,22 +1243,39 @@ function openLearningMenu() {
 
 function backToLearningMenu() {
 
-    if (currentCategory === "menu") {
-        goHome();
+    // Agar kisi Learning World ke andar ka topic open hai
+    if (currentCategory === "language-topic") {
+        showLanguageMenu();
         return;
     }
 
-    openLearningMenu();
-}
-
-
-function removeLearningMenuMode() {
-
-    if (learningPage) {
-        learningPage.classList.remove(
-            "learning-menu-page"
-        );
+    if (currentCategory === "maths-topic") {
+        showMathsMenu();
+        return;
     }
+
+    if (currentCategory === "science-topic") {
+        showScienceMenu();
+        return;
+    }
+
+    if (currentCategory === "gk-topic") {
+        showGKMenu();
+        return;
+    }
+
+    if (currentCategory === "games-topic") {
+        showGamesMenu();
+        return;
+    }
+
+    if (currentCategory === "creativity-topic") {
+        showCreativityMenu();
+        return;
+    }
+
+    // Agar Choose Your Learning World par hain
+    goHome();
 }
 
 
