@@ -4213,3 +4213,32 @@ body {
         height: 500px;
     }
 }
+
+/* Hide everything below "What do you want to learn?" initially */
+
+.category-section,
+.about-section {
+    display: none;
+}
+
+
+/* Show after Start Learning */
+
+.category-section.show-learning-menu,
+.about-section.show-learning-menu {
+    display: block;
+    animation: learningMenuOpen 0.7s ease;
+}
+
+
+@keyframes learningMenuOpen {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
