@@ -3084,3 +3084,110 @@ body {
         padding: 12px;
     }
 }
+
+/* =========================================================
+   KIDS LEARNING WORLD - PREMIUM BANNER TEXT
+   ========================================================= */
+
+.premium-text {
+    position: relative;
+    z-index: 5;
+    text-align: center;
+}
+
+/* Main Website Name */
+
+.premium-text h1 {
+    margin: 0;
+
+    font-size: 42px;
+
+    line-height: 1.1;
+
+    font-weight: 900;
+
+    letter-spacing: 2px;
+}
+
+
+/* Colourful Website Name */
+
+.premium-text h1 span {
+    background:
+        linear-gradient(
+            90deg,
+            #ffea55,
+            #ff75c8,
+            #a66cff,
+            #55eaff,
+            #ffea55
+        );
+
+    background-size: 300% auto;
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    background-clip: text;
+
+    animation: luxuryText 5s linear infinite;
+
+    text-shadow:
+        0 5px 20px rgba(0,0,0,0.15);
+}
+
+
+/* Creator Name */
+
+.premium-text p {
+    margin: 8px 0 0;
+
+    font-size: 20px;
+
+    font-weight: 800;
+
+    letter-spacing: 3px;
+
+    color: #ffffff;
+
+    text-shadow:
+        0 2px 12px rgba(0,0,0,0.30);
+}
+
+
+/* Moving luxury gradient */
+
+@keyframes luxuryText {
+
+    0% {
+        background-position: 0% center;
+    }
+
+    100% {
+        background-position: 300% center;
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    .premium-text h1 {
+        font-size: 25px;
+
+        letter-spacing: 1px;
+    }
+
+    .premium-text p {
+        margin-top: 6px;
+
+        font-size: 13px;
+
+        letter-spacing: 1.5px;
+    }
+
+}
