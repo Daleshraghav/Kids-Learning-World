@@ -4248,3 +4248,799 @@ body {
         transform: translateY(0);
     }
 }
+
+/* ============================================================
+   🎓 FULL SCREEN LEARNING MENU
+   ============================================================ */
+
+.learning-menu-page {
+
+    position: relative;
+
+    min-height: 100vh;
+
+    overflow: hidden;
+
+    background:
+        radial-gradient(
+            circle at 10% 10%,
+            rgba(255, 214, 102, 0.22),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 90% 20%,
+            rgba(155, 93, 229, 0.20),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 50% 100%,
+            rgba(76, 201, 240, 0.18),
+            transparent 35%
+        ),
+        linear-gradient(
+            135deg,
+            #f9f7ff,
+            #eef8ff,
+            #f5fffb
+        );
+
+    animation:
+        learningPageReveal
+        0.8s
+        cubic-bezier(.22,1,.36,1);
+
+}
+
+
+@keyframes learningPageReveal {
+
+    0% {
+
+        opacity: 0;
+
+        transform:
+            scale(0.96)
+            translateY(30px);
+
+    }
+
+    100% {
+
+        opacity: 1;
+
+        transform:
+            scale(1)
+            translateY(0);
+
+    }
+
+}
+
+
+/* ============================================================
+   LEARNING MENU INTRO
+   ============================================================ */
+
+.learning-menu-intro {
+
+    text-align: center;
+
+    max-width: 850px;
+
+    margin:
+        10px auto
+        45px;
+
+    animation:
+        menuIntro
+        0.8s
+        ease
+        both;
+
+}
+
+
+@keyframes menuIntro {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(-30px);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0);
+
+    }
+
+}
+
+
+.learning-menu-stars {
+
+    font-size: 28px;
+
+    margin-bottom: 12px;
+
+    animation:
+        starsPulse
+        2s
+        infinite
+        ease-in-out;
+
+}
+
+
+@keyframes starsPulse {
+
+    0%,
+    100% {
+
+        transform:
+            scale(1);
+
+    }
+
+    50% {
+
+        transform:
+            scale(1.12);
+
+    }
+
+}
+
+
+.learning-menu-intro h2 {
+
+    font-size:
+        clamp(
+            30px,
+            5vw,
+            48px
+        );
+
+    color: #273c75;
+
+    font-weight: 900;
+
+}
+
+
+.learning-menu-intro p {
+
+    margin-top: 12px;
+
+    color: #78839d;
+
+    font-size: 17px;
+
+}
+
+
+/* ============================================================
+   MENU GRID
+   ============================================================ */
+
+.learning-menu-grid {
+
+    width: min(
+        1150px,
+        100%
+    );
+
+    margin: auto;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            3,
+            1fr
+        );
+
+    gap: 24px;
+
+}
+
+
+/* ============================================================
+   MENU CARD
+   ============================================================ */
+
+.learning-menu-card {
+
+    --menu-delay: 0ms;
+
+    position: relative;
+
+    min-height: 190px;
+
+    padding: 28px;
+
+    border: 1px solid
+        rgba(
+            255,
+            255,
+            255,
+            0.8
+        );
+
+    border-radius: 30px;
+
+    cursor: pointer;
+
+    text-align: left;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    overflow: hidden;
+
+    isolation: isolate;
+
+    box-shadow:
+        0 15px 35px
+        rgba(
+            60,
+            70,
+            110,
+            0.10
+        );
+
+    opacity: 0;
+
+    animation:
+        menuCardReveal
+        0.7s
+        cubic-bezier(
+            .22,
+            1,
+            .36,
+            1
+        )
+        var(--menu-delay)
+        forwards;
+
+    transition:
+        transform 0.35s ease,
+        box-shadow 0.35s ease;
+
+}
+
+
+@keyframes menuCardReveal {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(45px)
+            scale(0.92);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+
+    }
+
+}
+
+
+/* Glow */
+
+.learning-menu-card::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 180px;
+
+    height: 180px;
+
+    right: -70px;
+
+    top: -70px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            0.45
+        );
+
+    transition:
+        transform 0.5s ease;
+
+    z-index: -1;
+
+}
+
+
+.learning-menu-card::after {
+
+    content: "";
+
+    position: absolute;
+
+    left: -100%;
+
+    top: 0;
+
+    width: 60%;
+
+    height: 100%;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(
+                255,
+                255,
+                255,
+                0.35
+            ),
+            transparent
+        );
+
+    transform:
+        skewX(-20deg);
+
+    transition:
+        left 0.7s ease;
+
+}
+
+
+.learning-menu-card:hover {
+
+    transform:
+        translateY(-10px)
+        scale(1.025);
+
+    box-shadow:
+        0 28px 55px
+        rgba(
+            60,
+            70,
+            110,
+            0.18
+        );
+
+}
+
+
+.learning-menu-card:hover::before {
+
+    transform:
+        scale(1.7);
+
+}
+
+
+.learning-menu-card:hover::after {
+
+    left: 140%;
+
+}
+
+
+/* ============================================================
+   MENU ICON
+   ============================================================ */
+
+.menu-card-icon {
+
+    width: 72px;
+
+    height: 72px;
+
+    border-radius: 23px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            0.70
+        );
+
+    font-size: 38px;
+
+    box-shadow:
+        0 10px 25px
+        rgba(
+            40,
+            50,
+            90,
+            0.10
+        );
+
+    transition:
+        transform 0.4s ease;
+
+}
+
+
+.learning-menu-card:hover
+.menu-card-icon {
+
+    transform:
+        rotate(-8deg)
+        scale(1.15);
+
+}
+
+
+/* ============================================================
+   MENU TEXT
+   ============================================================ */
+
+.menu-card-text {
+
+    margin-top: 18px;
+
+}
+
+
+.menu-card-text h3 {
+
+    font-size: 23px;
+
+    color: #273c75;
+
+    font-weight: 850;
+
+}
+
+
+.menu-card-text p {
+
+    margin-top: 5px;
+
+    color: #68738d;
+
+    font-size: 14px;
+
+    line-height: 1.5;
+
+}
+
+
+/* ============================================================
+   MENU ARROW
+   ============================================================ */
+
+.menu-card-arrow {
+
+    position: absolute;
+
+    right: 24px;
+
+    bottom: 24px;
+
+    width: 42px;
+
+    height: 42px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            0.70
+        );
+
+    font-size: 22px;
+
+    transition:
+        transform 0.35s ease,
+        background 0.35s ease;
+
+}
+
+
+.learning-menu-card:hover
+.menu-card-arrow {
+
+    transform:
+        translateX(7px);
+
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            0.95
+        );
+
+}
+
+
+/* ============================================================
+   MENU COLORS
+   ============================================================ */
+
+.menu-blue {
+
+    background:
+        linear-gradient(
+            135deg,
+            #dff3ff,
+            #c5e5ff
+        );
+
+}
+
+
+.menu-hindi {
+
+    background:
+        linear-gradient(
+            135deg,
+            #fff0d7,
+            #ffe0b2
+        );
+
+}
+
+
+.menu-purple {
+
+    background:
+        linear-gradient(
+            135deg,
+            #eee3ff,
+            #ddcaff
+        );
+
+}
+
+
+.menu-pink {
+
+    background:
+        linear-gradient(
+            135deg,
+            #ffe5f0,
+            #ffd0e3
+        );
+
+}
+
+
+.menu-orange {
+
+    background:
+        linear-gradient(
+            135deg,
+            #fff0d8,
+            #ffdca8
+        );
+
+}
+
+
+.menu-red {
+
+    background:
+        linear-gradient(
+            135deg,
+            #ffe4e4,
+            #ffcfcf
+        );
+
+}
+
+
+.menu-green {
+
+    background:
+        linear-gradient(
+            135deg,
+            #def8e9,
+            #c5efd8
+        );
+
+}
+
+
+.menu-yellow {
+
+    background:
+        linear-gradient(
+            135deg,
+            #fff8ce,
+            #ffefa0
+        );
+
+}
+
+
+.menu-cyan {
+
+    background:
+        linear-gradient(
+            135deg,
+            #dcfbff,
+            #c5f2f7
+        );
+
+}
+
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+
+.learning-menu-footer {
+
+    text-align: center;
+
+    margin-top: 45px;
+
+    padding-bottom: 30px;
+
+    color: #7c86a0;
+
+    font-weight: 700;
+
+    animation:
+        footerAppear
+        1s
+        1s
+        both;
+
+}
+
+
+@keyframes footerAppear {
+
+    from {
+
+        opacity: 0;
+
+    }
+
+    to {
+
+        opacity: 1;
+
+    }
+
+}
+
+
+/* ============================================================
+   MOBILE
+   ============================================================ */
+
+@media (max-width: 900px) {
+
+    .learning-menu-grid {
+
+        grid-template-columns:
+            repeat(
+                2,
+                1fr
+            );
+
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .learning-page {
+
+        padding:
+            25px 18px
+            70px;
+
+    }
+
+
+    .learning-menu-intro {
+
+        margin-bottom: 30px;
+
+    }
+
+
+    .learning-menu-intro h2 {
+
+        font-size: 30px;
+
+    }
+
+
+    .learning-menu-intro p {
+
+        font-size: 14px;
+
+    }
+
+
+    .learning-menu-grid {
+
+        grid-template-columns:
+            1fr;
+
+        gap: 16px;
+
+    }
+
+
+    .learning-menu-card {
+
+        min-height: 155px;
+
+        padding: 22px;
+
+        border-radius: 24px;
+
+    }
+
+
+    .menu-card-icon {
+
+        width: 62px;
+
+        height: 62px;
+
+        font-size: 32px;
+
+    }
+
+
+    .menu-card-text h3 {
+
+        font-size: 20px;
+
+    }
+
+
+    .menu-card-text p {
+
+        font-size: 13px;
+
+    }
+
+}
