@@ -5193,6 +5193,17 @@ body {
     transform: translateX(-2px);
 }
 
+.premium-back .back-icon,
+.premium-back .back-text {
+    color: #b08d57 !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+.premium-back .back-icon {
+    display: inline-block !important;
+    font-size: 24px !important;
+}
 
 /* Click animation */
 
@@ -5266,16 +5277,3 @@ body {
 
 }
 
-.back-btn {
-    color: #9b7a3c !important;
-    font-family: "Georgia", serif;
-    font-size: 18px;
-    font-weight: 600;
-    letter-spacing: 1px;
-}
-
-.back-btn span,
-.back-btn i {
-    color: #9b7a3c !important;
-    font-size: 24px;
-}
