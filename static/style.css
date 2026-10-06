@@ -5730,3 +5730,60 @@ body {
 .learning-menu-page .learning-menu-card span:last-child {
     display: none !important;
 }
+
+/* Learning Adventure - Center & Highlight */
+.learning-adventure {
+    text-align: center !important;
+    position: relative;
+    transform: translateY(-25px);
+    margin-bottom: 10px !important;
+}
+
+.learning-adventure h2 {
+    text-align: center !important;
+    display: block !important;
+    margin: 0 auto !important;
+    padding: 12px 20px !important;
+
+    color: #243b70 !important;
+    font-weight: 700 !important;
+
+    background: linear-gradient(
+        135deg,
+        #fff8d9,
+        #ffe8f4,
+        #eee5ff
+    );
+
+    border-radius: 22px;
+    box-shadow: 0 8px 25px rgba(120, 90, 180, 0.20);
+
+    width: fit-content;
+    max-width: 90%;
+}
+
+/* Elegant line */
+.learning-adventure h2::after {
+    content: "";
+    display: block;
+    width: 100px;
+    height: 3px;
+    margin: 12px auto 0;
+
+    background: linear-gradient(
+        90deg,
+        transparent,
+        #b08d57,
+        transparent
+    );
+
+    border-radius: 10px;
+}
+
+/* Subtitle */
+.learning-adventure p {
+    text-align: center !important;
+    margin: 12px auto 0 !important;
+    color: #52617d !important;
+    font-size: 18px;
+}
