@@ -2364,3 +2364,27 @@ function turnLampOn() {
         intro.classList.add("hide-intro");
     }, 2200);
 }
+
+function openLearningMenu() {
+
+    const categorySection =
+        document.querySelector(".category-section");
+
+    const aboutSection =
+        document.querySelector(".about-section");
+
+    categorySection.classList.add("show-learning-menu");
+
+    if (aboutSection) {
+        aboutSection.classList.add("show-learning-menu");
+    }
+
+    setTimeout(function () {
+
+        categorySection.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
+
+    }, 100);
+}
