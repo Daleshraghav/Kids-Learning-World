@@ -3365,13 +3365,17 @@ body {
 }
 
 /* =========================================================
-   🌙 LUXURY STUDY ROOM INTRO
+   🌙 LUXURY LAMP INTRO
    ========================================================= */
 
 #studyIntro {
+
     position: fixed;
 
     inset: 0;
+
+    width: 100%;
+    height: 100vh;
 
     z-index: 999999;
 
@@ -3380,15 +3384,14 @@ body {
     display: flex;
 
     align-items: center;
-
     justify-content: center;
 
     background:
         radial-gradient(
-            circle at 50% 45%,
-            #29345d 0%,
-            #151a35 35%,
-            #080b1d 75%,
+            circle at 50% 55%,
+            #27345f 0%,
+            #151c3b 35%,
+            #080c20 72%,
             #03040d 100%
         );
 
@@ -3399,55 +3402,60 @@ body {
 
 
 /* =========================================================
-   STARS
+   ⭐ STARS
    ========================================================= */
 
-.night-stars span {
+.intro-stars span {
+
     position: absolute;
 
-    color: #fff4a3;
+    color: #ffe99a;
 
     font-size: 18px;
 
-    opacity: 0.8;
+    opacity: .75;
 
-    animation: twinkle 2s infinite alternate;
+    animation:
+        starGlow 2.5s ease-in-out infinite alternate;
 }
 
-.night-stars span:nth-child(1) {
+.intro-stars span:nth-child(1) {
     top: 12%;
-    left: 15%;
+    left: 12%;
 }
 
-.night-stars span:nth-child(2) {
+.intro-stars span:nth-child(2) {
     top: 20%;
-    right: 18%;
-
+    right: 15%;
     animation-delay: .5s;
 }
 
-.night-stars span:nth-child(3) {
+.intro-stars span:nth-child(3) {
     top: 35%;
-    left: 8%;
-
+    left: 7%;
     animation-delay: 1s;
 }
 
-.night-stars span:nth-child(4) {
+.intro-stars span:nth-child(4) {
     top: 30%;
     right: 8%;
-
     animation-delay: 1.5s;
 }
 
-.night-stars span:nth-child(5) {
+.intro-stars span:nth-child(5) {
     top: 10%;
     left: 48%;
-
     animation-delay: .8s;
 }
 
-@keyframes twinkle {
+.intro-stars span:nth-child(6) {
+    top: 45%;
+    right: 20%;
+    animation-delay: 1.2s;
+}
+
+
+@keyframes starGlow {
 
     from {
         opacity: .25;
@@ -3463,306 +3471,32 @@ body {
 
 
 /* =========================================================
-   MOON
+   🌕 MOON
    ========================================================= */
 
 .intro-moon {
+
     position: absolute;
 
-    width: 100px;
-    height: 100px;
+    width: 95px;
+    height: 95px;
 
-    top: 8%;
-    right: 13%;
+    top: 9%;
+    right: 12%;
 
     border-radius: 50%;
 
-    background: #fff4c7;
-
-    box-shadow:
-        0 0 40px rgba(255,244,199,.35),
-        0 0 100px rgba(255,244,199,.15);
-}
-
-
-/* =========================================================
-   WINDOW
-   ========================================================= */
-
-.study-window {
-    position: absolute;
-
-    top: 8%;
-    left: 8%;
-
-    width: 170px;
-    height: 130px;
-
-    border: 8px solid #242944;
-
     background:
-        linear-gradient(
-            135deg,
-            #101631,
-            #27355d
+        radial-gradient(
+            circle at 35% 30%,
+            #fffde5,
+            #fff1ae 70%,
+            #f6d978
         );
 
     box-shadow:
-        0 10px 30px rgba(0,0,0,.5);
-}
-
-.study-window::before {
-    content: "";
-
-    position: absolute;
-
-    left: 50%;
-
-    top: 0;
-
-    width: 5px;
-    height: 100%;
-
-    background: #242944;
-}
-
-.study-window::after {
-    content: "";
-
-    position: absolute;
-
-    top: 50%;
-
-    left: 0;
-
-    width: 100%;
-    height: 5px;
-
-    background: #242944;
-}
-
-
-/* =========================================================
-   TABLE
-   ========================================================= */
-
-.study-table {
-    position: absolute;
-
-    bottom: 0;
-
-    left: 0;
-
-    width: 100%;
-
-    height: 34%;
-
-    background:
-        linear-gradient(
-            180deg,
-            #6b3c27,
-            #3b1f17
-        );
-
-    box-shadow:
-        0 -15px 35px rgba(0,0,0,.35);
-}
-
-
-/* Table shine */
-
-.study-table::before {
-    content: "";
-
-    position: absolute;
-
-    top: 0;
-    left: 0;
-
-    width: 100%;
-    height: 8px;
-
-    background:
-        linear-gradient(
-            90deg,
-            #b97948,
-            #e0a36c,
-            #b97948
-        );
-}
-
-
-/* =========================================================
-   BOOKS
-   ========================================================= */
-
-.study-books {
-    position: absolute;
-
-    bottom: 35px;
-    left: 12%;
-
-    display: flex;
-
-    flex-direction: column-reverse;
-
-    width: 170px;
-}
-
-.book {
-    height: 25px;
-
-    margin-top: 3px;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    border-radius: 4px;
-
-    color: white;
-
-    font-size: 10px;
-
-    font-weight: 800;
-
-    letter-spacing: 1px;
-
-    box-shadow:
-        0 4px 8px rgba(0,0,0,.35);
-}
-
-.book-one {
-    background: #913c68;
-}
-
-.book-two {
-    background: #284d91;
-}
-
-.book-three {
-    background: #b97835;
-}
-
-
-/* =========================================================
-   PEN HOLDER
-   ========================================================= */
-
-.pen-holder {
-    position: absolute;
-
-    bottom: 38px;
-    right: 14%;
-
-    width: 60px;
-    height: 65px;
-
-    display: flex;
-
-    justify-content: center;
-
-    gap: 4px;
-
-    padding-top: 8px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #202532,
-            #05060a
-        );
-
-    border-radius: 5px 5px 12px 12px;
-
-    box-shadow:
-        0 8px 15px rgba(0,0,0,.4);
-}
-
-.pen-holder span {
-    font-size: 22px;
-
-    transform: rotate(
-        var(--rotation, -8deg)
-    );
-}
-
-
-/* =========================================================
-   FLOWER VASE
-   ========================================================= */
-
-.flower-vase {
-    position: absolute;
-
-    bottom: 34px;
-
-    left: 50%;
-
-    transform: translateX(-50%);
-
-    text-align: center;
-}
-
-.flower {
-    position: absolute;
-
-    font-size: 28px;
-
-    animation:
-        flowerMove 3s ease-in-out infinite;
-}
-
-.flower-one {
-    bottom: 45px;
-    left: -45px;
-}
-
-.flower-two {
-    bottom: 60px;
-    left: -5px;
-
-    animation-delay: .5s;
-}
-
-.flower-three {
-    bottom: 42px;
-    left: 30px;
-
-    animation-delay: 1s;
-}
-
-.vase {
-    width: 65px;
-    height: 75px;
-
-    background:
-        linear-gradient(
-            90deg,
-            #6b2f65,
-            #b85c91,
-            #54224f
-        );
-
-    border-radius:
-        10px 10px 25px 25px;
-
-    box-shadow:
-        0 8px 20px rgba(0,0,0,.35);
-}
-
-@keyframes flowerMove {
-
-    0%,100% {
-        transform: rotate(-3deg);
-    }
-
-    50% {
-        transform: rotate(3deg);
-    }
-
+        0 0 35px rgba(255,240,160,.4),
+        0 0 100px rgba(255,230,120,.12);
 }
 
 
@@ -3770,150 +3504,275 @@ body {
    💡 LAMP
    ========================================================= */
 
-.study-lamp {
+.luxury-lamp {
+
     position: absolute;
 
-    bottom: 34px;
-
     left: 50%;
+    bottom: 7%;
 
     transform: translateX(-50%);
 
-    width: 180px;
-    height: 250px;
+    width: 240px;
+    height: 390px;
 
     border: none;
 
-    background: none;
+    background: transparent;
 
     cursor: pointer;
 
+    padding: 0;
+
     z-index: 20;
+
+    -webkit-tap-highlight-color: transparent;
+
+    transition:
+        transform .3s ease;
 }
 
 
-/* Lamp shade */
+.luxury-lamp:hover {
+
+    transform:
+        translateX(-50%)
+        scale(1.03);
+}
+
+
+.luxury-lamp:active {
+
+    transform:
+        translateX(-50%)
+        scale(.97);
+}
+
+
+/* =========================================================
+   LAMP SHADE
+   ========================================================= */
 
 .lamp-shade {
+
     position: absolute;
 
-    top: 10px;
+    top: 5px;
     left: 25px;
 
-    width: 130px;
-    height: 80px;
+    width: 190px;
+    height: 120px;
 
     background:
         linear-gradient(
             145deg,
-            #34394a,
-            #121520
+            #555b69 0%,
+            #272c38 45%,
+            #10131b 100%
         );
 
     clip-path:
         polygon(
-            20% 0,
-            80% 0,
+            17% 0%,
+            83% 0%,
             100% 100%,
-            0 100%
+            0% 100%
         );
 
-    border-radius: 8px;
+    border-radius: 14px;
 
     box-shadow:
-        0 12px 25px rgba(0,0,0,.55);
+        0 18px 30px rgba(0,0,0,.55);
+
+    transition:
+        background .8s ease,
+        box-shadow .8s ease;
 }
 
 
-/* Bulb */
+/* Shade top shine */
 
-.lamp-bulb {
+.lamp-shade::before {
+
+    content: "";
+
     position: absolute;
 
-    left: 50%;
-    bottom: -12px;
+    left: 25%;
+    top: 5px;
 
-    transform: translateX(-50%);
-
-    width: 35px;
-    height: 35px;
+    width: 50%;
+    height: 4px;
 
     border-radius: 50%;
 
-    background: #fff4b0;
+    background:
+        rgba(255,255,255,.25);
 
-    box-shadow:
-        0 0 15px rgba(255,235,120,.2);
+    filter: blur(2px);
 }
 
 
-/* Neck */
+/* =========================================================
+   BULB
+   ========================================================= */
 
-.lamp-neck {
+.lamp-bulb {
+
     position: absolute;
 
-    top: 90px;
     left: 50%;
+    bottom: -16px;
 
-    width: 14px;
-    height: 95px;
+    transform:
+        translateX(-50%);
 
-    transform: translateX(-50%);
+    width: 43px;
+    height: 43px;
+
+    border-radius: 50%;
+
+    background:
+        #b9b3a0;
+
+    transition:
+        .7s ease;
+}
+
+
+/* =========================================================
+   LAMP STAND
+   ========================================================= */
+
+.lamp-stand {
+
+    position: absolute;
+
+    left: 50%;
+    top: 112px;
+
+    transform:
+        translateX(-50%);
+
+    width: 18px;
+    height: 210px;
+
+    border-radius: 20px;
 
     background:
         linear-gradient(
             90deg,
-            #151922,
-            #626878,
-            #151922
+            #10131a,
+            #727887,
+            #252a34,
+            #0c0f15
         );
 
-    border-radius: 20px;
+    box-shadow:
+        5px 10px 20px rgba(0,0,0,.45);
 }
 
 
-/* Base */
+/* =========================================================
+   LAMP BASE
+   ========================================================= */
 
 .lamp-base {
+
     position: absolute;
 
-    bottom: 0;
     left: 50%;
+    bottom: 0;
 
-    transform: translateX(-50%);
+    transform:
+        translateX(-50%);
 
-    width: 100px;
-    height: 25px;
+    width: 145px;
+    height: 35px;
 
     border-radius: 50%;
 
     background:
         linear-gradient(
             180deg,
-            #535967,
-            #11141b
+            #5d6471,
+            #20242d 55%,
+            #080a0e
         );
 
     box-shadow:
-        0 8px 12px rgba(0,0,0,.45);
+        0 12px 20px rgba(0,0,0,.5);
 }
 
 
 /* =========================================================
-   💛 LAMP ON STATE
+   ✨ LIGHT OFF -> ON
    ========================================================= */
+
+.lamp-light {
+
+    position: absolute;
+
+    left: 50%;
+    top: 75px;
+
+    transform:
+        translateX(-50%)
+        scale(.3);
+
+    width: 500px;
+    height: 500px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255,232,125,.48) 0%,
+            rgba(255,211,70,.20) 30%,
+            rgba(255,190,40,.08) 52%,
+            transparent 72%
+        );
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    transition:
+        opacity 1s ease,
+        transform 1.2s ease;
+}
+
+
+/* =========================================================
+   💛 LAMP ON
+   ========================================================= */
+
+#studyIntro.lamp-on .lamp-light {
+
+    opacity: 1;
+
+    transform:
+        translateX(-50%)
+        scale(1);
+
+    animation:
+        lightPulse 2s ease-in-out infinite alternate;
+}
+
 
 #studyIntro.lamp-on .lamp-bulb {
 
-    background: #fff4a3;
+    background:
+        #fff5a8;
 
     box-shadow:
-        0 0 25px #fff4a3,
-        0 0 60px #ffd84d,
-        0 0 120px rgba(255,210,50,.75);
+        0 0 15px #fff5a8,
+        0 0 40px #ffd83d,
+        0 0 90px rgba(255,207,55,.9);
 
     animation:
-        bulbPulse 1s infinite alternate;
+        bulbGlow 1.2s ease-in-out infinite alternate;
 }
 
 
@@ -3922,174 +3781,122 @@ body {
     background:
         linear-gradient(
             145deg,
-            #655d43,
-            #252014
+            #806f42,
+            #3c321d
         );
 
     box-shadow:
-        0 0 45px rgba(255,215,90,.45);
+        0 0 35px rgba(255,214,85,.45);
 }
 
 
-/* Big warm light */
-
-#studyIntro.lamp-on::after {
-
-    content: "";
-
-    position: absolute;
-
-    left: 50%;
-    bottom: 18%;
-
-    transform: translateX(-50%);
-
-    width: 600px;
-    height: 450px;
-
-    border-radius: 50%;
-
-    background:
-        radial-gradient(
-            ellipse,
-            rgba(255,222,100,.35),
-            rgba(255,190,60,.12) 40%,
-            transparent 70%
-        );
-
-    pointer-events: none;
-
-    animation:
-        roomLight 1.5s ease forwards;
-}
-
-
-@keyframes bulbPulse {
+@keyframes bulbGlow {
 
     from {
-        transform: translateX(-50%) scale(.9);
+        transform:
+            translateX(-50%)
+            scale(.9);
     }
 
     to {
-        transform: translateX(-50%) scale(1.15);
+        transform:
+            translateX(-50%)
+            scale(1.12);
     }
 
 }
 
 
-@keyframes roomLight {
+@keyframes lightPulse {
 
     from {
-        opacity: 0;
-        transform: translateX(-50%) scale(.5);
+        opacity: .65;
     }
 
     to {
         opacity: 1;
-        transform: translateX(-50%) scale(1);
     }
 
 }
 
 
 /* =========================================================
-   INTRO TEXT
+   💡 MESSAGE
    ========================================================= */
 
-.intro-content {
+.lamp-message {
+
     position: absolute;
 
-    z-index: 30;
+    z-index: 50;
 
-    top: 12%;
+    top: 18%;
 
     left: 50%;
 
-    transform: translateX(-50%);
+    transform:
+        translateX(-50%);
 
     text-align: center;
 
     width: 90%;
+
+    pointer-events: none;
 }
 
-.intro-small {
 
-    font-size: 13px;
-
-    letter-spacing: 5px;
-
-    color: #ffe58a;
-
-    font-weight: 800;
-}
-
-.intro-content h1 {
-
-    margin: 10px 0;
-
-    font-size: 46px;
-
-    font-weight: 900;
-
-    color: white;
-
-    text-shadow:
-        0 4px 20px rgba(255,210,70,.25);
-}
-
-.intro-content p {
-
-    margin: 0;
-
-    color: #c9d2ef;
-
-    font-size: 17px;
-}
-
-.tap-lamp {
-
-    margin-top: 22px;
+.tap-title {
 
     display: inline-block;
 
-    padding: 12px 22px;
+    padding: 14px 28px;
 
-    border-radius: 30px;
+    border-radius: 40px;
+
+    color: #ffe98a;
+
+    font-size: 20px;
+
+    font-weight: 800;
+
+    letter-spacing: .5px;
 
     background:
-        rgba(255,255,255,.10);
+        rgba(255,255,255,.08);
 
     border:
-        1px solid rgba(255,255,255,.25);
+        1px solid rgba(255,255,255,.22);
 
-    color: #ffe993;
+    box-shadow:
+        0 8px 30px rgba(0,0,0,.25);
 
-    font-size: 14px;
-
-    font-weight: 700;
-
-    backdrop-filter: blur(8px);
+    backdrop-filter:
+        blur(12px);
 
     animation:
-        tapPulse 2s infinite;
+        messagePulse 2s ease-in-out infinite;
 }
 
-@keyframes tapPulse {
+
+@keyframes messagePulse {
 
     0%,100% {
-        box-shadow: 0 0 0 rgba(255,220,80,0);
+        transform: scale(1);
+        box-shadow:
+            0 8px 30px rgba(0,0,0,.25);
     }
 
     50% {
+        transform: scale(1.04);
         box-shadow:
-            0 0 25px rgba(255,220,80,.25);
+            0 0 30px rgba(255,220,90,.18);
     }
 
 }
 
 
 /* =========================================================
-   EXIT ANIMATION
+   EXIT
    ========================================================= */
 
 #studyIntro.hide-intro {
@@ -4109,130 +3916,78 @@ body {
 @media (max-width: 600px) {
 
     .intro-moon {
-        width: 55px;
-        height: 55px;
 
-        right: 10%;
-    }
+        width: 58px;
+        height: 58px;
 
-    .study-window {
-        width: 100px;
-        height: 80px;
-
-        left: 5%;
         top: 8%;
+        right: 9%;
     }
 
-    .intro-content {
-        top: 11%;
+
+    .lamp-message {
+
+        top: 15%;
     }
 
-    .intro-small {
-        font-size: 9px;
-        letter-spacing: 3px;
-    }
 
-    .intro-content h1 {
-        font-size: 28px;
+    .tap-title {
 
-        margin: 7px 0;
-    }
+        padding: 11px 17px;
 
-    .intro-content p {
-        font-size: 12px;
-    }
-
-    .tap-lamp {
-        margin-top: 14px;
-
-        padding: 9px 15px;
-
-        font-size: 11px;
-    }
-
-    .study-table {
-        height: 31%;
-    }
-
-    .study-books {
-        left: 5%;
-        bottom: 25px;
-
-        width: 100px;
-    }
-
-    .book {
-        height: 18px;
-
-        font-size: 7px;
-    }
-
-    .pen-holder {
-        right: 5%;
-
-        width: 42px;
-        height: 45px;
-
-        bottom: 25px;
-    }
-
-    .pen-holder span {
         font-size: 14px;
     }
 
-    .flower-vase {
-        bottom: 25px;
+
+    .luxury-lamp {
+
+        width: 190px;
+        height: 310px;
+
+        bottom: 8%;
     }
 
-    .vase {
-        width: 45px;
-        height: 50px;
-    }
-
-    .flower {
-        font-size: 21px;
-    }
-
-    .flower-one {
-        left: -35px;
-    }
-
-    .flower-two {
-        left: -5px;
-    }
-
-    .flower-three {
-        left: 22px;
-    }
-
-    .study-lamp {
-        width: 130px;
-        height: 190px;
-
-        bottom: 25px;
-    }
 
     .lamp-shade {
-        width: 95px;
-        height: 60px;
 
-        left: 18px;
+        left: 20px;
+
+        width: 150px;
+        height: 95px;
     }
 
-    .lamp-neck {
-        top: 68px;
 
-        height: 75px;
+    .lamp-stand {
+
+        top: 90px;
+
+        height: 170px;
+
+        width: 15px;
     }
+
 
     .lamp-base {
-        width: 75px;
-        height: 19px;
+
+        width: 115px;
+
+        height: 29px;
     }
 
-    #studyIntro.lamp-on::after {
+
+    .lamp-bulb {
+
+        width: 34px;
+        height: 34px;
+    }
+
+
+    .lamp-light {
+
+        top: 50px;
+
         width: 400px;
-        height: 350px;
+        height: 400px;
     }
 
 }
