@@ -1,192 +1,291 @@
-// ============================================================
-// KIDS LEARNING WORLD 🌈
-// COMPLETE LEARNING SYSTEM
-// 30+ ITEMS + SMOOTH NAVIGATION + ANIMATIONS
-// ============================================================
+/* =========================================================
+   🌈 KIDS LEARNING WORLD
+   COMPLETE JAVASCRIPT
+   ========================================================= */
 
 
-// ============================================================
-// GLOBAL SETTINGS
-// ============================================================
+/* =========================================================
+   ⚙️ APP SETTINGS
+   ========================================================= */
 
 const APP_SETTINGS = {
-
     speechRate: 0.72,
     speechPitch: 1.05,
     speechVolume: 1,
-
     animationDuration: 600,
     cardAnimationDelay: 45,
-
     scrollBehavior: "smooth"
-
 };
 
 
-// ============================================================
-// DOM ELEMENTS
-// ============================================================
+/* =========================================================
+   📌 DOM REFERENCES
+   ========================================================= */
 
-const homePage =
-    document.getElementById("homePage");
-
-const learningPage =
-    document.getElementById("learningPage");
-
-const learningContent =
-    document.getElementById("learningContent");
-
-const learningTitle =
-    document.getElementById("learningTitle");
-
-const learningSubtitle =
-    document.getElementById("learningSubtitle");
-
-const learningIcon =
-    document.getElementById("learningIcon");
+const homePage = document.getElementById("homePage");
+const learningPage = document.getElementById("learningPage");
+const learningContent = document.getElementById("learningContent");
+const learningTitle = document.getElementById("learningTitle");
+const learningSubtitle = document.getElementById("learningSubtitle");
+const learningIcon = document.getElementById("learningIcon");
 
 
-// ============================================================
-// CURRENT STATE
-// ============================================================
+/* =========================================================
+   🧠 GLOBAL STATE
+   ========================================================= */
 
 let currentCategory = "";
-
 let currentSpeech = null;
+let speechSupported = "speechSynthesis" in window;
 
-let speechSupported =
-    "speechSynthesis" in window;
+let playerScore = 0;
+let playerStars = 0;
+let playerCorrect = 0;
+let playerAnswered = 0;
+
+let currentQuizIndex = 0;
+let currentQuizQuestions = [];
+let currentQuizType = "";
+
+let memoryCards = [];
+let memoryFlipped = [];
+let memoryMatched = 0;
+
+let drawingCanvas = null;
+let drawingContext = null;
+let drawingActive = false;
+let drawingColor = "#333333";
+let drawingSize = 6;
+
+let connectPoints = [];
+let connectCurrent = 0;
 
 
-// ============================================================
-// SAFE ELEMENT CHECK
-// ============================================================
+/* =========================================================
+   🛠️ BASIC HELPERS
+   ========================================================= */
 
 function elementExists(element) {
-
-    return element !== null &&
-           element !== undefined;
-
+    return !!element;
 }
 
-
-// ============================================================
-// SAFE TEXT
-// ============================================================
 
 function safeText(value) {
-
-    if (
-        value === null ||
-        value === undefined
-    ) {
-
-        return "";
-
-    }
-
-    return String(value);
-
+    return value === undefined || value === null ? "" : String(value);
 }
 
 
-// ============================================================
-// ESCAPE HTML
-// ============================================================
-
 function escapeHTML(value) {
-
     return safeText(value)
         .replace(/&/g, "&amp;")
         .replace(/</g, "&lt;")
         .replace(/>/g, "&gt;")
         .replace(/"/g, "&quot;")
         .replace(/'/g, "&#039;");
-
 }
 
 
-// ============================================================
-// ABC DATA
-// ============================================================
+function scrollToTop() {
+    window.scrollTo({
+        top: 0,
+        behavior: APP_SETTINGS.scrollBehavior
+    });
+}
+
+
+function randomItem(array) {
+    return array[Math.floor(Math.random() * array.length)];
+}
+
+
+function shuffleArray(array) {
+    return [...array].sort(() => Math.random() - 0.5);
+}
+
+
+function delay(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+
+/* =========================================================
+   🔊 SPEECH SYSTEM
+   ========================================================= */
+
+function stopSpeech() {
+
+    if (!speechSupported) return;
+
+    window.speechSynthesis.cancel();
+    currentSpeech = null;
+}
+
+
+function speak(text, options = {}) {
+
+    if (!speechSupported) {
+        return;
+    }
+
+    stopSpeech();
+
+    const utterance = new SpeechSynthesisUtterance(safeText(text));
+
+    utterance.rate =
+        options.rate !== undefined
+            ? options.rate
+            : APP_SETTINGS.speechRate;
+
+    utterance.pitch =
+        options.pitch !== undefined
+            ? options.pitch
+            : APP_SETTINGS.speechPitch;
+
+    utterance.volume =
+        options.volume !== undefined
+            ? options.volume
+            : APP_SETTINGS.speechVolume;
+
+    if (options.lang) {
+        utterance.lang = options.lang;
+    } else {
+        utterance.lang = "en-IN";
+    }
+
+    currentSpeech = utterance;
+
+    utterance.onend = function () {
+        currentSpeech = null;
+    };
+
+    window.speechSynthesis.speak(utterance);
+}
+
+
+function pauseSpeech() {
+
+    if (!speechSupported) return;
+
+    if (window.speechSynthesis.speaking) {
+        window.speechSynthesis.pause();
+    }
+}
+
+
+function resumeSpeech() {
+
+    if (!speechSupported) return;
+
+    if (window.speechSynthesis.paused) {
+        window.speechSynthesis.resume();
+    }
+}
+
+
+/* =========================================================
+   🇮🇳 HINDI SPEECH
+   ========================================================= */
+
+function speakHindi(letter, word) {
+
+    if (!speechSupported) return;
+
+    stopSpeech();
+
+    const utterance =
+        new SpeechSynthesisUtterance(
+            `${letter} से ${word}`
+        );
+
+    utterance.lang = "hi-IN";
+    utterance.rate = 0.70;
+    utterance.pitch = 1.05;
+    utterance.volume = 1;
+
+    currentSpeech = utterance;
+
+    utterance.onend = function () {
+        currentSpeech = null;
+    };
+
+    window.speechSynthesis.speak(utterance);
+}
+
+
+/* =========================================================
+   🔤 ENGLISH ALPHABET
+   ========================================================= */
 
 const alphabet = [
-
-    ["A", "Apple", "🍎"],
-    ["B", "Ball", "⚽"],
-    ["C", "Cat", "🐱"],
-    ["D", "Dog", "🐶"],
-    ["E", "Elephant", "🐘"],
-    ["F", "Fish", "🐟"],
-    ["G", "Grapes", "🍇"],
-    ["H", "Horse", "🐴"],
-    ["I", "Ice Cream", "🍦"],
-    ["J", "Juice", "🧃"],
-    ["K", "Kite", "🪁"],
-    ["L", "Lion", "🦁"],
-    ["M", "Mango", "🥭"],
-    ["N", "Nest", "🪺"],
-    ["O", "Orange", "🍊"],
-    ["P", "Parrot", "🦜"],
-    ["Q", "Queen", "👑"],
-    ["R", "Rabbit", "🐰"],
-    ["S", "Sun", "☀️"],
-    ["T", "Tiger", "🐯"],
-    ["U", "Umbrella", "☂️"],
-    ["V", "Van", "🚐"],
-    ["W", "Watch", "⌚"],
-    ["X", "Xylophone", "🎵"],
-    ["Y", "Yak", "🐂"],
-    ["Z", "Zebra", "🦓"]
-
+    { letter: "A", word: "Apple", emoji: "🍎" },
+    { letter: "B", word: "Ball", emoji: "⚽" },
+    { letter: "C", word: "Cat", emoji: "🐱" },
+    { letter: "D", word: "Dog", emoji: "🐶" },
+    { letter: "E", word: "Elephant", emoji: "🐘" },
+    { letter: "F", word: "Fish", emoji: "🐟" },
+    { letter: "G", word: "Grapes", emoji: "🍇" },
+    { letter: "H", word: "Horse", emoji: "🐴" },
+    { letter: "I", word: "Ice Cream", emoji: "🍦" },
+    { letter: "J", word: "Juice", emoji: "🧃" },
+    { letter: "K", word: "Kite", emoji: "🪁" },
+    { letter: "L", word: "Lion", emoji: "🦁" },
+    { letter: "M", word: "Monkey", emoji: "🐒" },
+    { letter: "N", word: "Nest", emoji: "🪺" },
+    { letter: "O", word: "Orange", emoji: "🍊" },
+    { letter: "P", word: "Parrot", emoji: "🦜" },
+    { letter: "Q", word: "Queen", emoji: "👑" },
+    { letter: "R", word: "Rabbit", emoji: "🐰" },
+    { letter: "S", word: "Sun", emoji: "☀️" },
+    { letter: "T", word: "Tiger", emoji: "🐯" },
+    { letter: "U", word: "Umbrella", emoji: "☂️" },
+    { letter: "V", word: "Van", emoji: "🚐" },
+    { letter: "W", word: "Watch", emoji: "⌚" },
+    { letter: "X", word: "Xylophone", emoji: "🎵" },
+    { letter: "Y", word: "Yak", emoji: "🐂" },
+    { letter: "Z", word: "Zebra", emoji: "🦓" }
 ];
 
 
-// ============================================================
-// DAYS DATA
-// ============================================================
+/* =========================================================
+   📅 DAYS
+   ========================================================= */
 
 const days = [
-
-    ["Monday", "🌞"],
-    ["Tuesday", "🌈"],
-    ["Wednesday", "⭐"],
-    ["Thursday", "🌻"],
-    ["Friday", "🎉"],
-    ["Saturday", "🎈"],
-    ["Sunday", "☀️"]
-
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+    "Sunday"
 ];
 
 
-// ============================================================
-// MONTHS DATA
-// ============================================================
+/* =========================================================
+   🗓️ MONTHS
+   ========================================================= */
 
 const months = [
-
-    ["January", "❄️"],
-    ["February", "❤️"],
-    ["March", "🌸"],
-    ["April", "🌷"],
-    ["May", "🌼"],
-    ["June", "☀️"],
-    ["July", "🌧️"],
-    ["August", "🇮🇳"],
-    ["September", "🍂"],
-    ["October", "🎃"],
-    ["November", "🍁"],
-    ["December", "🎄"]
-
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December"
 ];
 
 
-// ============================================================
-// FRUITS DATA — 30
-// ============================================================
+/* =========================================================
+   🍎 FRUITS
+   ========================================================= */
 
 const fruits = [
-
     ["Apple", "🍎"],
     ["Banana", "🍌"],
     ["Mango", "🥭"],
@@ -196,1690 +295,244 @@ const fruits = [
     ["Pineapple", "🍍"],
     ["Strawberry", "🍓"],
     ["Papaya", "🥭"],
-    ["Coconut", "🥥"],
-
+    ["Guava", "🍐"],
+    ["Pomegranate", "❤️"],
     ["Cherry", "🍒"],
     ["Peach", "🍑"],
     ["Pear", "🍐"],
-    ["Guava", "🍈"],
+    ["Coconut", "🥥"],
     ["Kiwi", "🥝"],
     ["Lemon", "🍋"],
     ["Lime", "🍋"],
-    ["Pomegranate", "❤️"],
-    ["Plum", "🫐"],
-    ["Apricot", "🍑"],
-
-    ["Fig", "🫐"],
-    ["Dragon Fruit", "🐉"],
-    ["Lychee", "🍒"],
-    ["Jackfruit", "🍈"],
-    ["Muskmelon", "🍈"],
     ["Blueberry", "🫐"],
     ["Raspberry", "🍓"],
-    ["Blackberry", "🫐"],
-    ["Custard Apple", "🍏"],
-    ["Dates", "🌴"]
-
+    ["Melon", "🍈"],
+    ["Plum", "🫐"],
+    ["Apricot", "🍑"],
+    ["Fig", "🟣"],
+    ["Dates", "🌴"],
+    ["Jackfruit", "🍈"],
+    ["Lychee", "🍒"],
+    ["Dragon Fruit", "🐉"],
+    ["Avocado", "🥑"],
+    ["Star Fruit", "⭐"]
 ];
 
 
-// ============================================================
-// BODY PARTS DATA — 30
-// ============================================================
+/* =========================================================
+   👦 BODY PARTS
+   ========================================================= */
 
 const bodyParts = [
-
-    ["Head", "🙂"],
-    ["Hair", "💇"],
-    ["Eyes", "👀"],
-    ["Eyebrow", "🤨"],
-    ["Eyelashes", "👁️"],
-    ["Ears", "👂"],
+    ["Head", "🧑"],
+    ["Eye", "👁️"],
+    ["Ear", "👂"],
     ["Nose", "👃"],
-    ["Cheeks", "😊"],
     ["Mouth", "👄"],
-    ["Lips", "💋"],
-
     ["Teeth", "🦷"],
     ["Tongue", "👅"],
-    ["Neck", "🧣"],
+    ["Hair", "💇"],
+    ["Neck", "🧍"],
     ["Shoulder", "💪"],
     ["Arm", "💪"],
-    ["Elbow", "💪"],
     ["Hand", "✋"],
     ["Finger", "☝️"],
-    ["Thumb", "👍"],
-    ["Chest", "🫁"],
-
+    ["Chest", "🫀"],
+    ["Heart", "❤️"],
     ["Stomach", "🫃"],
-    ["Back", "🔙"],
-    ["Waist", "🧍"],
     ["Leg", "🦵"],
     ["Knee", "🦵"],
-    ["Ankle", "🦶"],
     ["Foot", "🦶"],
     ["Toe", "🦶"],
-    ["Skin", "🧴"],
-    ["Heart", "❤️"]
-
+    ["Brain", "🧠"],
+    ["Lungs", "🫁"],
+    ["Skin", "🖐️"],
+    ["Bone", "🦴"],
+    ["Blood", "🩸"],
+    ["Face", "🙂"],
+    ["Eyebrow", "🤨"],
+    ["Eyelash", "👁️"],
+    ["Cheek", "😊"],
+    ["Chin", "🙂"]
 ];
 
 
-// ============================================================
-// ANIMALS DATA — 30
-// ============================================================
+/* =========================================================
+   🐶 ANIMALS
+   ========================================================= */
 
 const animals = [
-
-    ["Dog", "🐶"],
-    ["Cat", "🐱"],
-    ["Lion", "🦁"],
-    ["Tiger", "🐯"],
-    ["Elephant", "🐘"],
-    ["Monkey", "🐒"],
-    ["Rabbit", "🐰"],
-    ["Horse", "🐴"],
-    ["Cow", "🐮"],
-    ["Giraffe", "🦒"],
-
-    ["Panda", "🐼"],
-    ["Bear", "🐻"],
-    ["Zebra", "🦓"],
-    ["Fox", "🦊"],
-    ["Wolf", "🐺"],
-    ["Deer", "🦌"],
-    ["Goat", "🐐"],
-    ["Sheep", "🐑"],
-    ["Pig", "🐷"],
-    ["Donkey", "🫏"],
-
-    ["Camel", "🐪"],
-    ["Kangaroo", "🦘"],
-    ["Koala", "🐨"],
-    ["Leopard", "🐆"],
-    ["Cheetah", "🐆"],
-    ["Hippopotamus", "🦛"],
-    ["Rhinoceros", "🦏"],
-    ["Crocodile", "🐊"],
-    ["Snake", "🐍"],
-    ["Turtle", "🐢"]
-
+    ["Dog", "🐶", "Woof"],
+    ["Cat", "🐱", "Meow"],
+    ["Cow", "🐮", "Moo"],
+    ["Lion", "🦁", "Roar"],
+    ["Tiger", "🐯", "Roar"],
+    ["Elephant", "🐘", "Trumpet"],
+    ["Horse", "🐴", "Neigh"],
+    ["Goat", "🐐", "Bleat"],
+    ["Sheep", "🐑", "Baa"],
+    ["Monkey", "🐒", "Chatter"],
+    ["Rabbit", "🐰", "Squeak"],
+    ["Bear", "🐻", "Growl"],
+    ["Fox", "🦊", "Bark"],
+    ["Wolf", "🐺", "Howl"],
+    ["Deer", "🦌", "Bleat"],
+    ["Giraffe", "🦒", "Hum"],
+    ["Zebra", "🦓", "Neigh"],
+    ["Kangaroo", "🦘", "Growl"],
+    ["Panda", "🐼", "Growl"],
+    ["Penguin", "🐧", "Squawk"],
+    ["Parrot", "🦜", "Squawk"],
+    ["Peacock", "🦚", "Call"],
+    ["Duck", "🦆", "Quack"],
+    ["Chicken", "🐔", "Cluck"],
+    ["Rooster", "🐓", "Cock-a-doodle-doo"],
+    ["Frog", "🐸", "Croak"],
+    ["Snake", "🐍", "Hiss"],
+    ["Crocodile", "🐊", "Growl"],
+    ["Dolphin", "🐬", "Click"],
+    ["Whale", "🐋", "Song"]
 ];
 
 
-// ============================================================
-// COLOURS DATA — 30
-// ============================================================
+/* =========================================================
+   🎨 COLOURS
+   ========================================================= */
 
 const colours = [
-
-    ["Red", "#ff4d6d", "❤️"],
-    ["Blue", "#4d96ff", "💙"],
-    ["Green", "#38b000", "💚"],
-    ["Yellow", "#ffd60a", "💛"],
-    ["Orange", "#ff8500", "🧡"],
-    ["Purple", "#9b5de5", "💜"],
-    ["Pink", "#ff70a6", "💗"],
-    ["Brown", "#9c6644", "🤎"],
-    ["Black", "#222222", "🖤"],
-    ["White", "#ffffff", "🤍"],
-
-    ["Grey", "#808080", "🩶"],
-    ["Violet", "#8a2be2", "💜"],
-    ["Indigo", "#4b0082", "💙"],
-    ["Gold", "#ffd700", "✨"],
-    ["Silver", "#c0c0c0", "🌟"],
-    ["Sky Blue", "#87ceeb", "🩵"],
-    ["Navy Blue", "#000080", "💙"],
-    ["Light Green", "#90ee90", "💚"],
-    ["Dark Green", "#006400", "💚"],
-    ["Light Pink", "#ffb6c1", "💗"],
-
-    ["Magenta", "#ff00ff", "💖"],
-    ["Cyan", "#00ffff", "🩵"],
+    ["Red", "#ff4d4d", "🔴"],
+    ["Blue", "#4d96ff", "🔵"],
+    ["Green", "#38b000", "🟢"],
+    ["Yellow", "#ffd43b", "🟡"],
+    ["Orange", "#ff922b", "🟠"],
+    ["Purple", "#9b5de5", "🟣"],
+    ["Pink", "#ff70a6", "🩷"],
+    ["Brown", "#8d5524", "🟤"],
+    ["Black", "#222222", "⚫"],
+    ["White", "#ffffff", "⚪"],
+    ["Cyan", "#00b4d8", "🔵"],
+    ["Grey", "#999999", "⚪"],
+    ["Gold", "#f5c542", "🌟"],
+    ["Silver", "#bfc0c0", "✨"],
+    ["Navy", "#001f54", "🔵"],
+    ["Sky Blue", "#74c0fc", "🔵"],
+    ["Lime", "#a9e34b", "🟢"],
+    ["Magenta", "#d63384", "🩷"],
+    ["Maroon", "#800000", "🔴"],
+    ["Teal", "#008080", "🟢"],
+    ["Olive", "#808000", "🟢"],
+    ["Violet", "#7b2cbf", "🟣"],
+    ["Beige", "#f5f5dc", "🟨"],
+    ["Coral", "#ff7f50", "🟠"],
+    ["Peach", "#ffdab9", "🍑"],
     ["Turquoise", "#40e0d0", "💎"],
-    ["Teal", "#008080", "🩵"],
-    ["Maroon", "#800000", "❤️"],
-    ["Beige", "#f5f5dc", "🤎"],
-    ["Cream", "#fffdd0", "🤍"],
-    ["Peach", "#ffcba4", "🍑"],
-    ["Lavender", "#e6e6fa", "💜"],
-    ["Mint", "#98ff98", "💚"]
-
+    ["Indigo", "#4b0082", "🟣"],
+    ["Cream", "#fffdd0", "🟡"],
+    ["Mint", "#98ff98", "🟢"],
+    ["Lavender", "#e6e6fa", "🟣"]
 ];
 
 
-// ============================================================
-// HINDI ALPHABET DATA
-// ============================================================
+/* =========================================================
+   🇮🇳 HINDI ALPHABET
+   ========================================================= */
 
 const hindiAlphabet = [
+    ["अ", "अनार", "Apple", "🍎"],
+    ["आ", "आम", "Mango", "🥭"],
+    ["इ", "इमली", "Tamarind", "🌿"],
+    ["ई", "ईख", "Sugarcane", "🌾"],
+    ["उ", "उल्लू", "Owl", "🦉"],
+    ["ऊ", "ऊन", "Wool", "🧶"],
+    ["ऋ", "ऋषि", "Sage", "🧘"],
+    ["ए", "एड़ी", "Heel", "🦶"],
+    ["ऐ", "ऐनक", "Glasses", "👓"],
+    ["ओ", "ओखली", "Mortar", "🥣"],
+    ["औ", "औरत", "Woman", "👩"],
+    ["अं", "अंगूर", "Grapes", "🍇"],
+    ["अः", "अः", "Visarga", "📖"],
 
-    {
-        letter: "अ",
-        word: "अनार",
-        meaning: "अनार एक स्वादिष्ट फल है।",
-        english: "Pomegranate",
-        emoji: "🍎"
-    },
+    ["क", "कमल", "Lotus", "🌸"],
+    ["ख", "खरगोश", "Rabbit", "🐰"],
+    ["ग", "गमला", "Pot", "🪴"],
+    ["घ", "घर", "House", "🏠"],
+    ["ङ", "ङ", "Letter", "🔤"],
 
-    {
-        letter: "आ",
-        word: "आम",
-        meaning: "आम एक मीठा और स्वादिष्ट फल है।",
-        english: "Mango",
-        emoji: "🥭"
-    },
+    ["च", "चम्मच", "Spoon", "🥄"],
+    ["छ", "छाता", "Umbrella", "☂️"],
+    ["ज", "जहाज", "Ship", "🚢"],
+    ["झ", "झंडा", "Flag", "🇮🇳"],
+    ["ञ", "ञ", "Letter", "🔤"],
 
-    {
-        letter: "इ",
-        word: "इमली",
-        meaning: "इमली का स्वाद खट्टा होता है।",
-        english: "Tamarind",
-        emoji: "🌿"
-    },
+    ["ट", "टमाटर", "Tomato", "🍅"],
+    ["ठ", "ठेला", "Cart", "🛒"],
+    ["ड", "डमरू", "Drum", "🥁"],
+    ["ढ", "ढक्कन", "Lid", "🫙"],
+    ["ण", "ण", "Letter", "🔤"],
 
-    {
-        letter: "ई",
-        word: "ईख",
-        meaning: "ईख से गन्ने का रस बनाया जाता है।",
-        english: "Sugarcane",
-        emoji: "🌱"
-    },
+    ["त", "तरबूज", "Watermelon", "🍉"],
+    ["थ", "थर्मस", "Thermos", "🧴"],
+    ["द", "दवात", "Inkpot", "🖋️"],
+    ["ध", "धनुष", "Bow", "🏹"],
+    ["न", "नल", "Tap", "🚰"],
 
-    {
-        letter: "उ",
-        word: "उल्लू",
-        meaning: "उल्लू एक पक्षी है जो रात में जागता है।",
-        english: "Owl",
-        emoji: "🦉"
-    },
+    ["प", "पतंग", "Kite", "🪁"],
+    ["फ", "फल", "Fruit", "🍎"],
+    ["ब", "बकरी", "Goat", "🐐"],
+    ["भ", "भालू", "Bear", "🐻"],
+    ["म", "मछली", "Fish", "🐟"],
 
-    {
-        letter: "ऊ",
-        word: "ऊन",
-        meaning: "ऊन भेड़ से मिलने वाला मुलायम रेशा है।",
-        english: "Wool",
-        emoji: "🧶"
-    },
+    ["य", "यज्ञ", "Yagya", "🔥"],
+    ["र", "रथ", "Chariot", "🏇"],
+    ["ल", "लड्डू", "Laddu", "🍬"],
+    ["व", "वक", "Crane", "🦢"],
 
-    {
-        letter: "ऋ",
-        word: "ऋषि",
-        meaning: "ऋषि ज्ञानी और तपस्वी व्यक्ति को कहा जाता है।",
-        english: "Sage",
-        emoji: "🧘"
-    },
+    ["श", "शेर", "Lion", "🦁"],
+    ["ष", "षट्कोण", "Hexagon", "⬡"],
+    ["स", "सूरज", "Sun", "☀️"],
+    ["ह", "हाथी", "Elephant", "🐘"],
 
-    {
-        letter: "ए",
-        word: "एड़ी",
-        meaning: "एड़ी पैर का पिछला हिस्सा होती है।",
-        english: "Heel",
-        emoji: "🦶"
-    },
-
-    {
-        letter: "ऐ",
-        word: "ऐनक",
-        meaning: "ऐनक आँखों की सहायता के लिए पहनी जाती है।",
-        english: "Glasses",
-        emoji: "👓"
-    },
-
-    {
-        letter: "ओ",
-        word: "ओखली",
-        meaning: "ओखली में अनाज या मसाले कूटे जाते हैं।",
-        english: "Mortar",
-        emoji: "🥣"
-    },
-
-    {
-        letter: "औ",
-        word: "औरत",
-        meaning: "औरत एक वयस्क महिला को कहा जाता है।",
-        english: "Woman",
-        emoji: "👩"
-    },
-
-    {
-        letter: "अं",
-        word: "अंगूर",
-        meaning: "अंगूर छोटे और मीठे फल होते हैं।",
-        english: "Grapes",
-        emoji: "🍇"
-    },
-
-    {
-        letter: "अः",
-        word: "दुःख",
-        meaning: "दुःख का अर्थ है मन में उदासी या परेशानी।",
-        english: "Sorrow",
-        emoji: "💙"
-    },
-
-    {
-        letter: "क",
-        word: "कमल",
-        meaning: "कमल एक सुंदर फूल है।",
-        english: "Lotus",
-        emoji: "🌸"
-    },
-
-    {
-        letter: "ख",
-        word: "खरगोश",
-        meaning: "खरगोश एक छोटा और तेज दौड़ने वाला जानवर है।",
-        english: "Rabbit",
-        emoji: "🐇"
-    },
-
-    {
-        letter: "ग",
-        word: "गमला",
-        meaning: "गमले में पौधे लगाए जाते हैं।",
-        english: "Flower Pot",
-        emoji: "🪴"
-    },
-
-    {
-        letter: "घ",
-        word: "घर",
-        meaning: "घर वह स्थान है जहाँ हम रहते हैं।",
-        english: "House",
-        emoji: "🏠"
-    },
-
-    {
-        letter: "ङ",
-        word: "ङ",
-        meaning: "यह हिंदी वर्णमाला का एक व्यंजन है।",
-        english: "Hindi letter",
-        emoji: "🔤"
-    },
-
-    {
-        letter: "च",
-        word: "चम्मच",
-        meaning: "चम्मच से भोजन खाया जाता है।",
-        english: "Spoon",
-        emoji: "🥄"
-    },
-
-    {
-        letter: "छ",
-        word: "छाता",
-        meaning: "छाता बारिश से बचने के लिए इस्तेमाल होता है।",
-        english: "Umbrella",
-        emoji: "☂️"
-    },
-
-    {
-        letter: "ज",
-        word: "जहाज",
-        meaning: "जहाज पानी में चलने वाला बड़ा वाहन है।",
-        english: "Ship",
-        emoji: "🚢"
-    },
-
-    {
-        letter: "झ",
-        word: "झंडा",
-        meaning: "झंडा किसी देश या संस्था का प्रतीक हो सकता है।",
-        english: "Flag",
-        emoji: "🇮🇳"
-    },
-
-    {
-        letter: "ञ",
-        word: "ञ",
-        meaning: "यह हिंदी वर्णमाला का एक व्यंजन है।",
-        english: "Hindi letter",
-        emoji: "🔤"
-    },
-
-    {
-        letter: "ट",
-        word: "टमाटर",
-        meaning: "टमाटर एक लाल रंग की सब्जी है।",
-        english: "Tomato",
-        emoji: "🍅"
-    },
-
-    {
-        letter: "ठ",
-        word: "ठेला",
-        meaning: "ठेला सामान ले जाने के लिए इस्तेमाल होता है।",
-        english: "Cart",
-        emoji: "🛒"
-    },
-
-    {
-        letter: "ड",
-        word: "डमरू",
-        meaning: "डमरू एक छोटा वाद्य यंत्र है।",
-        english: "Drum",
-        emoji: "🥁"
-    },
-
-    {
-        letter: "ढ",
-        word: "ढक्कन",
-        meaning: "ढक्कन किसी बर्तन को ढकने के लिए होता है।",
-        english: "Lid",
-        emoji: "🥣"
-    },
-
-    {
-        letter: "ण",
-        word: "ण",
-        meaning: "यह हिंदी वर्णमाला का एक व्यंजन है।",
-        english: "Hindi letter",
-        emoji: "🔤"
-    },
-
-    {
-        letter: "त",
-        word: "तरबूज",
-        meaning: "तरबूज गर्मियों में खाया जाने वाला रसदार फल है।",
-        english: "Watermelon",
-        emoji: "🍉"
-    },
-
-    {
-        letter: "थ",
-        word: "थैला",
-        meaning: "थैले में सामान रखा जाता है।",
-        english: "Bag",
-        emoji: "👜"
-    },
-
-    {
-        letter: "द",
-        word: "दवात",
-        meaning: "दवात में स्याही रखी जाती थी।",
-        english: "Ink Pot",
-        emoji: "🖋️"
-    },
-
-    {
-        letter: "ध",
-        word: "धनुष",
-        meaning: "धनुष एक प्राचीन हथियार है।",
-        english: "Bow",
-        emoji: "🏹"
-    },
-
-    {
-        letter: "न",
-        word: "नल",
-        meaning: "नल से पानी आता है।",
-        english: "Tap",
-        emoji: "🚰"
-    },
-
-    {
-        letter: "प",
-        word: "पतंग",
-        meaning: "पतंग हवा में उड़ाई जाती है।",
-        english: "Kite",
-        emoji: "🪁"
-    },
-
-    {
-        letter: "फ",
-        word: "फल",
-        meaning: "फल हमारे लिए पौष्टिक भोजन हैं।",
-        english: "Fruit",
-        emoji: "🍎"
-    },
-
-    {
-        letter: "ब",
-        word: "बतख",
-        meaning: "बतख एक पक्षी है जो पानी में तैर सकती है।",
-        english: "Duck",
-        emoji: "🦆"
-    },
-
-    {
-        letter: "भ",
-        word: "भालू",
-        meaning: "भालू एक बड़ा जंगली जानवर है।",
-        english: "Bear",
-        emoji: "🐻"
-    },
-
-    {
-        letter: "म",
-        word: "मछली",
-        meaning: "मछली पानी में रहने वाला जीव है।",
-        english: "Fish",
-        emoji: "🐟"
-    },
-
-    {
-        letter: "य",
-        word: "यज्ञ",
-        meaning: "यज्ञ एक धार्मिक अनुष्ठान है।",
-        english: "Sacred Ritual",
-        emoji: "🔥"
-    },
-
-    {
-        letter: "र",
-        word: "रथ",
-        meaning: "रथ पहियों वाला एक वाहन है।",
-        english: "Chariot",
-        emoji: "🏇"
-    },
-
-    {
-        letter: "ल",
-        word: "लट्टू",
-        meaning: "लट्टू बच्चों का एक घूमने वाला खिलौना है।",
-        english: "Spinning Top",
-        emoji: "🌀"
-    },
-
-    {
-        letter: "व",
-        word: "वन",
-        meaning: "वन में बहुत सारे पेड़ और पौधे होते हैं।",
-        english: "Forest",
-        emoji: "🌳"
-    },
-
-    {
-        letter: "श",
-        word: "शेर",
-        meaning: "शेर एक शक्तिशाली जंगली जानवर है।",
-        english: "Lion",
-        emoji: "🦁"
-    },
-
-    {
-        letter: "ष",
-        word: "षट्कोण",
-        meaning: "षट्कोण छह भुजाओं वाली आकृति है।",
-        english: "Hexagon",
-        emoji: "⬡"
-    },
-
-    {
-        letter: "स",
-        word: "सूरज",
-        meaning: "सूरज हमें प्रकाश और गर्मी देता है।",
-        english: "Sun",
-        emoji: "☀️"
-    },
-
-    {
-        letter: "ह",
-        word: "हाथी",
-        meaning: "हाथी एक बहुत बड़ा जानवर है।",
-        english: "Elephant",
-        emoji: "🐘"
-    },
-
-    {
-        letter: "क्ष",
-        word: "क्षमा",
-        meaning: "क्षमा का अर्थ है किसी की गलती को माफ करना।",
-        english: "Forgiveness",
-        emoji: "❤️"
-    },
-
-    {
-        letter: "त्र",
-        word: "त्रिशूल",
-        meaning: "त्रिशूल तीन नुकीले सिरों वाला प्रतीक है।",
-        english: "Trident",
-        emoji: "🔱"
-    },
-
-    {
-        letter: "ज्ञ",
-        word: "ज्ञान",
-        meaning: "ज्ञान का अर्थ है किसी विषय की समझ और जानकारी।",
-        english: "Knowledge",
-        emoji: "📚"
-    }
-
+    ["क्ष", "क्षत्रिय", "Warrior", "🛡️"],
+    ["त्र", "त्रिशूल", "Trident", "🔱"],
+    ["ज्ञ", "ज्ञान", "Knowledge", "📚"]
 ];
 
 
-// ============================================================
-// PAGE TRANSITION
-// ============================================================
+/* =========================================================
+   🏠 NAVIGATION
+   ========================================================= */
 
-function playPageAnimation() {
+function setupLearning(icon, title, subtitle, content) {
 
-    if (!elementExists(learningPage)) {
-        return;
-    }
-
-    learningPage.style.opacity = "0";
-
-    learningPage.style.transform =
-        "translateY(18px) scale(0.985)";
-
-    requestAnimationFrame(() => {
-
-        requestAnimationFrame(() => {
-
-            learningPage.style.transition =
-                "opacity 0.45s ease, transform 0.45s ease";
-
-            learningPage.style.opacity = "1";
-
-            learningPage.style.transform =
-                "translateY(0) scale(1)";
-
-        });
-
-    });
-
-}
-
-
-// ============================================================
-// REMOVE MENU MODE
-// ============================================================
-
-function removeLearningMenuMode() {
-
-    if (!elementExists(learningPage)) {
-        return;
-    }
-
-    learningPage.classList.remove(
-        "learning-menu-page"
-    );
-
-}
-
-
-// ============================================================
-// SHOW CATEGORY
-// ============================================================
-
-function showCategory(category) {
+    if (!learningPage || !learningContent) return;
 
     stopSpeech();
 
-    currentCategory = category;
-
-    removeLearningMenuMode();
-
-
-    if (
-        !elementExists(homePage) ||
-        !elementExists(learningPage)
-    ) {
-
-        console.error(
-            "Learning page elements not found."
-        );
-
-        return;
-
+    if (homePage) {
+        homePage.style.display = "none";
     }
-
-
-    homePage.style.display = "none";
-
-    learningPage.classList.add("active");
 
     learningPage.style.display = "block";
 
-    playPageAnimation();
-
-
-    window.scrollTo({
-
-        top: 0,
-
-        behavior:
-            APP_SETTINGS.scrollBehavior
-
-    });
-
-
-    if (category === "abc") {
-
-        setupLearning(
-            "🔤",
-            "Learn A to Z",
-            "Click a letter to hear it!",
-            showAlphabet()
-        );
-
+    if (learningIcon) {
+        learningIcon.textContent = icon;
     }
 
-    else if (category === "days") {
-
-        setupLearning(
-            "📅",
-            "Days of the Week",
-            "Click a day to hear it!",
-            showDays()
-        );
-
+    if (learningTitle) {
+        learningTitle.textContent = title;
     }
 
-    else if (category === "months") {
-
-        setupLearning(
-            "🗓️",
-            "Months of the Year",
-            "Click a month to hear it!",
-            showMonths()
-        );
-
+    if (learningSubtitle) {
+        learningSubtitle.textContent = subtitle;
     }
 
-    else if (category === "tables") {
+    learningContent.innerHTML = content;
 
-        setupLearning(
-            "✖️",
-            "Multiplication Tables",
-            "Choose a table to start!",
-            showTables()
-        );
-
-    }
-
-    else if (category === "fruits") {
-
-        setupLearning(
-            "🍎",
-            "Yummy Fruits",
-            "Let's learn 30 fruit names!",
-            showFruits()
-        );
-
-    }
-
-    else if (category === "bodyparts") {
-
-        setupLearning(
-            "👦",
-            "Body Parts",
-            "Let's learn 30 body parts!",
-            showBodyParts()
-        );
-
-    }
-
-    else if (category === "animals") {
-
-        setupLearning(
-            "🐶",
-            "Amazing Animals",
-            "Meet 30 amazing animals!",
-            showAnimals()
-        );
-
-    }
-
-    else if (category === "colours") {
-
-        setupLearning(
-            "🎨",
-            "Beautiful Colours",
-            "Explore 30 beautiful colours!",
-            showColours()
-        );
-
-    }
-
-    else if (category === "hindi") {
-
-        openHindiAlphabet();
-
-    }
-
-}
-
-
-// ============================================================
-// SETUP LEARNING
-// ============================================================
-
-function setupLearning(
-    icon,
-    title,
-    subtitle,
-    content
-) {
-
-    if (elementExists(learningIcon)) {
-
-        learningIcon.textContent =
-            safeText(icon);
-
-    }
-
-
-    if (elementExists(learningTitle)) {
-
-        learningTitle.textContent =
-            safeText(title);
-
-    }
-
-
-    if (elementExists(learningSubtitle)) {
-
-        learningSubtitle.textContent =
-            safeText(subtitle);
-
-    }
-
-
-    if (!elementExists(learningContent)) {
-
-        return;
-
-    }
-
-
-    learningContent.innerHTML =
-        content;
+    scrollToTop();
 
     animateLearningCards();
-
 }
 
-
-// ============================================================
-// ANIMATE LEARNING CARDS
-// ============================================================
-
-function animateLearningCards() {
-
-    setTimeout(() => {
-
-        const cards =
-            document.querySelectorAll(
-                ".learning-card"
-            );
-
-
-        cards.forEach(
-            (card, index) => {
-
-                card.style.animationDelay =
-                    `${index * APP_SETTINGS.cardAnimationDelay}ms`;
-
-                card.style.opacity = "0";
-
-                card.style.transform =
-                    "translateY(18px) scale(0.96)";
-
-                requestAnimationFrame(() => {
-
-                    setTimeout(() => {
-
-                        card.style.transition =
-                            "opacity 0.45s ease, transform 0.45s ease";
-
-                        card.style.opacity = "1";
-
-                        card.style.transform =
-                            "translateY(0) scale(1)";
-
-                    }, index * APP_SETTINGS.cardAnimationDelay);
-
-                });
-
-            }
-        );
-
-    }, 50);
-
-}
-
-
-// ============================================================
-// ABC PAGE
-// ============================================================
-
-function showAlphabet() {
-
-    let html =
-        `<div class="cards-grid alphabet-grid">`;
-
-
-    alphabet.forEach(
-        (item, index) => {
-
-            const letter =
-                escapeHTML(item[0]);
-
-            const word =
-                escapeHTML(item[1]);
-
-            const emoji =
-                escapeHTML(item[2]);
-
-
-            html += `
-
-                <div
-                    class="learning-card alphabet-card"
-                    tabindex="0"
-                    role="button"
-                    data-index="${index}"
-                    onclick="handleAlphabetClick(this, '${letter}', '${word}')"
-                    onkeydown="handleCardKey(event, this, '${letter} for ${word}')"
-                >
-
-                    <div class="letter">
-                        ${letter}
-                    </div>
-
-                    <div class="learning-emoji">
-                        ${emoji}
-                    </div>
-
-                    <div class="word">
-                        ${word}
-                    </div>
-
-                    <div class="mini-text">
-                        ${letter} for ${word}
-                    </div>
-
-                    <div class="sound-hint">
-                        🔊 Tap to hear
-                    </div>
-
-                </div>
-
-            `;
-
-        }
-    );
-
-
-    html += `</div>`;
-
-    return html;
-
-}
-
-
-// ============================================================
-// ABC CLICK
-// ============================================================
-
-function handleAlphabetClick(
-    card,
-    letter,
-    word
-) {
-
-    animateCard(card);
-
-    speak(
-        `${letter} for ${word}`
-    );
-
-}
-
-
-// ============================================================
-// DAYS PAGE
-// ============================================================
-
-function showDays() {
-
-    let html =
-        `<div class="cards-grid">`;
-
-
-    days.forEach(
-        (item, index) => {
-
-            const name =
-                escapeHTML(item[0]);
-
-            const emoji =
-                escapeHTML(item[1]);
-
-
-            html += `
-
-                <div
-                    class="learning-card day-card"
-                    tabindex="0"
-                    role="button"
-                    onclick="handleSimpleCardClick(this, '${name}')"
-                    onkeydown="handleCardKey(event, this, '${name}')"
-                >
-
-                    <div class="number-badge">
-                        ${index + 1}
-                    </div>
-
-                    <div class="learning-emoji">
-                        ${emoji}
-                    </div>
-
-                    <div class="word">
-                        ${name}
-                    </div>
-
-                    <div class="mini-text">
-                        Day ${index + 1}
-                    </div>
-
-                    <div class="sound-hint">
-                        🔊 Tap to hear
-                    </div>
-
-                </div>
-
-            `;
-
-        }
-    );
-
-
-    html += `</div>`;
-
-    return html;
-
-}
-
-
-// ============================================================
-// MONTHS PAGE
-// ============================================================
-
-function showMonths() {
-
-    let html =
-        `<div class="cards-grid months-grid">`;
-
-
-    months.forEach(
-        (item, index) => {
-
-            const name =
-                escapeHTML(item[0]);
-
-            const emoji =
-                escapeHTML(item[1]);
-
-
-            html += `
-
-                <div
-                    class="learning-card month-card"
-                    tabindex="0"
-                    role="button"
-                    onclick="handleSimpleCardClick(this, '${name}')"
-                    onkeydown="handleCardKey(event, this, '${name}')"
-                >
-
-                    <div class="number-badge">
-                        ${index + 1}
-                    </div>
-
-                    <div class="learning-emoji">
-                        ${emoji}
-                    </div>
-
-                    <div class="word">
-                        ${name}
-                    </div>
-
-                    <div class="sound-hint">
-                        🔊 Tap to hear
-                    </div>
-
-                </div>
-
-            `;
-
-        }
-    );
-
-
-    html += `</div>`;
-
-    return html;
-
-}
-
-
-// ============================================================
-// SIMPLE CARD CLICK
-// ============================================================
-
-function handleSimpleCardClick(
-    card,
-    text
-) {
-
-    animateCard(card);
-
-    speak(text);
-
-}
-
-
-// ============================================================
-// KEYBOARD SUPPORT
-// ============================================================
-
-function handleCardKey(
-    event,
-    card,
-    text
-) {
-
-    if (
-        event.key === "Enter" ||
-        event.key === " "
-    ) {
-
-        event.preventDefault();
-
-        animateCard(card);
-
-        speak(text);
-
-    }
-
-}
-
-
-// ============================================================
-// CARD ANIMATION
-// ============================================================
-
-function animateCard(card) {
-
-    if (!card) {
-        return;
-    }
-
-
-    card.classList.remove(
-        "card-active"
-    );
-
-
-    void card.offsetWidth;
-
-
-    card.classList.add(
-        "card-active"
-    );
-
-
-    setTimeout(() => {
-
-        card.classList.remove(
-            "card-active"
-        );
-
-    }, APP_SETTINGS.animationDuration);
-
-}
-
-
-// ============================================================
-// SPEECH
-// ============================================================
-
-function speak(text) {
-
-    if (!speechSupported) {
-
-        console.warn(
-            "Speech synthesis is not supported."
-        );
-
-        return;
-
-    }
-
-
-    window.speechSynthesis.cancel();
-
-
-    const speech =
-        new SpeechSynthesisUtterance(
-            safeText(text)
-        );
-
-
-    speech.rate =
-        APP_SETTINGS.speechRate;
-
-    speech.pitch =
-        APP_SETTINGS.speechPitch;
-
-    speech.volume =
-        APP_SETTINGS.speechVolume;
-
-    speech.lang =
-        "en-IN";
-
-
-    currentSpeech =
-        speech;
-
-
-    speech.onstart =
-        function () {
-
-            document.body.classList.add(
-                "speaking"
-            );
-
-        };
-
-
-    speech.onend =
-        function () {
-
-            document.body.classList.remove(
-                "speaking"
-            );
-
-        };
-
-
-    speech.onerror =
-        function () {
-
-            document.body.classList.remove(
-                "speaking"
-            );
-
-        };
-
-
-    window.speechSynthesis.speak(
-        speech
-    );
-
-}
-
-
-// ============================================================
-// STOP SPEECH
-// ============================================================
-
-function stopSpeech() {
-
-    if (!speechSupported) {
-        return;
-    }
-
-
-    window.speechSynthesis.cancel();
-
-
-    document.body.classList.remove(
-        "speaking"
-    );
-
-}
-
-
-// ============================================================
-// PAUSE SPEECH
-// ============================================================
-
-function pauseSpeech() {
-
-    if (!speechSupported) {
-        return;
-    }
-
-
-    if (
-        window.speechSynthesis.speaking
-    ) {
-
-        window.speechSynthesis.pause();
-
-    }
-
-}
-
-
-// ============================================================
-// RESUME SPEECH
-// ============================================================
-
-function resumeSpeech() {
-
-    if (!speechSupported) {
-        return;
-    }
-
-
-    if (
-        window.speechSynthesis.paused
-    ) {
-
-        window.speechSynthesis.resume();
-
-    }
-
-}
-
-
-// ============================================================
-// TABLES
-// ============================================================
-
-function showTables() {
-
-    let html = `
-
-        <div class="table-choice">
-
-            <div class="table-choice-title">
-                ✨ Choose a table
-            </div>
-
-            <div class="table-buttons">
-
-    `;
-
-
-    for (
-        let i = 1;
-        i <= 20;
-        i++
-    ) {
-
-        html += `
-
-            <button
-                type="button"
-                onclick="showTable(${i})"
-                class="table-number"
-            >
-                ${i}
-            </button>
-
-        `;
-
-    }
-
-
-    html += `
-
-            </div>
-
-        </div>
-
-        <div id="tableResult"></div>
-
-    `;
-
-
-    return html;
-
-}
-
-
-// ============================================================
-// SHOW TABLE
-// ============================================================
-
-function showTable(number) {
-
-    const result =
-        document.getElementById(
-            "tableResult"
-        );
-
-
-    if (!result) {
-        return;
-    }
-
-
-    let html = `
-
-        <div class="table-result-box">
-
-            <div class="table-big-number">
-                ${number}
-            </div>
-
-            <h2>
-                Table of ${number}
-            </h2>
-
-            <div class="multiplication-list">
-
-    `;
-
-
-    for (
-        let i = 1;
-        i <= 10;
-        i++
-    ) {
-
-        const answer =
-            number * i;
-
-
-        html += `
-
-            <div
-                class="multiplication-row"
-                onclick="speak('${number} times ${i} equals ${answer}')"
-            >
-
-                <span>
-                    ${number}
-                </span>
-
-                <b>×</b>
-
-                <span>
-                    ${i}
-                </span>
-
-                <b>=</b>
-
-                <strong>
-                    ${answer}
-                </strong>
-
-            </div>
-
-        `;
-
-    }
-
-
-    html += `
-
-            </div>
-
-        </div>
-
-    `;
-
-
-    result.innerHTML =
-        html;
-
-
-    result.scrollIntoView({
-
-        behavior: "smooth",
-
-        block: "start"
-
-    });
-
-}
-
-
-// ============================================================
-// FRUITS
-// ============================================================
-
-function showFruits() {
-
-    let html =
-        `<div class="cards-grid fruits-grid">`;
-
-
-    fruits.forEach(
-        (item) => {
-
-            const name =
-                escapeHTML(item[0]);
-
-            const emoji =
-                escapeHTML(item[1]);
-
-
-            html += `
-
-                <div
-                    class="learning-card fruit-card"
-                    tabindex="0"
-                    role="button"
-                    onclick="handleSimpleCardClick(this, '${name}')"
-                    onkeydown="handleCardKey(event, this, '${name}')"
-                >
-
-                    <div class="learning-emoji fruit-emoji">
-                        ${emoji}
-                    </div>
-
-                    <div class="word">
-                        ${name}
-                    </div>
-
-                    <div class="mini-text">
-                        Yummy! 😋
-                    </div>
-
-                    <div class="sound-hint">
-                        🔊 Tap to hear
-                    </div>
-
-                </div>
-
-            `;
-
-        }
-    );
-
-
-    html += `</div>`;
-
-    return html;
-
-}
-
-
-// ============================================================
-// BODY PARTS
-// ============================================================
-
-function showBodyParts() {
-
-    let html =
-        `<div class="cards-grid bodyparts-grid">`;
-
-
-    bodyParts.forEach(
-        (item) => {
-
-            const name =
-                escapeHTML(item[0]);
-
-            const emoji =
-                escapeHTML(item[1]);
-
-
-            html += `
-
-                <div
-                    class="learning-card bodypart-card"
-                    tabindex="0"
-                    role="button"
-                    onclick="handleSimpleCardClick(this, '${name}')"
-                    onkeydown="handleCardKey(event, this, '${name}')"
-                >
-
-                    <div class="learning-emoji">
-                        ${emoji}
-                    </div>
-
-                    <div class="word">
-                        ${name}
-                    </div>
-
-                    <div class="sound-hint">
-                        🔊 Tap to hear
-                    </div>
-
-                </div>
-
-            `;
-
-        }
-    );
-
-
-    html += `</div>`;
-
-    return html;
-
-}
-
-
-// ============================================================
-// ANIMALS
-// ============================================================
-
-function showAnimals() {
-
-    let html =
-        `<div class="cards-grid animals-grid">`;
-
-
-    animals.forEach(
-        (item) => {
-
-            const name =
-                escapeHTML(item[0]);
-
-            const emoji =
-                escapeHTML(item[1]);
-
-
-            html += `
-
-                <div
-                    class="learning-card animal-card"
-                    tabindex="0"
-                    role="button"
-                    onclick="handleSimpleCardClick(this, '${name}')"
-                    onkeydown="handleCardKey(event, this, '${name}')"
-                >
-
-                    <div class="learning-emoji animal-emoji">
-                        ${emoji}
-                    </div>
-
-                    <div class="word">
-                        ${name}
-                    </div>
-
-                    <div class="mini-text">
-                        Say hello! 👋
-                    </div>
-
-                    <div class="sound-hint">
-                        🔊 Tap to hear
-                    </div>
-
-                </div>
-
-            `;
-
-        }
-    );
-
-
-    html += `</div>`;
-
-    return html;
-
-}
-
-
-// ============================================================
-// COLOURS
-// ============================================================
-
-function showColours() {
-
-    let html =
-        `<div class="cards-grid colours-grid">`;
-
-
-    colours.forEach(
-        (item) => {
-
-            const name =
-                escapeHTML(item[0]);
-
-            const color =
-                escapeHTML(item[1]);
-
-            const emoji =
-                escapeHTML(item[2]);
-
-
-            html += `
-
-                <div
-                    class="learning-card colour-card"
-                    tabindex="0"
-                    role="button"
-                    onclick="handleSimpleCardClick(this, '${name}')"
-                    onkeydown="handleCardKey(event, this, '${name}')"
-                >
-
-                    <div
-                        class="colour-circle"
-                        style="background:${color}">
-                    </div>
-
-                    <div class="learning-emoji">
-                        ${emoji}
-                    </div>
-
-                    <div class="word">
-                        ${name}
-                    </div>
-
-                    <div class="sound-hint">
-                        🔊 Tap to hear
-                    </div>
-
-                </div>
-
-            `;
-
-        }
-    );
-
-
-    html += `</div>`;
-
-    return html;
-
-}
-
-
-// ============================================================
-// GO HOME
-// ============================================================
 
 function goHome() {
 
@@ -1887,49 +540,502 @@ function goHome() {
 
     currentCategory = "";
 
-
-    if (elementExists(learningPage)) {
-
-        learningPage.classList.remove(
-            "active"
-        );
-
-        learningPage.classList.remove(
-            "learning-menu-page"
-        );
-
-        learningPage.style.display =
-            "none";
-
-        learningPage.style.opacity = "";
-        learningPage.style.transform = "";
-
+    if (learningPage) {
+        learningPage.style.display = "none";
+        learningPage.classList.remove("learning-menu-page");
     }
 
-
-    if (elementExists(homePage)) {
-
-        homePage.style.display =
-            "block";
-
+    if (homePage) {
+        homePage.style.display = "block";
     }
 
-
-    window.scrollTo({
-
-        top: 0,
-
-        behavior:
-            APP_SETTINGS.scrollBehavior
-
-    });
-
+    scrollToTop();
 }
 
 
-// ============================================================
-// HINDI ALPHABET OPEN
-// ============================================================
+function goBackFromLearning() {
+
+    if (currentCategory === "menu") {
+        goHome();
+        return;
+    }
+
+    openLearningMenu();
+}
+
+
+/* =========================================================
+   🎬 CARD ANIMATION
+   ========================================================= */
+
+function animateLearningCards() {
+
+    const cards = document.querySelectorAll(
+        ".learning-card, .hindi-card, .adventure-card, .learning-menu-card"
+    );
+
+    cards.forEach((card, index) => {
+
+        card.style.animationDelay =
+            `${index * APP_SETTINGS.cardAnimationDelay}ms`;
+
+    });
+}
+
+
+/* =========================================================
+   🔤 MAIN CATEGORY SYSTEM
+   ========================================================= */
+
+function showCategory(category) {
+
+    stopSpeech();
+
+    currentCategory = category;
+
+    if (category === "abc") {
+
+        setupLearning(
+            "🔤",
+            "Learn A to Z",
+            "Let's learn letters and words!",
+            renderAlphabet()
+        );
+
+        return;
+    }
+
+
+    if (category === "days") {
+
+        setupLearning(
+            "📅",
+            "Days of the Week",
+            "Let's learn all seven days!",
+            renderDays()
+        );
+
+        return;
+    }
+
+
+    if (category === "months") {
+
+        setupLearning(
+            "🗓️",
+            "Months of the Year",
+            "Let's learn all twelve months!",
+            renderMonths()
+        );
+
+        return;
+    }
+
+
+    if (category === "tables") {
+
+        setupLearning(
+            "✖️",
+            "Multiplication Tables",
+            "Choose a table and start practising!",
+            renderTableChoice()
+        );
+
+        return;
+    }
+
+
+    if (category === "fruits") {
+
+        setupLearning(
+            "🍎",
+            "Fruits",
+            "Let's learn delicious fruits!",
+            renderFruits()
+        );
+
+        return;
+    }
+
+
+    if (category === "bodyparts") {
+
+        setupLearning(
+            "👦",
+            "Body Parts",
+            "Let's learn about our body!",
+            renderBodyParts()
+        );
+
+        return;
+    }
+
+
+    if (category === "animals") {
+
+        setupLearning(
+            "🐶",
+            "Animals",
+            "Let's meet some amazing animals!",
+            renderAnimals()
+        );
+
+        return;
+    }
+
+
+    if (category === "colours") {
+
+        setupLearning(
+            "🎨",
+            "Colours",
+            "Let's explore beautiful colours!",
+            renderColours()
+        );
+
+        return;
+    }
+
+
+    if (category === "hindi") {
+
+        openHindiAlphabet();
+
+        return;
+    }
+}
+
+
+/* =========================================================
+   🔤 ALPHABET RENDER
+   ========================================================= */
+
+function renderAlphabet() {
+
+    return `
+        <div class="learning-heading">
+            <h2>🔤 ABC Alphabet</h2>
+            <p>Tap a card to hear the letter.</p>
+        </div>
+
+        <div class="cards-grid">
+
+            ${alphabet.map((item, index) => `
+                <div
+                    class="learning-card"
+                    tabindex="0"
+                    role="button"
+                    onclick="speakAlphabet(${index})"
+                    onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();speakAlphabet(${index})}"
+                >
+
+                    <div class="letter">
+                        ${escapeHTML(item.letter)}
+                    </div>
+
+                    <div class="learning-emoji">
+                        ${item.emoji}
+                    </div>
+
+                    <div class="word">
+                        ${escapeHTML(item.word)}
+                    </div>
+
+                    <div class="mini-text">
+                        🔊 Tap to hear
+                    </div>
+
+                </div>
+            `).join("")}
+
+        </div>
+    `;
+}
+
+
+function speakAlphabet(index) {
+
+    const item = alphabet[index];
+
+    if (!item) return;
+
+    speak(
+        `${item.letter}. ${item.word}`,
+        {
+            lang: "en-US",
+            rate: 0.68
+        }
+    );
+}
+
+
+/* =========================================================
+   📅 DAYS
+   ========================================================= */
+
+function renderDays() {
+
+    return `
+        <div class="learning-heading">
+            <h2>📅 Days of the Week</h2>
+            <p>There are 7 days in a week.</p>
+        </div>
+
+        <div class="cards-grid">
+
+            ${days.map((day, index) => `
+                <div
+                    class="learning-card"
+                    onclick="speak('Today is ${day}', {lang:'en-US'})"
+                >
+
+                    <div class="learning-emoji">
+                        ${["🌞","🌈","⭐","🌸","🎉","🎮","🏡"][index]}
+                    </div>
+
+                    <div class="word">
+                        ${day}
+                    </div>
+
+                    <div class="mini-text">
+                        Day ${index + 1}
+                    </div>
+
+                </div>
+            `).join("")}
+
+        </div>
+    `;
+}
+
+
+/* =========================================================
+   🗓️ MONTHS
+   ========================================================= */
+
+function renderMonths() {
+
+    return `
+        <div class="learning-heading">
+            <h2>🗓️ Months of the Year</h2>
+            <p>There are 12 months in a year.</p>
+        </div>
+
+        <div class="cards-grid">
+
+            ${months.map((month, index) => `
+                <div
+                    class="learning-card"
+                    onclick="speak('${month}', {lang:'en-US'})"
+                >
+
+                    <div class="number-badge">
+                        ${index + 1}
+                    </div>
+
+                    <div class="learning-emoji">
+                        ${["❄️","💖","🌸","🌷","🌞","🌦️","🏖️","🌈","🍂","🎃","🍁","🎄"][index]}
+                    </div>
+
+                    <div class="word">
+                        ${month}
+                    </div>
+
+                </div>
+            `).join("")}
+
+        </div>
+    `;
+}
+
+
+/* =========================================================
+   🍎 FRUITS
+   ========================================================= */
+
+function renderFruits() {
+
+    return `
+        <div class="learning-heading">
+            <h2>🍎 Fruits</h2>
+            <p>Tap a fruit to hear its name.</p>
+        </div>
+
+        <div class="cards-grid">
+
+            ${fruits.map((item, index) => `
+                <div
+                    class="learning-card"
+                    onclick="speakFruit(${index})"
+                >
+
+                    <div class="learning-emoji">
+                        ${item[1]}
+                    </div>
+
+                    <div class="word">
+                        ${escapeHTML(item[0])}
+                    </div>
+
+                    <div class="mini-text">
+                        🔊 Listen
+                    </div>
+
+                </div>
+            `).join("")}
+
+        </div>
+    `;
+}
+
+
+function speakFruit(index) {
+
+    if (!fruits[index]) return;
+
+    speak(fruits[index][0], {
+        lang: "en-US",
+        rate: 0.70
+    });
+}
+
+
+/* =========================================================
+   👦 BODY PARTS
+   ========================================================= */
+
+function renderBodyParts() {
+
+    return `
+        <div class="learning-heading">
+            <h2>👦 Body Parts</h2>
+            <p>Let's learn about our body.</p>
+        </div>
+
+        <div class="cards-grid">
+
+            ${bodyParts.map((item, index) => `
+                <div
+                    class="learning-card"
+                    onclick="speak('${item[0]}', {lang:'en-US'})"
+                >
+
+                    <div class="learning-emoji">
+                        ${item[1]}
+                    </div>
+
+                    <div class="word">
+                        ${escapeHTML(item[0])}
+                    </div>
+
+                </div>
+            `).join("")}
+
+        </div>
+    `;
+}
+
+
+/* =========================================================
+   🐶 ANIMALS
+   ========================================================= */
+
+function renderAnimals() {
+
+    return `
+        <div class="learning-heading">
+            <h2>🐾 Animals</h2>
+            <p>Meet our animal friends!</p>
+        </div>
+
+        <div class="cards-grid">
+
+            ${animals.map((item, index) => `
+                <div
+                    class="learning-card"
+                    onclick="speakAnimal(${index})"
+                >
+
+                    <div class="learning-emoji">
+                        ${item[1]}
+                    </div>
+
+                    <div class="word">
+                        ${escapeHTML(item[0])}
+                    </div>
+
+                    <div class="mini-text">
+                        ${escapeHTML(item[2])} 🔊
+                    </div>
+
+                </div>
+            `).join("")}
+
+        </div>
+    `;
+}
+
+
+function speakAnimal(index) {
+
+    const item = animals[index];
+
+    if (!item) return;
+
+    speak(
+        `${item[0]}. It says ${item[2]}.`,
+        {
+            lang: "en-US",
+            rate: 0.68
+        }
+    );
+}
+
+
+/* =========================================================
+   🎨 COLOURS
+   ========================================================= */
+
+function renderColours() {
+
+    return `
+        <div class="learning-heading">
+            <h2>🎨 Colours</h2>
+            <p>Let's learn colours!</p>
+        </div>
+
+        <div class="cards-grid">
+
+            ${colours.map((item, index) => `
+                <div
+                    class="learning-card colour-card"
+                    onclick="speak('${item[0]}', {lang:'en-US'})"
+                >
+
+                    <div
+                        class="colour-circle"
+                        style="background:${item[1]}"
+                    ></div>
+
+                    <div class="learning-emoji">
+                        ${item[2]}
+                    </div>
+
+                    <div class="word">
+                        ${escapeHTML(item[0])}
+                    </div>
+
+                </div>
+            `).join("")}
+
+        </div>
+    `;
+}
+
+
+/* =========================================================
+   🇮🇳 HINDI ALPHABET
+   ========================================================= */
 
 function openHindiAlphabet() {
 
@@ -1937,155 +1043,54 @@ function openHindiAlphabet() {
 
     currentCategory = "hindi";
 
-    removeLearningMenuMode();
-
-
-    if (elementExists(homePage)) {
-
-        homePage.style.display =
-            "none";
-
-    }
-
-
-    if (elementExists(learningPage)) {
-
-        learningPage.classList.add(
-            "active"
-        );
-
-        learningPage.style.display =
-            "block";
-
-        playPageAnimation();
-
-    }
-
-
-    if (elementExists(learningIcon)) {
-
-        learningIcon.textContent =
-            "🇮🇳";
-
-    }
-
-
-    if (elementExists(learningTitle)) {
-
-        learningTitle.textContent =
-            "हिंदी वर्णमाला";
-
-    }
-
-
-    if (elementExists(learningSubtitle)) {
-
-        learningSubtitle.textContent =
-            "अ से ज्ञ तक हिंदी अक्षर सीखें!";
-
-    }
-
-
-    renderHindiAlphabet();
-
-
-    window.scrollTo({
-
-        top: 0,
-
-        behavior:
-            APP_SETTINGS.scrollBehavior
-
-    });
-
+    setupLearning(
+        "🇮🇳",
+        "Hindi Alphabet",
+        "हिंदी वर्णमाला सीखें और सुनें!",
+        renderHindiAlphabet()
+    );
 }
 
 
-// ============================================================
-// RENDER HINDI
-// ============================================================
-
 function renderHindiAlphabet() {
 
-    if (!elementExists(learningContent)) {
-        return;
-    }
-
-
-    let html = `
-
+    return `
         <div class="hindi-learning-heading">
 
-            <div class="hindi-title-icon">
-                🌈
-            </div>
-
-            <h2>
-                हिंदी अक्षर सीखें
-            </h2>
+            <h2>🇮🇳 हिंदी वर्णमाला</h2>
 
             <p>
-                किसी भी अक्षर पर क्लिक करें
-                और उसका उच्चारण सुनें 🔊
+                अक्षर पर टैप करके उच्चारण सुनें।
             </p>
 
         </div>
 
         <div class="hindi-grid">
 
-    `;
-
-
-    hindiAlphabet.forEach(
-        (item, index) => {
-
-            html +=
+            ${hindiAlphabet.map((item, index) =>
                 createHindiCard(
-                    item,
+                    {
+                        letter: item[0],
+                        word: item[1],
+                        english: item[2],
+                        emoji: item[3]
+                    },
                     index
-                );
-
-        }
-    );
-
-
-    html += `
+                )
+            ).join("")}
 
         </div>
-
     `;
-
-
-    learningContent.innerHTML =
-        html;
-
-
-    animateHindiCards();
-
 }
 
 
-// ============================================================
-// CREATE HINDI CARD
-// ============================================================
+function createHindiCard(item, index) {
 
-function createHindiCard(
-    item,
-    index
-) {
-
-    const letter =
-        escapeHTML(item.letter);
-
-    const word =
-        escapeHTML(item.word);
-
-    const emoji =
-        escapeHTML(item.emoji);
-
+    const letter = escapeHTML(item.letter);
+    const word = escapeHTML(item.word);
+    const emoji = escapeHTML(item.emoji);
 
     return `
-
         <div
             class="hindi-card"
             tabindex="0"
@@ -2121,94 +1126,37 @@ function createHindiCard(
             </div>
 
         </div>
-
     `;
-
 }
 
 
-// ============================================================
-// HINDI CARD ANIMATION
-// ============================================================
+function handleHindiCardClick(card, index) {
 
-function animateHindiCards() {
+    if (!hindiAlphabet[index]) return;
 
-    setTimeout(() => {
-
-        const cards =
-            document.querySelectorAll(
-                ".hindi-card"
-            );
-
-
-        cards.forEach(
-            (card, index) => {
-
-                card.style.opacity = "0";
-
-                card.style.transform =
-                    "translateY(16px) scale(0.97)";
-
-
-                setTimeout(() => {
-
-                    card.style.transition =
-                        "opacity 0.4s ease, transform 0.4s ease";
-
-                    card.style.opacity = "1";
-
-                    card.style.transform =
-                        "translateY(0) scale(1)";
-
-                }, index * 35);
-
-            }
-        );
-
-
-    }, 50);
-
-}
-
-
-// ============================================================
-// HINDI CARD CLICK
-// ============================================================
-
-function handleHindiCardClick(
-    card,
-    index
-) {
-
-    const item =
-        hindiAlphabet[index];
-
-
-    if (!item) {
-        return;
-    }
-
-
-    animateHindiCard(card);
-
+    const item = hindiAlphabet[index];
 
     speakHindi(
-        item.letter,
-        item.word
+        item[0],
+        item[1]
     );
 
+    if (card) {
+
+        card.classList.remove("hindi-card-active");
+
+        void card.offsetWidth;
+
+        card.classList.add("hindi-card-active");
+
+        setTimeout(() => {
+            card.classList.remove("hindi-card-active");
+        }, 700);
+    }
 }
 
 
-// ============================================================
-// HINDI KEYBOARD
-// ============================================================
-
-function handleHindiKey(
-    event,
-    card,
-    index
-) {
+function handleHindiKey(event, card, index) {
 
     if (
         event.key === "Enter" ||
@@ -2217,189 +1165,41 @@ function handleHindiKey(
 
         event.preventDefault();
 
-
         handleHindiCardClick(
             card,
             index
         );
-
     }
-
 }
 
 
-// ============================================================
-// HINDI CARD ACTIVE
-// ============================================================
-
-function animateHindiCard(card) {
-
-    if (!card) {
-        return;
-    }
-
-
-    card.classList.remove(
-        "hindi-active"
-    );
-
-
-    void card.offsetWidth;
-
-
-    card.classList.add(
-        "hindi-active"
-    );
-
-
-    setTimeout(() => {
-
-        card.classList.remove(
-            "hindi-active"
-        );
-
-    }, 750);
-
-}
-
-
-// ============================================================
-// HINDI SPEECH
-// ============================================================
-
-function speakHindi(
-    letter,
-    word
-) {
-
-    if (!speechSupported) {
-
-        alert(
-            "Aapke browser mein voice support available nahi hai."
-        );
-
-        return;
-
-    }
-
-
-    window.speechSynthesis.cancel();
-
-
-    const text =
-        `${letter} से ${word}`;
-
-
-    const speech =
-        new SpeechSynthesisUtterance(
-            text
-        );
-
-
-    speech.lang =
-        "hi-IN";
-
-    speech.rate =
-        0.70;
-
-    speech.pitch =
-        1.05;
-
-    speech.volume =
-        1;
-
-
-    currentSpeech =
-        speech;
-
-
-    speech.onstart =
-        function () {
-
-            document.body.classList.add(
-                "hindi-speaking"
-            );
-
-        };
-
-
-    speech.onend =
-        function () {
-
-            document.body.classList.remove(
-                "hindi-speaking"
-            );
-
-        };
-
-
-    speech.onerror =
-        function () {
-
-            document.body.classList.remove(
-                "hindi-speaking"
-            );
-
-        };
-
-
-    window.speechSynthesis.speak(
-        speech
-    );
-
-}
-
-
-// ============================================================
-// 💡 LUXURY LAMP
-// ============================================================
+/* =========================================================
+   💡 STUDY LAMP
+   DO NOT REMOVE
+   ========================================================= */
 
 function turnLampOn() {
 
     const intro =
-        document.getElementById(
-            "studyIntro"
-        );
+        document.getElementById("studyIntro");
 
+    if (!intro) return;
 
-    if (!intro) {
-        return;
-    }
+    if (intro.classList.contains("lamp-on")) return;
 
+    intro.classList.add("lamp-on");
 
-    if (
-        intro.classList.contains(
-            "lamp-on"
-        )
-    ) {
+    setTimeout(function () {
 
-        return;
+        intro.classList.add("hide-intro");
 
-    }
-
-
-    intro.classList.add(
-        "lamp-on"
-    );
-
-
-    setTimeout(
-        function () {
-
-            intro.classList.add(
-                "hide-intro"
-            );
-
-        },
-        2200
-    );
-
+    }, 2200);
 }
 
 
-// ============================================================
-// 🚀 START LEARNING
-// ============================================================
+/* =========================================================
+   📚 LEARNING MENU
+   ========================================================= */
 
 function openLearningMenu() {
 
@@ -2407,95 +1207,464 @@ function openLearningMenu() {
 
     currentCategory = "menu";
 
-
-    if (elementExists(homePage)) {
-
-        homePage.style.display =
-            "none";
-
+    if (homePage) {
+        homePage.style.display = "none";
     }
 
-
-    if (elementExists(learningPage)) {
-
-        learningPage.classList.remove(
-            "learning-menu-page"
-        );
-
-        void learningPage.offsetWidth;
-
-        learningPage.classList.add(
-            "active"
-        );
-
-        learningPage.classList.add(
-            "learning-menu-page"
-        );
-
-        learningPage.style.display =
-            "block";
-
-        playPageAnimation();
-
+    if (learningPage) {
+        learningPage.style.display = "block";
+        learningPage.classList.add("learning-menu-page");
     }
 
-
-    if (elementExists(learningIcon)) {
-
-        learningIcon.textContent =
-            "🎯";
-
+    if (learningIcon) {
+        learningIcon.textContent = "🚀";
     }
 
-
-    if (elementExists(learningTitle)) {
-
+    if (learningTitle) {
         learningTitle.textContent =
             "What do you want to learn?";
-
     }
 
-
-    if (elementExists(learningSubtitle)) {
-
+    if (learningSubtitle) {
         learningSubtitle.textContent =
             "Choose a topic and let's start learning! ✨";
-
     }
 
+    if (learningContent) {
+        learningContent.innerHTML =
+            renderLearningMenu();
+    }
 
-    renderLearningMenu();
+    scrollToTop();
 
-
-    window.scrollTo({
-
-        top: 0,
-
-        behavior: "smooth"
-
-    });
-
+    animateLearningCards();
 }
 
 
-// ============================================================
-// 🎯 LEARNING MENU
-// ============================================================
+function backToLearningMenu() {
+
+    if (currentCategory === "menu") {
+        goHome();
+        return;
+    }
+
+    openLearningMenu();
+}
+
+
+function removeLearningMenuMode() {
+
+    if (learningPage) {
+        learningPage.classList.remove(
+            "learning-menu-page"
+        );
+    }
+}
+
+
+/* =========================================================
+   🌟 MAIN ADVENTURE MENU
+   ========================================================= */
 
 function renderLearningMenu() {
 
-    if (!elementExists(learningContent)) {
+    return `
+
+        <div class="adventure-heading">
+
+            <div class="adventure-badge">
+                🌟 BIG LEARNING ADVENTURE
+            </div>
+
+            <h2>
+                Choose Your Learning World
+            </h2>
+
+            <p>
+                Learn • Play • Explore • Create
+            </p>
+
+        </div>
+
+
+        <div class="adventure-grid">
+
+
+            <!-- LANGUAGE -->
+
+            <button
+                class="adventure-card adventure-language"
+                onclick="openAdventure('language')"
+            >
+
+                <div class="adventure-icon">
+                    🔤
+                </div>
+
+                <h3>
+                    Language World
+                </h3>
+
+                <p>
+                    Letters, words, stories & reading
+                </p>
+
+                <span>
+                    Explore →
+                </span>
+
+            </button>
+
+
+            <!-- MATHS -->
+
+            <button
+                class="adventure-card adventure-maths"
+                onclick="openAdventure('maths')"
+            >
+
+                <div class="adventure-icon">
+                    🔢
+                </div>
+
+                <h3>
+                    Maths World
+                </h3>
+
+                <p>
+                    Numbers, maths & challenges
+                </p>
+
+                <span>
+                    Explore →
+                </span>
+
+            </button>
+
+
+            <!-- GK -->
+
+            <button
+                class="adventure-card adventure-gk"
+                onclick="openAdventure('gk')"
+            >
+
+                <div class="adventure-icon">
+                    🌍
+                </div>
+
+                <h3>
+                    General Knowledge
+                </h3>
+
+                <p>
+                    World, animals, places & more
+                </p>
+
+                <span>
+                    Explore →
+                </span>
+
+            </button>
+
+
+            <!-- SCIENCE -->
+
+            <button
+                class="adventure-card adventure-science"
+                onclick="openAdventure('science')"
+            >
+
+                <div class="adventure-icon">
+                    🔬
+                </div>
+
+                <h3>
+                    Science World
+                </h3>
+
+                <p>
+                    Discover how our world works
+                </p>
+
+                <span>
+                    Explore →
+                </span>
+
+            </button>
+
+
+            <!-- GAMES -->
+
+            <button
+                class="adventure-card adventure-games"
+                onclick="openAdventure('games')"
+            >
+
+                <div class="adventure-icon">
+                    🎮
+                </div>
+
+                <h3>
+                    Games & Quizzes
+                </h3>
+
+                <p>
+                    Play games and earn stars
+                </p>
+
+                <span>
+                    Play →
+                </span>
+
+            </button>
+
+
+            <!-- CREATIVITY -->
+
+            <button
+                class="adventure-card adventure-creativity"
+                onclick="openAdventure('creativity')"
+            >
+
+                <div class="adventure-icon">
+                    🎨
+                </div>
+
+                <h3>
+                    Drawing & Creativity
+                </h3>
+
+                <p>
+                    Draw, colour and create
+                </p>
+
+                <span>
+                    Create →
+                </span>
+
+            </button>
+
+        </div>
+
+
+        <div class="learning-menu-existing-title">
+
+            <h2>
+                📚 More Learning
+            </h2>
+
+            <p>
+                Your original learning topics
+            </p>
+
+        </div>
+
+
+        <div class="learning-menu-grid existing-learning-grid">
+
+
+            <button
+                class="learning-menu-card menu-blue"
+                onclick="showCategory('abc')"
+            >
+                <div class="menu-icon">🔤</div>
+                <h3>ABC</h3>
+                <p>Learn A to Z</p>
+            </button>
+
+
+            <button
+                class="learning-menu-card menu-hindi"
+                onclick="openHindiAlphabet()"
+            >
+                <div class="menu-icon">🇮🇳</div>
+                <h3>Hindi Alphabet</h3>
+                <p>हिंदी वर्णमाला</p>
+            </button>
+
+
+            <button
+                class="learning-menu-card menu-purple"
+                onclick="showCategory('days')"
+            >
+                <div class="menu-icon">📅</div>
+                <h3>Days</h3>
+                <p>Days of the week</p>
+            </button>
+
+
+            <button
+                class="learning-menu-card menu-pink"
+                onclick="showCategory('months')"
+            >
+                <div class="menu-icon">🗓️</div>
+                <h3>Months</h3>
+                <p>Months of the year</p>
+            </button>
+
+
+            <button
+                class="learning-menu-card menu-orange"
+                onclick="showCategory('tables')"
+            >
+                <div class="menu-icon">✖️</div>
+                <h3>Tables</h3>
+                <p>Multiplication tables</p>
+            </button>
+
+
+            <button
+                class="learning-menu-card menu-red"
+                onclick="showCategory('fruits')"
+            >
+                <div class="menu-icon">🍎</div>
+                <h3>Fruits</h3>
+                <p>Learn fruits</p>
+            </button>
+
+
+            <button
+                class="learning-menu-card menu-green"
+                onclick="showCategory('bodyparts')"
+            >
+                <div class="menu-icon">👦</div>
+                <h3>Body Parts</h3>
+                <p>Know your body</p>
+            </button>
+
+
+            <button
+                class="learning-menu-card menu-yellow"
+                onclick="showCategory('animals')"
+            >
+                <div class="menu-icon">🐶</div>
+                <h3>Animals</h3>
+                <p>Meet animals</p>
+            </button>
+
+
+            <button
+                class="learning-menu-card menu-cyan"
+                onclick="showCategory('colours')"
+            >
+                <div class="menu-icon">🎨</div>
+                <h3>Colours</h3>
+                <p>Explore colours</p>
+            </button>
+
+        </div>
+
+    `;
+}
+
+
+/* =========================================================
+   🚀 OPEN ADVENTURE
+   ========================================================= */
+
+function openAdventure(type) {
+
+    stopSpeech();
+
+    removeLearningMenuMode();
+
+    currentCategory = type;
+
+    if (type === "language") {
+
+        setupLearning(
+            "🔤",
+            "Language World",
+            "Letters, words, reading and stories!",
+            showLanguageMenu()
+        );
+
         return;
     }
 
 
-    learningContent.innerHTML = `
+    if (type === "maths") {
 
-        <div class="learning-menu-intro">
+        setupLearning(
+            "🔢",
+            "Maths World",
+            "Let's play with numbers!",
+            showMathsMenu()
+        );
 
-            <h2>
-                🎓 Choose Your Learning Adventure
-            </h2>
+        return;
+    }
+
+
+    if (type === "gk") {
+
+        setupLearning(
+            "🌍",
+            "General Knowledge",
+            "Discover our amazing world!",
+            showGKMenu()
+        );
+
+        return;
+    }
+
+
+    if (type === "science") {
+
+        setupLearning(
+            "🔬",
+            "Science World",
+            "Let's discover how things work!",
+            showScienceMenu()
+        );
+
+        return;
+    }
+
+
+    if (type === "games") {
+
+        setupLearning(
+            "🎮",
+            "Games & Quizzes",
+            "Play games and earn stars!",
+            showGamesMenu()
+        );
+
+        return;
+    }
+
+
+    if (type === "creativity") {
+
+        setupLearning(
+            "🎨",
+            "Creative World",
+            "Draw, colour and create!",
+            showCreativityMenu()
+        );
+
+        return;
+    }
+}
+
+
+/* =========================================================
+   🔤 LANGUAGE WORLD
+   ========================================================= */
+
+function showLanguageMenu() {
+
+    return `
+
+        <div class="learning-heading">
+
+            <h2>🔤 Language World</h2>
+
+            <p>
+                Learn letters, words and reading.
+            </p>
 
         </div>
 
@@ -2503,421 +1672,4183 @@ function renderLearningMenu() {
         <div class="learning-menu-grid">
 
 
-            <button
-                class="learning-menu-card menu-blue"
-                type="button"
-                onclick="showCategory('abc')">
+            ${createWorldCard(
+                "🔠",
+                "Capital & Small Letters",
+                "Learn A and a together",
+                "openCapitalSmallLetters()"
+            )}
 
-                <div class="menu-card-icon">
-                    🔤
+
+            ${createWorldCard(
+                "✍️",
+                "Letter Writing",
+                "Practice writing letters",
+                "openLetterWriting()"
+            )}
+
+
+            ${createWorldCard(
+                "🔊",
+                "ABC Pronunciation",
+                "Listen and repeat",
+                "openPronunciation()"
+            )}
+
+
+            ${createWorldCard(
+                "🔗",
+                "Word Matching",
+                "Match letters with words",
+                "startWordMatching()"
+            )}
+
+
+            ${createWorldCard(
+                "📝",
+                "Spell the Word",
+                "Build simple words",
+                "startSpellingGame()"
+            )}
+
+
+            ${createWorldCard(
+                "🐱",
+                "Easy Words",
+                "CAT • DOG • SUN",
+                "openEasyWords()"
+            )}
+
+
+            ${createWorldCard(
+                "📖",
+                "Short Stories",
+                "Read tiny stories",
+                "openStories()"
+            )}
+
+
+            ${createWorldCard(
+                "🎵",
+                "Nursery Rhymes",
+                "Fun rhymes for kids",
+                "openRhymes()"
+            )}
+
+
+            ${createWorldCard(
+                "म",
+                "Hindi Matra",
+                "Learn Hindi matras",
+                "openHindiMatra()"
+            )}
+
+
+            ${createWorldCard(
+                "📚",
+                "Hindi Words",
+                "Simple Hindi words",
+                "openHindiWords()"
+            )}
+
+        </div>
+    `;
+}
+
+
+function createWorldCard(icon, title, description, action) {
+
+    return `
+        <button
+            class="learning-menu-card"
+            onclick="${action}"
+        >
+
+            <div class="menu-icon">
+                ${icon}
+            </div>
+
+            <h3>
+                ${escapeHTML(title)}
+            </h3>
+
+            <p>
+                ${escapeHTML(description)}
+            </p>
+
+        </button>
+    `;
+}
+
+
+/* =========================================================
+   🔠 CAPITAL / SMALL LETTERS
+   ========================================================= */
+
+function openCapitalSmallLetters() {
+
+    setupLearning(
+        "🔠",
+        "Capital & Small Letters",
+        "Learn uppercase and lowercase letters!",
+        `
+        <div class="cards-grid">
+
+            ${alphabet.map((item, index) => `
+
+                <div
+                    class="learning-card"
+                    onclick="speak('${item.letter} ${item.letter.toLowerCase()}', {lang:'en-US'})"
+                >
+
+                    <div class="letter">
+                        ${item.letter}
+                    </div>
+
+                    <div class="word">
+                        ${item.letter.toLowerCase()}
+                    </div>
+
+                    <div class="learning-emoji">
+                        ${item.emoji}
+                    </div>
+
+                    <div class="mini-text">
+                        ${item.word}
+                    </div>
+
                 </div>
 
-                <div class="menu-card-text">
+            `).join("")}
+
+        </div>
+        `
+    );
+}
+
+
+/* =========================================================
+   ✍️ LETTER WRITING
+   ========================================================= */
+
+function openLetterWriting() {
+
+    setupLearning(
+        "✍️",
+        "Letter Writing Practice",
+        "Practice letters on the screen!",
+        `
+
+        <div class="learning-card writing-practice-card">
+
+            <div class="letter" id="writingLetter">
+                A
+            </div>
+
+            <p>
+                Trace or write the letter.
+            </p>
+
+            <div style="
+                display:flex;
+                gap:10px;
+                justify-content:center;
+                flex-wrap:wrap;
+            ">
+
+                <button
+                    type="button"
+                    onclick="previousWritingLetter()"
+                >
+                    ← Previous
+                </button>
+
+                <button
+                    type="button"
+                    onclick="nextWritingLetter()"
+                >
+                    Next →
+                </button>
+
+                <button
+                    type="button"
+                    onclick="speakCurrentWritingLetter()"
+                >
+                    🔊 Hear
+                </button>
+
+            </div>
+
+        </div>
+        `
+    );
+
+    window.currentWritingIndex = 0;
+}
+
+
+function nextWritingLetter() {
+
+    if (window.currentWritingIndex === undefined) {
+        window.currentWritingIndex = 0;
+    }
+
+    window.currentWritingIndex =
+        (window.currentWritingIndex + 1) %
+        alphabet.length;
+
+    updateWritingLetter();
+}
+
+
+function previousWritingLetter() {
+
+    if (window.currentWritingIndex === undefined) {
+        window.currentWritingIndex = 0;
+    }
+
+    window.currentWritingIndex =
+        (window.currentWritingIndex - 1 + alphabet.length) %
+        alphabet.length;
+
+    updateWritingLetter();
+}
+
+
+function updateWritingLetter() {
+
+    const element =
+        document.getElementById("writingLetter");
+
+    if (!element) return;
+
+    const item =
+        alphabet[window.currentWritingIndex];
+
+    element.textContent =
+        `${item.letter} ${item.letter.toLowerCase()}`;
+}
+
+
+function speakCurrentWritingLetter() {
+
+    const item =
+        alphabet[window.currentWritingIndex || 0];
+
+    speak(item.letter, {
+        lang: "en-US"
+    });
+}
+
+
+/* =========================================================
+   🔊 PRONUNCIATION
+   ========================================================= */
+
+function openPronunciation() {
+
+    setupLearning(
+        "🔊",
+        "ABC Pronunciation",
+        "Tap any letter to hear it!",
+        renderAlphabet()
+    );
+}
+
+
+/* =========================================================
+   🔗 WORD MATCHING
+   ========================================================= */
+
+function startWordMatching() {
+
+    const selected =
+        shuffleArray(alphabet).slice(0, 8);
+
+    setupLearning(
+        "🔗",
+        "Word Matching",
+        "Match the letter with the correct word!",
+        `
+
+        <div class="cards-grid">
+
+            ${selected.map((item, index) => `
+
+                <div
+                    class="learning-card"
+                    onclick="checkLetterWordMatch(this, '${item.letter}', '${item.word}')"
+                >
+
+                    <div class="letter">
+                        ${item.letter}
+                    </div>
+
+                    <div class="learning-emoji">
+                        ${item.emoji}
+                    </div>
+
+                    <div class="word">
+                        ${item.word}
+                    </div>
+
+                </div>
+
+            `).join("")}
+
+        </div>
+
+        `
+    );
+}
+
+
+function checkLetterWordMatch(card, letter, word) {
+
+    speak(
+        `${letter} for ${word}`,
+        {
+            lang: "en-US",
+            rate: 0.68
+        }
+    );
+
+    if (card) {
+        card.style.transform = "scale(1.05)";
+
+        setTimeout(() => {
+            card.style.transform = "";
+        }, 300);
+    }
+
+    addStars(1);
+}
+
+
+/* =========================================================
+   📝 SPELL THE WORD
+   ========================================================= */
+
+function startSpellingGame() {
+
+    const words = [
+        {
+            word: "CAT",
+            emoji: "🐱"
+        },
+        {
+            word: "DOG",
+            emoji: "🐶"
+        },
+        {
+            word: "SUN",
+            emoji: "☀️"
+        },
+        {
+            word: "BALL",
+            emoji: "⚽"
+        },
+        {
+            word: "FISH",
+            emoji: "🐟"
+        }
+    ];
+
+    const item = randomItem(words);
+
+    setupLearning(
+        "📝",
+        "Spell the Word",
+        "Can you spell it?",
+        `
+
+        <div class="learning-card">
+
+            <div class="learning-emoji">
+                ${item.emoji}
+            </div>
+
+            <h2>
+                ${item.word}
+            </h2>
+
+            <p>
+                ${item.word.split("").join(" - ")}
+            </p>
+
+            <button
+                type="button"
+                onclick="speak('${item.word}', {lang:'en-US'})"
+            >
+                🔊 Hear Word
+            </button>
+
+        </div>
+
+        `
+    );
+}
+
+
+/* =========================================================
+   🐱 EASY WORDS
+   ========================================================= */
+
+function openEasyWords() {
+
+    const easyWords = [
+        ["CAT", "🐱"],
+        ["DOG", "🐶"],
+        ["SUN", "☀️"],
+        ["BAT", "🦇"],
+        ["CUP", "🥤"],
+        ["PEN", "🖊️"],
+        ["BUS", "🚌"],
+        ["CAR", "🚗"],
+        ["HAT", "🧢"],
+        ["FAN", "🪭"],
+        ["BOX", "📦"],
+        ["BOOK", "📚"]
+    ];
+
+    setupLearning(
+        "📚",
+        "Easy Words",
+        "Let's learn simple words!",
+        `
+
+        <div class="cards-grid">
+
+            ${easyWords.map(item => `
+
+                <div
+                    class="learning-card"
+                    onclick="speak('${item[0]}', {lang:'en-US'})"
+                >
+
+                    <div class="learning-emoji">
+                        ${item[1]}
+                    </div>
+
+                    <div class="word">
+                        ${item[0]}
+                    </div>
+
+                    <div class="mini-text">
+                        🔊 Tap to hear
+                    </div>
+
+                </div>
+
+            `).join("")}
+
+        </div>
+
+        `
+    );
+}
+
+
+/* =========================================================
+   📖 STORIES
+   ========================================================= */
+
+function openStories() {
+
+    const stories = [
+        {
+            title: "🐰 The Little Rabbit",
+            text: "A little rabbit lived near a green forest. Every morning, it jumped happily in the grass."
+        },
+        {
+            title: "🦁 The Kind Lion",
+            text: "A kind lion helped a small mouse. Later, the mouse helped the lion too."
+        },
+        {
+            title: "🐦 The Little Bird",
+            text: "A little bird learned to fly. It was scared at first, but soon it flew high in the blue sky."
+        }
+    ];
+
+    setupLearning(
+        "📖",
+        "Short Stories",
+        "Read and listen to little stories!",
+        `
+
+        <div class="cards-grid">
+
+            ${stories.map((story, index) => `
+
+                <div class="learning-card">
+
+                    <div class="learning-emoji">
+                        ${story.title.split(" ")[0]}
+                    </div>
 
                     <h3>
-                        ABC
+                        ${escapeHTML(story.title)}
                     </h3>
 
                     <p>
-                        Learn A to Z
+                        ${escapeHTML(story.text)}
                     </p>
 
+                    <button
+                        type="button"
+                        onclick="speakStory(${index})"
+                    >
+                        🔊 Read Aloud
+                    </button>
+
                 </div>
 
-            </button>
+            `).join("")}
+
+        </div>
+
+        `
+    );
+
+    window.currentStories = stories;
+}
 
 
-            <button
-                class="learning-menu-card menu-hindi"
-                type="button"
-                onclick="openHindiAlphabet()">
+function speakStory(index) {
 
-                <div class="menu-card-icon">
-                    🇮🇳
-                </div>
+    const story =
+        window.currentStories &&
+        window.currentStories[index];
 
-                <div class="menu-card-text">
+    if (!story) return;
 
-                    <h3>
-                        Hindi Alphabet
-                    </h3>
+    speak(
+        `${story.title}. ${story.text}`,
+        {
+            lang: "en-US",
+            rate: 0.65
+        }
+    );
+}
+
+
+/* =========================================================
+   🎵 RHYMES
+   ========================================================= */
+
+function openRhymes() {
+
+    const rhymes = [
+        "Twinkle, twinkle, little star.",
+        "Rain, rain, go away.",
+        "Row, row, row your boat.",
+        "Humpty Dumpty sat on a wall."
+    ];
+
+    setupLearning(
+        "🎵",
+        "Nursery Rhymes",
+        "Listen to fun little rhymes!",
+        `
+
+        <div class="cards-grid">
+
+            ${rhymes.map((rhyme, index) => `
+
+                <div class="learning-card">
+
+                    <div class="learning-emoji">
+                        🎵
+                    </div>
+
+                    <div class="word">
+                        Rhyme ${index + 1}
+                    </div>
 
                     <p>
-                        हिंदी वर्णमाला सीखें
+                        ${escapeHTML(rhyme)}
                     </p>
 
-                </div>
-
-            </button>
-
-
-            <button
-                class="learning-menu-card menu-purple"
-                type="button"
-                onclick="showCategory('days')">
-
-                <div class="menu-card-icon">
-                    📅
-                </div>
-
-                <div class="menu-card-text">
-
-                    <h3>
-                        Days
-                    </h3>
-
-                    <p>
-                        Learn the days of the week
-                    </p>
+                    <button
+                        type="button"
+                        onclick="speakRhyme(${index})"
+                    >
+                        🔊 Listen
+                    </button>
 
                 </div>
 
-            </button>
+            `).join("")}
+
+        </div>
+
+        `
+    );
+
+    window.currentRhymes = rhymes;
+}
 
 
-            <button
-                class="learning-menu-card menu-pink"
-                type="button"
-                onclick="showCategory('months')">
+function speakRhyme(index) {
 
-                <div class="menu-card-icon">
-                    🗓️
-                </div>
+    const rhyme =
+        window.currentRhymes &&
+        window.currentRhymes[index];
 
-                <div class="menu-card-text">
+    if (!rhyme) return;
 
-                    <h3>
-                        Months
-                    </h3>
-
-                    <p>
-                        Learn the months of the year
-                    </p>
-
-                </div>
-
-            </button>
+    speak(
+        rhyme,
+        {
+            lang: "en-US",
+            rate: 0.65
+        }
+    );
+}
 
 
-            <button
-                class="learning-menu-card menu-orange"
-                type="button"
-                onclick="showCategory('tables')">
+/* =========================================================
+   म HINDI MATRA
+   ========================================================= */
 
-                <div class="menu-card-icon">
-                    ✖️
-                </div>
+function openHindiMatra() {
 
-                <div class="menu-card-text">
+    const matras = [
+        ["ा", "का", "आ की मात्रा"],
+        ["ि", "कि", "इ की मात्रा"],
+        ["ी", "की", "ई की मात्रा"],
+        ["ु", "कु", "उ की मात्रा"],
+        ["ू", "कू", "ऊ की मात्रा"],
+        ["े", "के", "ए की मात्रा"],
+        ["ै", "कै", "ऐ की मात्रा"],
+        ["ो", "को", "ओ की मात्रा"],
+        ["ौ", "कौ", "औ की मात्रा"],
+        ["ं", "कं", "अनुस्वार"],
+        ["ः", "कः", "विसर्ग"]
+    ];
 
-                    <h3>
-                        Tables
-                    </h3>
+    setupLearning(
+        "म",
+        "Hindi Matra",
+        "मात्राएँ सीखें!",
+        `
 
-                    <p>
-                        Practice multiplication tables
-                    </p>
+        <div class="cards-grid">
 
-                </div>
+            ${matras.map(item => `
 
-            </button>
+                <div
+                    class="learning-card"
+                    onclick="speak('${item[1]}', {lang:'hi-IN'})"
+                >
 
+                    <div class="letter">
+                        ${item[0]}
+                    </div>
 
-            <button
-                class="learning-menu-card menu-red"
-                type="button"
-                onclick="showCategory('fruits')">
+                    <div class="word">
+                        ${item[1]}
+                    </div>
 
-                <div class="menu-card-icon">
-                    🍎
-                </div>
-
-                <div class="menu-card-text">
-
-                    <h3>
-                        Fruits
-                    </h3>
-
-                    <p>
-                        Discover 30 yummy fruits
-                    </p>
-
-                </div>
-
-            </button>
-
-
-            <button
-                class="learning-menu-card menu-green"
-                type="button"
-                onclick="showCategory('bodyparts')">
-
-                <div class="menu-card-icon">
-                    👦
-                </div>
-
-                <div class="menu-card-text">
-
-                    <h3>
-                        Body Parts
-                    </h3>
-
-                    <p>
-                        Learn 30 body parts
-                    </p>
+                    <div class="mini-text">
+                        ${item[2]}
+                    </div>
 
                 </div>
 
-            </button>
+            `).join("")}
+
+        </div>
+
+        `
+    );
+}
 
 
-            <button
-                class="learning-menu-card menu-yellow"
-                type="button"
-                onclick="showCategory('animals')">
+/* =========================================================
+   📚 HINDI WORDS
+   ========================================================= */
 
-                <div class="menu-card-icon">
-                    🐶
+function openHindiWords() {
+
+    const words = [
+        ["कमल", "🌸"],
+        ["घर", "🏠"],
+        ["गाय", "🐮"],
+        ["फल", "🍎"],
+        ["जल", "💧"],
+        ["सूरज", "☀️"],
+        ["चाँद", "🌙"],
+        ["पेड़", "🌳"],
+        ["फूल", "🌸"],
+        ["मछली", "🐟"],
+        ["हाथी", "🐘"],
+        ["किताब", "📚"]
+    ];
+
+    setupLearning(
+        "📚",
+        "Hindi Words",
+        "आसान हिंदी शब्द सीखें!",
+        `
+
+        <div class="cards-grid">
+
+            ${words.map(item => `
+
+                <div
+                    class="learning-card"
+                    onclick="speak('${item[0]}', {lang:'hi-IN'})"
+                >
+
+                    <div class="learning-emoji">
+                        ${item[1]}
+                    </div>
+
+                    <div class="word">
+                        ${item[0]}
+                    </div>
+
+                    <div class="mini-text">
+                        🔊 सुनें
+                    </div>
+
                 </div>
 
-                <div class="menu-card-text">
+            `).join("")}
 
-                    <h3>
-                        Animals
-                    </h3>
+        </div>
 
-                    <p>
-                        Meet 30 amazing animals
-                    </p>
-
-                </div>
-
-            </button>
+        `
+    );
+}
 
 
-            <button
-                class="learning-menu-card menu-cyan"
-                type="button"
-                onclick="showCategory('colours')">
+/* =========================================================
+   🔢 MATHS WORLD
+   ========================================================= */
 
-                <div class="menu-card-icon">
-                    🎨
-                </div>
+function showMathsMenu() {
 
-                <div class="menu-card-text">
+    return `
 
-                    <h3>
-                        Colours
-                    </h3>
+        <div class="learning-heading">
 
-                    <p>
-                        Explore 30 beautiful colours
-                    </p>
+            <h2>🔢 Maths World</h2>
 
-                </div>
-
-            </button>
-
+            <p>
+                Numbers ko fun ke saath seekho!
+            </p>
 
         </div>
 
 
-        <div class="learning-menu-footer">
+        <div class="learning-menu-grid">
 
-            🌟 Every click is a new thing to learn! 🌟
+            ${createWorldCard(
+                "🔢",
+                "Numbers 1–100",
+                "Learn counting",
+                "openNumbers()"
+            )}
+
+            ${createWorldCard(
+                "➕",
+                "Addition",
+                "Add numbers",
+                "startAdditionGame()"
+            )}
+
+            ${createWorldCard(
+                "➖",
+                "Subtraction",
+                "Subtract numbers",
+                "startSubtractionGame()"
+            )}
+
+            ${createWorldCard(
+                "✖️",
+                "Multiplication",
+                "Multiply numbers",
+                "startMultiplicationGame()"
+            )}
+
+            ${createWorldCard(
+                "➗",
+                "Division",
+                "Divide numbers",
+                "startDivisionGame()"
+            )}
+
+            ${createWorldCard(
+                "🔤",
+                "Number Names",
+                "Learn number names",
+                "openNumberNames()"
+            )}
+
+            ${createWorldCard(
+                "⚖️",
+                "Greater / Less",
+                "Compare numbers",
+                "startComparisonGame()"
+            )}
+
+            ${createWorldCard(
+                "🔎",
+                "Missing Numbers",
+                "Find the missing number",
+                "startMissingNumbersGame()"
+            )}
+
+            ${createWorldCard(
+                "🔷",
+                "Shapes",
+                "Learn basic shapes",
+                "openShapes()"
+            )}
+
+            ${createWorldCard(
+                "📏",
+                "Measurement",
+                "Big, small, long, short",
+                "openMeasurement()"
+            )}
+
+            ${createWorldCard(
+                "🧠",
+                "Maths Quiz",
+                "Test your maths",
+                "startMathQuiz()"
+            )}
+
+        </div>
+
+    `;
+}
+
+
+/* =========================================================
+   🔢 NUMBERS
+   ========================================================= */
+
+function openNumbers() {
+
+    setupLearning(
+        "🔢",
+        "Numbers 1–100",
+        "Let's count together!",
+        `
+
+        <div class="cards-grid">
+
+            ${Array.from({ length: 100 }, (_, i) => i + 1)
+                .map(number => `
+
+                    <div
+                        class="learning-card"
+                        onclick="speak('${number}', {lang:'en-US'})"
+                    >
+
+                        <div class="letter">
+                            ${number}
+                        </div>
+
+                        <div class="mini-text">
+                            🔊
+                        </div>
+
+                    </div>
+
+                `).join("")}
+
+        </div>
+
+        `
+    );
+}
+
+
+/* =========================================================
+   ➕ ADDITION
+   ========================================================= */
+
+function startAdditionGame() {
+
+    const a = Math.floor(Math.random() * 10) + 1;
+    const b = Math.floor(Math.random() * 10) + 1;
+
+    const answer = a + b;
+
+    showMathQuestion(
+        "➕ Addition",
+        `${a} + ${b} = ?`,
+        answer
+    );
+}
+
+
+/* =========================================================
+   ➖ SUBTRACTION
+   ========================================================= */
+
+function startSubtractionGame() {
+
+    let a = Math.floor(Math.random() * 15) + 5;
+    let b = Math.floor(Math.random() * 10) + 1;
+
+    if (b > a) {
+        [a, b] = [b, a];
+    }
+
+    const answer = a - b;
+
+    showMathQuestion(
+        "➖ Subtraction",
+        `${a} - ${b} = ?`,
+        answer
+    );
+}
+
+
+/* =========================================================
+   ✖️ MULTIPLICATION
+   ========================================================= */
+
+function startMultiplicationGame() {
+
+    const a = Math.floor(Math.random() * 10) + 1;
+    const b = Math.floor(Math.random() * 10) + 1;
+
+    const answer = a * b;
+
+    showMathQuestion(
+        "✖️ Multiplication",
+        `${a} × ${b} = ?`,
+        answer
+    );
+}
+
+
+/* =========================================================
+   ➗ DIVISION
+   ========================================================= */
+
+function startDivisionGame() {
+
+    const b = Math.floor(Math.random() * 9) + 1;
+    const answer = Math.floor(Math.random() * 10) + 1;
+    const a = b * answer;
+
+    showMathQuestion(
+        "➗ Division",
+        `${a} ÷ ${b} = ?`,
+        answer
+    );
+}
+
+
+/* =========================================================
+   🧮 MATH QUESTION
+   ========================================================= */
+
+function showMathQuestion(title, question, answer) {
+
+    const options = shuffleArray([
+        answer,
+        answer + 1,
+        Math.max(0, answer - 1),
+        answer + 2
+    ]).slice(0, 4);
+
+    window.currentMathAnswer = answer;
+
+    setupLearning(
+        "🧠",
+        title,
+        "Choose the correct answer!",
+        `
+
+        <div class="quiz-box">
+
+            <div class="quiz-question">
+                ${question}
+            </div>
+
+            <div class="quiz-options">
+
+                ${options.map(option => `
+
+                    <button
+                        type="button"
+                        onclick="checkMathAnswer(${option})"
+                    >
+                        ${option}
+                    </button>
+
+                `).join("")}
+
+            </div>
+
+        </div>
+
+        `
+    );
+}
+
+
+function checkMathAnswer(answer) {
+
+    const correct =
+        answer === window.currentMathAnswer;
+
+    playerAnswered++;
+
+    if (correct) {
+
+        playerCorrect++;
+
+        addScore(10);
+        addStars(1);
+
+        showSuccessMessage(
+            "🎉 Great Job!",
+            "Your answer is correct!"
+        );
+
+    } else {
+
+        showSuccessMessage(
+            "😊 Nice Try!",
+            `The correct answer is ${window.currentMathAnswer}.`
+        );
+    }
+}
+
+
+/* =========================================================
+   🔤 NUMBER NAMES
+   ========================================================= */
+
+const numberNames = {
+    1: "One",
+    2: "Two",
+    3: "Three",
+    4: "Four",
+    5: "Five",
+    6: "Six",
+    7: "Seven",
+    8: "Eight",
+    9: "Nine",
+    10: "Ten",
+    11: "Eleven",
+    12: "Twelve",
+    13: "Thirteen",
+    14: "Fourteen",
+    15: "Fifteen",
+    16: "Sixteen",
+    17: "Seventeen",
+    18: "Eighteen",
+    19: "Nineteen",
+    20: "Twenty"
+};
+
+
+function openNumberNames() {
+
+    setupLearning(
+        "🔤",
+        "Number Names",
+        "Learn numbers in words!",
+        `
+
+        <div class="cards-grid">
+
+            ${Object.entries(numberNames).map(([num, name]) => `
+
+                <div
+                    class="learning-card"
+                    onclick="speak('${name}', {lang:'en-US'})"
+                >
+
+                    <div class="letter">
+                        ${num}
+                    </div>
+
+                    <div class="word">
+                        ${name}
+                    </div>
+
+                </div>
+
+            `).join("")}
+
+        </div>
+
+        `
+    );
+}
+
+
+/* =========================================================
+   ⚖️ GREATER / LESS
+   ========================================================= */
+
+function startComparisonGame() {
+
+    const a =
+        Math.floor(Math.random() * 20) + 1;
+
+    let b =
+        Math.floor(Math.random() * 20) + 1;
+
+    while (b === a) {
+        b =
+            Math.floor(Math.random() * 20) + 1;
+    }
+
+    let answer;
+
+    if (a > b) {
+        answer = ">";
+    } else {
+        answer = "<";
+    }
+
+    window.currentComparisonAnswer = answer;
+
+    setupLearning(
+        "⚖️",
+        "Greater or Less?",
+        "Choose the correct sign.",
+        `
+
+        <div class="quiz-box">
+
+            <div class="quiz-question">
+                ${a} ? ${b}
+            </div>
+
+            <div class="quiz-options">
+
+                <button
+                    onclick="checkComparisonAnswer('>')"
+                >
+                    ${a} &gt; ${b}
+                </button>
+
+                <button
+                    onclick="checkComparisonAnswer('<')"
+                >
+                    ${a} &lt; ${b}
+                </button>
+
+            </div>
+
+        </div>
+
+        `
+    );
+}
+
+
+function checkComparisonAnswer(answer) {
+
+    playerAnswered++;
+
+    if (
+        answer ===
+        window.currentComparisonAnswer
+    ) {
+
+        playerCorrect++;
+        addScore(10);
+        addStars(1);
+
+        showSuccessMessage(
+            "🎉 Correct!",
+            "Excellent comparison!"
+        );
+
+    } else {
+
+        showSuccessMessage(
+            "😊 Try Again!",
+            `The correct sign is ${window.currentComparisonAnswer}.`
+        );
+    }
+}
+
+
+/* =========================================================
+   🔎 MISSING NUMBERS
+   ========================================================= */
+
+function startMissingNumbersGame() {
+
+    const start =
+        Math.floor(Math.random() * 10) + 1;
+
+    const missingIndex =
+        Math.floor(Math.random() * 3) + 1;
+
+    const numbers = [
+        start,
+        start + 1,
+        start + 2,
+        start + 3,
+        start + 4
+    ];
+
+    const answer =
+        numbers[missingIndex];
+
+    window.currentMissingAnswer = answer;
+
+    const display =
+        numbers.map((number, index) =>
+            index === missingIndex
+                ? "?"
+                : number
+        ).join(" , ");
+
+    const options =
+        shuffleArray([
+            answer,
+            answer + 1,
+            answer - 1,
+            answer + 2
+        ]);
+
+    setupLearning(
+        "🔎",
+        "Missing Number",
+        "Find the missing number!",
+        `
+
+        <div class="quiz-box">
+
+            <div class="quiz-question">
+                ${display}
+            </div>
+
+            <div class="quiz-options">
+
+                ${options.map(option => `
+
+                    <button
+                        onclick="checkMissingAnswer(${option})"
+                    >
+                        ${option}
+                    </button>
+
+                `).join("")}
+
+            </div>
+
+        </div>
+
+        `
+    );
+}
+
+
+function checkMissingAnswer(answer) {
+
+    playerAnswered++;
+
+    if (
+        answer ===
+        window.currentMissingAnswer
+    ) {
+
+        playerCorrect++;
+        addScore(10);
+        addStars(1);
+
+        showSuccessMessage(
+            "🌟 Amazing!",
+            "You found the missing number!"
+        );
+
+    } else {
+
+        showSuccessMessage(
+            "😊 Keep Trying!",
+            `The answer was ${window.currentMissingAnswer}.`
+        );
+    }
+}
+
+
+/* =========================================================
+   🔷 SHAPES
+   ========================================================= */
+
+function openShapes() {
+
+    const shapes = [
+        ["Circle", "⭕"],
+        ["Square", "🟦"],
+        ["Triangle", "🔺"],
+        ["Rectangle", "▭"],
+        ["Star", "⭐"],
+        ["Heart", "❤️"],
+        ["Diamond", "🔷"],
+        ["Oval", "🥚"]
+    ];
+
+    setupLearning(
+        "🔷",
+        "Shapes",
+        "Let's learn basic shapes!",
+        `
+
+        <div class="cards-grid">
+
+            ${shapes.map(item => `
+
+                <div
+                    class="learning-card"
+                    onclick="speak('${item[0]}', {lang:'en-US'})"
+                >
+
+                    <div class="learning-emoji">
+                        ${item[1]}
+                    </div>
+
+                    <div class="word">
+                        ${item[0]}
+                    </div>
+
+                </div>
+
+            `).join("")}
+
+        </div>
+
+        `
+    );
+}
+
+
+/* =========================================================
+   📏 MEASUREMENT
+   ========================================================= */
+
+function openMeasurement() {
+
+    const concepts = [
+        ["Big", "🐘"],
+        ["Small", "🐭"],
+        ["Long", "📏"],
+        ["Short", "✏️"],
+        ["Heavy", "🏋️"],
+        ["Light", "🪶"],
+        ["Tall", "🦒"],
+        ["Short", "🐜"]
+    ];
+
+    setupLearning(
+        "📏",
+        "Measurement",
+        "Learn basic measurement ideas!",
+        `
+
+        <div class="cards-grid">
+
+            ${concepts.map(item => `
+
+                <div
+                    class="learning-card"
+                    onclick="speak('${item[0]}', {lang:'en-US'})"
+                >
+
+                    <div class="learning-emoji">
+                        ${item[1]}
+                    </div>
+
+                    <div class="word">
+                        ${item[0]}
+                    </div>
+
+                </div>
+
+            `).join("")}
+
+        </div>
+
+        `
+    );
+}
+
+
+/* =========================================================
+   🧠 MATH QUIZ
+   ========================================================= */
+
+function startMathQuiz() {
+
+    const questions = [
+        {
+            question: "5 + 3 = ?",
+            options: [6, 7, 8, 9],
+            answer: 8
+        },
+        {
+            question: "10 - 4 = ?",
+            options: [5, 6, 7, 8],
+            answer: 6
+        },
+        {
+            question: "3 × 4 = ?",
+            options: [7, 10, 12, 14],
+            answer: 12
+        },
+        {
+            question: "20 ÷ 5 = ?",
+            options: [2, 3, 4, 5],
+            answer: 4
+        },
+        {
+            question: "7 + 2 = ?",
+            options: [8, 9, 10, 11],
+            answer: 9
+        }
+    ];
+
+    startQuiz(
+        "Maths Quiz",
+        questions,
+        "math"
+    );
+}
+
+
+/* =========================================================
+   🌍 GENERAL KNOWLEDGE
+   ========================================================= */
+
+function showGKMenu() {
+
+    return `
+
+        <div class="learning-heading">
+
+            <h2>🌍 General Knowledge</h2>
+
+            <p>
+                Discover amazing things around us!
+            </p>
+
+        </div>
+
+
+        <div class="learning-menu-grid">
+
+            ${createWorldCard(
+                "🌎",
+                "Countries",
+                "Learn about countries",
+                "openCountries()"
+            )}
+
+            ${createWorldCard(
+                "🏛️",
+                "Famous Places",
+                "Explore famous places",
+                "openFamousPlaces()"
+            )}
+
+            ${createWorldCard(
+                "🚩",
+                "Flags",
+                "Learn country flags",
+                "openFlags()"
+            )}
+
+            ${createWorldCard(
+                "🪐",
+                "Solar System",
+                "Explore space",
+                "openSolarSystem()"
+            )}
+
+            ${createWorldCard(
+                "🐾",
+                "Wild Animals",
+                "Meet wild animals",
+                "openWildAnimals()"
+            )}
+
+            ${createWorldCard(
+                "🐄",
+                "Domestic Animals",
+                "Animals around us",
+                "openDomesticAnimals()"
+            )}
+
+            ${createWorldCard(
+                "🚗",
+                "Vehicles",
+                "Cars, buses, planes",
+                "openVehicles()"
+            )}
+
+            ${createWorldCard(
+                "👩‍⚕️",
+                "Community Helpers",
+                "People who help us",
+                "openCommunityHelpers()"
+            )}
+
+            ${createWorldCard(
+                "🌦️",
+                "Weather",
+                "Learn weather",
+                "openWeather()"
+            )}
+
+            ${createWorldCard(
+                "🌱",
+                "Plants",
+                "Learn about plants",
+                "openPlants()"
+            )}
+
+            ${createWorldCard(
+                "🍎",
+                "Healthy Food",
+                "Eat healthy",
+                "openHealthyFood()"
+            )}
+
+            ${createWorldCard(
+                "🫀",
+                "Human Body",
+                "Discover the human body",
+                "openBodyScience()"
+            )}
+
+        </div>
+
+    `;
+}
+
+
+/* =========================================================
+   🌎 COUNTRIES
+   ========================================================= */
+
+function openCountries() {
+
+    const data = [
+        ["India", "🇮🇳"],
+        ["Japan", "🇯🇵"],
+        ["USA", "🇺🇸"],
+        ["UK", "🇬🇧"],
+        ["France", "🇫🇷"],
+        ["Australia", "🇦🇺"],
+        ["Canada", "🇨🇦"],
+        ["Brazil", "🇧🇷"],
+        ["Germany", "🇩🇪"],
+        ["Italy", "🇮🇹"]
+    ];
+
+    renderSimpleTopic(
+        "🌎",
+        "Countries",
+        data
+    );
+}
+
+
+/* =========================================================
+   🏛️ FAMOUS PLACES
+   ========================================================= */
+
+function openFamousPlaces() {
+
+    const data = [
+        ["Taj Mahal", "🕌"],
+        ["Eiffel Tower", "🗼"],
+        ["Great Wall of China", "🏯"],
+        ["Statue of Liberty", "🗽"],
+        ["Big Ben", "🕰️"],
+        ["Pyramids", "🔺"],
+        ["Colosseum", "🏛️"],
+        ["Sydney Opera House", "🎭"]
+    ];
+
+    renderSimpleTopic(
+        "🏛️",
+        "Famous Places",
+        data
+    );
+}
+
+
+/* =========================================================
+   🚩 FLAGS
+   ========================================================= */
+
+function openFlags() {
+
+    const data = [
+        ["India", "🇮🇳"],
+        ["USA", "🇺🇸"],
+        ["UK", "🇬🇧"],
+        ["Japan", "🇯🇵"],
+        ["France", "🇫🇷"],
+        ["Germany", "🇩🇪"],
+        ["Canada", "🇨🇦"],
+        ["Australia", "🇦🇺"]
+    ];
+
+    renderSimpleTopic(
+        "🚩",
+        "Flags",
+        data
+    );
+}
+
+
+/* =========================================================
+   🪐 SOLAR SYSTEM
+   ========================================================= */
+
+function openSolarSystem() {
+
+    const planets = [
+        ["Mercury", "☿️"],
+        ["Venus", "♀️"],
+        ["Earth", "🌍"],
+        ["Mars", "🔴"],
+        ["Jupiter", "🪐"],
+        ["Saturn", "🪐"],
+        ["Uranus", "🔵"],
+        ["Neptune", "🔵"]
+    ];
+
+    renderSimpleTopic(
+        "🪐",
+        "Planets",
+        planets
+    );
+}
+
+
+/* =========================================================
+   🐾 WILD ANIMALS
+   ========================================================= */
+
+function openWildAnimals() {
+
+    const data = animals
+        .slice(0, 20)
+        .map(item => [item[0], item[1]]);
+
+    renderSimpleTopic(
+        "🐾",
+        "Wild Animals",
+        data
+    );
+}
+
+
+/* =========================================================
+   🐄 DOMESTIC ANIMALS
+   ========================================================= */
+
+function openDomesticAnimals() {
+
+    const data = [
+        ["Cow", "🐮"],
+        ["Dog", "🐶"],
+        ["Cat", "🐱"],
+        ["Goat", "🐐"],
+        ["Sheep", "🐑"],
+        ["Horse", "🐴"],
+        ["Hen", "🐔"],
+        ["Duck", "🦆"]
+    ];
+
+    renderSimpleTopic(
+        "🐄",
+        "Domestic Animals",
+        data
+    );
+}
+
+
+/* =========================================================
+   🚗 VEHICLES
+   ========================================================= */
+
+function openVehicles() {
+
+    const data = [
+        ["Car", "🚗"],
+        ["Bus", "🚌"],
+        ["Train", "🚆"],
+        ["Aeroplane", "✈️"],
+        ["Helicopter", "🚁"],
+        ["Bicycle", "🚲"],
+        ["Ship", "🚢"],
+        ["Boat", "⛵"],
+        ["Truck", "🚚"],
+        ["Ambulance", "🚑"]
+    ];
+
+    renderSimpleTopic(
+        "🚗",
+        "Vehicles",
+        data
+    );
+}
+
+
+/* =========================================================
+   👩‍⚕️ COMMUNITY HELPERS
+   ========================================================= */
+
+function openCommunityHelpers() {
+
+    const data = [
+        ["Doctor", "👨‍⚕️"],
+        ["Teacher", "👩‍🏫"],
+        ["Police Officer", "👮"],
+        ["Firefighter", "👨‍🚒"],
+        ["Farmer", "👨‍🌾"],
+        ["Pilot", "👨‍✈️"],
+        ["Chef", "👨‍🍳"],
+        ["Nurse", "👩‍⚕️"]
+    ];
+
+    renderSimpleTopic(
+        "👩‍⚕️",
+        "Community Helpers",
+        data
+    );
+}
+
+
+/* =========================================================
+   🌦️ WEATHER
+   ========================================================= */
+
+function openWeather() {
+
+    const data = [
+        ["Sunny", "☀️"],
+        ["Rainy", "🌧️"],
+        ["Cloudy", "☁️"],
+        ["Windy", "💨"],
+        ["Snowy", "❄️"],
+        ["Stormy", "⛈️"],
+        ["Rainbow", "🌈"]
+    ];
+
+    renderSimpleTopic(
+        "🌦️",
+        "Weather",
+        data
+    );
+}
+
+
+/* =========================================================
+   🌱 PLANTS
+   ========================================================= */
+
+function openPlants() {
+
+    const data = [
+        ["Tree", "🌳"],
+        ["Flower", "🌸"],
+        ["Leaf", "🍃"],
+        ["Seed", "🌱"],
+        ["Root", "🌿"],
+        ["Fruit", "🍎"],
+        ["Vegetable", "🥕"]
+    ];
+
+    renderSimpleTopic(
+        "🌱",
+        "Plants",
+        data
+    );
+}
+
+
+/* =========================================================
+   🍎 HEALTHY FOOD
+   ========================================================= */
+
+function openHealthyFood() {
+
+    const data = [
+        ["Apple", "🍎"],
+        ["Banana", "🍌"],
+        ["Carrot", "🥕"],
+        ["Milk", "🥛"],
+        ["Egg", "🥚"],
+        ["Spinach", "🥬"],
+        ["Orange", "🍊"],
+        ["Water", "💧"]
+    ];
+
+    renderSimpleTopic(
+        "🍎",
+        "Healthy Food",
+        data
+    );
+}
+
+
+/* =========================================================
+   🫀 HUMAN BODY
+   ========================================================= */
+
+function openBodyScience() {
+
+    const data = [
+        ["Brain", "🧠"],
+        ["Heart", "❤️"],
+        ["Lungs", "🫁"],
+        ["Eye", "👁️"],
+        ["Ear", "👂"],
+        ["Nose", "👃"],
+        ["Hand", "✋"],
+        ["Foot", "🦶"]
+    ];
+
+    renderSimpleTopic(
+        "🫀",
+        "Human Body",
+        data
+    );
+}
+
+
+function renderSimpleTopic(icon, title, data) {
+
+    setupLearning(
+        icon,
+        title,
+        "Tap a card to learn!",
+        `
+
+        <div class="cards-grid">
+
+            ${data.map(item => `
+
+                <div
+                    class="learning-card"
+                    onclick="speak('${item[0]}', {lang:'en-US'})"
+                >
+
+                    <div class="learning-emoji">
+                        ${item[1]}
+                    </div>
+
+                    <div class="word">
+                        ${escapeHTML(item[0])}
+                    </div>
+
+                    <div class="mini-text">
+                        🔊 Listen
+                    </div>
+
+                </div>
+
+            `).join("")}
+
+        </div>
+
+        `
+    );
+}
+
+
+/* =========================================================
+   🔬 SCIENCE WORLD
+   ========================================================= */
+
+function showScienceMenu() {
+
+    return `
+
+        <div class="learning-heading">
+
+            <h2>🔬 Science World</h2>
+
+            <p>
+                Discover how the world works!
+            </p>
+
+        </div>
+
+
+        <div class="learning-menu-grid">
+
+            ${createWorldCard(
+                "☀️",
+                "Sun",
+                "Learn about the Sun",
+                "openScienceSun()"
+            )}
+
+            ${createWorldCard(
+                "🌍",
+                "Earth",
+                "Our home planet",
+                "openScienceEarth()"
+            )}
+
+            ${createWorldCard(
+                "🌙",
+                "Moon",
+                "Explore the Moon",
+                "openScienceMoon()"
+            )}
+
+            ${createWorldCard(
+                "🪐",
+                "Solar System",
+                "Explore planets",
+                "openSolarSystem()"
+            )}
+
+            ${createWorldCard(
+                "💧",
+                "Water Cycle",
+                "Learn evaporation & rain",
+                "openWaterCycle()"
+            )}
+
+            ${createWorldCard(
+                "🌱",
+                "Plant Growth",
+                "Seed to plant",
+                "openPlantGrowth()"
+            )}
+
+            ${createWorldCard(
+                "🦋",
+                "Life Cycle",
+                "How living things grow",
+                "openLifeCycle()"
+            )}
+
+            ${createWorldCard(
+                "🧲",
+                "Magnets",
+                "Discover magnets",
+                "openMagnets()"
+            )}
+
+            ${createWorldCard(
+                "💧",
+                "Water",
+                "Why water is important",
+                "openScienceWater()"
+            )}
+
+            ${createWorldCard(
+                "🌈",
+                "Colours & Light",
+                "Learn about light",
+                "openLightColours()"
+            )}
+
+            ${createWorldCard(
+                "🫀",
+                "Human Body",
+                "Discover your body",
+                "openBodyScience()"
+            )}
+
+        </div>
+
+    `;
+}
+
+
+/* =========================================================
+   ☀️ SCIENCE SUN
+   ========================================================= */
+
+function openScienceSun() {
+
+    openScienceInfo(
+        "☀️",
+        "The Sun",
+        "The Sun is a star that gives us light and heat."
+    );
+}
+
+
+function openScienceEarth() {
+
+    openScienceInfo(
+        "🌍",
+        "Earth",
+        "Earth is the planet where we live."
+    );
+}
+
+
+function openScienceMoon() {
+
+    openScienceInfo(
+        "🌙",
+        "Moon",
+        "The Moon is Earth's natural satellite."
+    );
+}
+
+
+function openWaterCycle() {
+
+    openScienceInfo(
+        "💧",
+        "Water Cycle",
+        "Water moves through evaporation, condensation and precipitation."
+    );
+}
+
+
+function openPlantGrowth() {
+
+    openScienceInfo(
+        "🌱",
+        "Plant Growth",
+        "A seed can grow into a plant with water, air, light and care."
+    );
+}
+
+
+function openLifeCycle() {
+
+    openScienceInfo(
+        "🦋",
+        "Life Cycle",
+        "Living things grow and change through different stages."
+    );
+}
+
+
+function openMagnets() {
+
+    openScienceInfo(
+        "🧲",
+        "Magnets",
+        "Magnets can attract some metal objects."
+    );
+}
+
+
+function openScienceWater() {
+
+    openScienceInfo(
+        "💧",
+        "Water",
+        "Water is important for people, animals and plants."
+    );
+}
+
+
+function openLightColours() {
+
+    openScienceInfo(
+        "🌈",
+        "Colours & Light",
+        "Light helps us see colours around us."
+    );
+}
+
+
+function openScienceInfo(icon, title, text) {
+
+    setupLearning(
+        icon,
+        title,
+        "Let's learn something new!",
+        `
+
+        <div class="learning-card">
+
+            <div class="learning-emoji">
+                ${icon}
+            </div>
+
+            <h2>
+                ${escapeHTML(title)}
+            </h2>
+
+            <p>
+                ${escapeHTML(text)}
+            </p>
+
+            <button
+                type="button"
+                onclick="speak('${escapeHTML(text)}', {lang:'en-US'})"
+            >
+                🔊 Listen
+            </button>
+
+        </div>
+
+        `
+    );
+}
+
+
+/* =========================================================
+   🎮 GAMES & QUIZZES
+   ========================================================= */
+
+function showGamesMenu() {
+
+    return `
+
+        <div class="learning-heading">
+
+            <h2>🎮 Games & Quizzes</h2>
+
+            <p>
+                Play, learn and earn stars!
+            </p>
+
+        </div>
+
+
+        <div class="learning-menu-grid">
+
+            ${createWorldCard(
+                "🧠",
+                "Quiz",
+                "Answer fun questions",
+                "startGeneralQuiz()"
+            )}
+
+            ${createWorldCard(
+                "🃏",
+                "Memory Game",
+                "Find matching cards",
+                "startMemoryGame()"
+            )}
+
+            ${createWorldCard(
+                "🔤",
+                "Guess the Letter",
+                "Guess the hidden letter",
+                "startGuessLetterGame()"
+            )}
+
+            ${createWorldCard(
+                "🍎",
+                "Guess the Fruit",
+                "Guess the fruit",
+                "startGuessFruitGame()"
+            )}
+
+            ${createWorldCard(
+                "🐶",
+                "Guess the Animal",
+                "Guess the animal",
+                "startGuessAnimalGame()"
+            )}
+
+            ${createWorldCard(
+                "🎨",
+                "Guess the Colour",
+                "Guess the colour",
+                "startGuessColourGame()"
+            )}
+
+            ${createWorldCard(
+                "➕",
+                "Math Challenge",
+                "Fast maths challenge",
+                "startMathChallenge()"
+            )}
+
+            ${createWorldCard(
+                "⭐",
+                "My Progress",
+                "See your score & stars",
+                "showProgress()"
+            )}
+
+        </div>
+
+    `;
+}
+
+
+/* =========================================================
+   🧠 GENERAL QUIZ
+   ========================================================= */
+
+function startGeneralQuiz() {
+
+    const questions = [
+        {
+            question: "Which planet do we live on?",
+            options: ["Mars", "Earth", "Jupiter", "Venus"],
+            answer: "Earth"
+        },
+        {
+            question: "Which animal says Moo?",
+            options: ["Dog", "Cow", "Cat", "Lion"],
+            answer: "Cow"
+        },
+        {
+            question: "How many days are in a week?",
+            options: ["5", "6", "7", "8"],
+            answer: "7"
+        },
+        {
+            question: "Which fruit is yellow?",
+            options: ["Banana", "Apple", "Grapes", "Blueberry"],
+            answer: "Banana"
+        },
+        {
+            question: "What colour is the sky usually?",
+            options: ["Blue", "Black", "Green", "Pink"],
+            answer: "Blue"
+        },
+        {
+            question: "Which animal is called the king of the jungle?",
+            options: ["Tiger", "Lion", "Horse", "Rabbit"],
+            answer: "Lion"
+        },
+        {
+            question: "How many legs does a dog have?",
+            options: ["2", "3", "4", "6"],
+            answer: "4"
+        },
+        {
+            question: "Which shape has three sides?",
+            options: ["Circle", "Square", "Triangle", "Oval"],
+            answer: "Triangle"
+        }
+    ];
+
+    startQuiz(
+        "Kids Quiz",
+        questions,
+        "general"
+    );
+}
+
+
+/* =========================================================
+   🧠 COMMON QUIZ ENGINE
+   ========================================================= */
+
+function startQuiz(title, questions, type) {
+
+    currentQuizQuestions =
+        shuffleArray(questions);
+
+    currentQuizIndex = 0;
+    currentQuizType = type;
+
+    renderCurrentQuizQuestion(title);
+}
+
+
+function renderCurrentQuizQuestion(title) {
+
+    const question =
+        currentQuizQuestions[currentQuizIndex];
+
+    if (!question) {
+
+        finishQuiz(title);
+
+        return;
+    }
+
+    const total =
+        currentQuizQuestions.length;
+
+    const progress =
+        currentQuizIndex + 1;
+
+    setupLearning(
+        "🧠",
+        title,
+        `Question ${progress} / ${total}`,
+        `
+
+        <div class="quiz-box">
+
+            <div class="quiz-question">
+                ${escapeHTML(question.question)}
+            </div>
+
+            <div class="quiz-options">
+
+                ${question.options.map(option => `
+
+                    <button
+                        type="button"
+                        onclick="answerQuiz('${escapeHTML(option)}')"
+                    >
+                        ${escapeHTML(option)}
+                    </button>
+
+                `).join("")}
+
+            </div>
+
+        </div>
+
+        `
+    );
+}
+
+
+function answerQuiz(answer) {
+
+    const question =
+        currentQuizQuestions[currentQuizIndex];
+
+    if (!question) return;
+
+    playerAnswered++;
+
+    if (String(answer) === String(question.answer)) {
+
+        playerCorrect++;
+
+        addScore(20);
+        addStars(1);
+
+        showSuccessMessage(
+            "🎉 Correct!",
+            "Excellent! You earned a star."
+        );
+
+    } else {
+
+        showSuccessMessage(
+            "😊 Good Try!",
+            `Correct answer: ${question.answer}`
+        );
+    }
+
+    currentQuizIndex++;
+
+    setTimeout(() => {
+
+        renderCurrentQuizQuestion(
+            currentQuizType === "math"
+                ? "Maths Quiz"
+                : "Kids Quiz"
+        );
+
+    }, 900);
+}
+
+
+function finishQuiz(title) {
+
+    const total =
+        currentQuizQuestions.length;
+
+    const percentage =
+        total
+            ? Math.round(
+                (playerCorrect / total) * 100
+            )
+            : 0;
+
+    setupLearning(
+        "🏆",
+        "Quiz Complete!",
+        "Amazing work!",
+        `
+
+        <div class="learning-card">
+
+            <div class="learning-emoji">
+                🏆
+            </div>
+
+            <h2>
+                ${title}
+            </h2>
+
+            <p>
+                You answered
+                <strong>${playerCorrect}</strong>
+                correctly.
+            </p>
+
+            <p>
+                Score:
+                <strong>${playerScore}</strong>
+            </p>
+
+            <p>
+                Stars:
+                <strong>${playerStars} ⭐</strong>
+            </p>
+
+            <p>
+                Result:
+                <strong>${percentage}%</strong>
+            </p>
+
+            <button
+                onclick="startGeneralQuiz()"
+            >
+                🔄 Play Again
+            </button>
+
+        </div>
+
+        `
+    );
+}
+
+
+/* =========================================================
+   🐾 GUESS THE LETTER
+   ========================================================= */
+
+function startGuessLetterGame() {
+
+    const item =
+        randomItem(alphabet);
+
+    const options =
+        shuffleArray([
+            item.letter,
+            randomItem(alphabet).letter,
+            randomItem(alphabet).letter,
+            randomItem(alphabet).letter
+        ]);
+
+    window.guessAnswer =
+        item.letter;
+
+    setupLearning(
+        "🔤",
+        "Guess the Letter",
+        `Which letter is for ${item.word}?`,
+        `
+
+        <div class="learning-card">
+
+            <div class="learning-emoji">
+                ${item.emoji}
+            </div>
+
+            <h2>
+                ${item.word}
+            </h2>
+
+            <div class="quiz-options">
+
+                ${options.map(option => `
+
+                    <button
+                        onclick="checkGuessAnswer('${option}')"
+                    >
+                        ${option}
+                    </button>
+
+                `).join("")}
+
+            </div>
+
+        </div>
+
+        `
+    );
+}
+
+
+/* =========================================================
+   🍎 GUESS FRUIT
+   ========================================================= */
+
+function startGuessFruitGame() {
+
+    const item =
+        randomItem(fruits);
+
+    const options =
+        shuffleArray([
+            item[0],
+            randomItem(fruits)[0],
+            randomItem(fruits)[0],
+            randomItem(fruits)[0]
+        ]);
+
+    window.guessAnswer =
+        item[0];
+
+    setupLearning(
+        "🍎",
+        "Guess the Fruit",
+        "Which fruit is this?",
+        `
+
+        <div class="learning-card">
+
+            <div class="learning-emoji">
+                ${item[1]}
+            </div>
+
+            <div class="quiz-options">
+
+                ${options.map(option => `
+
+                    <button
+                        onclick="checkGuessAnswer('${escapeHTML(option)}')"
+                    >
+                        ${escapeHTML(option)}
+                    </button>
+
+                `).join("")}
+
+            </div>
+
+        </div>
+
+        `
+    );
+}
+
+
+/* =========================================================
+   🐶 GUESS ANIMAL
+   ========================================================= */
+
+function startGuessAnimalGame() {
+
+    const item =
+        randomItem(animals);
+
+    const options =
+        shuffleArray([
+            item[0],
+            randomItem(animals)[0],
+            randomItem(animals)[0],
+            randomItem(animals)[0]
+        ]);
+
+    window.guessAnswer =
+        item[0];
+
+    setupLearning(
+        "🐾",
+        "Guess the Animal",
+        `This animal says "${item[2]}"`,
+        `
+
+        <div class="learning-card">
+
+            <div class="learning-emoji">
+                ${item[1]}
+            </div>
+
+            <p>
+                It says:
+                <strong>${item[2]}</strong>
+            </p>
+
+            <div class="quiz-options">
+
+                ${options.map(option => `
+
+                    <button
+                        onclick="checkGuessAnswer('${escapeHTML(option)}')"
+                    >
+                        ${escapeHTML(option)}
+                    </button>
+
+                `).join("")}
+
+            </div>
+
+        </div>
+
+        `
+    );
+}
+
+
+/* =========================================================
+   🎨 GUESS COLOUR
+   ========================================================= */
+
+function startGuessColourGame() {
+
+    const item =
+        randomItem(colours);
+
+    const options =
+        shuffleArray([
+            item[0],
+            randomItem(colours)[0],
+            randomItem(colours)[0],
+            randomItem(colours)[0]
+        ]);
+
+    window.guessAnswer =
+        item[0];
+
+    setupLearning(
+        "🎨",
+        "Guess the Colour",
+        "Which colour is this?",
+        `
+
+        <div class="learning-card">
+
+            <div
+                class="colour-circle"
+                style="
+                    background:${item[1]};
+                    margin:20px auto;
+                "
+            ></div>
+
+            <div class="quiz-options">
+
+                ${options.map(option => `
+
+                    <button
+                        onclick="checkGuessAnswer('${escapeHTML(option)}')"
+                    >
+                        ${escapeHTML(option)}
+                    </button>
+
+                `).join("")}
+
+            </div>
+
+        </div>
+
+        `
+    );
+}
+
+
+function checkGuessAnswer(answer) {
+
+    playerAnswered++;
+
+    if (
+        String(answer) ===
+        String(window.guessAnswer)
+    ) {
+
+        playerCorrect++;
+
+        addScore(20);
+        addStars(1);
+
+        showSuccessMessage(
+            "🎉 Correct!",
+            "You guessed it!"
+        );
+
+    } else {
+
+        showSuccessMessage(
+            "😊 Nice Try!",
+            `Correct answer: ${window.guessAnswer}`
+        );
+    }
+}
+
+
+/* =========================================================
+   🃏 MEMORY GAME
+   ========================================================= */
+
+function startMemoryGame() {
+
+    const symbols = [
+        "🍎",
+        "🐶",
+        "🚗",
+        "⭐",
+        "🌈",
+        "⚽"
+    ];
+
+    const cards =
+        shuffleArray([
+            ...symbols,
+            ...symbols
+        ]);
+
+    memoryCards = cards;
+    memoryFlipped = [];
+    memoryMatched = 0;
+
+    setupLearning(
+        "🃏",
+        "Memory Game",
+        "Find matching pairs!",
+        `
+
+        <div
+            class="memory-grid"
+            id="memoryGrid"
+        >
+
+            ${cards.map((symbol, index) => `
+
+                <button
+                    type="button"
+                    class="memory-card"
+                    id="memory-${index}"
+                    onclick="flipMemoryCard(${index})"
+                >
+                    ❓
+                </button>
+
+            `).join("")}
+
+        </div>
+
+        `
+    );
+}
+
+
+function flipMemoryCard(index) {
+
+    if (memoryFlipped.length >= 2) return;
+
+    const card =
+        document.getElementById(
+            `memory-${index}`
+        );
+
+    if (!card) return;
+
+    if (
+        card.dataset.matched === "true" ||
+        memoryFlipped.includes(index)
+    ) {
+        return;
+    }
+
+    card.textContent =
+        memoryCards[index];
+
+    memoryFlipped.push(index);
+
+    if (memoryFlipped.length === 2) {
+
+        const [first, second] =
+            memoryFlipped;
+
+        if (
+            memoryCards[first] ===
+            memoryCards[second]
+        ) {
+
+            document.getElementById(
+                `memory-${first}`
+            ).dataset.matched = "true";
+
+            document.getElementById(
+                `memory-${second}`
+            ).dataset.matched = "true";
+
+            memoryMatched++;
+
+            addScore(10);
+            addStars(1);
+
+            memoryFlipped = [];
+
+            if (memoryMatched === 6) {
+
+                setTimeout(() => {
+
+                    showSuccessMessage(
+                        "🏆 Memory Master!",
+                        "You found every pair!"
+                    );
+
+                }, 300);
+            }
+
+        } else {
+
+            setTimeout(() => {
+
+                const firstCard =
+                    document.getElementById(
+                        `memory-${first}`
+                    );
+
+                const secondCard =
+                    document.getElementById(
+                        `memory-${second}`
+                    );
+
+                if (firstCard) {
+                    firstCard.textContent = "❓";
+                }
+
+                if (secondCard) {
+                    secondCard.textContent = "❓";
+                }
+
+                memoryFlipped = [];
+
+            }, 700);
+        }
+    }
+}
+
+
+/* =========================================================
+   ⚡ MATH CHALLENGE
+   ========================================================= */
+
+function startMathChallenge() {
+
+    let timeLeft = 30;
+    let challengeScore = 0;
+
+    function nextQuestion() {
+
+        const a =
+            Math.floor(Math.random() * 10) + 1;
+
+        const b =
+            Math.floor(Math.random() * 10) + 1;
+
+        const answer =
+            a + b;
+
+        window.challengeAnswer =
+            answer;
+
+        setupLearning(
+            "⚡",
+            "Math Challenge",
+            `Time: ${timeLeft}s | Score: ${challengeScore}`,
+            `
+
+            <div class="quiz-box">
+
+                <div class="quiz-question">
+                    ${a} + ${b} = ?
+                </div>
+
+                <div class="quiz-options">
+
+                    ${shuffleArray([
+                        answer,
+                        answer + 1,
+                        answer + 2,
+                        Math.max(0, answer - 1)
+                    ]).map(option => `
+
+                        <button
+                            onclick="challengeAnswer(${option})"
+                        >
+                            ${option}
+                        </button>
+
+                    `).join("")}
+
+                </div>
+
+            </div>
+
+            `
+        );
+    }
+
+    window.challengeAnswer = function (answer) {
+
+        if (timeLeft <= 0) return;
+
+        if (
+            answer ===
+            window.challengeAnswerValue
+        ) {
+            challengeScore += 10;
+        }
+    };
+
+    window.challengeAnswerValue = 0;
+
+    nextQuestion();
+
+    const timer =
+        setInterval(() => {
+
+            timeLeft--;
+
+            if (timeLeft <= 0) {
+
+                clearInterval(timer);
+
+                setupLearning(
+                    "🏆",
+                    "Challenge Complete",
+                    "Time is up!",
+                    `
+
+                    <div class="learning-card">
+
+                        <div class="learning-emoji">
+                            🏆
+                        </div>
+
+                        <h2>
+                            Great Work!
+                        </h2>
+
+                        <p>
+                            Challenge Score:
+                            ${challengeScore}
+                        </p>
+
+                    </div>
+
+                    `
+                );
+
+            }
+
+        }, 1000);
+}
+
+
+/* =========================================================
+   ⭐ SCORE SYSTEM
+   ========================================================= */
+
+function addScore(points) {
+
+    playerScore += points;
+
+    saveProgress();
+}
+
+
+function addStars(stars) {
+
+    playerStars += stars;
+
+    saveProgress();
+
+    celebrateStars();
+}
+
+
+function celebrateStars() {
+
+    if (!document.body) return;
+
+    const star =
+        document.createElement("div");
+
+    star.textContent = "⭐";
+
+    star.style.position = "fixed";
+    star.style.left = "50%";
+    star.style.top = "45%";
+    star.style.zIndex = "9999";
+    star.style.fontSize = "50px";
+    star.style.pointerEvents = "none";
+    star.style.transition =
+        "transform 0.8s ease, opacity 0.8s ease";
+
+    document.body.appendChild(star);
+
+    requestAnimationFrame(() => {
+
+        star.style.transform =
+            "translateY(-100px) scale(1.4)";
+
+        star.style.opacity = "0";
+
+    });
+
+    setTimeout(() => {
+
+        star.remove();
+
+    }, 900);
+}
+
+
+/* =========================================================
+   💾 SAVE PROGRESS
+   ========================================================= */
+
+function saveProgress() {
+
+    try {
+
+        localStorage.setItem(
+            "kidsLearningScore",
+            String(playerScore)
+        );
+
+        localStorage.setItem(
+            "kidsLearningStars",
+            String(playerStars)
+        );
+
+        localStorage.setItem(
+            "kidsLearningCorrect",
+            String(playerCorrect)
+        );
+
+        localStorage.setItem(
+            "kidsLearningAnswered",
+            String(playerAnswered)
+        );
+
+    } catch (error) {
+
+        console.warn(
+            "Progress could not be saved.",
+            error
+        );
+    }
+}
+
+
+function loadProgress() {
+
+    try {
+
+        playerScore =
+            Number(
+                localStorage.getItem(
+                    "kidsLearningScore"
+                )
+            ) || 0;
+
+        playerStars =
+            Number(
+                localStorage.getItem(
+                    "kidsLearningStars"
+                )
+            ) || 0;
+
+        playerCorrect =
+            Number(
+                localStorage.getItem(
+                    "kidsLearningCorrect"
+                )
+            ) || 0;
+
+        playerAnswered =
+            Number(
+                localStorage.getItem(
+                    "kidsLearningAnswered"
+                )
+            ) || 0;
+
+    } catch (error) {
+
+        console.warn(
+            "Progress could not be loaded.",
+            error
+        );
+    }
+}
+
+
+function resetProgress() {
+
+    playerScore = 0;
+    playerStars = 0;
+    playerCorrect = 0;
+    playerAnswered = 0;
+
+    saveProgress();
+
+    showSuccessMessage(
+        "🔄 Progress Reset",
+        "Your learning progress has been reset."
+    );
+}
+
+
+/* =========================================================
+   📊 PROGRESS
+   ========================================================= */
+
+function showProgress() {
+
+    const accuracy =
+        playerAnswered > 0
+            ? Math.round(
+                (playerCorrect /
+                    playerAnswered) * 100
+            )
+            : 0;
+
+    setupLearning(
+        "⭐",
+        "My Progress",
+        "Keep learning and collecting stars!",
+        `
+
+        <div class="cards-grid">
+
+            <div class="learning-card">
+
+                <div class="learning-emoji">
+                    🏆
+                </div>
+
+                <div class="word">
+                    ${playerScore}
+                </div>
+
+                <div class="mini-text">
+                    Total Score
+                </div>
+
+            </div>
+
+
+            <div class="learning-card">
+
+                <div class="learning-emoji">
+                    ⭐
+                </div>
+
+                <div class="word">
+                    ${playerStars}
+                </div>
+
+                <div class="mini-text">
+                    Stars
+                </div>
+
+            </div>
+
+
+            <div class="learning-card">
+
+                <div class="learning-emoji">
+                    ✅
+                </div>
+
+                <div class="word">
+                    ${playerCorrect}
+                </div>
+
+                <div class="mini-text">
+                    Correct Answers
+                </div>
+
+            </div>
+
+
+            <div class="learning-card">
+
+                <div class="learning-emoji">
+                    🎯
+                </div>
+
+                <div class="word">
+                    ${accuracy}%
+                </div>
+
+                <div class="mini-text">
+                    Accuracy
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div style="text-align:center;margin-top:25px;">
+
+            <button
+                type="button"
+                onclick="resetProgress()"
+            >
+                🔄 Reset Progress
+            </button>
+
+        </div>
+
+        `
+    );
+}
+
+
+/* =========================================================
+   🎨 CREATIVITY WORLD
+   ========================================================= */
+
+function showCreativityMenu() {
+
+    return `
+
+        <div class="learning-heading">
+
+            <h2>🎨 Creative World</h2>
+
+            <p>
+                Draw, colour and create!
+            </p>
+
+        </div>
+
+
+        <div class="learning-menu-grid">
+
+            ${createWorldCard(
+                "🖌️",
+                "Drawing Pad",
+                "Draw anything you want",
+                "openDrawingPad()"
+            )}
+
+            ${createWorldCard(
+                "🌈",
+                "Colouring",
+                "Colour your ideas",
+                "openColouring()"
+            )}
+
+            ${createWorldCard(
+                "🔷",
+                "Draw Shapes",
+                "Create basic shapes",
+                "openShapeDrawing()"
+            )}
+
+            ${createWorldCard(
+                "🎨",
+                "Colour Picker",
+                "Choose your favourite colour",
+                "openColourPicker()"
+            )}
+
+            ${createWorldCard(
+                "🖌️",
+                "Simple Paint Tool",
+                "Paint on the screen",
+                "openDrawingPad()"
+            )}
+
+            ${createWorldCard(
+                "🔢",
+                "Connect the Dots",
+                "Join the dots",
+                "openConnectDots()"
+            )}
+
+        </div>
+
+    `;
+}
+
+
+/* =========================================================
+   🖌️ DRAWING PAD
+   ========================================================= */
+
+function openDrawingPad() {
+
+    setupLearning(
+        "🖌️",
+        "Drawing Pad",
+        "Draw anything you like!",
+        `
+
+        <div class="drawing-area">
+
+            <div
+                style="
+                    display:flex;
+                    gap:10px;
+                    flex-wrap:wrap;
+                    justify-content:center;
+                    margin-bottom:15px;
+                "
+            >
+
+                <label>
+                    Colour:
+                    <input
+                        type="color"
+                        value="#333333"
+                        onchange="setDrawingColor(this.value)"
+                    >
+                </label>
+
+
+                <label>
+                    Size:
+                    <input
+                        type="range"
+                        min="1"
+                        max="30"
+                        value="6"
+                        oninput="setDrawingSize(this.value)"
+                    >
+                </label>
+
+
+                <button
+                    type="button"
+                    onclick="clearDrawingCanvas()"
+                >
+                    🗑️ Clear
+                </button>
+
+            </div>
+
+
+            <canvas
+                id="drawingCanvas"
+                width="900"
+                height="500"
+                style="
+                    max-width:100%;
+                    border:3px solid #ddd;
+                    border-radius:20px;
+                    background:white;
+                    touch-action:none;
+                "
+            ></canvas>
+
+        </div>
+
+        `
+    );
+
+    setTimeout(
+        initializeDrawingCanvas,
+        100
+    );
+}
+
+
+function initializeDrawingCanvas() {
+
+    drawingCanvas =
+        document.getElementById(
+            "drawingCanvas"
+        );
+
+    if (!drawingCanvas) return;
+
+    drawingContext =
+        drawingCanvas.getContext("2d");
+
+    drawingContext.lineCap = "round";
+    drawingContext.lineJoin = "round";
+
+    drawingCanvas.addEventListener(
+        "pointerdown",
+        startDrawing
+    );
+
+    drawingCanvas.addEventListener(
+        "pointermove",
+        draw
+    );
+
+    drawingCanvas.addEventListener(
+        "pointerup",
+        stopDrawing
+    );
+
+    drawingCanvas.addEventListener(
+        "pointerleave",
+        stopDrawing
+    );
+}
+
+
+function getCanvasPosition(event) {
+
+    const rect =
+        drawingCanvas.getBoundingClientRect();
+
+    const scaleX =
+        drawingCanvas.width / rect.width;
+
+    const scaleY =
+        drawingCanvas.height / rect.height;
+
+    return {
+        x:
+            (event.clientX - rect.left) *
+            scaleX,
+
+        y:
+            (event.clientY - rect.top) *
+            scaleY
+    };
+}
+
+
+function startDrawing(event) {
+
+    if (!drawingContext) return;
+
+    drawingActive = true;
+
+    const pos =
+        getCanvasPosition(event);
+
+    drawingContext.beginPath();
+
+    drawingContext.moveTo(
+        pos.x,
+        pos.y
+    );
+}
+
+
+function draw(event) {
+
+    if (!drawingActive) return;
+
+    const pos =
+        getCanvasPosition(event);
+
+    drawingContext.strokeStyle =
+        drawingColor;
+
+    drawingContext.lineWidth =
+        drawingSize;
+
+    drawingContext.lineTo(
+        pos.x,
+        pos.y
+    );
+
+    drawingContext.stroke();
+}
+
+
+function stopDrawing() {
+
+    drawingActive = false;
+
+    if (drawingContext) {
+        drawingContext.closePath();
+    }
+}
+
+
+function setDrawingColor(color) {
+
+    drawingColor = color;
+}
+
+
+function setDrawingSize(size) {
+
+    drawingSize =
+        Number(size) || 6;
+}
+
+
+function clearDrawingCanvas() {
+
+    if (!drawingCanvas || !drawingContext) {
+        return;
+    }
+
+    drawingContext.clearRect(
+        0,
+        0,
+        drawingCanvas.width,
+        drawingCanvas.height
+    );
+}
+
+
+/* =========================================================
+   🌈 COLOURING
+   ========================================================= */
+
+function openColouring() {
+
+    setupLearning(
+        "🌈",
+        "Colouring",
+        "Choose a colour and paint!",
+        `
+
+        <div class="drawing-area">
+
+            <div style="text-align:center;">
+
+                <p>
+                    🎨 Choose your colour:
+                </p>
+
+                <input
+                    type="color"
+                    value="#ff4d6d"
+                    onchange="setDrawingColor(this.value)"
+                >
+
+            </div>
+
+
+            <div class="cards-grid">
+
+                <div
+                    class="learning-card"
+                    onclick="speak('Apple', {lang:'en-US'})"
+                >
+                    🍎
+                    <h3>Apple</h3>
+                </div>
+
+                <div
+                    class="learning-card"
+                    onclick="speak('Sun', {lang:'en-US'})"
+                >
+                    ☀️
+                    <h3>Sun</h3>
+                </div>
+
+                <div
+                    class="learning-card"
+                    onclick="speak('Flower', {lang:'en-US'})"
+                >
+                    🌸
+                    <h3>Flower</h3>
+                </div>
+
+                <div
+                    class="learning-card"
+                    onclick="speak('Butterfly', {lang:'en-US'})"
+                >
+                    🦋
+                    <h3>Butterfly</h3>
+                </div>
+
+            </div>
+
+        </div>
+
+        `
+    );
+}
+
+
+/* =========================================================
+   🔷 SHAPE DRAWING
+   ========================================================= */
+
+function openShapeDrawing() {
+
+    setupLearning(
+        "🔷",
+        "Draw Shapes",
+        "Choose a shape to practise!",
+        `
+
+        <div class="cards-grid">
+
+            ${[
+                ["⭕", "Circle"],
+                ["🟦", "Square"],
+                ["🔺", "Triangle"],
+                ["⭐", "Star"],
+                ["❤️", "Heart"],
+                ["🔷", "Diamond"]
+            ].map(item => `
+
+                <div
+                    class="learning-card"
+                    onclick="speak('${item[1]}', {lang:'en-US'})"
+                >
+
+                    <div class="learning-emoji">
+                        ${item[0]}
+                    </div>
+
+                    <div class="word">
+                        ${item[1]}
+                    </div>
+
+                </div>
+
+            `).join("")}
+
+        </div>
+
+        `
+    );
+}
+
+
+/* =========================================================
+   🎨 COLOUR PICKER
+   ========================================================= */
+
+function openColourPicker() {
+
+    setupLearning(
+        "🎨",
+        "Colour Picker",
+        "Pick a colour!",
+        `
+
+        <div class="learning-card">
+
+            <input
+                type="color"
+                id="mainColourPicker"
+                value="#ff4d6d"
+                style="
+                    width:120px;
+                    height:120px;
+                    cursor:pointer;
+                "
+                onchange="speakSelectedColour(this.value)"
+            >
+
+            <h2>
+                Choose your colour
+            </h2>
+
+        </div>
+
+        `
+    );
+}
+
+
+function speakSelectedColour(value) {
+
+    speak(
+        `You selected colour ${value}`,
+        {
+            lang: "en-US"
+        }
+    );
+}
+
+
+/* =========================================================
+   🔢 CONNECT THE DOTS
+   ========================================================= */
+
+function openConnectDots() {
+
+    connectPoints = [
+        [120, 120],
+        [220, 80],
+        [320, 120],
+        [360, 220],
+        [260, 300],
+        [160, 260],
+        [120, 120]
+    ];
+
+    connectCurrent = 0;
+
+    setupLearning(
+        "🔢",
+        "Connect the Dots",
+        "Click the dots in order!",
+        `
+
+        <div
+            id="connectDotsArea"
+            style="
+                position:relative;
+                width:min(600px,90vw);
+                height:400px;
+                margin:auto;
+                background:white;
+                border-radius:25px;
+                border:3px solid #ddd;
+            "
+        >
+
+            ${connectPoints.map((point, index) => `
+
+                <button
+                    type="button"
+                    onclick="connectDot(${index})"
+                    style="
+                        position:absolute;
+                        left:${point[0]}px;
+                        top:${point[1]}px;
+                        width:40px;
+                        height:40px;
+                        border-radius:50%;
+                    "
+                >
+                    ${index + 1}
+                </button>
+
+            `).join("")}
+
+        </div>
+
+        `
+    );
+}
+
+
+function connectDot(index) {
+
+    if (index !== connectCurrent) {
+
+        showSuccessMessage(
+            "😊 Almost!",
+            "Start from the dots in order."
+        );
+
+        return;
+    }
+
+    connectCurrent++;
+
+    addScore(5);
+
+    if (
+        connectCurrent >=
+        connectPoints.length
+    ) {
+
+        addStars(2);
+
+        showSuccessMessage(
+            "🎉 Amazing!",
+            "You connected all the dots!"
+        );
+    }
+}
+
+
+/* =========================================================
+   🎉 SUCCESS MESSAGE
+   ========================================================= */
+
+function showSuccessMessage(title, message) {
+
+    const old =
+        document.getElementById(
+            "learningSuccessMessage"
+        );
+
+    if (old) {
+        old.remove();
+    }
+
+    const box =
+        document.createElement("div");
+
+    box.id =
+        "learningSuccessMessage";
+
+    box.innerHTML = `
+        <div>
+            <strong>
+                ${escapeHTML(title)}
+            </strong>
+
+            <p>
+                ${escapeHTML(message)}
+            </p>
+        </div>
+    `;
+
+    box.style.position = "fixed";
+    box.style.left = "50%";
+    box.style.top = "20px";
+    box.style.transform = "translateX(-50%)";
+    box.style.zIndex = "10000";
+    box.style.padding = "18px 25px";
+    box.style.borderRadius = "20px";
+    box.style.background = "white";
+    box.style.boxShadow =
+        "0 15px 40px rgba(0,0,0,.18)";
+    box.style.textAlign = "center";
+
+    document.body.appendChild(box);
+
+    setTimeout(() => {
+
+        box.remove();
+
+    }, 1300);
+}
+
+
+/* =========================================================
+   🎊 SIMPLE CONFETTI
+   ========================================================= */
+
+function createConfetti() {
+
+    const emojis = [
+        "🎉",
+        "⭐",
+        "✨",
+        "🎈",
+        "🌟"
+    ];
+
+    for (let i = 0; i < 15; i++) {
+
+        const piece =
+            document.createElement("div");
+
+        piece.textContent =
+            randomItem(emojis);
+
+        piece.style.position =
+            "fixed";
+
+        piece.style.left =
+            `${Math.random() * 100}%`;
+
+        piece.style.top =
+            "-30px";
+
+        piece.style.fontSize =
+            `${18 + Math.random() * 20}px`;
+
+        piece.style.zIndex =
+            "10001";
+
+        piece.style.pointerEvents =
+            "none";
+
+        document.body.appendChild(piece);
+
+        const duration =
+            900 + Math.random() * 1000;
+
+        piece.animate(
+            [
+                {
+                    transform:
+                        "translateY(0) rotate(0deg)",
+                    opacity: 1
+                },
+                {
+                    transform:
+                        `translateY(${window.innerHeight + 100}px) rotate(720deg)`,
+                    opacity: 0
+                }
+            ],
+            {
+                duration,
+                easing: "ease-out"
+            }
+        );
+
+        setTimeout(() => {
+
+            piece.remove();
+
+        }, duration);
+    }
+}
+
+
+/* =========================================================
+   🔄 ENHANCED SUCCESS
+   ========================================================= */
+
+const originalShowSuccessMessage =
+    showSuccessMessage;
+
+showSuccessMessage = function (
+    title,
+    message
+) {
+
+    originalShowSuccessMessage(
+        title,
+        message
+    );
+
+    if (
+        title.includes("Correct") ||
+        title.includes("Great") ||
+        title.includes("Amazing") ||
+        title.includes("Master") ||
+        title.includes("🎉")
+    ) {
+
+        createConfetti();
+    }
+};
+
+
+/* =========================================================
+   🧮 TABLES
+   ========================================================= */
+
+function renderTableChoice() {
+
+    return `
+
+        <div class="table-choice">
+
+            <div class="table-choice-title">
+                Choose a table
+            </div>
+
+            <div class="table-buttons">
+
+                ${Array.from(
+                    { length: 20 },
+                    (_, index) => {
+
+                        const number =
+                            index + 1;
+
+                        return `
+                            <button
+                                class="table-number"
+                                onclick="showTable(${number})"
+                            >
+                                ${number}
+                            </button>
+                        `;
+                    }
+                ).join("")}
+
+            </div>
+
+        </div>
+
+        <div id="tableResult"></div>
+
+    `;
+}
+
+
+function showTable(number) {
+
+    const result =
+        document.getElementById(
+            "tableResult"
+        );
+
+    if (!result) return;
+
+    result.innerHTML = `
+
+        <div class="table-result-box">
+
+            <div class="table-big-number">
+                ${number}
+            </div>
+
+            <h2>
+                Table of ${number}
+            </h2>
+
+            <div class="multiplication-list">
+
+                ${Array.from(
+                    { length: 10 },
+                    (_, index) => {
+
+                        const multiplier =
+                            index + 1;
+
+                        return `
+                            <div
+                                class="multiplication-row"
+                            >
+
+                                <span>
+                                    ${number}
+                                </span>
+
+                                ×
+
+                                <span>
+                                    ${multiplier}
+                                </span>
+
+                                =
+
+                                <strong>
+                                    ${number * multiplier}
+                                </strong>
+
+                            </div>
+                        `;
+                    }
+                ).join("")}
+
+            </div>
+
+            <button
+                onclick="speakTable(${number})"
+            >
+                🔊 Hear Table
+            </button>
 
         </div>
 
     `;
 
+    result.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+    });
+}
 
-    // ========================================================
-    // MENU CARD ANIMATION
-    // ========================================================
 
-    const cards =
-        document.querySelectorAll(
-            ".learning-menu-card"
+function speakTable(number) {
+
+    const lines = [];
+
+    for (let i = 1; i <= 10; i++) {
+
+        lines.push(
+            `${number} times ${i} is ${number * i}`
         );
+    }
 
-
-    cards.forEach(
-        function(card, index) {
-
-            card.style.opacity = "0";
-
-            card.style.transform =
-                "translateY(25px) scale(0.94)";
-
-
-            setTimeout(
-                function() {
-
-                    card.style.transition =
-                        "opacity 0.55s ease, transform 0.55s cubic-bezier(.2,.8,.2,1)";
-
-                    card.style.opacity = "1";
-
-                    card.style.transform =
-                        "translateY(0) scale(1)";
-
-                },
-                80 + index * 80
-            );
-
+    speak(
+        lines.join(". "),
+        {
+            lang: "en-US",
+            rate: 0.65
         }
     );
-
 }
 
 
-// ============================================================
-// 🔙 BACK BUTTON SYSTEM
-// ============================================================
-
-function backToLearningMenu() {
-
-    stopSpeech();
-
-
-    // --------------------------------------------------------
-    // MENU → HOME
-    // --------------------------------------------------------
-
-    if (
-        currentCategory === "menu"
-    ) {
-
-        goHome();
-
-        return;
-
-    }
-
-
-    // --------------------------------------------------------
-    // TOPIC → MENU
-    // --------------------------------------------------------
-
-    currentCategory = "menu";
-
-
-    if (elementExists(homePage)) {
-
-        homePage.style.display =
-            "none";
-
-    }
-
-
-    if (elementExists(learningPage)) {
-
-        learningPage.classList.remove(
-            "learning-menu-page"
-        );
-
-        void learningPage.offsetWidth;
-
-        learningPage.classList.add(
-            "active"
-        );
-
-        learningPage.classList.add(
-            "learning-menu-page"
-        );
-
-        learningPage.style.display =
-            "block";
-
-        playPageAnimation();
-
-    }
-
-
-    if (elementExists(learningIcon)) {
-
-        learningIcon.textContent =
-            "🎯";
-
-    }
-
-
-    if (elementExists(learningTitle)) {
-
-        learningTitle.textContent =
-            "What do you want to learn?";
-
-    }
-
-
-    if (elementExists(learningSubtitle)) {
-
-        learningSubtitle.textContent =
-            "Choose a topic and let's start learning! ✨";
-
-    }
-
-
-    renderLearningMenu();
-
-
-    window.scrollTo({
-
-        top: 0,
-
-        behavior: "smooth"
-
-    });
-
-}
-
-
-// ============================================================
-// OPTIONAL BACK ROUTER
-// ============================================================
-
-function goBackFromLearning() {
-
-    stopSpeech();
-
-
-    if (
-        currentCategory === "menu"
-    ) {
-
-        goHome();
-
-        return;
-
-    }
-
-
-    backToLearningMenu();
-
-}
-
-
-// ============================================================
-// PAGE STARTUP
-// ============================================================
+/* =========================================================
+   🖱️ GLOBAL BUTTON SAFETY
+   ========================================================= */
 
 document.addEventListener(
-    "DOMContentLoaded",
-    function() {
+    "click",
+    function (event) {
 
-        if (elementExists(learningPage)) {
+        const button =
+            event.target.closest("button");
 
-            learningPage.style.opacity = "1";
+        if (!button) return;
 
-            learningPage.style.transform =
-                "translateY(0) scale(1)";
+        button.classList.add(
+            "js-button-clicked"
+        );
 
-        }
+        setTimeout(() => {
 
+            button.classList.remove(
+                "js-button-clicked"
+            );
+
+        }, 250);
     }
 );
 
 
-// ============================================================
-// END OF SCRIPT
-// ============================================================
+/* =========================================================
+   ⌨️ KEYBOARD SUPPORT
+   ========================================================= */
+
+document.addEventListener(
+    "keydown",
+    function (event) {
+
+        if (event.key === "Escape") {
+
+            stopSpeech();
+        }
+    }
+);
+
+
+/* =========================================================
+   📱 TOUCH SUPPORT
+   ========================================================= */
+
+document.addEventListener(
+    "touchstart",
+    function () {
+
+        if (speechSupported) {
+
+            /*
+             * Some mobile browsers require
+             * user interaction before speech.
+             */
+        }
+
+    },
+    {
+        passive: true
+    }
+);
+
+
+/* =========================================================
+   🚀 APP START
+   ========================================================= */
+
+function initializeApp() {
+
+    loadProgress();
+
+    if (learningPage) {
+        learningPage.style.display = "none";
+    }
+
+    if (homePage) {
+        homePage.style.display = "block";
+    }
+
+    console.log(
+        "🌈 Kids Learning World loaded successfully!"
+    );
+
+    console.log(
+        `⭐ Stars: ${playerStars} | 🏆 Score: ${playerScore}`
+    );
+}
+
+
+if (
+    document.readyState ===
+    "loading"
+) {
+
+    document.addEventListener(
+        "DOMContentLoaded",
+        initializeApp
+    );
+
+} else {
+
+    initializeApp();
+}
