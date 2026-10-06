@@ -2416,3 +2416,392 @@ function openLearningMenu() {
 
     }, 100);
 }
+
+// ============================================================
+// 🚀 START LEARNING - FULL LEARNING MENU
+// ============================================================
+
+function openLearningMenu() {
+
+    stopSpeech();
+
+    currentCategory = "";
+
+    // Hide Home Page
+    if (elementExists(homePage)) {
+        homePage.style.display = "none";
+    }
+
+    // Show Learning Page
+    if (elementExists(learningPage)) {
+
+        learningPage.classList.remove("learning-menu-page");
+
+        // Restart animation
+        void learningPage.offsetWidth;
+
+        learningPage.classList.add("active");
+        learningPage.classList.add("learning-menu-page");
+
+        learningPage.style.display = "block";
+    }
+
+    // Change header
+    if (elementExists(learningIcon)) {
+        learningIcon.textContent = "🎯";
+    }
+
+    if (elementExists(learningTitle)) {
+        learningTitle.textContent =
+            "What do you want to learn?";
+    }
+
+    if (elementExists(learningSubtitle)) {
+        learningSubtitle.textContent =
+            "Choose a topic and let's start learning! ✨";
+    }
+
+    // Show learning categories
+    renderLearningMenu();
+
+    // Start from top
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+
+}
+
+
+// ============================================================
+// 🎯 RENDER LEARNING MENU
+// ============================================================
+
+function renderLearningMenu() {
+
+    if (!elementExists(learningContent)) {
+        return;
+    }
+
+    learningContent.innerHTML = `
+
+        <div class="learning-menu-intro">
+
+            <div class="learning-menu-stars">
+                ✨ ⭐ ✨
+            </div>
+
+            <h2>
+                🎓 Choose Your Learning Adventure
+            </h2>
+
+            <p>
+                Pick any topic below and let's learn something amazing!
+            </p>
+
+        </div>
+
+
+        <div class="learning-menu-grid">
+
+
+            <!-- ABC -->
+
+            <button
+                class="learning-menu-card menu-blue"
+                type="button"
+                onclick="showCategory('abc')">
+
+                <div class="menu-card-icon">
+                    🔤
+                </div>
+
+                <div class="menu-card-text">
+
+                    <h3>
+                        ABC
+                    </h3>
+
+                    <p>
+                        Learn A to Z
+                    </p>
+
+                </div>
+
+                <span class="menu-card-arrow">
+                    →
+                </span>
+
+            </button>
+
+
+            <!-- HINDI -->
+
+            <button
+                class="learning-menu-card menu-hindi"
+                type="button"
+                onclick="openHindiAlphabet()">
+
+                <div class="menu-card-icon">
+                    🇮🇳
+                </div>
+
+                <div class="menu-card-text">
+
+                    <h3>
+                        Hindi Alphabet
+                    </h3>
+
+                    <p>
+                        हिंदी वर्णमाला सीखें
+                    </p>
+
+                </div>
+
+                <span class="menu-card-arrow">
+                    →
+                </span>
+
+            </button>
+
+
+            <!-- DAYS -->
+
+            <button
+                class="learning-menu-card menu-purple"
+                type="button"
+                onclick="showCategory('days')">
+
+                <div class="menu-card-icon">
+                    📅
+                </div>
+
+                <div class="menu-card-text">
+
+                    <h3>
+                        Days
+                    </h3>
+
+                    <p>
+                        Learn the days of the week
+                    </p>
+
+                </div>
+
+                <span class="menu-card-arrow">
+                    →
+                </span>
+
+            </button>
+
+
+            <!-- MONTHS -->
+
+            <button
+                class="learning-menu-card menu-pink"
+                type="button"
+                onclick="showCategory('months')">
+
+                <div class="menu-card-icon">
+                    🗓️
+                </div>
+
+                <div class="menu-card-text">
+
+                    <h3>
+                        Months
+                    </h3>
+
+                    <p>
+                        Learn the months of the year
+                    </p>
+
+                </div>
+
+                <span class="menu-card-arrow">
+                    →
+                </span>
+
+            </button>
+
+
+            <!-- TABLES -->
+
+            <button
+                class="learning-menu-card menu-orange"
+                type="button"
+                onclick="showCategory('tables')">
+
+                <div class="menu-card-icon">
+                    ✖️
+                </div>
+
+                <div class="menu-card-text">
+
+                    <h3>
+                        Tables
+                    </h3>
+
+                    <p>
+                        Practice multiplication tables
+                    </p>
+
+                </div>
+
+                <span class="menu-card-arrow">
+                    →
+                </span>
+
+            </button>
+
+
+            <!-- FRUITS -->
+
+            <button
+                class="learning-menu-card menu-red"
+                type="button"
+                onclick="showCategory('fruits')">
+
+                <div class="menu-card-icon">
+                    🍎
+                </div>
+
+                <div class="menu-card-text">
+
+                    <h3>
+                        Fruits
+                    </h3>
+
+                    <p>
+                        Discover yummy fruits
+                    </p>
+
+                </div>
+
+                <span class="menu-card-arrow">
+                    →
+                </span>
+
+            </button>
+
+
+            <!-- BODY PARTS -->
+
+            <button
+                class="learning-menu-card menu-green"
+                type="button"
+                onclick="showCategory('bodyparts')">
+
+                <div class="menu-card-icon">
+                    👦
+                </div>
+
+                <div class="menu-card-text">
+
+                    <h3>
+                        Body Parts
+                    </h3>
+
+                    <p>
+                        Learn about your body
+                    </p>
+
+                </div>
+
+                <span class="menu-card-arrow">
+                    →
+                </span>
+
+            </button>
+
+
+            <!-- ANIMALS -->
+
+            <button
+                class="learning-menu-card menu-yellow"
+                type="button"
+                onclick="showCategory('animals')">
+
+                <div class="menu-card-icon">
+                    🐶
+                </div>
+
+                <div class="menu-card-text">
+
+                    <h3>
+                        Animals
+                    </h3>
+
+                    <p>
+                        Meet amazing animals
+                    </p>
+
+                </div>
+
+                <span class="menu-card-arrow">
+                    →
+                </span>
+
+            </button>
+
+
+            <!-- COLOURS -->
+
+            <button
+                class="learning-menu-card menu-cyan"
+                type="button"
+                onclick="showCategory('colours')">
+
+                <div class="menu-card-icon">
+                    🎨
+                </div>
+
+                <div class="menu-card-text">
+
+                    <h3>
+                        Colours
+                    </h3>
+
+                    <p>
+                        Explore beautiful colours
+                    </p>
+
+                </div>
+
+                <span class="menu-card-arrow">
+                    →
+                </span>
+
+            </button>
+
+
+        </div>
+
+
+        <div class="learning-menu-footer">
+
+            🌟 Every click is a new thing to learn! 🌟
+
+        </div>
+
+    `;
+
+
+    // Animate cards one by one
+
+    const cards =
+        document.querySelectorAll(
+            ".learning-menu-card"
+        );
+
+
+    cards.forEach(function(card, index) {
+
+        card.style.setProperty(
+            "--menu-delay",
+            `${index * 80}ms`
+        );
+
+    });
+
+}
