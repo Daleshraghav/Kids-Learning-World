@@ -2343,6 +2343,8 @@ function speakHindi(
 // ============================================================
 
 /* =========================================================
+
+/* =========================================================
    💡 LUXURY LAMP START
    ========================================================= */
 
@@ -2365,123 +2367,94 @@ function turnLampOn() {
     }, 2200);
 }
 
-function openLearningMenu() {
 
-    const categorySection =
-        document.querySelector(".category-section");
-
-    const aboutSection =
-        document.querySelector(".about-section");
-
-    categorySection.classList.add("show-learning-menu");
-
-    if (aboutSection) {
-        aboutSection.classList.add("show-learning-menu");
-    }
-
-    setTimeout(function () {
-
-        categorySection.scrollIntoView({
-            behavior: "smooth",
-            block: "start"
-        });
-
-    }, 100);
-}
-
-function openLearningMenu() {
-
-    const categorySection =
-        document.querySelector(".category-section");
-
-    const aboutSection =
-        document.querySelector(".about-section");
-
-    if (categorySection) {
-        categorySection.classList.add("show-learning-menu");
-    }
-
-    if (aboutSection) {
-        aboutSection.classList.add("show-learning-menu");
-    }
-
-    setTimeout(function () {
-
-        if (categorySection) {
-            categorySection.scrollIntoView({
-                behavior: "smooth",
-                block: "start"
-            });
-        }
-
-    }, 100);
-}
-
-// ============================================================
-// 🚀 START LEARNING - FULL LEARNING MENU
-// ============================================================
+/* =========================================================
+   🚀 START LEARNING - FULL LEARNING MENU
+   ========================================================= */
 
 function openLearningMenu() {
 
     stopSpeech();
 
-    currentCategory = "";
+    currentCategory = "menu";
+
 
     // Hide Home Page
     if (elementExists(homePage)) {
         homePage.style.display = "none";
     }
 
+
     // Show Learning Page
     if (elementExists(learningPage)) {
 
-        learningPage.classList.remove("learning-menu-page");
+        learningPage.classList.remove(
+            "learning-menu-page"
+        );
 
         // Restart animation
         void learningPage.offsetWidth;
 
         learningPage.classList.add("active");
-        learningPage.classList.add("learning-menu-page");
+
+        learningPage.classList.add(
+            "learning-menu-page"
+        );
 
         learningPage.style.display = "block";
     }
 
-    // Change header
+
+    // Change Header
     if (elementExists(learningIcon)) {
+
         learningIcon.textContent = "🎯";
+
     }
+
 
     if (elementExists(learningTitle)) {
+
         learningTitle.textContent =
             "What do you want to learn?";
+
     }
+
 
     if (elementExists(learningSubtitle)) {
+
         learningSubtitle.textContent =
             "Choose a topic and let's start learning! ✨";
+
     }
 
-    // Show learning categories
+
+    // Render Categories
     renderLearningMenu();
 
-    // Start from top
+
+    // Scroll to top
     window.scrollTo({
+
         top: 0,
+
         behavior: "smooth"
+
     });
 
 }
 
 
-// ============================================================
-// 🎯 RENDER LEARNING MENU
-// ============================================================
+/* =========================================================
+   🎯 RENDER LEARNING MENU
+   ========================================================= */
 
 function renderLearningMenu() {
 
     if (!elementExists(learningContent)) {
         return;
     }
+
 
     learningContent.innerHTML = `
 
@@ -2787,8 +2760,7 @@ function renderLearningMenu() {
     `;
 
 
-    // Animate cards one by one
-
+    // Animate menu cards
     const cards =
         document.querySelectorAll(
             ".learning-menu-card"
@@ -2805,3 +2777,88 @@ function renderLearningMenu() {
     });
 
 }
+
+
+/* =========================================================
+   🔙 BACK TO LEARNING MENU
+   ========================================================= */
+
+function backToLearningMenu() {
+
+    stopSpeech();
+
+    currentCategory = "menu";
+
+
+    // Home hidden
+    if (elementExists(homePage)) {
+
+        homePage.style.display = "none";
+
+    }
+
+
+    // Learning page visible
+    if (elementExists(learningPage)) {
+
+        learningPage.classList.remove(
+            "learning-menu-page"
+        );
+
+        // Restart page animation
+        void learningPage.offsetWidth;
+
+        learningPage.classList.add(
+            "active"
+        );
+
+        learningPage.classList.add(
+            "learning-menu-page"
+        );
+
+        learningPage.style.display =
+            "block";
+
+    }
+
+
+    // Header
+    if (elementExists(learningIcon)) {
+
+        learningIcon.textContent =
+            "🎯";
+
+    }
+
+
+    if (elementExists(learningTitle)) {
+
+        learningTitle.textContent =
+            "What do you want to learn?";
+
+    }
+
+
+    if (elementExists(learningSubtitle)) {
+
+        learningSubtitle.textContent =
+            "Choose a topic and let's start learning! ✨";
+
+    }
+
+
+    // Show categories again
+    renderLearningMenu();
+
+
+    // Scroll top
+    window.scrollTo({
+
+        top: 0,
+
+        behavior: "smooth"
+
+    });
+
+}
+  
