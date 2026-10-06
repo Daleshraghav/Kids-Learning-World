@@ -1,22 +1,7 @@
 // ============================================================
 // KIDS LEARNING WORLD 🌈
 // COMPLETE LEARNING SYSTEM
-// PART 1
-// ============================================================
-//
-// IMPORTANT:
-// This file works with the existing index.html IDs:
-//
-// homePage
-// learningPage
-// learningContent
-// learningTitle
-// learningSubtitle
-// learningIcon
-//
-// Hindi Alphabet:
-// अ → ज्ञ
-//
+// FIXED + SMOOTH NAVIGATION + ANIMATIONS
 // ============================================================
 
 
@@ -48,22 +33,17 @@ const APP_SETTINGS = {
 const homePage =
     document.getElementById("homePage");
 
-
 const learningPage =
     document.getElementById("learningPage");
-
 
 const learningContent =
     document.getElementById("learningContent");
 
-
 const learningTitle =
     document.getElementById("learningTitle");
 
-
 const learningSubtitle =
     document.getElementById("learningSubtitle");
-
 
 const learningIcon =
     document.getElementById("learningIcon");
@@ -99,8 +79,10 @@ function elementExists(element) {
 
 function safeText(value) {
 
-    if (value === null ||
-        value === undefined) {
+    if (
+        value === null ||
+        value === undefined
+    ) {
 
         return "";
 
@@ -134,55 +116,30 @@ function escapeHTML(value) {
 const alphabet = [
 
     ["A", "Apple", "🍎"],
-
     ["B", "Ball", "⚽"],
-
     ["C", "Cat", "🐱"],
-
     ["D", "Dog", "🐶"],
-
     ["E", "Elephant", "🐘"],
-
     ["F", "Fish", "🐟"],
-
     ["G", "Grapes", "🍇"],
-
     ["H", "Horse", "🐴"],
-
     ["I", "Ice Cream", "🍦"],
-
     ["J", "Juice", "🧃"],
-
     ["K", "Kite", "🪁"],
-
     ["L", "Lion", "🦁"],
-
     ["M", "Mango", "🥭"],
-
     ["N", "Nest", "🪺"],
-
     ["O", "Orange", "🍊"],
-
     ["P", "Parrot", "🦜"],
-
     ["Q", "Queen", "👑"],
-
     ["R", "Rabbit", "🐰"],
-
     ["S", "Sun", "☀️"],
-
     ["T", "Tiger", "🐯"],
-
     ["U", "Umbrella", "☂️"],
-
     ["V", "Van", "🚐"],
-
     ["W", "Watch", "⌚"],
-
     ["X", "Xylophone", "🎵"],
-
     ["Y", "Yak", "🐂"],
-
     ["Z", "Zebra", "🦓"]
 
 ];
@@ -195,17 +152,11 @@ const alphabet = [
 const days = [
 
     ["Monday", "🌞"],
-
     ["Tuesday", "🌈"],
-
     ["Wednesday", "⭐"],
-
     ["Thursday", "🌻"],
-
     ["Friday", "🎉"],
-
     ["Saturday", "🎈"],
-
     ["Sunday", "☀️"]
 
 ];
@@ -218,27 +169,16 @@ const days = [
 const months = [
 
     ["January", "❄️"],
-
     ["February", "❤️"],
-
     ["March", "🌸"],
-
     ["April", "🌷"],
-
     ["May", "🌼"],
-
     ["June", "☀️"],
-
     ["July", "🌧️"],
-
     ["August", "🇮🇳"],
-
     ["September", "🍂"],
-
     ["October", "🎃"],
-
     ["November", "🍁"],
-
     ["December", "🎄"]
 
 ];
@@ -251,27 +191,16 @@ const months = [
 const fruits = [
 
     ["Apple", "🍎"],
-
     ["Banana", "🍌"],
-
     ["Mango", "🥭"],
-
     ["Orange", "🍊"],
-
     ["Grapes", "🍇"],
-
     ["Watermelon", "🍉"],
-
     ["Pineapple", "🍍"],
-
     ["Strawberry", "🍓"],
-
     ["Papaya", "🥭"],
-
     ["Coconut", "🥥"],
-
     ["Cherry", "🍒"],
-
     ["Peach", "🍑"]
 
 ];
@@ -284,23 +213,14 @@ const fruits = [
 const bodyParts = [
 
     ["Eyes", "👀"],
-
     ["Ears", "👂"],
-
     ["Nose", "👃"],
-
     ["Mouth", "👄"],
-
     ["Hand", "✋"],
-
     ["Leg", "🦵"],
-
     ["Foot", "🦶"],
-
     ["Head", "🙂"],
-
     ["Arm", "💪"],
-
     ["Teeth", "🦷"]
 
 ];
@@ -313,27 +233,16 @@ const bodyParts = [
 const animals = [
 
     ["Dog", "🐶"],
-
     ["Cat", "🐱"],
-
     ["Lion", "🦁"],
-
     ["Tiger", "🐯"],
-
     ["Elephant", "🐘"],
-
     ["Monkey", "🐒"],
-
     ["Rabbit", "🐰"],
-
     ["Horse", "🐴"],
-
     ["Cow", "🐮"],
-
     ["Giraffe", "🦒"],
-
     ["Panda", "🐼"],
-
     ["Bear", "🐻"]
 
 ];
@@ -346,23 +255,14 @@ const animals = [
 const colours = [
 
     ["Red", "#ff4d6d", "❤️"],
-
     ["Blue", "#4d96ff", "💙"],
-
     ["Green", "#38b000", "💚"],
-
     ["Yellow", "#ffd60a", "💛"],
-
     ["Orange", "#ff8500", "🧡"],
-
     ["Purple", "#9b5de5", "💜"],
-
     ["Pink", "#ff70a6", "💗"],
-
     ["Brown", "#9c6644", "🤎"],
-
     ["Black", "#222222", "🖤"],
-
     ["White", "#ffffff", "🤍"]
 
 ];
@@ -770,15 +670,70 @@ const hindiAlphabet = [
 
 
 // ============================================================
+// PAGE TRANSITION
+// ============================================================
+
+function playPageAnimation() {
+
+    if (!elementExists(learningPage)) {
+        return;
+    }
+
+    learningPage.style.opacity = "0";
+    learningPage.style.transform = "translateY(18px) scale(0.985)";
+
+    requestAnimationFrame(() => {
+
+        requestAnimationFrame(() => {
+
+            learningPage.style.transition =
+                "opacity 0.45s ease, transform 0.45s ease";
+
+            learningPage.style.opacity = "1";
+            learningPage.style.transform =
+                "translateY(0) scale(1)";
+
+        });
+
+    });
+
+}
+
+
+// ============================================================
+// REMOVE MENU MODE
+// ============================================================
+
+function removeLearningMenuMode() {
+
+    if (!elementExists(learningPage)) {
+        return;
+    }
+
+    learningPage.classList.remove(
+        "learning-menu-page"
+    );
+
+}
+
+
+// ============================================================
 // SHOW CATEGORY
 // ============================================================
 
 function showCategory(category) {
 
+    stopSpeech();
+
     currentCategory = category;
 
-    if (!elementExists(homePage) ||
-        !elementExists(learningPage)) {
+    removeLearningMenuMode();
+
+
+    if (
+        !elementExists(homePage) ||
+        !elementExists(learningPage)
+    ) {
 
         console.error(
             "Learning page elements not found."
@@ -796,11 +751,15 @@ function showCategory(category) {
     learningPage.style.display = "block";
 
 
+    playPageAnimation();
+
+
     window.scrollTo({
 
         top: 0,
 
-        behavior: APP_SETTINGS.scrollBehavior
+        behavior:
+            APP_SETTINGS.scrollBehavior
 
     });
 
@@ -973,6 +932,26 @@ function animateLearningCards() {
                 card.style.animationDelay =
                     `${index * APP_SETTINGS.cardAnimationDelay}ms`;
 
+                card.style.opacity = "0";
+                card.style.transform =
+                    "translateY(18px) scale(0.96)";
+
+                requestAnimationFrame(() => {
+
+                    setTimeout(() => {
+
+                        card.style.transition =
+                            "opacity 0.45s ease, transform 0.45s ease";
+
+                        card.style.opacity = "1";
+
+                        card.style.transform =
+                            "translateY(0) scale(1)";
+
+                    }, index * APP_SETTINGS.cardAnimationDelay);
+
+                });
+
             }
         );
 
@@ -1013,7 +992,7 @@ function showAlphabet() {
                     role="button"
                     data-index="${index}"
                     onclick="handleAlphabetClick(this, '${letter}', '${word}')"
-                    onkeydown="handleCardKey(event, this, '${letter}', '${word}')"
+                    onkeydown="handleCardKey(event, this, '${letter} for ${word}')"
                 >
 
                     <div class="letter">
@@ -1279,7 +1258,7 @@ function animateCard(card) {
 
 
 // ============================================================
-// SPEECH FUNCTION
+// SPEECH
 // ============================================================
 
 function speak(text) {
@@ -1307,47 +1286,48 @@ function speak(text) {
     speech.rate =
         APP_SETTINGS.speechRate;
 
-
     speech.pitch =
         APP_SETTINGS.speechPitch;
-
 
     speech.volume =
         APP_SETTINGS.speechVolume;
 
-
-    speech.lang = "en-IN";
+    speech.lang =
+        "en-IN";
 
 
     currentSpeech =
         speech;
 
 
-    speech.onstart = function () {
+    speech.onstart =
+        function () {
 
-        document.body.classList.add(
-            "speaking"
-        );
+            document.body.classList.add(
+                "speaking"
+            );
 
-    };
-
-
-    speech.onend = function () {
-
-        document.body.classList.remove(
-            "speaking"
-        );
-
-    };
+        };
 
 
-    speech.onerror = function () {
+    speech.onend =
+        function () {
 
-        document.body.classList.remove(
-            "speaking"
-        );
+            document.body.classList.remove(
+                "speaking"
+            );
 
-    };
+        };
+
+
+    speech.onerror =
+        function () {
+
+            document.body.classList.remove(
+                "speaking"
+            );
+
+        };
 
 
     window.speechSynthesis.speak(
@@ -1429,7 +1409,7 @@ function resumeSpeech() {
 
 
 // ============================================================
-// TABLES PAGE
+// TABLES
 // ============================================================
 
 function showTables() {
@@ -1485,7 +1465,7 @@ function showTables() {
 
 
 // ============================================================
-// SHOW INDIVIDUAL TABLE
+// SHOW TABLE
 // ============================================================
 
 function showTable(number) {
@@ -1585,7 +1565,7 @@ function showTable(number) {
 
 
 // ============================================================
-// FRUITS PAGE
+// FRUITS
 // ============================================================
 
 function showFruits() {
@@ -1595,7 +1575,7 @@ function showFruits() {
 
 
     fruits.forEach(
-        (item, index) => {
+        (item) => {
 
             const name =
                 escapeHTML(item[0]);
@@ -1647,7 +1627,7 @@ function showFruits() {
 
 
 // ============================================================
-// BODY PARTS PAGE
+// BODY PARTS
 // ============================================================
 
 function showBodyParts() {
@@ -1705,7 +1685,7 @@ function showBodyParts() {
 
 
 // ============================================================
-// ANIMALS PAGE
+// ANIMALS
 // ============================================================
 
 function showAnimals() {
@@ -1767,7 +1747,7 @@ function showAnimals() {
 
 
 // ============================================================
-// COLOURS PAGE
+// COLOURS
 // ============================================================
 
 function showColours() {
@@ -1840,7 +1820,6 @@ function goHome() {
 
     stopSpeech();
 
-
     currentCategory = "";
 
 
@@ -1850,8 +1829,15 @@ function goHome() {
             "active"
         );
 
+        learningPage.classList.remove(
+            "learning-menu-page"
+        );
+
         learningPage.style.display =
             "none";
+
+        learningPage.style.opacity = "";
+        learningPage.style.transform = "";
 
     }
 
@@ -1882,10 +1868,11 @@ function goHome() {
 
 function openHindiAlphabet() {
 
+    stopSpeech();
+
     currentCategory = "hindi";
 
-
-    stopSpeech();
+    removeLearningMenuMode();
 
 
     if (elementExists(homePage)) {
@@ -1904,6 +1891,8 @@ function openHindiAlphabet() {
 
         learningPage.style.display =
             "block";
+
+        playPageAnimation();
 
     }
 
@@ -1948,7 +1937,7 @@ function openHindiAlphabet() {
 
 
 // ============================================================
-// RENDER HINDI ALPHABET
+// RENDER HINDI
 // ============================================================
 
 function renderHindiAlphabet() {
@@ -2051,56 +2040,36 @@ function createHindiCard(
         >
 
             <div class="hindi-letter">
-
                 ${letter}
-
             </div>
-
 
             <div class="hindi-emoji">
-
                 ${emoji}
-
             </div>
-
 
             <div class="hindi-word">
-
                 ${word}
-
             </div>
-
 
             <div class="hindi-english">
-
                 ${english}
-
             </div>
-
 
             <div class="hindi-meaning">
-
                 ${meaning}
-
             </div>
-
 
             <button
                 type="button"
                 class="hindi-sound-btn"
-                onclick="event.stopPropagation(); handleHindiCardClick(document.querySelector('[data-hindi-index=&quot;${index}&quot;]'), ${index})"
+                onclick="event.stopPropagation(); handleHindiCardClick(this.closest('.hindi-card'), ${index})"
                 aria-label="उच्चारण सुनें"
             >
-
                 🔊
-
             </button>
 
-
             <div class="hindi-tap-text">
-
                 सुनने के लिए टैप करें
-
             </div>
 
         </div>
@@ -2127,8 +2096,21 @@ function animateHindiCards() {
         cards.forEach(
             (card, index) => {
 
-                card.style.animationDelay =
-                    `${index * 35}ms`;
+                card.style.opacity = "0";
+                card.style.transform =
+                    "translateY(16px) scale(0.97)";
+
+                setTimeout(() => {
+
+                    card.style.transition =
+                        "opacity 0.4s ease, transform 0.4s ease";
+
+                    card.style.opacity = "1";
+
+                    card.style.transform =
+                        "translateY(0) scale(1)";
+
+                }, index * 35);
 
             }
         );
@@ -2199,7 +2181,7 @@ function handleHindiKey(
 
 
 // ============================================================
-// HINDI CARD ACTIVE ANIMATION
+// HINDI CARD ACTIVE
 // ============================================================
 
 function animateHindiCard(card) {
@@ -2271,14 +2253,11 @@ function speakHindi(
     speech.lang =
         "hi-IN";
 
-
     speech.rate =
         0.70;
 
-
     speech.pitch =
         1.05;
-
 
     speech.volume =
         1;
@@ -2326,51 +2305,57 @@ function speakHindi(
 
 
 // ============================================================
-// END OF PART 1
+// 💡 LUXURY LAMP
 // ============================================================
-//
-// IMPORTANT:
-// Part 2 isi file ke END mein paste hoga.
-// Part 2 mein:
-// - Hindi voice selection
-// - Hindi pronunciation effects
-// - extra animations
-// - speech helpers
-// - table animations
-// - card effects
-// - mobile interactions
-//
-// ============================================================
-
-/* =========================================================
-
-/* =========================================================
-   💡 LUXURY LAMP START
-   ========================================================= */
 
 function turnLampOn() {
 
-    const intro = document.getElementById("studyIntro");
+    const intro =
+        document.getElementById(
+            "studyIntro"
+        );
+
 
     if (!intro) {
+
         return;
+
     }
 
-    if (intro.classList.contains("lamp-on")) {
+
+    if (
+        intro.classList.contains(
+            "lamp-on"
+        )
+    ) {
+
         return;
+
     }
 
-    intro.classList.add("lamp-on");
 
-    setTimeout(function () {
-        intro.classList.add("hide-intro");
-    }, 2200);
+    intro.classList.add(
+        "lamp-on"
+    );
+
+
+    setTimeout(
+        function () {
+
+            intro.classList.add(
+                "hide-intro"
+            );
+
+        },
+        2200
+    );
+
 }
 
 
-/* =========================================================
-   🚀 START LEARNING - FULL LEARNING MENU
-   ========================================================= */
+// ============================================================
+// 🚀 START LEARNING
+// ============================================================
 
 function openLearningMenu() {
 
@@ -2379,36 +2364,42 @@ function openLearningMenu() {
     currentCategory = "menu";
 
 
-    // Hide Home Page
     if (elementExists(homePage)) {
-        homePage.style.display = "none";
+
+        homePage.style.display =
+            "none";
+
     }
 
 
-    // Show Learning Page
     if (elementExists(learningPage)) {
 
         learningPage.classList.remove(
             "learning-menu-page"
         );
 
-        // Restart animation
         void learningPage.offsetWidth;
 
-        learningPage.classList.add("active");
+        learningPage.classList.add(
+            "active"
+        );
 
         learningPage.classList.add(
             "learning-menu-page"
         );
 
-        learningPage.style.display = "block";
+        learningPage.style.display =
+            "block";
+
+        playPageAnimation();
+
     }
 
 
-    // Change Header
     if (elementExists(learningIcon)) {
 
-        learningIcon.textContent = "🎯";
+        learningIcon.textContent =
+            "🎯";
 
     }
 
@@ -2429,11 +2420,9 @@ function openLearningMenu() {
     }
 
 
-    // Render Categories
     renderLearningMenu();
 
 
-    // Scroll to top
     window.scrollTo({
 
         top: 0,
@@ -2445,14 +2434,16 @@ function openLearningMenu() {
 }
 
 
-/* =========================================================
-   🎯 RENDER LEARNING MENU
-   ========================================================= */
+// ============================================================
+// 🎯 LEARNING MENU
+// ============================================================
 
 function renderLearningMenu() {
 
     if (!elementExists(learningContent)) {
+
         return;
+
     }
 
 
@@ -2461,6 +2452,7 @@ function renderLearningMenu() {
         <div class="learning-menu-intro">
 
             <div class="learning-menu-stars">
+                ✦ ✧ ✦ ✧ ✦
             </div>
 
             <h2>
@@ -2476,8 +2468,6 @@ function renderLearningMenu() {
 
         <div class="learning-menu-grid">
 
-
-            <!-- ABC -->
 
             <button
                 class="learning-menu-card menu-blue"
@@ -2507,8 +2497,6 @@ function renderLearningMenu() {
             </button>
 
 
-            <!-- HINDI -->
-
             <button
                 class="learning-menu-card menu-hindi"
                 type="button"
@@ -2536,8 +2524,6 @@ function renderLearningMenu() {
 
             </button>
 
-
-            <!-- DAYS -->
 
             <button
                 class="learning-menu-card menu-purple"
@@ -2567,8 +2553,6 @@ function renderLearningMenu() {
             </button>
 
 
-            <!-- MONTHS -->
-
             <button
                 class="learning-menu-card menu-pink"
                 type="button"
@@ -2596,8 +2580,6 @@ function renderLearningMenu() {
 
             </button>
 
-
-            <!-- TABLES -->
 
             <button
                 class="learning-menu-card menu-orange"
@@ -2627,8 +2609,6 @@ function renderLearningMenu() {
             </button>
 
 
-            <!-- FRUITS -->
-
             <button
                 class="learning-menu-card menu-red"
                 type="button"
@@ -2656,8 +2636,6 @@ function renderLearningMenu() {
 
             </button>
 
-
-            <!-- BODY PARTS -->
 
             <button
                 class="learning-menu-card menu-green"
@@ -2687,8 +2665,6 @@ function renderLearningMenu() {
             </button>
 
 
-            <!-- ANIMALS -->
-
             <button
                 class="learning-menu-card menu-yellow"
                 type="button"
@@ -2716,8 +2692,6 @@ function renderLearningMenu() {
 
             </button>
 
-
-            <!-- COLOURS -->
 
             <button
                 class="learning-menu-card menu-cyan"
@@ -2759,72 +2733,222 @@ function renderLearningMenu() {
     `;
 
 
-    // Animate menu cards
+    // ========================================================
+    // MENU CARD ANIMATION
+    // ========================================================
+
     const cards =
         document.querySelectorAll(
             ".learning-menu-card"
         );
 
 
-    cards.forEach(function(card, index) {
+    cards.forEach(
+        function(card, index) {
 
-        card.style.setProperty(
-            "--menu-delay",
-            `${index * 80}ms`
-        );
+            card.style.opacity = "0";
 
-    });
+            card.style.transform =
+                "translateY(25px) scale(0.94)";
+
+
+            card.style.setProperty(
+                "--menu-delay",
+                `${index * 80}ms`
+            );
+
+
+            setTimeout(
+                function() {
+
+                    card.style.transition =
+                        "opacity 0.55s ease, transform 0.55s cubic-bezier(.2,.8,.2,1)";
+
+                    card.style.opacity = "1";
+
+                    card.style.transform =
+                        "translateY(0) scale(1)";
+
+                },
+                80 + index * 80
+            );
+
+        }
+    );
 
 }
 
 
-/* =========================================================
-   🔙 BACK TO LEARNING MENU
-   ========================================================= */
+// ============================================================
+// 🔙 BACK BUTTON SYSTEM
+// ============================================================
+//
+// IMPORTANT:
+//
+// Topic page:
+// ABC → Back → Learning Categories
+//
+// Learning Categories:
+// Categories → Back → Home
+//
+// ============================================================
+
 function backToLearningMenu() {
 
     stopSpeech();
 
+
+    // --------------------------------------------------------
+    // IF ALREADY ON LEARNING MENU → GO HOME
+    // --------------------------------------------------------
+
+    if (
+        currentCategory === "menu"
+    ) {
+
+        goHome();
+
+        return;
+
+    }
+
+
+    // --------------------------------------------------------
+    // OTHERWISE TOPIC → LEARNING MENU
+    // --------------------------------------------------------
+
     currentCategory = "menu";
 
-    if (elementExists(learningPage)) {
-        learningPage.classList.add("active");
-        learningPage.classList.add("learning-menu-page");
-        learningPage.style.display = "block";
+
+    if (elementExists(homePage)) {
+
+        homePage.style.display =
+            "none";
+
     }
+
+
+    if (elementExists(learningPage)) {
+
+        learningPage.classList.remove(
+            "learning-menu-page"
+        );
+
+        void learningPage.offsetWidth;
+
+        learningPage.classList.add(
+            "active"
+        );
+
+        learningPage.classList.add(
+            "learning-menu-page"
+        );
+
+        learningPage.style.display =
+            "block";
+
+        playPageAnimation();
+
+    }
+
 
     if (elementExists(learningIcon)) {
-        learningIcon.textContent = "🚀";
+
+        learningIcon.textContent =
+            "🎯";
+
     }
+
 
     if (elementExists(learningTitle)) {
-        learningTitle.textContent = "Choose Your Learning";
+
+        learningTitle.textContent =
+            "What do you want to learn?";
+
     }
+
 
     if (elementExists(learningSubtitle)) {
+
         learningSubtitle.textContent =
-            "Pick a topic and let's start learning! ✨";
+            "Choose a topic and let's start learning! ✨";
+
     }
 
-    if (elementExists(learningContent)) {
-        learningContent.innerHTML = renderLearningMenu();
-    }
 
-    requestAnimationFrame(() => {
+    // IMPORTANT:
+    // renderLearningMenu() already writes
+    // HTML into learningContent.
+    //
+    // DO NOT WRITE:
+    // learningContent.innerHTML = renderLearningMenu();
+    //
+    // That causes undefined.
 
-        document
-            .querySelectorAll(".learning-choice-card")
-            .forEach((card, index) => {
+    renderLearningMenu();
 
-                card.style.animationDelay =
-                    `${index * 70}ms`;
-
-            });
-
-    });
 
     window.scrollTo({
+
         top: 0,
+
         behavior: "smooth"
+
     });
+
 }
+
+
+// ============================================================
+// OPTIONAL: DIRECT BACK ROUTER
+// ============================================================
+//
+// Agar future mein HTML button ko
+// onclick="goBackFromLearning()"
+// karna ho, ye function ready hai.
+// ============================================================
+
+function goBackFromLearning() {
+
+    stopSpeech();
+
+
+    if (
+        currentCategory === "menu"
+    ) {
+
+        goHome();
+
+        return;
+
+    }
+
+
+    backToLearningMenu();
+
+}
+
+
+// ============================================================
+// PAGE STARTUP
+// ============================================================
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function() {
+
+        if (elementExists(learningPage)) {
+
+            learningPage.style.opacity = "1";
+            learningPage.style.transform =
+                "translateY(0) scale(1)";
+
+        }
+
+    }
+);
+
+
+// ============================================================
+// END OF SCRIPT
+// ============================================================
