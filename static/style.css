@@ -5653,3 +5653,37 @@ body {
     }
 
 }
+
+/* =========================================================
+   LEARNING CATEGORY HEADING - POSITION FIX
+   ========================================================= */
+
+.learning-menu-page .learning-top {
+    padding-bottom: 8px;
+}
+
+.learning-menu-page .learning-top h1 {
+    margin-top: -6px;
+    margin-bottom: 4px;
+}
+
+.learning-menu-page .learning-top p {
+    margin-top: 0;
+}
+
+
+/* =========================================================
+   REMOVE ARROWS FROM LEARNING CATEGORY CARDS
+   ========================================================= */
+
+.learning-menu-page .learning-menu-card .arrow,
+.learning-menu-page .learning-menu-card .menu-arrow,
+.learning-menu-page .learning-menu-card .card-arrow {
+    display: none !important;
+}
+
+
+/* Agar arrow direct span mein laga hai */
+.learning-menu-page .learning-menu-card span:last-child {
+    display: none !important;
+}
