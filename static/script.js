@@ -2354,24 +2354,13 @@ function turnLampOn() {
         return;
     }
 
-    /* Prevent double click */
-
     if (intro.classList.contains("lamp-on")) {
         return;
     }
 
-
-    /* Turn ON the lamp */
-
     intro.classList.add("lamp-on");
 
-
-    /* Open existing website */
-
     setTimeout(function () {
-
         intro.classList.add("hide-intro");
-
     }, 2200);
-
 }
