@@ -1242,42 +1242,24 @@ function openLearningMenu() {
 
 
 function backToLearningMenu() {
-
-    // Agar kisi Learning World ke andar ka topic open hai
-    if (currentCategory === "language-topic") {
-        showLanguageMenu();
+   
+   if (currentCategory === "menu") {
+        goHome();
         return;
     }
 
-    if (currentCategory === "maths-topic") {
-        showMathsMenu();
-        return;
-    }
+    openLearningMenu();
+}
+function removeLearningMenuMode() {
 
-    if (currentCategory === "science-topic") {
-        showScienceMenu();
-        return;
+    if (learningPage) {
+        learningPage.classList.remove(
+            "learning-menu-page"
+        );
     }
-
-    if (currentCategory === "gk-topic") {
-        showGKMenu();
-        return;
-    }
-
-    if (currentCategory === "games-topic") {
-        showGamesMenu();
-        return;
-    }
-
-    if (currentCategory === "creativity-topic") {
-        showCreativityMenu();
-        return;
-    }
-
-    // Agar Choose Your Learning World par hain
-    goHome();
 }
 
+   
 
 /* =========================================================
    🌟 MAIN ADVENTURE MENU
