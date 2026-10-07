@@ -8753,3 +8753,184 @@ table tr:hover {
     }
 
 }
+
+/* =====================================================
+   ✨ LUXURY BRAND BADGE
+   Kids Learning World by Dalesh Raghav
+===================================================== */
+
+.welcome-pill {
+    position: relative;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 12px 24px;
+
+    margin-bottom: 18px;
+
+    border-radius: 50px;
+
+    /* Luxury glass background */
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,0.95),
+            rgba(255,248,220,0.92)
+        );
+
+    /* Golden luxury border */
+    border: 2px solid transparent;
+
+    background-image:
+        linear-gradient(
+            135deg,
+            #ffffff,
+            #fff7d6
+        ),
+        linear-gradient(
+            135deg,
+            #d4af37,
+            #fff1a8,
+            #d4af37,
+            #fff1a8,
+            #d4af37
+        );
+
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+
+    /* Premium shadow */
+    box-shadow:
+        0 8px 25px rgba(212,175,55,0.20),
+        0 0 18px rgba(255,215,90,0.18);
+
+    color: #6b4f12;
+
+    font-size: 15px;
+    font-weight: 800;
+
+    letter-spacing: 0.4px;
+
+    white-space: nowrap;
+
+    overflow: hidden;
+
+    transition:
+        transform 0.35s ease,
+        box-shadow 0.35s ease;
+}
+
+
+/* ✨ Shining effect */
+
+.welcome-pill::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: -120%;
+
+    width: 60%;
+    height: 100%;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255,255,255,0.85),
+            transparent
+        );
+
+    transform: skewX(-25deg);
+
+    animation:
+        luxuryShine 3.5s infinite;
+}
+
+
+/* ✨ Small golden glow */
+
+.welcome-pill::after {
+    content: "";
+
+    position: absolute;
+
+    inset: -3px;
+
+    border-radius: inherit;
+
+    background:
+        linear-gradient(
+            90deg,
+            #d4af37,
+            #fff2a8,
+            #d4af37
+        );
+
+    opacity: 0;
+
+    z-index: -1;
+
+    filter: blur(10px);
+
+    transition: opacity 0.3s ease;
+}
+
+
+/* Hover */
+
+.welcome-pill:hover {
+    transform:
+        translateY(-3px)
+        scale(1.03);
+
+    box-shadow:
+        0 12px 32px rgba(212,175,55,0.30),
+        0 0 28px rgba(255,215,90,0.25);
+}
+
+.welcome-pill:hover::after {
+    opacity: 0.7;
+}
+
+
+/* Shine animation */
+
+@keyframes luxuryShine {
+
+    0% {
+        left: -120%;
+    }
+
+    45%,
+    100% {
+        left: 140%;
+    }
+}
+
+
+/* =====================================================
+   📱 PHONE
+===================================================== */
+
+@media (max-width: 600px) {
+
+    .welcome-pill {
+        padding: 8px 14px;
+
+        margin-bottom: 10px;
+
+        font-size: 11px;
+
+        letter-spacing: 0.2px;
+
+        border-width: 1.5px;
+
+        box-shadow:
+            0 5px 16px rgba(212,175,55,0.18),
+            0 0 12px rgba(255,215,90,0.15);
+    }
+}
