@@ -8728,3 +8728,28 @@ table tr:hover {
         gap: 14px !important;
     }
 }
+
+/* 📱 MOBILE - ONLY HERO TEXT SIZE */
+
+@media (max-width: 600px) {
+
+    .hero h1 {
+        font-size: 27px !important;
+        line-height: 1.05 !important;
+        margin-top: 8px !important;
+        margin-bottom: 8px !important;
+    }
+
+    .hero h1 span {
+        font-size: 19px !important;
+        line-height: 1.1 !important;
+    }
+
+    .hero p {
+        font-size: 12px !important;
+        line-height: 1.35 !important;
+        margin-top: 8px !important;
+        margin-bottom: 10px !important;
+    }
+
+}
