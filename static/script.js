@@ -3090,9 +3090,9 @@ function startMathQuiz() {
 
     const questions = [
         {
-            question: "5 + 3 = ?",
-            options: [6, 7, 8, 9],
-            answer: 8
+            question: "5 + 8 = ?",
+            options: [13, 10, 18, 9],
+            answer: 13
         },
         {
             question: "10 - 4 = ?",
@@ -3100,9 +3100,9 @@ function startMathQuiz() {
             answer: 6
         },
         {
-            question: "3 × 4 = ?",
-            options: [7, 10, 12, 14],
-            answer: 12
+            question: "7 × 4 = ?",
+            options: [26, 10, 28, 14],
+            answer: 28
         },
         {
             question: "20 ÷ 5 = ?",
@@ -3110,9 +3110,9 @@ function startMathQuiz() {
             answer: 4
         },
         {
-            question: "7 + 2 = ?",
-            options: [8, 9, 10, 11],
-            answer: 9
+            question: "7 + 9 + 12 = ?",
+            options: [25, 29, 28, 11],
+            answer: 28
         }
     ];
 
