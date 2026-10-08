@@ -11226,3 +11226,1216 @@ table tr:hover {
     }
 
 }
+
+/* =========================================================
+   🌈 COLOURING WORLD
+   ========================================================= */
+
+.colouring-world {
+
+    width: 100%;
+    max-width: 1200px;
+
+    margin: 0 auto;
+
+    padding: 15px;
+
+    box-sizing: border-box;
+
+}
+
+
+/* =========================================================
+   🎨 INTRO
+   ========================================================= */
+
+.colouring-intro {
+
+    text-align: center;
+
+    margin-bottom: 28px;
+
+}
+
+
+.colouring-intro h2 {
+
+    margin: 0 0 8px;
+
+    font-size: 30px;
+
+    font-weight: 800;
+
+}
+
+
+.colouring-intro p {
+
+    margin: 0;
+
+    font-size: 17px;
+
+    opacity: 0.8;
+
+}
+
+
+/* =========================================================
+   🖼️ PICTURE GRID
+   ========================================================= */
+
+.colouring-picture-grid {
+
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+
+    gap: 20px;
+
+}
+
+
+.colouring-picture-card {
+
+    background:
+        rgba(255,255,255,0.97);
+
+    border-radius: 24px;
+
+    padding: 22px 15px;
+
+    text-align: center;
+
+    cursor: pointer;
+
+    border: 3px solid transparent;
+
+    box-shadow:
+        0 8px 25px rgba(0,0,0,0.12);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        border-color 0.2s ease;
+
+}
+
+
+.colouring-picture-card:hover {
+
+    transform:
+        translateY(-6px)
+        scale(1.02);
+
+    border-color:
+        #ffd000;
+
+    box-shadow:
+        0 15px 35px rgba(0,0,0,0.18);
+
+}
+
+
+.colouring-preview {
+
+    font-size: 72px;
+
+    line-height: 1.2;
+
+    min-height: 90px;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    margin-bottom: 10px;
+
+}
+
+
+.colouring-picture-card h3 {
+
+    margin:
+        5px 0;
+
+    font-size:
+        19px;
+
+    color:
+        #222;
+
+}
+
+
+.colouring-picture-card p {
+
+    margin:
+        5px 0 0;
+
+    font-size:
+        13px;
+
+    color:
+        #666;
+
+}
+
+
+/* =========================================================
+   ⭐ FIVE STARS PREVIEW
+   ========================================================= */
+
+.stars-preview {
+
+    display: flex !important;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 4px;
+
+    min-height: 90px;
+
+    font-size: 0 !important;
+
+    overflow: hidden;
+
+    white-space: nowrap;
+
+}
+
+
+.stars-preview span {
+
+    display: inline-block;
+
+    font-size: 34px;
+
+    line-height: 1;
+
+    flex-shrink: 1;
+
+}
+
+
+/* =========================================================
+   🎨 PROPER COLOURING PAGE
+   ========================================================= */
+
+.proper-colouring-page {
+
+    width: 100%;
+
+    max-width: 950px;
+
+    margin: 0 auto;
+
+    text-align: center;
+
+}
+
+
+/* =========================================================
+   🛠️ TOOLBAR
+   ========================================================= */
+
+.colouring-toolbar {
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    flex-wrap: wrap;
+
+    gap: 10px;
+
+    margin:
+        15px 0;
+
+}
+
+
+.colouring-tool-button {
+
+    border: none;
+
+    border-radius: 14px;
+
+    padding:
+        11px 18px;
+
+    background:
+        white;
+
+    color:
+        #222;
+
+    font-size:
+        15px;
+
+    font-weight:
+        700;
+
+    cursor:
+        pointer;
+
+    box-shadow:
+        0 5px 16px rgba(0,0,0,0.13);
+
+    transition:
+        transform 0.15s ease,
+        background 0.15s ease;
+
+}
+
+
+.colouring-tool-button:hover {
+
+    transform:
+        translateY(-2px);
+
+}
+
+
+.colouring-tool-button.active-colouring-tool {
+
+    background:
+        #ffd000;
+
+    box-shadow:
+        0 5px 18px rgba(255,180,0,0.35);
+
+}
+
+
+.save-colouring-button {
+
+    background:
+        #e8fff0;
+
+    color:
+        #16833a;
+
+}
+
+
+/* =========================================================
+   💾 SAVE MESSAGE
+   ========================================================= */
+
+.colouring-save-message {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    min-height: 20px;
+
+    padding:
+        8px 15px;
+
+    margin:
+        3px auto 12px;
+
+    border-radius:
+        14px;
+
+    background:
+        rgba(40,190,90,0.12);
+
+    color:
+        #16833a;
+
+    font-size:
+        14px;
+
+    font-weight:
+        800;
+
+    opacity:
+        0.75;
+
+    transition:
+        all 0.2s ease;
+
+}
+
+
+.colouring-save-message.show-colouring-message {
+
+    opacity:
+        1;
+
+    transform:
+        scale(1.04);
+
+    box-shadow:
+        0 5px 18px rgba(40,190,90,0.18);
+
+}
+
+
+/* =========================================================
+   🌈 COLOUR AREA
+   ========================================================= */
+
+.colouring-colour-area {
+
+    width: 100%;
+
+    background:
+        rgba(255,255,255,0.96);
+
+    border-radius:
+        22px;
+
+    padding:
+        16px;
+
+    box-sizing:
+        border-box;
+
+    box-shadow:
+        0 7px 22px rgba(0,0,0,0.10);
+
+    margin:
+        15px auto;
+
+}
+
+
+.current-colour-box {
+
+    display:
+        flex;
+
+    justify-content:
+        center;
+
+    align-items:
+        center;
+
+    gap:
+        10px;
+
+    margin-bottom:
+        15px;
+
+    font-weight:
+        700;
+
+}
+
+
+.current-colour {
+
+    width:
+        32px;
+
+    height:
+        32px;
+
+    border-radius:
+        50%;
+
+    display:
+        inline-block;
+
+    border:
+        3px solid #222;
+
+    box-shadow:
+        0 2px 7px rgba(0,0,0,0.2);
+
+}
+
+
+/* =========================================================
+   🎨 PALETTE
+   ========================================================= */
+
+.colouring-palette {
+
+    display:
+        flex;
+
+    justify-content:
+        center;
+
+    align-items:
+        center;
+
+    flex-wrap:
+        wrap;
+
+    gap:
+        10px;
+
+}
+
+
+.colouring-colour-button {
+
+    width:
+        39px;
+
+    height:
+        39px;
+
+    padding:
+        0;
+
+    border-radius:
+        50%;
+
+    border:
+        3px solid white;
+
+    outline:
+        2px solid rgba(0,0,0,0.18);
+
+    cursor:
+        pointer;
+
+    box-sizing:
+        border-box;
+
+    transition:
+        transform 0.15s ease,
+        outline 0.15s ease;
+
+}
+
+
+.colouring-colour-button:hover {
+
+    transform:
+        scale(1.13);
+
+}
+
+
+.colouring-colour-button.selected-colouring-color {
+
+    transform:
+        scale(1.18);
+
+    outline:
+        4px solid #222;
+
+}
+
+
+/* =========================================================
+   🖼️ DRAWING BOARD
+   ========================================================= */
+
+.colouring-drawing-board {
+
+    width:
+        100%;
+
+    max-width:
+        850px;
+
+    min-height:
+        430px;
+
+    margin:
+        20px auto;
+
+    padding:
+        15px;
+
+    box-sizing:
+        border-box;
+
+    background:
+        white;
+
+    border-radius:
+        26px;
+
+    box-shadow:
+        0 10px 30px rgba(0,0,0,0.15);
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    overflow:
+        hidden;
+
+}
+
+
+/* =========================================================
+   🎨 SVG
+   ========================================================= */
+
+.colouring-svg {
+
+    display:
+        block;
+
+    width:
+        100%;
+
+    max-width:
+        800px;
+
+    height:
+        auto;
+
+    margin:
+        auto;
+
+}
+
+
+/* =========================================================
+   🖌️ CLICKABLE PART
+   ========================================================= */
+
+.colour-part {
+
+    cursor:
+        pointer;
+
+    transition:
+        fill 0.12s ease;
+
+}
+
+
+.colour-part:hover {
+
+    filter:
+        brightness(0.96);
+
+}
+
+
+/* =========================================================
+   💡 HELP
+   ========================================================= */
+
+.colouring-help {
+
+    max-width:
+        750px;
+
+    margin:
+        15px auto;
+
+    padding:
+        13px 18px;
+
+    border-radius:
+        16px;
+
+    background:
+        rgba(255,255,255,0.92);
+
+    font-size:
+        16px;
+
+    font-weight:
+        600;
+
+}
+
+
+/* =========================================================
+   📱 TABLET
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+    .colouring-picture-grid {
+
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+        gap:
+            15px;
+
+    }
+
+}
+
+
+/* =========================================================
+   📱 MOBILE
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    .colouring-world {
+
+        padding:
+            10px;
+
+    }
+
+
+    .colouring-intro h2 {
+
+        font-size:
+            24px;
+
+    }
+
+
+    .colouring-intro p {
+
+        font-size:
+            14px;
+
+    }
+
+
+    .colouring-picture-grid {
+
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+        gap:
+            10px;
+
+    }
+
+
+    .colouring-picture-card {
+
+        padding:
+            14px 8px;
+
+        border-radius:
+            18px;
+
+    }
+
+
+    .colouring-preview {
+
+        font-size:
+            48px;
+
+        min-height:
+            60px;
+
+    }
+
+
+    .stars-preview {
+
+        min-height:
+            60px;
+
+        gap:
+            2px;
+
+    }
+
+
+    .stars-preview span {
+
+        font-size:
+            22px;
+
+    }
+
+
+    .colouring-picture-card h3 {
+
+        font-size:
+            15px;
+
+    }
+
+
+    .colouring-picture-card p {
+
+        font-size:
+            11px;
+
+    }
+
+
+    .colouring-toolbar {
+
+        gap:
+            7px;
+
+    }
+
+
+    .colouring-tool-button {
+
+        padding:
+            9px 11px;
+
+        font-size:
+            13px;
+
+        border-radius:
+            11px;
+
+    }
+
+
+    .colouring-save-message {
+
+        width:
+            100%;
+
+        box-sizing:
+            border-box;
+
+        font-size:
+            12px;
+
+    }
+
+
+    .colouring-colour-area {
+
+        padding:
+            12px;
+
+    }
+
+
+    .colouring-palette {
+
+        gap:
+            8px;
+
+    }
+
+
+    .colouring-colour-button {
+
+        width:
+            33px;
+
+        height:
+            33px;
+
+    }
+
+
+    .colouring-drawing-board {
+
+        min-height:
+            280px;
+
+        padding:
+            6px;
+
+        border-radius:
+            18px;
+
+    }
+
+
+    .colouring-help {
+
+        font-size:
+            13px;
+
+        padding:
+            10px;
+
+    }
+
+}
+
+
+/* =========================================================
+   📱 SMALL PHONE
+   ========================================================= */
+
+@media (max-width: 380px) {
+
+    .colouring-preview {
+
+        font-size:
+            42px;
+
+    }
+
+
+    .stars-preview span {
+
+        font-size:
+            19px;
+
+    }
+
+
+    .colouring-picture-card h3 {
+
+        font-size:
+            14px;
+
+    }
+
+
+    .colouring-colour-button {
+
+        width:
+            30px;
+
+        height:
+            30px;
+
+    }
+
+
+    .colouring-tool-button {
+
+        padding:
+            8px 9px;
+
+        font-size:
+            12px;
+
+    }
+
+}
+
+/* =========================================================
+   🎨 PREMIUM COLOURING TOOLBAR BUTTONS
+   ========================================================= */
+
+.colouring-toolbar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 14px;
+
+    margin: 18px auto 20px;
+    padding: 12px;
+
+    background: rgba(255, 255, 255, 0.82);
+    border: 2px solid rgba(120, 90, 200, 0.18);
+    border-radius: 22px;
+
+    box-shadow:
+        0 8px 25px rgba(0, 0, 0, 0.10),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+
+/* =========================================================
+   ✨ ALL 4 BUTTONS
+   ========================================================= */
+
+.colouring-tool-button {
+
+    position: relative;
+
+    min-width: 135px;
+
+    padding: 13px 20px;
+
+    border-radius: 16px;
+
+    border: 3px solid #ffffff;
+
+    font-size: 15px;
+    font-weight: 800;
+
+    letter-spacing: 0.2px;
+
+    cursor: pointer;
+
+    color: #222;
+
+    background: linear-gradient(
+        145deg,
+        #ffffff,
+        #f3f3f3
+    );
+
+    box-shadow:
+        0 5px 0 rgba(0, 0, 0, 0.12),
+        0 9px 18px rgba(0, 0, 0, 0.12);
+
+    transition:
+        transform 0.18s ease,
+        box-shadow 0.18s ease,
+        border-color 0.18s ease,
+        filter 0.18s ease;
+}
+
+
+/* =========================================================
+   🖱️ HOVER
+   ========================================================= */
+
+.colouring-tool-button:hover {
+
+    transform: translateY(-4px);
+
+    box-shadow:
+        0 8px 0 rgba(0, 0, 0, 0.10),
+        0 14px 25px rgba(0, 0, 0, 0.17);
+
+    filter: brightness(1.03);
+}
+
+
+/* =========================================================
+   👆 CLICK
+   ========================================================= */
+
+.colouring-tool-button:active {
+
+    transform: translateY(2px);
+
+    box-shadow:
+        0 2px 0 rgba(0, 0, 0, 0.12),
+        0 5px 10px rgba(0, 0, 0, 0.10);
+}
+
+
+/* =========================================================
+   ⬅️ PICTURES
+   ========================================================= */
+
+.colouring-tool-button[onclick="openColouring()"] {
+
+    border-color: #7c5cff;
+
+    background: linear-gradient(
+        145deg,
+        #f1edff,
+        #ffffff
+    );
+
+    color: #5a3fd6;
+
+    box-shadow:
+        0 5px 0 #c9bfff,
+        0 10px 20px rgba(124, 92, 255, 0.20);
+}
+
+
+.colouring-tool-button[onclick="openColouring()"]:hover {
+
+    border-color: #6244e8;
+
+    box-shadow:
+        0 8px 0 #b7aaff,
+        0 14px 25px rgba(124, 92, 255, 0.28);
+}
+
+
+/* =========================================================
+   🧽 ERASER
+   ========================================================= */
+
+#colouringEraserButton {
+
+    border-color: #00a8c8;
+
+    background: linear-gradient(
+        145deg,
+        #e9fbff,
+        #ffffff
+    );
+
+    color: #007c99;
+
+    box-shadow:
+        0 5px 0 #a7dfea,
+        0 10px 20px rgba(0, 168, 200, 0.18);
+}
+
+
+#colouringEraserButton:hover {
+
+    border-color: #008eaa;
+
+    box-shadow:
+        0 8px 0 #91d4e0,
+        0 14px 25px rgba(0, 168, 200, 0.26);
+}
+
+
+/* Active eraser */
+
+#colouringEraserButton.active-colouring-tool {
+
+    border-color: #00849d;
+
+    background: linear-gradient(
+        145deg,
+        #bff5ff,
+        #e8fcff
+    );
+
+    color: #005d70;
+
+    transform: translateY(-2px) scale(1.03);
+
+    box-shadow:
+        0 5px 0 #74c5d3,
+        0 12px 25px rgba(0, 168, 200, 0.30);
+}
+
+
+/* =========================================================
+   💾 SAVE
+   ========================================================= */
+
+.save-colouring-button {
+
+    border-color: #20a957 !important;
+
+    background: linear-gradient(
+        145deg,
+        #eafff1,
+        #ffffff
+    ) !important;
+
+    color: #13833e !important;
+
+    box-shadow:
+        0 5px 0 #a8dfbb,
+        0 10px 20px rgba(32, 169, 87, 0.20) !important;
+}
+
+
+.save-colouring-button:hover {
+
+    border-color: #168c46 !important;
+
+    box-shadow:
+        0 8px 0 #91d4a8,
+        0 14px 25px rgba(32, 169, 87, 0.28) !important;
+}
+
+
+/* =========================================================
+   🔄 RESET
+   ========================================================= */
+
+.colouring-tool-button[onclick="resetColouringDrawing()"] {
+
+    border-color: #ff8a00;
+
+    background: linear-gradient(
+        145deg,
+        #fff4e5,
+        #ffffff
+    );
+
+    color: #d96b00;
+
+    box-shadow:
+        0 5px 0 #f4c48e,
+        0 10px 20px rgba(255, 138, 0, 0.20);
+}
+
+
+.colouring-tool-button[onclick="resetColouringDrawing()"]:hover {
+
+    border-color: #e87900;
+
+    box-shadow:
+        0 8px 0 #eeb87d,
+        0 14px 25px rgba(255, 138, 0, 0.28);
+}
+
+
+/* =========================================================
+   📱 MOBILE
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    .colouring-toolbar {
+
+        gap: 9px;
+
+        padding: 10px;
+
+        margin:
+            12px auto 16px;
+
+        border-radius:
+            18px;
+
+    }
+
+
+    .colouring-tool-button {
+
+        min-width:
+            calc(50% - 8px);
+
+        padding:
+            11px 8px;
+
+        font-size:
+            13px;
+
+        border-radius:
+            13px;
+
+    }
+
+}
+
+
+/* =========================================================
+   📱 VERY SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 380px) {
+
+    .colouring-toolbar {
+
+        gap:
+            7px;
+
+    }
+
+
+    .colouring-tool-button {
+
+        min-width:
+            calc(50% - 6px);
+
+        padding:
+            10px 5px;
+
+        font-size:
+            12px;
+
+        border-width:
+            2px;
+
+    }
+
+}
