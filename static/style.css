@@ -16272,3 +16272,32 @@ table tr:hover {
     }
 }
 }
+
+/* =========================================================
+   🎁 GIFT CLICK FIX
+========================================================= */
+
+/* Decorative layers click ko block nahi karenge */
+.gift-night-sky,
+.gift-stars,
+.gift-yellow-glow,
+.gift-light-particles,
+.gift-books,
+.gift-box-inner-glow,
+.gift-shadow,
+.gift-message {
+    pointer-events: none !important;
+}
+
+/* Gift area itself */
+.gift-box-area {
+    pointer-events: none;
+}
+
+/* ONLY BOX clickable */
+#learningGiftBox {
+    pointer-events: auto !important;
+    cursor: pointer !important;
+    position: absolute;
+    z-index: 999999 !important;
+}
