@@ -1278,7 +1278,6 @@ function handleHindiKey(event, card, index) {
    🎁 LEARNING GIFT INTRO
    Glow → Shake → Open → Books → Home
 ========================================================= */
-
 window.openLearningGift = function () {
 
     const intro = document.getElementById("giftIntro");
@@ -1286,109 +1285,63 @@ window.openLearningGift = function () {
     const homePage = document.getElementById("homePage");
 
     if (!intro || !giftBox) {
-        console.error("Gift intro / gift box not found.");
+        console.error("Gift box not found!");
         return;
     }
 
-    /* Prevent second click */
     if (intro.classList.contains("gift-opening")) {
         return;
     }
 
-    /* Start */
+    console.log("🎁 Gift clicked!");
+
     intro.classList.add("gift-opening");
 
     giftBox.disabled = true;
 
-    /* -----------------------------------------
-       STEP 1
-       Yellow glow
-    ----------------------------------------- */
-
+    /* STEP 1 - Yellow glow */
     setTimeout(function () {
-
         intro.classList.add("gift-glowing");
-
     }, 50);
 
-
-    /* -----------------------------------------
-       STEP 2
-       Gift lid opens
-    ----------------------------------------- */
-
+    /* STEP 2 - Lid opens */
     setTimeout(function () {
-
         intro.classList.add("gift-open");
+    }, 800);
 
-    }, 850);
-
-
-    /* -----------------------------------------
-       STEP 3
-       Books come out
-    ----------------------------------------- */
-
+    /* STEP 3 - Books */
     setTimeout(function () {
-
         intro.classList.add("books-coming-out");
+    }, 1300);
 
-    }, 1350);
-
-
-    /* -----------------------------------------
-       STEP 4
-       Final magical glow
-    ----------------------------------------- */
-
+    /* STEP 4 - Final glow */
     setTimeout(function () {
-
         intro.classList.add("gift-final-glow");
+    }, 2000);
 
-    }, 2050);
-
-
-    /* -----------------------------------------
-       STEP 5
-       Home page appears
-    ----------------------------------------- */
-
+    /* STEP 5 - Home */
     setTimeout(function () {
 
         if (homePage) {
-
             homePage.style.display = "block";
-
-            homePage.classList.add(
-                "home-page-opening"
-            );
+            homePage.classList.add("home-page-opening");
         }
 
         intro.classList.add("gift-hide");
 
     }, 2900);
 
-
-    /* -----------------------------------------
-       STEP 6
-       Remove intro completely
-    ----------------------------------------- */
-
+    /* STEP 6 */
     setTimeout(function () {
 
         intro.style.display = "none";
 
         if (homePage) {
-
             homePage.style.display = "block";
-
-            homePage.classList.remove(
-                "home-page-opening"
-            );
+            homePage.classList.remove("home-page-opening");
         }
 
     }, 4000);
-
 };
 
 /* =========================================================
