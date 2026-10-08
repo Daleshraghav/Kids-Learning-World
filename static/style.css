@@ -9913,3 +9913,315 @@ table tr:hover {
     }
 
 }
+
+/* =========================================================
+   🎨 COLOURING WORLD
+   ========================================================= */
+
+.colouring-world {
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;
+    padding: 15px;
+    box-sizing: border-box;
+}
+
+.colouring-palette {
+    width: 100%;
+    background: rgba(255,255,255,0.96);
+    border-radius: 22px;
+    padding: 18px;
+    margin-bottom: 25px;
+    box-sizing: border-box;
+    text-align: center;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+}
+
+.colouring-palette h2,
+.colouring-picture-section h2 {
+    margin: 5px 0 18px;
+}
+
+.colour-palette-grid {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    gap: 10px;
+}
+
+.colour-choice {
+    border: 2px solid transparent;
+    background: white;
+    border-radius: 14px;
+    padding: 8px 5px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.colour-choice:hover {
+    transform: translateY(-3px);
+}
+
+.colour-choice.selected {
+    border-color: #222;
+    transform: scale(1.05);
+}
+
+.colour-circle {
+    display: block;
+    width: 35px;
+    height: 35px;
+    margin: auto;
+    border-radius: 50%;
+    border: 2px solid #555;
+}
+
+.colour-name {
+    display: block;
+    margin-top: 5px;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.selected-colour-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 15px;
+    font-weight: 700;
+}
+
+.selected-colour-box span {
+    width: 28px;
+    height: 28px;
+    display: inline-block;
+    border-radius: 50%;
+    border: 2px solid #333;
+}
+
+
+/* =========================================================
+   🖼️ PICTURE GRID
+   ========================================================= */
+
+.colouring-picture-section {
+    text-align: center;
+}
+
+.colouring-picture-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+}
+
+.colouring-picture-card {
+    border: none;
+    background: white;
+    border-radius: 22px;
+    padding: 20px 10px;
+    cursor: pointer;
+    box-shadow: 0 8px 22px rgba(0,0,0,0.12);
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.colouring-picture-card:hover {
+    transform: translateY(-7px) scale(1.02);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.18);
+}
+
+.colour-picture-emoji {
+    font-size: 70px;
+    line-height: 1;
+    margin-bottom: 12px;
+}
+
+.colour-picture-name {
+    font-size: 20px;
+    font-weight: 900;
+}
+
+.colour-picture-text {
+    margin-top: 7px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   🎨 SINGLE COLORING PAGE
+   ========================================================= */
+
+.single-colouring-page {
+    width: 100%;
+    max-width: 900px;
+    margin: auto;
+    text-align: center;
+    padding: 15px;
+    box-sizing: border-box;
+}
+
+.back-colouring-button {
+    border: none;
+    padding: 10px 18px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: 800;
+    margin-bottom: 15px;
+}
+
+.colouring-toolbar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    font-weight: 800;
+    margin-bottom: 15px;
+}
+
+.current-colour-dot {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    border: 3px solid #333;
+}
+
+
+/* =========================================================
+   🌈 MINI PALETTE
+   ========================================================= */
+
+.mini-colouring-palette {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 9px;
+    padding: 15px;
+    margin-bottom: 20px;
+    background: rgba(255,255,255,0.95);
+    border-radius: 20px;
+}
+
+.mini-colour {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    border: 3px solid white;
+    outline: 1px solid #777;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.mini-colour:hover,
+.mini-colour.selected {
+    transform: scale(1.18);
+    outline: 3px solid #222;
+}
+
+
+/* =========================================================
+   🖼️ BIG PICTURE
+   ========================================================= */
+
+.colouring-canvas-area {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 350px;
+}
+
+.big-colouring-picture {
+    background: white;
+    border-radius: 30px;
+    padding: 45px;
+    min-width: 300px;
+    min-height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 10px 35px rgba(0,0,0,0.15);
+}
+
+.colourable-object {
+    cursor: pointer;
+    user-select: none;
+}
+
+.colourable-shape {
+    width: 220px;
+    height: 220px;
+    border: 5px solid #222;
+    border-radius: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 140px;
+}
+
+.colouring-tip {
+    margin-top: 15px;
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   📱 MOBILE
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+    .colour-palette-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 7px;
+    }
+
+    .colour-circle {
+        width: 28px;
+        height: 28px;
+    }
+
+    .colour-name {
+        font-size: 8px;
+    }
+
+    .colouring-picture-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+
+    .colouring-picture-card {
+        padding: 14px 7px;
+        border-radius: 16px;
+    }
+
+    .colour-picture-emoji {
+        font-size: 48px;
+    }
+
+    .colour-picture-name {
+        font-size: 15px;
+    }
+
+    .colour-picture-text {
+        font-size: 9px;
+    }
+
+    .mini-colour {
+        width: 32px;
+        height: 32px;
+    }
+
+    .big-colouring-picture {
+        min-width: 0;
+        width: 90%;
+        min-height: 280px;
+        padding: 25px;
+    }
+
+    .colourable-shape {
+        width: 190px;
+        height: 190px;
+        font-size: 110px;
+    }
+}
