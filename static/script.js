@@ -2143,51 +2143,169 @@ function startSpellingGame() {
     );
 }
 /* =========================================================
-   🐱 EASY WORDS
+   📚 EASY WORDS — 100 WORDS + HINDI MEANING + VOICE
    ========================================================= */
 
 function openEasyWords() {
 
     const easyWords = [
-        ["CAT", "🐱"],
-        ["DOG", "🐶"],
-        ["SUN", "☀️"],
-        ["BAT", "🦇"],
-        ["CUP", "🥤"],
-        ["PEN", "🖊️"],
-        ["BUS", "🚌"],
-        ["CAR", "🚗"],
-        ["HAT", "🧢"],
-        ["FAN", "🪭"],
-        ["BOX", "📦"],
-        ["BOOK", "📚"]
+
+        ["CAT", "बिल्ली", "🐱"],
+        ["DOG", "कुत्ता", "🐶"],
+        ["SUN", "सूरज", "☀️"],
+        ["MOON", "चाँद", "🌙"],
+        ["STAR", "तारा", "⭐"],
+        ["BAT", "चमगादड़", "🦇"],
+        ["CUP", "कप", "🥤"],
+        ["PEN", "कलम", "🖊️"],
+        ["BOOK", "किताब", "📚"],
+        ["BAG", "बैग", "🎒"],
+
+        ["BUS", "बस", "🚌"],
+        ["CAR", "गाड़ी", "🚗"],
+        ["TRAIN", "रेलगाड़ी", "🚆"],
+        ["BIKE", "साइकिल", "🚲"],
+        ["BOAT", "नाव", "⛵"],
+        ["SHIP", "जहाज़", "🚢"],
+        ["PLANE", "हवाई जहाज़", "✈️"],
+        ["ROAD", "सड़क", "🛣️"],
+        ["HOUSE", "घर", "🏠"],
+        ["DOOR", "दरवाज़ा", "🚪"],
+
+        ["MOTHER", "माँ", "👩"],
+        ["FATHER", "पिता", "👨"],
+        ["BABY", "बच्चा", "👶"],
+        ["BOY", "लड़का", "👦"],
+        ["GIRL", "लड़की", "👧"],
+        ["MAN", "आदमी", "👨"],
+        ["WOMAN", "महिला", "👩"],
+        ["FAMILY", "परिवार", "👨‍👩‍👧‍👦"],
+        ["FRIEND", "दोस्त", "🧑‍🤝‍🧑"],
+        ["HOME", "घर", "🏡"],
+
+        ["APPLE", "सेब", "🍎"],
+        ["MANGO", "आम", "🥭"],
+        ["BANANA", "केला", "🍌"],
+        ["ORANGE", "संतरा", "🍊"],
+        ["GRAPES", "अंगूर", "🍇"],
+        ["GUAVA", "अमरूद", "🍐"],
+        ["PAPAYA", "पपीता", "🥭"],
+        ["WATERMELON", "तरबूज", "🍉"],
+        ["LEMON", "नींबू", "🍋"],
+        ["COCONUT", "नारियल", "🥥"],
+
+        ["MILK", "दूध", "🥛"],
+        ["WATER", "पानी", "💧"],
+        ["BREAD", "ब्रेड", "🍞"],
+        ["RICE", "चावल", "🍚"],
+        ["CAKE", "केक", "🎂"],
+        ["EGG", "अंडा", "🥚"],
+        ["SALT", "नमक", "🧂"],
+        ["SUGAR", "चीनी", "🍬"],
+        ["HONEY", "शहद", "🍯"],
+        ["FOOD", "खाना", "🍲"],
+
+        ["LION", "शेर", "🦁"],
+        ["TIGER", "बाघ", "🐯"],
+        ["ELEPHANT", "हाथी", "🐘"],
+        ["MONKEY", "बंदर", "🐒"],
+        ["HORSE", "घोड़ा", "🐴"],
+        ["COW", "गाय", "🐄"],
+        ["GOAT", "बकरी", "🐐"],
+        ["SHEEP", "भेड़", "🐑"],
+        ["RABBIT", "खरगोश", "🐰"],
+        ["BEAR", "भालू", "🐻"],
+
+        ["BIRD", "पक्षी", "🐦"],
+        ["FISH", "मछली", "🐟"],
+        ["DUCK", "बत्तख", "🦆"],
+        ["HEN", "मुर्गी", "🐔"],
+        ["PARROT", "तोता", "🦜"],
+        ["CROW", "कौआ", "🐦‍⬛"],
+        ["PIGEON", "कबूतर", "🕊️"],
+        ["PEACOCK", "मोर", "🦚"],
+        ["OWL", "उल्लू", "🦉"],
+        ["EAGLE", "गरुड़", "🦅"],
+
+        ["TREE", "पेड़", "🌳"],
+        ["FLOWER", "फूल", "🌸"],
+        ["ROSE", "गुलाब", "🌹"],
+        ["LEAF", "पत्ता", "🍃"],
+        ["GRASS", "घास", "🌱"],
+        ["PLANT", "पौधा", "🪴"],
+        ["SEED", "बीज", "🌱"],
+        ["SUN", "सूरज", "☀️"],
+        ["RAIN", "बारिश", "🌧️"],
+        ["CLOUD", "बादल", "☁️"],
+
+        ["EYE", "आँख", "👁️"],
+        ["EAR", "कान", "👂"],
+        ["NOSE", "नाक", "👃"],
+        ["MOUTH", "मुँह", "👄"],
+        ["HAND", "हाथ", "✋"],
+        ["FOOT", "पैर", "🦶"],
+        ["HEAD", "सिर", "🙂"],
+        ["HAIR", "बाल", "💇"],
+        ["TOOTH", "दाँत", "🦷"],
+        ["FACE", "चेहरा", "😀"],
+
+        ["RED", "लाल", "🔴"],
+        ["BLUE", "नीला", "🔵"],
+        ["GREEN", "हरा", "🟢"],
+        ["YELLOW", "पीला", "🟡"],
+        ["BLACK", "काला", "⚫"],
+        ["WHITE", "सफेद", "⚪"],
+        ["BIG", "बड़ा", "🔝"],
+        ["SMALL", "छोटा", "🔹"],
+        ["HAPPY", "खुश", "😊"],
+        ["GOOD", "अच्छा", "👍"]
+
     ];
 
     setupLearning(
         "📚",
         "Easy Words",
-        "Let's learn simple words!",
+        "100 easy English words with Hindi meanings!",
         `
 
-        <div class="cards-grid">
+        <div class="cards-grid easy-words-grid">
 
-            ${easyWords.map(item => `
+            ${easyWords.map((item, index) => `
 
-                <div
-                    class="learning-card"
-                    onclick="speak('${item[0]}', {lang:'en-US'})"
-                >
+                <div class="learning-card easy-word-card">
+
+                    <div class="word-number">
+                        ${index + 1}
+                    </div>
 
                     <div class="learning-emoji">
-                        ${item[1]}
+                        ${item[2]}
                     </div>
 
                     <div class="word">
                         ${item[0]}
                     </div>
 
-                    <div class="mini-text">
-                        🔊 Tap to hear
+                    <div class="hindi-word">
+                        ${item[1]}
+                    </div>
+
+                    <div class="word-voices">
+
+                        <button
+                            type="button"
+                            onclick="event.stopPropagation(); speak('${item[0]}', {lang:'en-US'})"
+                        >
+                            🔊 English
+                        </button>
+
+                        <button
+                            type="button"
+                            onclick="event.stopPropagation(); speak('${item[1]}', {lang:'hi-IN'})"
+                        >
+                            🔊 हिंदी
+                        </button>
+
                     </div>
 
                 </div>
@@ -2199,7 +2317,6 @@ function openEasyWords() {
         `
     );
 }
-
 
 /* =========================================================
    📖 STORIES
