@@ -9481,3 +9481,372 @@ table tr:hover {
         font-size: 8px;
     }
 }
+
+/* =========================================================
+   📚 EASY WORDS
+   100 WORDS + HINDI MEANING + ENGLISH/HINDI VOICE
+   ========================================================= */
+
+.easy-words-grid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+    padding: 15px;
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   🃏 EASY WORD CARD
+   ========================================================= */
+
+.easy-word-card {
+    position: relative;
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    padding: 18px 12px !important;
+    margin: 0 !important;
+
+    border-radius: 18px;
+
+    cursor: default;
+
+    overflow: hidden;
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+
+/* Card hover */
+
+.easy-word-card:hover {
+    transform: translateY(-6px) scale(1.02);
+}
+
+
+/* =========================================================
+   🔢 WORD NUMBER
+   ========================================================= */
+
+.easy-word-card .word-number {
+    align-self: flex-start;
+
+    font-size: 12px;
+    font-weight: 800;
+
+    opacity: 0.65;
+
+    margin-bottom: 4px;
+}
+
+
+/* =========================================================
+   🐱 EMOJI
+   ========================================================= */
+
+.easy-word-card .learning-emoji {
+    font-size: 48px;
+    line-height: 1;
+
+    margin: 8px 0 10px;
+
+    transition: transform 0.25s ease;
+}
+
+
+.easy-word-card:hover .learning-emoji {
+    transform: scale(1.15) rotate(3deg);
+}
+
+
+/* =========================================================
+   🇬🇧 ENGLISH WORD
+   ========================================================= */
+
+.easy-word-card .word {
+    width: 100%;
+
+    font-size: 24px;
+    line-height: 1.2;
+
+    font-weight: 900;
+
+    word-break: break-word;
+    overflow-wrap: anywhere;
+
+    margin: 3px 0;
+}
+
+
+/* =========================================================
+   🇮🇳 HINDI MEANING
+   ========================================================= */
+
+.easy-word-card .hindi-word {
+    width: 100%;
+
+    font-size: 19px;
+    line-height: 1.3;
+
+    font-weight: 700;
+
+    margin: 4px 0 10px;
+
+    word-break: break-word;
+}
+
+
+/* =========================================================
+   🔊 VOICE BUTTON AREA
+   ========================================================= */
+
+.easy-word-card .word-voices {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 6px;
+
+    margin-top: auto;
+}
+
+
+/* =========================================================
+   🔊 VOICE BUTTON
+   ========================================================= */
+
+.easy-word-card .word-voices button {
+    width: 100%;
+
+    border: none;
+    outline: none;
+
+    padding: 8px 6px;
+
+    border-radius: 9px;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        opacity 0.2s ease;
+}
+
+
+.easy-word-card .word-voices button:hover {
+    transform: scale(1.04);
+}
+
+
+.easy-word-card .word-voices button:active {
+    transform: scale(0.95);
+}
+
+
+/* =========================================================
+   📱 TABLET
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+    .easy-words-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 12px;
+        padding: 12px;
+    }
+
+    .easy-word-card {
+        padding: 15px 9px !important;
+    }
+
+    .easy-word-card .learning-emoji {
+        font-size: 42px;
+    }
+
+    .easy-word-card .word {
+        font-size: 20px;
+    }
+
+    .easy-word-card .hindi-word {
+        font-size: 16px;
+    }
+
+}
+
+
+/* =========================================================
+   📱 PHONE
+   3 CARDS PER ROW
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    .easy-words-grid {
+        width: 100%;
+
+        grid-template-columns:
+            repeat(3, minmax(0, 1fr));
+
+        gap: 8px;
+
+        padding: 8px;
+    }
+
+
+    .easy-word-card {
+
+        width: 100%;
+        min-width: 0;
+
+        padding: 10px 5px !important;
+
+        border-radius: 12px;
+    }
+
+
+    /* Number */
+
+    .easy-word-card .word-number {
+
+        font-size: 8px;
+
+        margin-bottom: 2px;
+    }
+
+
+    /* Emoji */
+
+    .easy-word-card .learning-emoji {
+
+        font-size: 30px;
+
+        margin: 5px 0 7px;
+    }
+
+
+    /* English */
+
+    .easy-word-card .word {
+
+        font-size: 13px;
+
+        line-height: 1.15;
+
+        margin: 2px 0;
+
+        word-break: break-word;
+    }
+
+
+    /* Hindi */
+
+    .easy-word-card .hindi-word {
+
+        font-size: 11px;
+
+        line-height: 1.2;
+
+        margin: 3px 0 7px;
+
+        word-break: break-word;
+    }
+
+
+    /* Voice buttons */
+
+    .easy-word-card .word-voices {
+
+        gap: 4px;
+
+        margin-top: 3px;
+    }
+
+
+    .easy-word-card .word-voices button {
+
+        font-size: 8px;
+
+        padding: 5px 2px;
+
+        min-height: 26px;
+
+        border-radius: 6px;
+
+        white-space: nowrap;
+    }
+
+}
+
+
+/* =========================================================
+   📱 VERY SMALL PHONES
+   ========================================================= */
+
+@media (max-width: 380px) {
+
+    .easy-words-grid {
+
+        gap: 6px;
+
+        padding: 6px;
+    }
+
+
+    .easy-word-card {
+
+        padding: 8px 3px !important;
+
+        border-radius: 10px;
+    }
+
+
+    .easy-word-card .learning-emoji {
+
+        font-size: 25px;
+    }
+
+
+    .easy-word-card .word {
+
+        font-size: 11px;
+    }
+
+
+    .easy-word-card .hindi-word {
+
+        font-size: 9px;
+    }
+
+
+    .easy-word-card .word-voices {
+
+        gap: 3px;
+    }
+
+
+    .easy-word-card .word-voices button {
+
+        font-size: 7px;
+
+        padding: 4px 1px;
+
+        min-height: 23px;
+    }
+
+}
