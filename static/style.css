@@ -12439,3 +12439,224 @@ table tr:hover {
     }
 
 }
+
+/* =========================================================
+   💡 LAMP INTRO → HOME TRANSITION
+   ========================================================= */
+
+#studyIntro {
+
+    position: fixed;
+    inset: 0;
+
+    z-index: 99999;
+
+    cursor: pointer;
+
+}
+
+
+/* =========================================================
+   🌟 LAMP ON / GOLDEN GLOW
+   ========================================================= */
+
+#studyIntro.lamp-on {
+
+    animation:
+        lampGlowUp 2.2s ease forwards;
+
+}
+
+
+/* Golden light spreading around lamp */
+
+#studyIntro.lamp-on::after {
+
+    content: "";
+
+    position: absolute;
+
+    left: 50%;
+    top: 53%;
+
+    width: 120px;
+    height: 120px;
+
+    transform:
+        translate(-50%, -50%);
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255, 226, 90, 0.95) 0%,
+            rgba(255, 203, 45, 0.65) 25%,
+            rgba(255, 184, 0, 0.30) 50%,
+            rgba(255, 184, 0, 0) 75%
+        );
+
+    filter:
+        blur(8px);
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    animation:
+        lampLightGlow 2.2s ease forwards;
+
+}
+
+
+/* =========================================================
+   ✨ LIGHT ANIMATION
+   ========================================================= */
+
+@keyframes lampLightGlow {
+
+    0% {
+
+        width: 100px;
+        height: 100px;
+
+        opacity: 0;
+
+    }
+
+    25% {
+
+        width: 230px;
+        height: 230px;
+
+        opacity: 0.75;
+
+    }
+
+    55% {
+
+        width: 480px;
+        height: 480px;
+
+        opacity: 0.55;
+
+    }
+
+    100% {
+
+        width: 900px;
+        height: 900px;
+
+        opacity: 0.08;
+
+    }
+
+}
+
+
+/* =========================================================
+   💡 WHOLE LAMP SCREEN BECOMES WARM
+   ========================================================= */
+
+@keyframes lampGlowUp {
+
+    0% {
+
+        filter:
+            brightness(1);
+
+    }
+
+    30% {
+
+        filter:
+            brightness(1.15);
+
+    }
+
+    60% {
+
+        filter:
+            brightness(1.35);
+
+    }
+
+    100% {
+
+        filter:
+            brightness(1.7);
+
+    }
+
+}
+
+
+/* =========================================================
+   🌙 FADE OUT INTRO
+   ========================================================= */
+
+#studyIntro.hide-intro {
+
+    animation:
+        lampIntroFadeOut 0.8s ease forwards;
+
+    pointer-events:
+        none;
+
+}
+
+
+@keyframes lampIntroFadeOut {
+
+    from {
+
+        opacity: 1;
+
+        visibility: visible;
+
+    }
+
+    to {
+
+        opacity: 0;
+
+        visibility: hidden;
+
+    }
+
+}
+
+
+/* =========================================================
+   🏠 HOME PAGE APPEAR
+   ========================================================= */
+
+#homePage.home-page-visible {
+
+    animation:
+        homePageReveal 0.7s ease forwards;
+
+}
+
+
+@keyframes homePageReveal {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(12px);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0);
+
+    }
+
+}
