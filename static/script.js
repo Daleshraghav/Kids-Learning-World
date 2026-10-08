@@ -5551,47 +5551,89 @@ let colouringEraser = false;
    🎨 COLOURS
    ========================================================= */
 
+/* =========================================================
+   🌈 COLOURING WORLD
+   ========================================================= */
+
+let colouringSelectedColor = "#ff0000";
+let colouringEraser = false;
+let currentColouringType = "";
+
+
+/* =========================================================
+   🎨 COLOUR PALETTE
+   ========================================================= */
+
 const colouringPalette = [
-    "#ff0000",
-    "#ff6b00",
-    "#ffd400",
-    "#00b83f",
-    "#00c853",
-    "#00bfff",
-    "#0066ff",
-    "#6a00ff",
-    "#b000ff",
-    "#ff00a8",
-    "#ff69b4",
-    "#8b4513",
-    "#000000",
-    "#ffffff",
-    "#777777",
-    "#00ffff",
-    "#7fff00",
-    "#ffd700",
-    "#ff4500",
-    "#8b0000"
+
+    "#ff0000",   // Red
+    "#ff6600",   // Orange
+    "#ffd000",   // Yellow
+    "#00b83f",   // Green
+    "#00c853",   // Bright Green
+    "#00bfff",   // Sky Blue
+    "#0066ff",   // Blue
+    "#6a00ff",   // Purple
+    "#b000ff",   // Violet
+    "#ff00a8",   // Pink
+    "#ff69b4",   // Light Pink
+    "#8b4513",   // Brown
+    "#000000",   // Black
+    "#ffffff",   // White
+    "#777777",   // Grey
+    "#00ffff",   // Cyan
+    "#7fff00",   // Lime
+    "#ffd700",   // Gold
+    "#ff4500",   // Red Orange
+    "#8b0000"    // Dark Red
+
 ];
 
 
 /* =========================================================
-   🌈 COLOURING MAIN MENU
+   💾 STORAGE
+   ========================================================= */
+
+const COLOURING_STORAGE_PREFIX =
+    "kidsLearningWorld_colouring_";
+
+
+function getColouringStorageKey(type) {
+
+    return (
+        COLOURING_STORAGE_PREFIX +
+        type
+    );
+
+}
+
+
+/* =========================================================
+   🌈 MAIN COLOURING MENU
    ========================================================= */
 
 function openColouring() {
 
+    currentColouringType = "";
+
     setupLearning(
+
         "🌈",
+
         "Colouring World",
+
         "Choose a picture and start colouring!",
+
         `
 
         <div class="colouring-world">
 
+
             <div class="colouring-intro">
 
-                <h2>🎨 Choose Your Picture</h2>
+                <h2>
+                    🎨 Choose Your Picture
+                </h2>
 
                 <p>
                     Click a picture and colour it!
@@ -5608,15 +5650,19 @@ function openColouring() {
                     class="colouring-picture-card"
                     onclick="openColouringPicture('luxuryhome')"
                 >
+
                     <div class="colouring-preview">
                         🏡
                     </div>
 
-                    <h3>Luxury Home</h3>
+                    <h3>
+                        Luxury Home
+                    </h3>
 
                     <p>
                         Big beautiful house
                     </p>
+
                 </div>
 
 
@@ -5625,15 +5671,19 @@ function openColouring() {
                     class="colouring-picture-card"
                     onclick="openColouringPicture('mountainriver')"
                 >
+
                     <div class="colouring-preview">
                         🏔️
                     </div>
 
-                    <h3>Mountain River</h3>
+                    <h3>
+                        Mountain River
+                    </h3>
 
                     <p>
                         Home • River • Trees
                     </p>
+
                 </div>
 
 
@@ -5642,15 +5692,19 @@ function openColouring() {
                     class="colouring-picture-card"
                     onclick="openColouringPicture('bigtree')"
                 >
+
                     <div class="colouring-preview">
                         🌳
                     </div>
 
-                    <h3>Big Tree</h3>
+                    <h3>
+                        Big Tree
+                    </h3>
 
                     <p>
                         Large beautiful tree
                     </p>
+
                 </div>
 
 
@@ -5659,15 +5713,19 @@ function openColouring() {
                     class="colouring-picture-card"
                     onclick="openColouringPicture('realfish')"
                 >
+
                     <div class="colouring-preview">
                         🐟
                     </div>
 
-                    <h3>Big Fish</h3>
+                    <h3>
+                        Big Fish
+                    </h3>
 
                     <p>
                         Detailed fish
                     </p>
+
                 </div>
 
 
@@ -5676,15 +5734,19 @@ function openColouring() {
                     class="colouring-picture-card"
                     onclick="openColouringPicture('waterbottles')"
                 >
+
                     <div class="colouring-preview">
                         🧴
                     </div>
 
-                    <h3>10 Water Bottles</h3>
+                    <h3>
+                        10 Water Bottles
+                    </h3>
 
                     <p>
                         Colour every bottle
                     </p>
+
                 </div>
 
 
@@ -5693,15 +5755,19 @@ function openColouring() {
                     class="colouring-picture-card"
                     onclick="openColouringPicture('balloonsflowers')"
                 >
+
                     <div class="colouring-preview">
                         🎈🌸
                     </div>
 
-                    <h3>Balloons & Flowers</h3>
+                    <h3>
+                        Balloons & Flowers
+                    </h3>
 
                     <p>
                         10 balloons + 5 flowers
                     </p>
+
                 </div>
 
 
@@ -5710,15 +5776,19 @@ function openColouring() {
                     class="colouring-picture-card"
                     onclick="openColouringPicture('luxurycar')"
                 >
+
                     <div class="colouring-preview">
                         🚗
                     </div>
 
-                    <h3>Luxury Sports Car</h3>
+                    <h3>
+                        Luxury Sports Car
+                    </h3>
 
                     <p>
                         Premium car
                     </p>
+
                 </div>
 
 
@@ -5727,15 +5797,25 @@ function openColouring() {
                     class="colouring-picture-card"
                     onclick="openColouringPicture('fivestars')"
                 >
-                    <div class="colouring-preview">
-                        ⭐⭐⭐⭐⭐
+
+                    <div class="colouring-preview stars-preview">
+
+                        <span>⭐</span>
+                        <span>⭐</span>
+                        <span>⭐</span>
+                        <span>⭐</span>
+                        <span>⭐</span>
+
                     </div>
 
-                    <h3>5 Stars</h3>
+                    <h3>
+                        5 Stars
+                    </h3>
 
                     <p>
                         Colour every star
                     </p>
+
                 </div>
 
 
@@ -5749,7 +5829,7 @@ function openColouring() {
 
 
 /* =========================================================
-   🎨 PALETTE
+   🎨 CREATE PALETTE
    ========================================================= */
 
 function createColouringPalette() {
@@ -5757,6 +5837,7 @@ function createColouringPalette() {
     return colouringPalette.map(function(color) {
 
         return `
+
             <button
                 type="button"
                 class="colouring-colour-button"
@@ -5764,9 +5845,11 @@ function createColouringPalette() {
                 onclick="selectColouringColor('${color}', this)"
                 aria-label="Choose colour"
             ></button>
+
         `;
 
     }).join("");
+
 }
 
 
@@ -5777,11 +5860,14 @@ function createColouringPalette() {
 function selectColouringColor(color, button) {
 
     colouringSelectedColor = color;
+
     colouringEraser = false;
 
 
     document
-        .querySelectorAll(".colouring-colour-button")
+        .querySelectorAll(
+            ".colouring-colour-button"
+        )
         .forEach(function(item) {
 
             item.classList.remove(
@@ -5827,6 +5913,7 @@ function selectColouringColor(color, button) {
             color;
 
     }
+
 }
 
 
@@ -5840,7 +5927,9 @@ function activateColouringEraser() {
 
 
     document
-        .querySelectorAll(".colouring-colour-button")
+        .querySelectorAll(
+            ".colouring-colour-button"
+        )
         .forEach(function(item) {
 
             item.classList.remove(
@@ -5863,11 +5952,12 @@ function activateColouringEraser() {
         );
 
     }
+
 }
 
 
 /* =========================================================
-   🖌️ COLOUR DRAWING PART
+   🖌️ COLOUR PART + AUTO SAVE
    ========================================================= */
 
 function colourDrawingPart(part) {
@@ -5886,31 +5976,198 @@ function colourDrawingPart(part) {
             ) || "#ffffff"
         );
 
-        return;
+    }
+
+    else {
+
+        part.setAttribute(
+            "fill",
+            colouringSelectedColor
+        );
+
     }
 
 
-    part.setAttribute(
-        "fill",
-        colouringSelectedColor
+    /*
+       Automatically save after every colour.
+    */
+
+    saveColouringDrawing(
+        currentColouringType,
+        false
     );
+
 }
 
 
 /* =========================================================
-   🔄 RESET
+   💾 SAVE DRAWING
+   ========================================================= */
+
+function saveColouringDrawing(
+    type,
+    showMessage
+) {
+
+    if (!type) {
+        return;
+    }
+
+
+    const parts =
+        document.querySelectorAll(
+            ".colour-part"
+        );
+
+
+    if (!parts.length) {
+        return;
+    }
+
+
+    const colours = [];
+
+
+    parts.forEach(function(part) {
+
+        colours.push(
+
+            part.getAttribute("fill") ||
+
+            part.getAttribute(
+                "data-original"
+            ) ||
+
+            "#ffffff"
+
+        );
+
+    });
+
+
+    try {
+
+        localStorage.setItem(
+
+            getColouringStorageKey(type),
+
+            JSON.stringify(colours)
+
+        );
+
+
+        if (showMessage) {
+
+            showColouringMessage(
+                "💾 Colouring Saved!"
+            );
+
+        }
+
+    }
+
+    catch (error) {
+
+        console.warn(
+            "Colouring could not be saved.",
+            error
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   📂 LOAD DRAWING
+   ========================================================= */
+
+function loadColouringDrawing(type) {
+
+    if (!type) {
+        return;
+    }
+
+
+    try {
+
+        const saved =
+            localStorage.getItem(
+                getColouringStorageKey(type)
+            );
+
+
+        if (!saved) {
+            return;
+        }
+
+
+        const colours =
+            JSON.parse(saved);
+
+
+        const parts =
+            document.querySelectorAll(
+                ".colour-part"
+            );
+
+
+        parts.forEach(function(part, index) {
+
+            if (
+                colours[index] &&
+                typeof colours[index] === "string"
+            ) {
+
+                part.setAttribute(
+                    "fill",
+                    colours[index]
+                );
+
+            }
+
+        });
+
+
+        showColouringMessage(
+            "✨ Your saved colouring is back!"
+        );
+
+    }
+
+    catch (error) {
+
+        console.warn(
+            "Saved colouring could not be loaded.",
+            error
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   🔄 RESET DRAWING
    ========================================================= */
 
 function resetColouringDrawing() {
 
+    const type =
+        currentColouringType;
+
+
     document
-        .querySelectorAll(".colour-part")
+        .querySelectorAll(
+            ".colour-part"
+        )
         .forEach(function(part) {
 
             const original =
                 part.getAttribute(
                     "data-original"
                 ) || "#ffffff";
+
 
             part.setAttribute(
                 "fill",
@@ -5920,8 +6177,37 @@ function resetColouringDrawing() {
         });
 
 
-    colouringSelectedColor = "#ff0000";
-    colouringEraser = false;
+    /*
+       Delete saved version.
+    */
+
+    if (type) {
+
+        try {
+
+            localStorage.removeItem(
+                getColouringStorageKey(type)
+            );
+
+        }
+
+        catch (error) {
+
+            console.warn(
+                "Saved colouring could not be removed.",
+                error
+            );
+
+        }
+
+    }
+
+
+    colouringSelectedColor =
+        "#ff0000";
+
+    colouringEraser =
+        false;
 
 
     const indicator =
@@ -5936,60 +6222,194 @@ function resetColouringDrawing() {
             "#ff0000";
 
     }
+
+
+    document
+        .querySelectorAll(
+            ".colouring-colour-button"
+        )
+        .forEach(function(button) {
+
+            button.classList.remove(
+                "selected-colouring-color"
+            );
+
+        });
+
+
+    const firstButton =
+        document.querySelector(
+            ".colouring-colour-button"
+        );
+
+
+    if (firstButton) {
+
+        firstButton.classList.add(
+            "selected-colouring-color"
+        );
+
+    }
+
+
+    const eraser =
+        document.getElementById(
+            "colouringEraserButton"
+        );
+
+
+    if (eraser) {
+
+        eraser.classList.remove(
+            "active-colouring-tool"
+        );
+
+    }
+
+
+    showColouringMessage(
+        "🔄 Reset! Colour again."
+    );
+
 }
 
 
 /* =========================================================
-   🖼️ OPEN SELECTED DRAWING
+   💬 MESSAGE
+   ========================================================= */
+
+function showColouringMessage(message) {
+
+    const box =
+        document.getElementById(
+            "colouringSaveMessage"
+        );
+
+
+    if (!box) {
+        return;
+    }
+
+
+    box.textContent = message;
+
+
+    box.classList.add(
+        "show-colouring-message"
+    );
+
+
+    clearTimeout(
+        window.colouringMessageTimer
+    );
+
+
+    window.colouringMessageTimer =
+        setTimeout(function() {
+
+            box.classList.remove(
+                "show-colouring-message"
+            );
+
+        }, 1800);
+
+}
+
+
+/* =========================================================
+   🖼️ OPEN DRAWING
    ========================================================= */
 
 function openColouringPicture(type) {
 
-    let title = "Colouring";
+    currentColouringType = type;
 
 
-    if (type === "luxuryhome")
-        title = "🏡 Luxury Home";
+    let title =
+        "Colouring";
 
 
-    if (type === "mountainriver")
-        title = "🏔️ Mountain River";
+    if (type === "luxuryhome") {
+
+        title =
+            "🏡 Luxury Home";
+
+    }
 
 
-    if (type === "bigtree")
-        title = "🌳 Big Tree";
+    if (type === "mountainriver") {
+
+        title =
+            "🏔️ Mountain River";
+
+    }
 
 
-    if (type === "realfish")
-        title = "🐟 Big Fish";
+    if (type === "bigtree") {
+
+        title =
+            "🌳 Big Tree";
+
+    }
 
 
-    if (type === "waterbottles")
-        title = "🧴 10 Water Bottles";
+    if (type === "realfish") {
+
+        title =
+            "🐟 Big Fish";
+
+    }
 
 
-    if (type === "balloonsflowers")
-        title = "🎈 Balloons & 🌸 Flowers";
+    if (type === "waterbottles") {
+
+        title =
+            "🧴 10 Water Bottles";
+
+    }
 
 
-    if (type === "luxurycar")
-        title = "🚗 Luxury Sports Car";
+    if (type === "balloonsflowers") {
+
+        title =
+            "🎈 Balloons & 🌸 Flowers";
+
+    }
 
 
-    if (type === "fivestars")
-        title = "⭐ 5 Stars";
+    if (type === "luxurycar") {
+
+        title =
+            "🚗 Luxury Sports Car";
+
+    }
+
+
+    if (type === "fivestars") {
+
+        title =
+            "⭐ 5 Stars";
+
+    }
 
 
     setupLearning(
+
         "🎨",
+
         title,
+
         "Choose a colour and click any part of the drawing!",
+
         `
 
         <div class="proper-colouring-page">
 
 
+            <!-- TOOLBAR -->
+
             <div class="colouring-toolbar">
+
 
                 <button
                     type="button"
@@ -6012,14 +6432,36 @@ function openColouringPicture(type) {
 
                 <button
                     type="button"
+                    class="colouring-tool-button save-colouring-button"
+                    onclick="saveColouringDrawing(currentColouringType, true)"
+                >
+                    💾 Save
+                </button>
+
+
+                <button
+                    type="button"
                     class="colouring-tool-button"
                     onclick="resetColouringDrawing()"
                 >
                     🔄 Reset
                 </button>
 
+
             </div>
 
+
+            <!-- SAVE MESSAGE -->
+
+            <div
+                id="colouringSaveMessage"
+                class="colouring-save-message"
+            >
+                💾 Automatically saved
+            </div>
+
+
+            <!-- COLOUR AREA -->
 
             <div class="colouring-colour-area">
 
@@ -6029,6 +6471,7 @@ function openColouringPicture(type) {
                     <span>
                         Current Colour:
                     </span>
+
 
                     <span
                         id="colouringCurrentColor"
@@ -6048,6 +6491,8 @@ function openColouringPicture(type) {
             </div>
 
 
+            <!-- DRAWING -->
+
             <div class="colouring-drawing-board">
 
                 ${getColouringSVG(type)}
@@ -6059,6 +6504,11 @@ function openColouringPicture(type) {
 
                 🎨 Pick a colour and tap different parts
                 of the picture!
+
+                <br>
+
+                💾 Your colouring is saved automatically
+                on this device.
 
             </div>
 
@@ -6072,10 +6522,17 @@ function openColouringPicture(type) {
     colouringSelectedColor =
         "#ff0000";
 
-    colouringEraser = false;
+    colouringEraser =
+        false;
 
+
+    /*
+       Wait until SVG is inside DOM,
+       then load previous colouring.
+    */
 
     setTimeout(function() {
+
 
         const indicator =
             document.getElementById(
@@ -6105,7 +6562,12 @@ function openColouringPicture(type) {
 
         }
 
-    }, 50);
+
+        loadColouringDrawing(type);
+
+
+    }, 80);
+
 }
 
 
@@ -6117,28 +6579,34 @@ function getColouringSVG(type) {
 
 
     const start = `
+
         <svg
             class="colouring-svg"
             viewBox="0 0 700 600"
             xmlns="http://www.w3.org/2000/svg"
         >
+
     `;
 
 
     const end = `
+
         </svg>
+
     `;
 
 
     /* =====================================================
-       1️⃣ LUXURY HOME
+       🏡 1. LUXURY HOME
        ===================================================== */
 
     if (type === "luxuryhome") {
 
         return start + `
 
-            <!-- MAIN HOUSE -->
+
+            <!-- HOUSE BODY -->
+
             <rect
                 class="colour-part"
                 data-original="#ffffff"
@@ -6155,6 +6623,7 @@ function getColouringSVG(type) {
 
 
             <!-- ROOF -->
+
             <path
                 class="colour-part"
                 data-original="#ffffff"
@@ -6172,6 +6641,7 @@ function getColouringSVG(type) {
 
 
             <!-- LEFT BALCONY -->
+
             <rect
                 class="colour-part"
                 data-original="#ffffff"
@@ -6187,6 +6657,7 @@ function getColouringSVG(type) {
 
 
             <!-- RIGHT BALCONY -->
+
             <rect
                 class="colour-part"
                 data-original="#ffffff"
@@ -6202,6 +6673,7 @@ function getColouringSVG(type) {
 
 
             <!-- DOOR -->
+
             <rect
                 class="colour-part"
                 data-original="#ffffff"
@@ -6217,6 +6689,7 @@ function getColouringSVG(type) {
 
 
             <!-- LEFT WINDOW -->
+
             <rect
                 class="colour-part"
                 data-original="#ffffff"
@@ -6232,6 +6705,7 @@ function getColouringSVG(type) {
 
 
             <!-- RIGHT WINDOW -->
+
             <rect
                 class="colour-part"
                 data-original="#ffffff"
@@ -6247,6 +6721,7 @@ function getColouringSVG(type) {
 
 
             <!-- CHIMNEY -->
+
             <rect
                 class="colour-part"
                 data-original="#ffffff"
@@ -6262,6 +6737,7 @@ function getColouringSVG(type) {
 
 
             <!-- GARAGE -->
+
             <rect
                 class="colour-part"
                 data-original="#ffffff"
@@ -6277,6 +6753,7 @@ function getColouringSVG(type) {
 
 
             <!-- PATH -->
+
             <path
                 class="colour-part"
                 data-original="#ffffff"
@@ -6295,18 +6772,21 @@ function getColouringSVG(type) {
 
 
         ` + end;
+
     }
 
 
     /* =====================================================
-       2️⃣ MOUNTAIN + RIVER + HOME + TREES
+       🏔️ 2. MOUNTAIN + RIVER + HOME + TREES
        ===================================================== */
 
     if (type === "mountainriver") {
 
         return start + `
 
-            <!-- SKY -->
+
+            <!-- BACKGROUND -->
+
             <rect
                 class="colour-part"
                 data-original="#ffffff"
@@ -6322,7 +6802,8 @@ function getColouringSVG(type) {
             />
 
 
-            <!-- BIG MOUNTAIN -->
+            <!-- MOUNTAIN -->
+
             <path
                 class="colour-part"
                 data-original="#ffffff"
@@ -6342,6 +6823,7 @@ function getColouringSVG(type) {
 
 
             <!-- SNOW -->
+
             <path
                 class="colour-part"
                 data-original="#ffffff"
@@ -6362,6 +6844,7 @@ function getColouringSVG(type) {
 
 
             <!-- RIVER -->
+
             <path
                 class="colour-part"
                 data-original="#ffffff"
@@ -6382,6 +6865,7 @@ function getColouringSVG(type) {
 
 
             <!-- HOME -->
+
             <rect
                 class="colour-part"
                 data-original="#ffffff"
@@ -6397,6 +6881,7 @@ function getColouringSVG(type) {
 
 
             <!-- HOME ROOF -->
+
             <path
                 class="colour-part"
                 data-original="#ffffff"
@@ -6414,6 +6899,7 @@ function getColouringSVG(type) {
 
 
             <!-- HOME DOOR -->
+
             <rect
                 class="colour-part"
                 data-original="#ffffff"
@@ -6428,7 +6914,8 @@ function getColouringSVG(type) {
             />
 
 
-            <!-- TREE 1 -->
+            <!-- TREE TRUNK 1 -->
+
             <rect
                 class="colour-part"
                 data-original="#ffffff"
@@ -6441,6 +6928,9 @@ function getColouringSVG(type) {
                 height="120"
                 onclick="colourDrawingPart(this)"
             />
+
+
+            <!-- TREE 1 -->
 
             <circle
                 class="colour-part"
@@ -6455,7 +6945,8 @@ function getColouringSVG(type) {
             />
 
 
-            <!-- TREE 2 -->
+            <!-- TREE TRUNK 2 -->
+
             <rect
                 class="colour-part"
                 data-original="#ffffff"
@@ -6469,6 +6960,9 @@ function getColouringSVG(type) {
                 onclick="colourDrawingPart(this)"
             />
 
+
+            <!-- TREE 2 -->
+
             <circle
                 class="colour-part"
                 data-original="#ffffff"
@@ -6481,19 +6975,23 @@ function getColouringSVG(type) {
                 onclick="colourDrawingPart(this)"
             />
 
+
         ` + end;
+
     }
 
 
     /* =====================================================
-       3️⃣ BIG TREE
+       🌳 3. BIG TREE
        ===================================================== */
 
     if (type === "bigtree") {
 
         return start + `
 
-            <!-- TRUNK -->
+
+            <!-- MAIN TRUNK -->
+
             <path
                 class="colour-part"
                 data-original="#ffffff"
@@ -6512,6 +7010,7 @@ function getColouringSVG(type) {
 
 
             <!-- MAIN CANOPY -->
+
             <circle
                 class="colour-part"
                 data-original="#ffffff"
@@ -6526,6 +7025,7 @@ function getColouringSVG(type) {
 
 
             <!-- LEFT CANOPY -->
+
             <circle
                 class="colour-part"
                 data-original="#ffffff"
@@ -6540,6 +7040,7 @@ function getColouringSVG(type) {
 
 
             <!-- RIGHT CANOPY -->
+
             <circle
                 class="colour-part"
                 data-original="#ffffff"
@@ -6554,23 +7055,22 @@ function getColouringSVG(type) {
 
 
             <!-- BRANCH -->
+
             <path
-                class="colour-part"
-                data-original="#ffffff"
-                fill="#ffffff"
-                stroke="#222"
-                stroke-width="20"
                 d="
                     M350 340
                     L230 250
                     M350 350
                     L480 245
                 "
-                onclick="colourDrawingPart(this)"
+                fill="none"
+                stroke="#222"
+                stroke-width="20"
             />
 
 
             <!-- FRUIT -->
+
             <circle
                 class="colour-part"
                 data-original="#ffffff"
@@ -6582,6 +7082,7 @@ function getColouringSVG(type) {
                 r="18"
                 onclick="colourDrawingPart(this)"
             />
+
 
             <circle
                 class="colour-part"
@@ -6595,6 +7096,7 @@ function getColouringSVG(type) {
                 onclick="colourDrawingPart(this)"
             />
 
+
             <circle
                 class="colour-part"
                 data-original="#ffffff"
@@ -6607,19 +7109,23 @@ function getColouringSVG(type) {
                 onclick="colourDrawingPart(this)"
             />
 
+
         ` + end;
+
     }
 
 
     /* =====================================================
-       4️⃣ BIG DETAILED FISH
+       🐟 4. BIG FISH
        ===================================================== */
 
     if (type === "realfish") {
 
         return start + `
 
-            <!-- FISH BODY -->
+
+            <!-- BODY -->
+
             <path
                 class="colour-part"
                 data-original="#ffffff"
@@ -6639,6 +7145,7 @@ function getColouringSVG(type) {
 
 
             <!-- TAIL -->
+
             <path
                 class="colour-part"
                 data-original="#ffffff"
@@ -6658,6 +7165,7 @@ function getColouringSVG(type) {
 
 
             <!-- TOP FIN -->
+
             <path
                 class="colour-part"
                 data-original="#ffffff"
@@ -6675,6 +7183,7 @@ function getColouringSVG(type) {
 
 
             <!-- BOTTOM FIN -->
+
             <path
                 class="colour-part"
                 data-original="#ffffff"
@@ -6692,6 +7201,7 @@ function getColouringSVG(type) {
 
 
             <!-- SIDE FIN -->
+
             <path
                 class="colour-part"
                 data-original="#ffffff"
@@ -6709,6 +7219,7 @@ function getColouringSVG(type) {
 
 
             <!-- EYE -->
+
             <circle
                 class="colour-part"
                 data-original="#ffffff"
@@ -6723,6 +7234,7 @@ function getColouringSVG(type) {
 
 
             <!-- PUPIL -->
+
             <circle
                 class="colour-part"
                 data-original="#ffffff"
@@ -6736,7 +7248,8 @@ function getColouringSVG(type) {
             />
 
 
-            <!-- SCALE 1 -->
+            <!-- SCALE -->
+
             <circle
                 class="colour-part"
                 data-original="#ffffff"
@@ -6750,7 +7263,6 @@ function getColouringSVG(type) {
             />
 
 
-            <!-- SCALE 2 -->
             <circle
                 class="colour-part"
                 data-original="#ffffff"
@@ -6764,7 +7276,6 @@ function getColouringSVG(type) {
             />
 
 
-            <!-- SCALE 3 -->
             <circle
                 class="colour-part"
                 data-original="#ffffff"
@@ -6777,12 +7288,14 @@ function getColouringSVG(type) {
                 onclick="colourDrawingPart(this)"
             />
 
+
         ` + end;
+
     }
 
 
     /* =====================================================
-       5️⃣ 10 WATER BOTTLES
+       🧴 5. TEN WATER BOTTLES
        ===================================================== */
 
     if (type === "waterbottles") {
@@ -6790,18 +7303,27 @@ function getColouringSVG(type) {
         let bottles = "";
 
 
-        for (let i = 0; i < 10; i++) {
+        for (
+            let i = 0;
+            i < 10;
+            i++
+        ) {
 
             const x =
-                45 + (i % 5) * 130;
+                45 +
+                (i % 5) * 130;
+
 
             const y =
-                i < 5 ? 80 : 320;
+                i < 5
+                    ? 70
+                    : 320;
 
 
             bottles += `
 
-                <!-- BOTTLE BODY -->
+
+                <!-- BODY -->
 
                 <rect
                     class="colour-part"
@@ -6818,7 +7340,7 @@ function getColouringSVG(type) {
                 />
 
 
-                <!-- BOTTLE NECK -->
+                <!-- NECK -->
 
                 <rect
                     class="colour-part"
@@ -6868,17 +7390,19 @@ function getColouringSVG(type) {
                     onclick="colourDrawingPart(this)"
                 />
 
+
             `;
 
         }
 
 
         return start + bottles + end;
+
     }
 
 
     /* =====================================================
-       6️⃣ 10 BALLOONS + 5 FLOWERS
+       🎈 6. 10 BALLOONS + 5 FLOWERS
        ===================================================== */
 
     if (type === "balloonsflowers") {
@@ -6888,16 +7412,25 @@ function getColouringSVG(type) {
 
         /* 10 BALLOONS */
 
-        for (let i = 0; i < 10; i++) {
+        for (
+            let i = 0;
+            i < 10;
+            i++
+        ) {
 
             const x =
-                75 + (i % 5) * 135;
+                75 +
+                (i % 5) * 135;
+
 
             const y =
-                i < 5 ? 110 : 285;
+                i < 5
+                    ? 100
+                    : 275;
 
 
             items += `
+
 
                 <ellipse
                     class="colour-part"
@@ -6941,6 +7474,7 @@ function getColouringSVG(type) {
                     stroke-width="4"
                 />
 
+
             `;
 
         }
@@ -6948,17 +7482,23 @@ function getColouringSVG(type) {
 
         /* 5 FLOWERS */
 
-        for (let i = 0; i < 5; i++) {
+        for (
+            let i = 0;
+            i < 5;
+            i++
+        ) {
 
             const x =
-                100 + i * 125;
+                100 +
+                i * 125;
 
-            const y = 535;
+
+            const y =
+                535;
 
 
             items += `
 
-                <!-- PETALS -->
 
                 <circle
                     class="colour-part"
@@ -6972,6 +7512,7 @@ function getColouringSVG(type) {
                     onclick="colourDrawingPart(this)"
                 />
 
+
                 <circle
                     class="colour-part"
                     data-original="#ffffff"
@@ -6983,6 +7524,7 @@ function getColouringSVG(type) {
                     r="24"
                     onclick="colourDrawingPart(this)"
                 />
+
 
                 <circle
                     class="colour-part"
@@ -6997,8 +7539,6 @@ function getColouringSVG(type) {
                 />
 
 
-                <!-- CENTER -->
-
                 <circle
                     class="colour-part"
                     data-original="#ffffff"
@@ -7011,8 +7551,6 @@ function getColouringSVG(type) {
                     onclick="colourDrawingPart(this)"
                 />
 
-
-                <!-- STEM -->
 
                 <rect
                     class="colour-part"
@@ -7027,22 +7565,25 @@ function getColouringSVG(type) {
                     onclick="colourDrawingPart(this)"
                 />
 
+
             `;
 
         }
 
 
         return start + items + end;
+
     }
 
 
     /* =====================================================
-       7️⃣ LUXURY SPORTS CAR
+       🚗 7. LUXURY SPORTS CAR
        ===================================================== */
 
     if (type === "luxurycar") {
 
         return start + `
+
 
             <!-- MAIN BODY -->
 
@@ -7067,7 +7608,7 @@ function getColouringSVG(type) {
             />
 
 
-            <!-- ROOF / CABIN -->
+            <!-- CABIN -->
 
             <path
                 class="colour-part"
@@ -7140,7 +7681,7 @@ function getColouringSVG(type) {
             />
 
 
-            <!-- FRONT GRILLE -->
+            <!-- GRILLE -->
 
             <rect
                 class="colour-part"
@@ -7217,24 +7758,13 @@ function getColouringSVG(type) {
             />
 
 
-            <!-- SIDE LINE -->
-
-            <path
-                d="
-                    M100 330
-                    L500 330
-                "
-                fill="none"
-                stroke="#222"
-                stroke-width="6"
-            />
-
         ` + end;
+
     }
 
 
     /* =====================================================
-       8️⃣ FIVE STARS
+       ⭐ 8. FIVE STARS
        ===================================================== */
 
     if (type === "fivestars") {
@@ -7255,7 +7785,7 @@ function getColouringSVG(type) {
 
             {
                 x: 550,
-                y: 175,
+                y: 170,
                 size: 90
             },
 
@@ -7279,35 +7809,40 @@ function getColouringSVG(type) {
 
         stars.forEach(function(star) {
 
-            const x = star.x;
-            const y = star.y;
-            const r = star.size;
-
-
             const points = [];
 
-            for (let i = 0; i < 10; i++) {
+
+            for (
+                let i = 0;
+                i < 10;
+                i++
+            ) {
 
                 const angle =
                     -Math.PI / 2 +
                     i * Math.PI / 5;
 
+
                 const radius =
                     i % 2 === 0
-                        ? r
-                        : r * 0.42;
+                        ? star.size
+                        : star.size * 0.42;
 
 
                 points.push(
+
                     (
-                        x +
-                        Math.cos(angle) * radius
+                        star.x +
+                        Math.cos(angle) *
+                        radius
                     ) +
                     "," +
                     (
-                        y +
-                        Math.sin(angle) * radius
+                        star.y +
+                        Math.sin(angle) *
+                        radius
                     )
+
                 );
 
             }
@@ -7331,10 +7866,13 @@ function getColouringSVG(type) {
 
 
         return start + output + end;
+
     }
 
 
-    /* FALLBACK */
+    /* =====================================================
+       FALLBACK
+       ===================================================== */
 
     return start + `
 
@@ -7351,194 +7889,7 @@ function getColouringSVG(type) {
         />
 
     ` + end;
-}
 
-/* =========================================================
-   🔷 SHAPE DRAWING
-   ========================================================= */
-
-function openShapeDrawing() {
-
-    setupLearning(
-        "🔷",
-        "Draw Shapes",
-        "Choose a shape to practise!",
-        `
-
-        <div class="cards-grid">
-
-            ${[
-                ["⭕", "Circle"],
-                ["🟦", "Square"],
-                ["🔺", "Triangle"],
-                ["⭐", "Star"],
-                ["❤️", "Heart"],
-                ["🔷", "Diamond"]
-            ].map(item => `
-
-                <div
-                    class="learning-card"
-                    onclick="speak('${item[1]}', {lang:'en-US'})"
-                >
-
-                    <div class="learning-emoji">
-                        ${item[0]}
-                    </div>
-
-                    <div class="word">
-                        ${item[1]}
-                    </div>
-
-                </div>
-
-            `).join("")}
-
-        </div>
-
-        `
-    );
-}
-
-
-/* =========================================================
-   🎨 COLOUR PICKER
-   ========================================================= */
-
-function openColourPicker() {
-
-    setupLearning(
-        "🎨",
-        "Colour Picker",
-        "Pick a colour!",
-        `
-
-        <div class="learning-card">
-
-            <input
-                type="color"
-                id="mainColourPicker"
-                value="#ff4d6d"
-                style="
-                    width:120px;
-                    height:120px;
-                    cursor:pointer;
-                "
-                onchange="speakSelectedColour(this.value)"
-            >
-
-            <h2>
-                Choose your colour
-            </h2>
-
-        </div>
-
-        `
-    );
-}
-
-
-function speakSelectedColour(value) {
-
-    speak(
-        `You selected colour ${value}`,
-        {
-            lang: "en-US"
-        }
-    );
-}
-
-
-/* =========================================================
-   🔢 CONNECT THE DOTS
-   ========================================================= */
-
-function openConnectDots() {
-
-    connectPoints = [
-        [120, 120],
-        [220, 80],
-        [320, 120],
-        [360, 220],
-        [260, 300],
-        [160, 260],
-        [120, 120]
-    ];
-
-    connectCurrent = 0;
-
-    setupLearning(
-        "🔢",
-        "Connect the Dots",
-        "Click the dots in order!",
-        `
-
-        <div
-            id="connectDotsArea"
-            style="
-                position:relative;
-                width:min(600px,90vw);
-                height:400px;
-                margin:auto;
-                background:white;
-                border-radius:25px;
-                border:3px solid #ddd;
-            "
-        >
-
-            ${connectPoints.map((point, index) => `
-
-                <button
-                    type="button"
-                    onclick="connectDot(${index})"
-                    style="
-                        position:absolute;
-                        left:${point[0]}px;
-                        top:${point[1]}px;
-                        width:40px;
-                        height:40px;
-                        border-radius:50%;
-                    "
-                >
-                    ${index + 1}
-                </button>
-
-            `).join("")}
-
-        </div>
-
-        `
-    );
-}
-
-
-function connectDot(index) {
-
-    if (index !== connectCurrent) {
-
-        showSuccessMessage(
-            "😊 Almost!",
-            "Start from the dots in order."
-        );
-
-        return;
-    }
-
-    connectCurrent++;
-
-    addScore(5);
-
-    if (
-        connectCurrent >=
-        connectPoints.length
-    ) {
-
-        addStars(2);
-
-        showSuccessMessage(
-            "🎉 Amazing!",
-            "You connected all the dots!"
-        );
-    }
 }
 
 
