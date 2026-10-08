@@ -5537,146 +5537,379 @@ function clearDrawingCanvas() {
 }
 
 /* =========================================================
-   🌈 COLOURING WORLD
+   🌈 PROPER COLOURING
    ========================================================= */
 
 function openColouring() {
 
-    const pictures = [
-        ["🍎", "Apple"],
-        ["☀️", "Sun"],
-        ["🌸", "Flower"],
-        ["🦋", "Butterfly"],
-        ["🚗", "Car"],
-        ["🏠", "House"],
-        ["🌳", "Tree"],
-        ["🐟", "Fish"],
-        ["🎈", "Balloon"],
-        ["🍦", "Ice Cream"],
-        ["⭐", "Star"],
-        ["☁️", "Cloud"],
-        ["🐦", "Bird"],
-        ["🐱", "Cat"],
-        ["🐶", "Dog"],
-        ["🐰", "Rabbit"],
-        ["🚌", "Bus"],
-        ["🪁", "Kite"],
-        ["⛵", "Boat"],
-        ["🧁", "Cupcake"]
-    ];
+    setupLearning(
+        "🌈",
+        "Colouring World",
+        "Choose a picture and start colouring!",
+        `
+        <div class="colouring-world">
 
-    const colours = [
-        ["#ff0000", "🔴 Red"],
-        ["#ff8c00", "🟠 Orange"],
-        ["#ffff00", "🟡 Yellow"],
-        ["#00aa00", "🟢 Green"],
-        ["#00bfff", "🔵 Sky Blue"],
-        ["#0000ff", "🔵 Blue"],
-        ["#8000ff", "🟣 Purple"],
-        ["#ff1493", "🩷 Pink"],
-        ["#8b4513", "🟤 Brown"],
-        ["#000000", "⚫ Black"],
-        ["#ffffff", "⚪ White"],
-        ["#808080", "🩶 Grey"],
-        ["#00ffff", "🩵 Cyan"],
-        ["#ff69b4", "🌸 Hot Pink"],
-        ["#32cd32", "💚 Lime"],
-        ["#ffd700", "✨ Gold"]
-    ];
+            <div class="colouring-intro">
+                <h2>🎨 Choose a Picture</h2>
+                <p>Click any picture to start colouring!</p>
+            </div>
+
+            <div class="colouring-picture-grid">
+
+                <div class="colouring-picture-card" onclick="openColouringPicture('apple')">
+                    <div class="colouring-preview">🍎</div>
+                    <h3>Apple</h3>
+                </div>
+
+                <div class="colouring-picture-card" onclick="openColouringPicture('sun')">
+                    <div class="colouring-preview">☀️</div>
+                    <h3>Sun</h3>
+                </div>
+
+                <div class="colouring-picture-card" onclick="openColouringPicture('flower')">
+                    <div class="colouring-preview">🌸</div>
+                    <h3>Flower</h3>
+                </div>
+
+                <div class="colouring-picture-card" onclick="openColouringPicture('butterfly')">
+                    <div class="colouring-preview">🦋</div>
+                    <h3>Butterfly</h3>
+                </div>
+
+                <div class="colouring-picture-card" onclick="openColouringPicture('house')">
+                    <div class="colouring-preview">🏠</div>
+                    <h3>House</h3>
+                </div>
+
+                <div class="colouring-picture-card" onclick="openColouringPicture('car')">
+                    <div class="colouring-preview">🚗</div>
+                    <h3>Car</h3>
+                </div>
+
+                <div class="colouring-picture-card" onclick="openColouringPicture('tree')">
+                    <div class="colouring-preview">🌳</div>
+                    <h3>Tree</h3>
+                </div>
+
+                <div class="colouring-picture-card" onclick="openColouringPicture('fish')">
+                    <div class="colouring-preview">🐟</div>
+                    <h3>Fish</h3>
+                </div>
+
+                <div class="colouring-picture-card" onclick="openColouringPicture('balloon')">
+                    <div class="colouring-preview">🎈</div>
+                    <h3>Balloon</h3>
+                </div>
+
+                <div class="colouring-picture-card" onclick="openColouringPicture('icecream')">
+                    <div class="colouring-preview">🍦</div>
+                    <h3>Ice Cream</h3>
+                </div>
+
+                <div class="colouring-picture-card" onclick="openColouringPicture('star')">
+                    <div class="colouring-preview">⭐</div>
+                    <h3>Star</h3>
+                </div>
+
+                <div class="colouring-picture-card" onclick="openColouringPicture('cloud')">
+                    <div class="colouring-preview">☁️</div>
+                    <h3>Cloud</h3>
+                </div>
+
+                <div class="colouring-picture-card" onclick="openColouringPicture('bird')">
+                    <div class="colouring-preview">🐦</div>
+                    <h3>Bird</h3>
+                </div>
+
+                <div class="colouring-picture-card" onclick="openColouringPicture('cat')">
+                    <div class="colouring-preview">🐱</div>
+                    <h3>Cat</h3>
+                </div>
+
+                <div class="colouring-picture-card" onclick="openColouringPicture('dog')">
+                    <div class="colouring-preview">🐶</div>
+                    <h3>Dog</h3>
+                </div>
+
+                <div class="colouring-picture-card" onclick="openColouringPicture('rabbit')">
+                    <div class="colouring-preview">🐰</div>
+                    <h3>Rabbit</h3>
+                </div>
+
+                <div class="colouring-picture-card" onclick="openColouringPicture('bus')">
+                    <div class="colouring-preview">🚌</div>
+                    <h3>Bus</h3>
+                </div>
+
+                <div class="colouring-picture-card" onclick="openColouringPicture('kite')">
+                    <div class="colouring-preview">🪁</div>
+                    <h3>Kite</h3>
+                </div>
+
+                <div class="colouring-picture-card" onclick="openColouringPicture('boat')">
+                    <div class="colouring-preview">⛵</div>
+                    <h3>Boat</h3>
+                </div>
+
+                <div class="colouring-picture-card" onclick="openColouringPicture('cupcake')">
+                    <div class="colouring-preview">🧁</div>
+                    <h3>Cupcake</h3>
+                </div>
+
+            </div>
+
+        </div>
+        `
+    );
+}
+
+/* =========================================================
+   🎨 COLOURING PICTURE SYSTEM
+   ========================================================= */
+
+let selectedColour = "#ff0000";
+let colouringEraser = false;
+
+
+/* ---------------------------------------------------------
+   🌈 COLOUR PALETTE
+--------------------------------------------------------- */
+
+const colouringColours = [
+    "#ff0000",
+    "#ff7a00",
+    "#ffd400",
+    "#00b83f",
+    "#00cfff",
+    "#0066ff",
+    "#7b2cff",
+    "#ff00a8",
+    "#ff69b4",
+    "#8b4513",
+    "#000000",
+    "#ffffff",
+    "#808080",
+    "#00ffff",
+    "#7fff00",
+    "#ffd700",
+    "#ff4500",
+    "#32cd32"
+];
+
+
+/* ---------------------------------------------------------
+   🎨 COLOUR BUTTONS
+--------------------------------------------------------- */
+
+function createColourPalette() {
+
+    return colouringColours.map(function(colour) {
+
+        return `
+            <button
+                class="colouring-colour-button"
+                style="background:${colour};"
+                onclick="chooseColour('${colour}', this)"
+                aria-label="Choose colour"
+            ></button>
+        `;
+
+    }).join("");
+}
+
+
+/* ---------------------------------------------------------
+   🎨 SELECT COLOUR
+--------------------------------------------------------- */
+
+function chooseColour(colour, button) {
+
+    selectedColour = colour;
+    colouringEraser = false;
+
+    document
+        .querySelectorAll(".colouring-colour-button")
+        .forEach(function(btn) {
+            btn.classList.remove("selected-colour");
+        });
+
+    if (button) {
+        button.classList.add("selected-colour");
+    }
+
+    const eraserButton = document.getElementById("colouringEraser");
+
+    if (eraserButton) {
+        eraserButton.classList.remove("active-tool");
+    }
+
+    const currentColour = document.getElementById("currentColour");
+
+    if (currentColour) {
+        currentColour.style.background = colour;
+    }
+}
+
+
+/* ---------------------------------------------------------
+   🧽 ERASER
+--------------------------------------------------------- */
+
+function useColouringEraser() {
+
+    colouringEraser = true;
+
+    document
+        .querySelectorAll(".colouring-colour-button")
+        .forEach(function(btn) {
+            btn.classList.remove("selected-colour");
+        });
+
+    const eraserButton = document.getElementById("colouringEraser");
+
+    if (eraserButton) {
+        eraserButton.classList.add("active-tool");
+    }
+}
+
+
+/* ---------------------------------------------------------
+   🖌️ COLOR SVG PART
+--------------------------------------------------------- */
+
+function colourDrawingPart(part) {
+
+    if (!part) return;
+
+    if (colouringEraser) {
+
+        part.setAttribute(
+            "fill",
+            part.getAttribute("data-original") || "#ffffff"
+        );
+
+        return;
+    }
+
+    part.setAttribute("fill", selectedColour);
+}
+
+
+/* ---------------------------------------------------------
+   🔄 RESET DRAWING
+--------------------------------------------------------- */
+
+function resetColouring() {
+
+    const parts = document.querySelectorAll(".colour-part");
+
+    parts.forEach(function(part) {
+
+        const original =
+            part.getAttribute("data-original") || "#ffffff";
+
+        part.setAttribute("fill", original);
+
+    });
+}
+
+
+/* ---------------------------------------------------------
+   🖼️ OPEN DRAWING
+--------------------------------------------------------- */
+
+function openColouringPicture(type) {
+
+    let title = "Colouring";
+
+    if (type === "apple") title = "🍎 Apple";
+    if (type === "sun") title = "☀️ Sun";
+    if (type === "flower") title = "🌸 Flower";
+    if (type === "butterfly") title = "🦋 Butterfly";
+    if (type === "house") title = "🏠 House";
+    if (type === "car") title = "🚗 Car";
+    if (type === "tree") title = "🌳 Tree";
+    if (type === "fish") title = "🐟 Fish";
+    if (type === "balloon") title = "🎈 Balloon";
+    if (type === "icecream") title = "🍦 Ice Cream";
+    if (type === "star") title = "⭐ Star";
+    if (type === "cloud") title = "☁️ Cloud";
+    if (type === "bird") title = "🐦 Bird";
+    if (type === "cat") title = "🐱 Cat";
+    if (type === "dog") title = "🐶 Dog";
+    if (type === "rabbit") title = "🐰 Rabbit";
+    if (type === "bus") title = "🚌 Bus";
+    if (type === "kite") title = "🪁 Kite";
+    if (type === "boat") title = "⛵ Boat";
+    if (type === "cupcake") title = "🧁 Cupcake";
+
+
+    let drawing = getColouringSVG(type);
+
 
     setupLearning(
         "🎨",
-        "Colouring World",
-        "Choose a picture and colour it! 🌈",
+        title,
+        "Choose a colour and click different parts of the picture!",
         `
 
-        <div class="colouring-world">
+        <div class="proper-colouring-page">
 
-            <!-- COLOUR PALETTE -->
+            <div class="colouring-toolbar">
 
-            <div class="colouring-palette">
+                <button
+                    class="colouring-tool-button"
+                    onclick="openColouring()"
+                >
+                    ⬅️ Pictures
+                </button>
 
-                <h2>🎨 Choose Your Colour</h2>
+                <button
+                    class="colouring-tool-button"
+                    id="colouringEraser"
+                    onclick="useColouringEraser()"
+                >
+                    🧽 Eraser
+                </button>
 
-                <div class="colour-palette-grid">
+                <button
+                    class="colouring-tool-button"
+                    onclick="resetColouring()"
+                >
+                    🔄 Reset
+                </button>
 
-                    ${colours.map((colour, index) => `
+            </div>
 
-                        <button
-                            type="button"
-                            class="colour-choice"
-                            title="${colour[1]}"
-                            style="--colour:${colour[0]}"
-                            onclick="selectColour('${colour[0]}', this)"
-                        >
 
-                            <span
-                                class="colour-circle"
-                                style="background:${colour[0]}"
-                            ></span>
+            <div class="colouring-colour-area">
 
-                            <span class="colour-name">
-                                ${colour[1]}
-                            </span>
-
-                        </button>
-
-                    `).join("")}
-
-                </div>
-
-                <div class="selected-colour-box">
-
-                    Selected Colour:
+                <div class="current-colour-box">
+                    <span>Current:</span>
 
                     <span
-                        id="selectedColourPreview"
-                        style="background:#ff0000"
+                        id="currentColour"
+                        class="current-colour"
                     ></span>
+                </div>
 
-                    <strong id="selectedColourName">
-                        Red
-                    </strong>
 
+                <div class="colouring-palette">
+                    ${createColourPalette()}
                 </div>
 
             </div>
 
 
-            <!-- PICTURES -->
+            <div class="colouring-drawing-board">
 
-            <div class="colouring-picture-section">
+                ${drawing}
 
-                <h2>🖼️ Choose What You Want To Colour</h2>
+            </div>
 
-                <div class="colouring-picture-grid">
 
-                    ${pictures.map((picture, index) => `
-
-                        <button
-                            type="button"
-                            class="colouring-picture-card"
-                            onclick="openColouringPicture(${index})"
-                        >
-
-                            <div class="colour-picture-emoji">
-                                ${picture[0]}
-                            </div>
-
-                            <div class="colour-picture-name">
-                                ${picture[1]}
-                            </div>
-
-                            <div class="colour-picture-text">
-                                🎨 Click to Colour
-                            </div>
-
-                        </button>
-
-                    `).join("")}
-
-                </div>
-
+            <div class="colouring-help">
+                🎨 Pick a colour and tap any part of the picture!
             </div>
 
         </div>
@@ -5684,11 +5917,1227 @@ function openColouring() {
         `
     );
 
-    window.colouringColours = colours;
 
-    window.selectedColour = "#ff0000";
+    selectedColour = "#ff0000";
+    colouringEraser = false;
+
+
+    setTimeout(function() {
+
+        const currentColour =
+            document.getElementById("currentColour");
+
+        if (currentColour) {
+            currentColour.style.background = selectedColour;
+        }
+
+        const firstButton =
+            document.querySelector(".colouring-colour-button");
+
+        if (firstButton) {
+            firstButton.classList.add("selected-colour");
+        }
+
+    }, 50);
 }
 
+
+/* =========================================================
+   🖼️ SVG DRAWINGS
+   ========================================================= */
+
+function getColouringSVG(type) {
+
+    const commonStart = `
+        <svg
+            class="colouring-svg"
+            viewBox="0 0 500 500"
+            xmlns="http://www.w3.org/2000/svg"
+        >
+    `;
+
+    const commonEnd = `</svg>`;
+
+
+    /* 🍎 APPLE */
+
+    if (type === "apple") {
+
+        return commonStart + `
+
+            <ellipse
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="8"
+                cx="250"
+                cy="280"
+                rx="145"
+                ry="130"
+                onclick="colourDrawingPart(this)"
+            />
+
+            <path
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="8"
+                d="M250 155 C240 115 250 85 270 65"
+                onclick="colourDrawingPart(this)"
+            />
+
+            <path
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="8"
+                d="M260 105 C315 55 365 85 385 125 C330 145 290 135 260 105Z"
+                onclick="colourDrawingPart(this)"
+            />
+
+        ` + commonEnd;
+    }
+
+
+    /* ☀️ SUN */
+
+    if (type === "sun") {
+
+        return commonStart + `
+
+            <circle
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="8"
+                cx="250"
+                cy="250"
+                r="105"
+                onclick="colourDrawingPart(this)"
+            />
+
+            <g
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="8"
+                onclick="colourDrawingPart(this)"
+            >
+                <path d="M250 35 L270 115 L230 115 Z"/>
+                <path d="M250 465 L270 385 L230 385 Z"/>
+                <path d="M35 250 L115 270 L115 230 Z"/>
+                <path d="M465 250 L385 270 L385 230 Z"/>
+                <path d="M100 100 L160 155 L135 180 Z"/>
+                <path d="M400 100 L340 155 L365 180 Z"/>
+                <path d="M100 400 L160 345 L135 320 Z"/>
+                <path d="M400 400 L340 345 L365 320 Z"/>
+            </g>
+
+        ` + commonEnd;
+    }
+
+
+    /* 🌸 FLOWER */
+
+    if (type === "flower") {
+
+        return commonStart + `
+
+            <circle class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="7"
+                cx="250" cy="145" r="65"
+                onclick="colourDrawingPart(this)"
+            />
+
+            <circle class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="7"
+                cx="165" cy="190" r="65"
+                onclick="colourDrawingPart(this)"
+            />
+
+            <circle class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="7"
+                cx="335" cy="190" r="65"
+                onclick="colourDrawingPart(this)"
+            />
+
+            <circle class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="7"
+                cx="190" cy="280" r="65"
+                onclick="colourDrawingPart(this)"
+            />
+
+            <circle class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="7"
+                cx="310" cy="280" r="65"
+                onclick="colourDrawingPart(this)"
+            />
+
+            <circle class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="7"
+                cx="250" cy="215" r="55"
+                onclick="colourDrawingPart(this)"
+            />
+
+            <rect
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="7"
+                x="235" y="265"
+                width="30"
+                height="180"
+                rx="15"
+                onclick="colourDrawingPart(this)"
+            />
+
+            <ellipse
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="7"
+                cx="205" cy="350"
+                rx="65"
+                ry="25"
+                transform="rotate(-25 205 350)"
+                onclick="colourDrawingPart(this)"
+            />
+
+            <ellipse
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="7"
+                cx="295" cy="390"
+                rx="65"
+                ry="25"
+                transform="rotate(25 295 390)"
+                onclick="colourDrawingPart(this)"
+            />
+
+        ` + commonEnd;
+    }
+
+
+    /* 🦋 BUTTERFLY */
+
+    if (type === "butterfly") {
+
+        return commonStart + `
+
+            <ellipse
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="8"
+                cx="170" cy="210"
+                rx="110"
+                ry="125"
+                onclick="colourDrawingPart(this)"
+            />
+
+            <ellipse
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="8"
+                cx="330" cy="210"
+                rx="110"
+                ry="125"
+                onclick="colourDrawingPart(this)"
+            />
+
+            <ellipse
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="8"
+                cx="185" cy="330"
+                rx="75"
+                ry="70"
+                onclick="colourDrawingPart(this)"
+            />
+
+            <ellipse
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="8"
+                cx="315" cy="330"
+                rx="75"
+                ry="70"
+                onclick="colourDrawingPart(this)"
+            />
+
+            <rect
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="8"
+                x="230"
+                y="150"
+                width="40"
+                height="240"
+                rx="20"
+                onclick="colourDrawingPart(this)"
+            />
+
+            <path
+                d="M240 165 Q190 80 155 90"
+                fill="none"
+                stroke="#222"
+                stroke-width="8"
+            />
+
+            <path
+                d="M260 165 Q310 80 345 90"
+                fill="none"
+                stroke="#222"
+                stroke-width="8"
+            />
+
+        ` + commonEnd;
+    }
+
+
+    /* 🏠 HOUSE */
+
+    if (type === "house") {
+
+        return commonStart + `
+
+            <rect
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="8"
+                x="100" y="210"
+                width="300" height="220"
+                onclick="colourDrawingPart(this)"
+            />
+
+            <path
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="8"
+                d="M70 220 L250 70 L430 220 Z"
+                onclick="colourDrawingPart(this)"
+            />
+
+            <rect
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="8"
+                x="205" y="310"
+                width="90"
+                height="120"
+                onclick="colourDrawingPart(this)"
+            />
+
+            <rect
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="8"
+                x="135" y="260"
+                width="70"
+                height="70"
+                onclick="colourDrawingPart(this)"
+            />
+
+            <rect
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="8"
+                x="295" y="260"
+                width="70"
+                height="70"
+                onclick="colourDrawingPart(this)"
+            />
+
+            <rect
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="8"
+                x="320" y="105"
+                width="45"
+                height="80"
+                onclick="colourDrawingPart(this)"
+            />
+
+        ` + commonEnd;
+    }
+
+
+    /* 🚗 CAR */
+
+    if (type === "car") {
+
+        return commonStart + `
+
+            <rect
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="8"
+                x="80" y="245"
+                width="340"
+                height="120"
+                rx="35"
+                onclick="colourDrawingPart(this)"
+            />
+
+            <path
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="8"
+                d="M145 245 L185 165 L320 165 L365 245 Z"
+                onclick="colourDrawingPart(this)"
+            />
+
+            <path
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="7"
+                d="M195 235 L215 185 L260 185 L260 235 Z"
+                onclick="colourDrawingPart(this)"
+            />
+
+            <path
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="7"
+                d="M275 185 L315 185 L345 235 L275 235 Z"
+                onclick="colourDrawingPart(this)"
+            />
+
+            <circle
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="8"
+                cx="155" cy="370" r="45"
+                onclick="colourDrawingPart(this)"
+            />
+
+            <circle
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="8"
+                cx="345" cy="370" r="45"
+                onclick="colourDrawingPart(this)"
+            />
+
+        ` + commonEnd;
+    }
+
+
+    /* 🌳 TREE */
+
+    if (type === "tree") {
+
+        return commonStart + `
+
+            <rect
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="8"
+                x="210" y="250"
+                width="80" height="190"
+                onclick="colourDrawingPart(this)"
+            />
+
+            <circle
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="8"
+                cx="170" cy="210" r="90"
+                onclick="colourDrawingPart(this)"
+            />
+
+            <circle
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="8"
+                cx="330" cy="210" r="90"
+                onclick="colourDrawingPart(this)"
+            />
+
+            <circle
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="8"
+                cx="250" cy="130" r="100"
+                onclick="colourDrawingPart(this)"
+            />
+
+        ` + commonEnd;
+    }
+
+
+    /* 🐟 FISH */
+
+    if (type === "fish") {
+
+        return commonStart + `
+
+            <ellipse
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="8"
+                cx="250" cy="250"
+                rx="145" ry="90"
+                onclick="colourDrawingPart(this)"
+            />
+
+            <path
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="8"
+                d="M115 250 L45 175 L45 325 Z"
+                onclick="colourDrawingPart(this)"
+            />
+
+            <path
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="8"
+                d="M250 160 L290 95 L320 180 Z"
+                onclick="colourDrawingPart(this)"
+            />
+
+            <circle
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="7"
+                cx="335" cy="225" r="18"
+                onclick="colourDrawingPart(this)"
+            />
+
+        ` + commonEnd;
+    }
+
+
+    /* 🎈 BALLOON */
+
+    if (type === "balloon") {
+
+        return commonStart + `
+
+            <ellipse
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="8"
+                cx="250" cy="190"
+                rx="120"
+                ry="145"
+                onclick="colourDrawingPart(this)"
+            />
+
+            <path
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="8"
+                d="M230 330 L250 365 L270 330 Z"
+                onclick="colourDrawingPart(this)"
+            />
+
+            <path
+                d="M250 365 C230 405 270 425 250 470"
+                fill="none"
+                stroke="#222"
+                stroke-width="8"
+            />
+
+        ` + commonEnd;
+    }
+
+
+    /* 🍦 ICE CREAM */
+
+    if (type === "icecream") {
+
+        return commonStart + `
+
+            <circle
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="8"
+                cx="250" cy="180" r="90"
+                onclick="colourDrawingPart(this)"
+            />
+
+            <path
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="8"
+                d="M155 215 L345 215 L250 440 Z"
+                onclick="colourDrawingPart(this)"
+            />
+
+            <circle
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="7"
+                cx="215" cy="140" r="18"
+                onclick="colourDrawingPart(this)"
+            />
+
+            <circle
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="7"
+                cx="285" cy="165" r="18"
+                onclick="colourDrawingPart(this)"
+            />
+
+        ` + commonEnd;
+    }
+
+
+    /* ⭐ STAR */
+
+    if (type === "star") {
+
+        return commonStart + `
+
+            <polygon
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="8"
+                points="
+                    250,55
+                    305,180
+                    440,190
+                    335,275
+                    370,410
+                    250,335
+                    130,410
+                    165,275
+                    60,190
+                    195,180
+                "
+                onclick="colourDrawingPart(this)"
+            />
+
+        ` + commonEnd;
+    }
+
+
+    /* ☁️ CLOUD */
+
+    if (type === "cloud") {
+
+        return commonStart + `
+
+            <path
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="8"
+                d="
+                    M100 330
+                    C70 300 90 245 135 235
+                    C135 165 220 135 270 190
+                    C320 145 400 180 395 240
+                    C440 245 455 310 415 335
+                    Z
+                "
+                onclick="colourDrawingPart(this)"
+            />
+
+            <circle
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="7"
+                cx="170" cy="390" r="20"
+                onclick="colourDrawingPart(this)"
+            />
+
+            <circle
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="7"
+                cx="250" cy="420" r="20"
+                onclick="colourDrawingPart(this)"
+            />
+
+            <circle
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="7"
+                cx="330" cy="390" r="20"
+                onclick="colourDrawingPart(this)"
+            />
+
+        ` + commonEnd;
+    }
+
+
+    /* 🐦 BIRD */
+
+    if (type === "bird") {
+
+        return commonStart + `
+
+            <ellipse
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="8"
+                cx="250" cy="270"
+                rx="125" ry="95"
+                onclick="colourDrawingPart(this)"
+            />
+
+            <ellipse
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="8"
+                cx="225" cy="275"
+                rx="65" ry="50"
+                onclick="colourDrawingPart(this)"
+            />
+
+            <circle
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="7"
+                cx="340" cy="220" r="15"
+                onclick="colourDrawingPart(this)"
+            />
+
+            <polygon
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="7"
+                points="365,225 430,250 365,275"
+                onclick="colourDrawingPart(this)"
+            />
+
+        ` + commonEnd;
+    }
+
+
+    /* 🐱 CAT */
+
+    if (type === "cat") {
+
+        return commonStart + `
+
+            <circle
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="8"
+                cx="250" cy="180" r="95"
+                onclick="colourDrawingPart(this)"
+            />
+
+            <ellipse
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="8"
+                cx="250" cy="345"
+                rx="105" ry="120"
+                onclick="colourDrawingPart(this)"
+            />
+
+            <polygon
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="8"
+                points="175,120 180,45 230,105"
+                onclick="colourDrawingPart(this)"
+            />
+
+            <polygon
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="8"
+                points="325,120 320,45 270,105"
+                onclick="colourDrawingPart(this)"
+            />
+
+            <ellipse
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="7"
+                cx="250" cy="395"
+                rx="35" ry="25"
+                onclick="colourDrawingPart(this)"
+            />
+
+        ` + commonEnd;
+    }
+
+
+    /* 🐶 DOG */
+
+    if (type === "dog") {
+
+        return commonStart + `
+
+            <circle
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="8"
+                cx="250" cy="190" r="95"
+                onclick="colourDrawingPart(this)"
+            />
+
+            <ellipse
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="8"
+                cx="250" cy="350"
+                rx="110" ry="120"
+                onclick="colourDrawingPart(this)"
+            />
+
+            <ellipse
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="8"
+                cx="155" cy="185"
+                rx="45" ry="85"
+                transform="rotate(-20 155 185)"
+                onclick="colourDrawingPart(this)"
+            />
+
+            <ellipse
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="8"
+                cx="345" cy="185"
+                rx="45" ry="85"
+                transform="rotate(20 345 185)"
+                onclick="colourDrawingPart(this)"
+            />
+
+            <circle
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="7"
+                cx="250" cy="235" r="25"
+                onclick="colourDrawingPart(this)"
+            />
+
+        ` + commonEnd;
+    }
+
+
+    /* 🐰 RABBIT */
+
+    if (type === "rabbit") {
+
+        return commonStart + `
+
+            <ellipse
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="8"
+                cx="210" cy="120"
+                rx="40" ry="100"
+                onclick="colourDrawingPart(this)"
+            />
+
+            <ellipse
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="8"
+                cx="290" cy="120"
+                rx="40" ry="100"
+                onclick="colourDrawingPart(this)"
+            />
+
+            <circle
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="8"
+                cx="250" cy="230" r="100"
+                onclick="colourDrawingPart(this)"
+            />
+
+            <ellipse
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="8"
+                cx="250" cy="365"
+                rx="100" ry="105"
+                onclick="colourDrawingPart(this)"
+            />
+
+            <circle
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="7"
+                cx="250" cy="270" r="20"
+                onclick="colourDrawingPart(this)"
+            />
+
+        ` + commonEnd;
+    }
+
+
+    /* 🚌 BUS */
+
+    if (type === "bus") {
+
+        return commonStart + `
+
+            <rect
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="8"
+                x="70" y="140"
+                width="360" height="240"
+                rx="35"
+                onclick="colourDrawingPart(this)"
+            />
+
+            <rect
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="7"
+                x="105" y="180"
+                width="80" height="75"
+                onclick="colourDrawingPart(this)"
+            />
+
+            <rect
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="7"
+                x="205" y="180"
+                width="80" height="75"
+                onclick="colourDrawingPart(this)"
+            />
+
+            <rect
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="7"
+                x="305" y="180"
+                width="80" height="75"
+                onclick="colourDrawingPart(this)"
+            />
+
+            <circle
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="8"
+                cx="150" cy="390" r="40"
+                onclick="colourDrawingPart(this)"
+            />
+
+            <circle
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="8"
+                cx="350" cy="390" r="40"
+                onclick="colourDrawingPart(this)"
+            />
+
+        ` + commonEnd;
+    }
+
+
+    /* 🪁 KITE */
+
+    if (type === "kite") {
+
+        return commonStart + `
+
+            <polygon
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="8"
+                points="250,45 390,230 250,380 110,230"
+                onclick="colourDrawingPart(this)"
+            />
+
+            <path
+                d="M250 45 L250 380"
+                fill="none"
+                stroke="#222"
+                stroke-width="7"
+            />
+
+            <path
+                d="M110 230 L390 230"
+                fill="none"
+                stroke="#222"
+                stroke-width="7"
+            />
+
+            <path
+                d="M250 380 C220 410 280 430 250 470"
+                fill="none"
+                stroke="#222"
+                stroke-width="7"
+            />
+
+        ` + commonEnd;
+    }
+
+
+    /* ⛵ BOAT */
+
+    if (type === "boat") {
+
+        return commonStart + `
+
+            <path
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="8"
+                d="M80 320 L420 320 L350 410 L150 410 Z"
+                onclick="colourDrawingPart(this)"
+            />
+
+            <path
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="8"
+                d="M250 80 L250 320 L120 320 Z"
+                onclick="colourDrawingPart(this)"
+            />
+
+            <path
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="8"
+                d="M260 100 L380 250 L260 250 Z"
+                onclick="colourDrawingPart(this)"
+            />
+
+            <rect
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="7"
+                x="245" y="70"
+                width="12"
+                height="255"
+                onclick="colourDrawingPart(this)"
+            />
+
+        ` + commonEnd;
+    }
+
+
+    /* 🧁 CUPCAKE */
+
+    if (type === "cupcake") {
+
+        return commonStart + `
+
+            <path
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="8"
+                d="
+                    M130 220
+                    C130 145 200 125 250 160
+                    C300 125 370 145 370 220
+                    C370 280 320 300 250 285
+                    C180 300 130 280 130 220
+                    Z
+                "
+                onclick="colourDrawingPart(this)"
+            />
+
+            <path
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="8"
+                d="M145 280 L355 280 L325 430 L175 430 Z"
+                onclick="colourDrawingPart(this)"
+            />
+
+            <circle
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="7"
+                cx="250" cy="130" r="35"
+                onclick="colourDrawingPart(this)"
+            />
+
+        ` + commonEnd;
+    }
+
+
+    return `
+        <svg
+            class="colouring-svg"
+            viewBox="0 0 500 500"
+        >
+            <circle
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="8"
+                cx="250"
+                cy="250"
+                r="150"
+                onclick="colourDrawingPart(this)"
+            />
+        </svg>
+    `;
+}
 
 /* =========================================================
    🔷 SHAPE DRAWING
