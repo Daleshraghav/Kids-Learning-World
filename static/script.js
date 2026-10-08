@@ -2152,7 +2152,6 @@ function openEasyWords() {
    📖 STORIES
    ========================================================= */
 
-```javascript
 function openStories() {
 
     const stories = [
@@ -2412,7 +2411,6 @@ function stopStoryVoice() {
         window.speechSynthesis.cancel();
     }
 }
-```
 
 
 /* =========================================================
