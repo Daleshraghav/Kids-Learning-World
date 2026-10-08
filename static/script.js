@@ -2027,68 +2027,121 @@ function checkLetterWordMatch(card, letter, word) {
 /* =========================================================
    📝 SPELL THE WORD
    ========================================================= */
-
 function startSpellingGame() {
 
     const words = [
-        {
-            word: "CAT",
-            emoji: "🐱"
-        },
-        {
-            word: "DOG",
-            emoji: "🐶"
-        },
-        {
-            word: "SUN",
-            emoji: "☀️"
-        },
-        {
-            word: "BALL",
-            emoji: "⚽"
-        },
-        {
-            word: "FISH",
-            emoji: "🐟"
-        }
+        { word: "CAT", emoji: "🐱" },
+        { word: "DOG", emoji: "🐶" },
+        { word: "SUN", emoji: "☀️" },
+        { word: "BALL", emoji: "⚽" },
+        { word: "FISH", emoji: "🐟" },
+        { word: "BIRD", emoji: "🐦" },
+        { word: "TREE", emoji: "🌳" },
+        { word: "BOOK", emoji: "📚" },
+        { word: "PEN", emoji: "🖊️" },
+        { word: "CAR", emoji: "🚗" },
+        { word: "BUS", emoji: "🚌" },
+        { word: "MILK", emoji: "🥛" },
+        { word: "APPLE", emoji: "🍎" },
+        { word: "MANGO", emoji: "🥭" },
+        { word: "BANANA", emoji: "🍌" },
+        { word: "ORANGE", emoji: "🍊" },
+        { word: "GRAPES", emoji: "🍇" },
+        { word: "WATER", emoji: "💧" },
+        { word: "HOUSE", emoji: "🏠" },
+        { word: "SCHOOL", emoji: "🏫" },
+        { word: "CHAIR", emoji: "🪑" },
+        { word: "TABLE", emoji: "🪑" },
+        { word: "CLOCK", emoji: "⏰" },
+        { word: "PHONE", emoji: "📱" },
+        { word: "MOBILE", emoji: "📱" },
+        { word: "MOTHER", emoji: "👩" },
+        { word: "FATHER", emoji: "👨" },
+        { word: "BABY", emoji: "👶" },
+        { word: "BOY", emoji: "👦" },
+        { word: "GIRL", emoji: "👧" },
+        { word: "FLOWER", emoji: "🌸" },
+        { word: "ROSE", emoji: "🌹" },
+        { word: "STAR", emoji: "⭐" },
+        { word: "MOON", emoji: "🌙" },
+        { word: "RAIN", emoji: "🌧️" },
+        { word: "CLOUD", emoji: "☁️" },
+        { word: "SNOW", emoji: "❄️" },
+        { word: "FIRE", emoji: "🔥" },
+        { word: "HOUSE", emoji: "🏠" },
+        { word: "DOOR", emoji: "🚪" },
+        { word: "WINDOW", emoji: "🪟" },
+        { word: "SHOES", emoji: "👟" },
+        { word: "SHIRT", emoji: "👕" },
+        { word: "PANTS", emoji: "👖" },
+        { word: "HAT", emoji: "🧢" },
+        { word: "HAND", emoji: "✋" },
+        { word: "FOOT", emoji: "🦶" },
+        { word: "EYE", emoji: "👁️" },
+        { word: "NOSE", emoji: "👃" },
+        { word: "MOUTH", emoji: "👄" },
+        { word: "EAR", emoji: "👂" },
+        { word: "TOOTH", emoji: "🦷" },
+        { word: "LION", emoji: "🦁" },
+        { word: "TIGER", emoji: "🐯" },
+        { word: "ELEPHANT", emoji: "🐘" },
+        { word: "MONKEY", emoji: "🐒" },
+        { word: "HORSE", emoji: "🐴" },
+        { word: "COW", emoji: "🐄" },
+        { word: "GOAT", emoji: "🐐" },
+        { word: "SHEEP", emoji: "🐑" },
+        { word: "RABBIT", emoji: "🐰" },
+        { word: "BEAR", emoji: "🐻" }
     ];
 
-    const item = randomItem(words);
+    let html = `
+        <div class="spelling-list">
+    `;
+
+    words.forEach((item, index) => {
+
+        html += `
+            <div class="learning-card spelling-card">
+
+                <div class="spelling-number">
+                    ${index + 1}
+                </div>
+
+                <div class="learning-emoji">
+                    ${item.emoji}
+                </div>
+
+                <h2>
+                    ${item.word}
+                </h2>
+
+                <p>
+                    ${item.word.split("").join(" - ")}
+                </p>
+
+                <button
+                    type="button"
+                    onclick="speak('${item.word}', {lang:'en-US'})"
+                >
+                    🔊 Hear Word
+                </button>
+
+            </div>
+        `;
+
+    });
+
+    html += `
+        </div>
+    `;
 
     setupLearning(
         "📝",
-        "Spell the Word",
-        "Can you spell it?",
-        `
-
-        <div class="learning-card">
-
-            <div class="learning-emoji">
-                ${item.emoji}
-            </div>
-
-            <h2>
-                ${item.word}
-            </h2>
-
-            <p>
-                ${item.word.split("").join(" - ")}
-            </p>
-
-            <button
-                type="button"
-                onclick="speak('${item.word}', {lang:'en-US'})"
-            >
-                🔊 Hear Word
-            </button>
-
-        </div>
-
-        `
+        "Spell the Words",
+        "Learn to spell 60 easy English words!",
+        html
     );
 }
-
-
 /* =========================================================
    🐱 EASY WORDS
    ========================================================= */
