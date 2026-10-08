@@ -1173,65 +1173,67 @@ function handleHindiKey(event, card, index) {
 }
 
 
-/* =========================================================
-   💡 STUDY LAMP
-   DO NOT REMOVE
-   ========================================================= */
+
 
 /* =========================================================
    💡 STUDY LAMP — OPEN HOME AFTER GLOW
    ========================================================= */
 
+/* =========================================================
+   💡 STUDY LAMP — FINAL VERSION
+   ========================================================= */
+
 function turnLampOn() {
 
-    const intro =
-        document.getElementById("studyIntro");
+    const intro = document.getElementById("studyIntro");
+    const home = document.getElementById("homePage");
+    const learning = document.getElementById("learningPage");
 
-    const home =
-        document.getElementById("homePage");
+    console.log("💡 Lamp clicked");
 
+    /* If lamp screen is not found */
     if (!intro) {
-        console.warn("studyIntro not found");
+        console.error("❌ studyIntro not found in HTML");
         return;
     }
 
     /* Prevent double click */
-    if (intro.classList.contains("lamp-on")) {
+    if (intro.dataset.opening === "true") {
         return;
     }
 
-    /* 🌟 Turn the lamp ON */
+    intro.dataset.opening = "true";
+
+    /* Make sure Home is hidden while lamp animation runs */
+    if (home) {
+        home.style.display = "none";
+    }
+
+    if (learning) {
+        learning.style.display = "none";
+    }
+
+    /* 🌟 START GOLDEN LIGHT */
     intro.classList.add("lamp-on");
 
-
-    /*
-       💡 Let the yellow glow animation play first.
-       Then hide the intro and show Home Page.
-    */
-
+    /* 🟡 After glow animation → open Home */
     setTimeout(function () {
 
         intro.classList.add("hide-intro");
 
         if (home) {
             home.style.display = "block";
+            home.style.opacity = "1";
         }
 
-        /*
-           Small delay so the Home Page
-           appears smoothly after lamp screen.
-        */
-
+        /* Remove intro completely after fade */
         setTimeout(function () {
 
-            if (home) {
-                home.classList.add("home-page-visible");
-            }
+            intro.style.display = "none";
 
-        }, 80);
+        }, 900);
 
     }, 2200);
-
 }
 
 
@@ -8336,3 +8338,28 @@ if (
 
     initializeApp();
 }
+
+/* =========================================================
+   💡 LAMP CLICK BACKUP
+   Makes the whole lamp screen clickable
+   ========================================================= */
+
+document.addEventListener("click", function (event) {
+
+    const intro = document.getElementById("studyIntro");
+
+    if (!intro) return;
+
+    /* Only work while lamp screen is visible */
+    if (intro.style.display === "none") {
+        return;
+    }
+
+    /* Click anywhere on lamp intro */
+    if (intro.contains(event.target)) {
+
+        turnLampOn();
+
+    }
+
+});
