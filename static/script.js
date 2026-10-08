@@ -1178,22 +1178,60 @@ function handleHindiKey(event, card, index) {
    DO NOT REMOVE
    ========================================================= */
 
+/* =========================================================
+   💡 STUDY LAMP — OPEN HOME AFTER GLOW
+   ========================================================= */
+
 function turnLampOn() {
 
     const intro =
         document.getElementById("studyIntro");
 
-    if (!intro) return;
+    const home =
+        document.getElementById("homePage");
 
-    if (intro.classList.contains("lamp-on")) return;
+    if (!intro) {
+        console.warn("studyIntro not found");
+        return;
+    }
 
+    /* Prevent double click */
+    if (intro.classList.contains("lamp-on")) {
+        return;
+    }
+
+    /* 🌟 Turn the lamp ON */
     intro.classList.add("lamp-on");
+
+
+    /*
+       💡 Let the yellow glow animation play first.
+       Then hide the intro and show Home Page.
+    */
 
     setTimeout(function () {
 
         intro.classList.add("hide-intro");
 
+        if (home) {
+            home.style.display = "block";
+        }
+
+        /*
+           Small delay so the Home Page
+           appears smoothly after lamp screen.
+        */
+
+        setTimeout(function () {
+
+            if (home) {
+                home.classList.add("home-page-visible");
+            }
+
+        }, 80);
+
     }, 2200);
+
 }
 
 
