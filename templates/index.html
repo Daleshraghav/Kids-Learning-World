@@ -66,94 +66,189 @@
          STUDY INTRO
     ========================================================== -->
 
-    <div id="studyIntro">
+   <!-- =========================================================
+     NEW GIFT BOX INTRO
+========================================================== -->
 
-        <!-- Night stars -->
+<div id="giftIntro">
 
-        <div class="night-stars">
+    <!-- NIGHT SKY -->
+    <div class="gift-night-sky">
 
+        <!-- STARS -->
+        <div class="gift-stars" aria-hidden="true">
             <span>✦</span>
             <span>✧</span>
             <span>✦</span>
+            <span>·</span>
             <span>✧</span>
             <span>✦</span>
+            <span>·</span>
+            <span>✧</span>
+            <span>✦</span>
+            <span>·</span>
+            <span>✧</span>
+            <span>✦</span>
+        </div>
+
+
+        <!-- REALISTIC MOON -->
+        <div class="gift-moon" aria-hidden="true">
+
+            <div class="moon-crater crater-one"></div>
+            <div class="moon-crater crater-two"></div>
+            <div class="moon-crater crater-three"></div>
+            <div class="moon-crater crater-four"></div>
+            <div class="moon-crater crater-five"></div>
 
         </div>
 
 
-        <!-- Moon -->
-
-        <div class="night-moon"></div>
-
-
-        <!-- Tap message -->
-
-        <div class="lamp-message">
-
-            💡 Tap the lamp to start learning
-
-        </div>
+        <!-- SOFT MOON GLOW -->
+        <div class="moon-glow" aria-hidden="true"></div>
 
 
-        <!-- =====================================================
-             LUXURY TABLE LAMP
-        ====================================================== -->
+        <!-- =================================================
+             GIFT BOX AREA
+        ================================================== -->
 
-        <button
-            id="studyLamp"
-            class="luxury-lamp"
-            type="button"
-            onclick="turnLampOn()"
-            aria-label="Turn on lamp">
-
-            <div class="lamp-light"></div>
+        <div
+            id="giftBoxArea"
+            class="gift-box-area">
 
 
-            <div class="lamp-shade">
+            <!-- GLOW BEHIND BOX -->
 
-                <div class="shade-top"></div>
-
-
-                <div class="shade-lines">
-
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-
-                </div>
+            <div
+                class="gift-yellow-glow"
+                aria-hidden="true">
+            </div>
 
 
-                <div class="lamp-bulb"></div>
+            <!-- LIGHT PARTICLES -->
+
+            <div
+                class="gift-light-particles"
+                aria-hidden="true">
+
+                <span>✦</span>
+                <span>✧</span>
+                <span>•</span>
+                <span>✦</span>
+                <span>•</span>
+                <span>✧</span>
+                <span>✦</span>
+                <span>•</span>
 
             </div>
 
 
-            <div class="lamp-neck-top"></div>
+            <!-- =================================================
+                 BOOKS COMING OUT OF BOX
+            ================================================== -->
+
+            <div
+                class="gift-books"
+                aria-hidden="true">
+
+                <div class="gift-book book-blue">
+                    📘
+                </div>
+
+                <div class="gift-book book-red">
+                    📕
+                </div>
+
+                <div class="gift-book book-green">
+                    📗
+                </div>
+
+                <div class="gift-book book-yellow">
+                    📙
+                </div>
+
+            </div>
 
 
-            <div class="lamp-decor decor-one"></div>
+            <!-- =================================================
+                 LUXURY GIFT BOX
+            ================================================== -->
+
+            <button
+                id="learningGiftBox"
+                class="luxury-gift-box"
+                type="button"
+                onclick="openLearningGift()"
+                aria-label="Open learning gift">
 
 
-            <div class="lamp-body"></div>
+                <!-- BOX GLOW -->
+
+                <span
+                    class="gift-box-inner-glow"
+                    aria-hidden="true">
+                </span>
 
 
-            <div class="lamp-decor decor-two"></div>
+                <!-- GIFT LID -->
+
+                <span
+                    class="gift-lid"
+                    aria-hidden="true">
+
+                    <span class="gift-lid-ribbon"></span>
+
+                    <span class="gift-bow">
+
+                        <span class="bow-left"></span>
+                        <span class="bow-right"></span>
+                        <span class="bow-center"></span>
+
+                    </span>
+
+                </span>
 
 
-            <div class="lamp-neck-bottom"></div>
+                <!-- GIFT BODY -->
+
+                <span
+                    class="gift-body"
+                    aria-hidden="true">
+
+                    <span class="gift-ribbon-vertical"></span>
+
+                    <span class="gift-ribbon-horizontal"></span>
+
+                    <span class="gift-body-shine"></span>
+
+                </span>
 
 
-            <div class="lamp-base"></div>
+                <!-- FLOOR SHADOW -->
 
-        </button>
+                <span
+                    class="gift-shadow"
+                    aria-hidden="true">
+                </span>
+
+            </button>
+
+
+            <!-- TAP MESSAGE -->
+
+            <div
+                class="gift-message"
+                id="giftMessage">
+
+                🎁 Open your learning gift
+
+            </div>
+
+        </div>
 
     </div>
 
-
+</div>
 
     <!-- =========================================================
          PREMIUM BRAND
