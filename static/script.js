@@ -1172,34 +1172,138 @@ function handleHindiKey(event, card, index) {
     }
 }
 
+<!-- =========================================================
+     🎁 LEARNING GIFT INTRO
+========================================================= -->
+
+<div id="giftIntro">
+
+    <div class="gift-night-sky">
+
+        <!-- STARS -->
+        <div class="gift-stars" aria-hidden="true">
+            <span>✦</span>
+            <span>✧</span>
+            <span>✦</span>
+            <span>·</span>
+            <span>✧</span>
+            <span>✦</span>
+            <span>·</span>
+            <span>✧</span>
+            <span>✦</span>
+            <span>·</span>
+            <span>✧</span>
+            <span>✦</span>
+        </div>
+
+        <!-- MOON -->
+        <div class="gift-moon" aria-hidden="true">
+            <div class="moon-crater crater-one"></div>
+            <div class="moon-crater crater-two"></div>
+            <div class="moon-crater crater-three"></div>
+            <div class="moon-crater crater-four"></div>
+            <div class="moon-crater crater-five"></div>
+        </div>
+
+        <div class="moon-glow" aria-hidden="true"></div>
+
+        <!-- GIFT AREA -->
+        <div id="giftBoxArea" class="gift-box-area">
+
+            <!-- YELLOW LIGHT -->
+            <div class="gift-yellow-glow" aria-hidden="true"></div>
+
+            <!-- PARTICLES -->
+            <div class="gift-light-particles" aria-hidden="true">
+                <span style="--x:-1; --y:-1;">✦</span>
+                <span style="--x:1; --y:-1;">✧</span>
+                <span style="--x:-1; --y:1;">•</span>
+                <span style="--x:1; --y:1;">✦</span>
+                <span style="--x:-2; --y:-1;">•</span>
+                <span style="--x:2; --y:-1;">✧</span>
+                <span style="--x:-2; --y:1;">✦</span>
+                <span style="--x:2; --y:1;">•</span>
+            </div>
+
+            <!-- BOOKS -->
+            <div class="gift-books" aria-hidden="true">
+                <div class="gift-book book-blue">📘</div>
+                <div class="gift-book book-red">📕</div>
+                <div class="gift-book book-green">📗</div>
+                <div class="gift-book book-yellow">📙</div>
+            </div>
+
+            <!-- GIFT BOX -->
+            <button
+                id="learningGiftBox"
+                class="luxury-gift-box"
+                type="button"
+                onclick="openLearningGift()"
+                aria-label="Open learning gift">
+
+                <span class="gift-box-inner-glow"></span>
+
+                <span class="gift-lid">
+                    <span class="gift-lid-ribbon"></span>
+
+                    <span class="gift-bow">
+                        <span class="bow-left"></span>
+                        <span class="bow-right"></span>
+                        <span class="bow-center"></span>
+                    </span>
+                </span>
+
+                <span class="gift-body">
+                    <span class="gift-ribbon-vertical"></span>
+                    <span class="gift-ribbon-horizontal"></span>
+                    <span class="gift-body-shine"></span>
+                </span>
+
+                <span class="gift-shadow"></span>
+
+            </button>
+
+            <!-- ONLY TEXT — NOT CLICKABLE -->
+            <div
+                class="gift-message"
+                id="giftMessage">
+                🎁 Open your learning gift
+            </div>
+
+        </div>
+    </div>
+</div>
+
 /* =========================================================
    🎁 LEARNING GIFT INTRO
-   Night → Gift Glow → Open Box → Books → Home
+   Glow → Shake → Open → Books → Home
 ========================================================= */
 
-function openLearningGift() {
+window.openLearningGift = function () {
 
     const intro = document.getElementById("giftIntro");
     const giftBox = document.getElementById("learningGiftBox");
+    const homePage = document.getElementById("homePage");
 
-    if (!intro || !giftBox) return;
+    if (!intro || !giftBox) {
+        console.error("Gift intro / gift box not found.");
+        return;
+    }
 
-    // Prevent double click
+    /* Prevent second click */
     if (intro.classList.contains("gift-opening")) {
         return;
     }
 
-    // Start complete animation
+    /* Start */
     intro.classList.add("gift-opening");
 
-    // Disable button during animation
     giftBox.disabled = true;
 
-
-    /*
+    /* -----------------------------------------
        STEP 1
-       Yellow glow starts
-    */
+       Yellow glow
+    ----------------------------------------- */
 
     setTimeout(function () {
 
@@ -1208,87 +1312,84 @@ function openLearningGift() {
     }, 50);
 
 
-    /*
+    /* -----------------------------------------
        STEP 2
-       Gift box opens
-    */
+       Gift lid opens
+    ----------------------------------------- */
 
     setTimeout(function () {
 
         intro.classList.add("gift-open");
 
-    }, 700);
+    }, 850);
 
 
-    /*
+    /* -----------------------------------------
        STEP 3
        Books come out
-    */
+    ----------------------------------------- */
 
     setTimeout(function () {
 
         intro.classList.add("books-coming-out");
 
-    }, 1200);
+    }, 1350);
 
 
-    /*
+    /* -----------------------------------------
        STEP 4
-       Strong light / final animation
-    */
+       Final magical glow
+    ----------------------------------------- */
 
     setTimeout(function () {
 
         intro.classList.add("gift-final-glow");
 
-    }, 1900);
+    }, 2050);
 
 
-    /*
+    /* -----------------------------------------
        STEP 5
-       Hide intro and show existing Home Page
-    */
+       Home page appears
+    ----------------------------------------- */
 
     setTimeout(function () {
-
-        intro.classList.add("gift-hide");
-
-        const homePage =
-            document.getElementById("homePage");
 
         if (homePage) {
 
             homePage.style.display = "block";
 
-            homePage.classList.add("home-page-opening");
-
+            homePage.classList.add(
+                "home-page-opening"
+            );
         }
 
-    }, 2700);
+        intro.classList.add("gift-hide");
+
+    }, 2900);
 
 
-    /*
+    /* -----------------------------------------
        STEP 6
-       Completely remove intro from visual flow
-    */
+       Remove intro completely
+    ----------------------------------------- */
 
     setTimeout(function () {
 
         intro.style.display = "none";
 
-        const homePage =
-            document.getElementById("homePage");
-
         if (homePage) {
 
-            homePage.classList.remove("home-page-opening");
+            homePage.style.display = "block";
 
+            homePage.classList.remove(
+                "home-page-opening"
+            );
         }
 
-    }, 3600);
+    }, 4000);
 
-}
-
+};
 
 /* =========================================================
    📚 LEARNING MENU
@@ -8391,4 +8492,3 @@ if (
 
     initializeApp();
 }
-
