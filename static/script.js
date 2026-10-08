@@ -14,7 +14,7 @@ const APP_SETTINGS = {
     speechVolume: 1,
     animationDuration: 600,
     cardAnimationDelay: 45,
-    scrollBehavior: "smooth"
+    scrollBehavior: "auto"
 };
 
 
