@@ -10532,3 +10532,697 @@ table tr:hover {
         padding: 5px;
     }
 }
+
+/* =========================================================
+   🌈 COLOURING WORLD
+   ========================================================= */
+
+.colouring-world {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 15px;
+    box-sizing: border-box;
+}
+
+
+.colouring-intro {
+    text-align: center;
+    margin-bottom: 28px;
+}
+
+
+.colouring-intro h2 {
+    margin: 0 0 8px;
+    font-size: 30px;
+    font-weight: 800;
+}
+
+
+.colouring-intro p {
+    margin: 0;
+    font-size: 17px;
+    opacity: 0.8;
+}
+
+
+/* =========================================================
+   🖼️ PICTURE GRID
+   ========================================================= */
+
+.colouring-picture-grid {
+    width: 100%;
+    display: grid;
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+    gap: 20px;
+}
+
+
+.colouring-picture-card {
+    background: rgba(255,255,255,0.97);
+    border-radius: 24px;
+    padding: 22px 15px;
+    text-align: center;
+    cursor: pointer;
+
+    border: 3px solid transparent;
+
+    box-shadow:
+        0 8px 25px rgba(0,0,0,0.12);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        border-color 0.2s ease;
+}
+
+
+.colouring-picture-card:hover {
+
+    transform:
+        translateY(-6px)
+        scale(1.02);
+
+    border-color:
+        #ffd000;
+
+    box-shadow:
+        0 15px 35px rgba(0,0,0,0.18);
+}
+
+
+.colouring-preview {
+    font-size: 72px;
+    line-height: 1.2;
+    min-height: 90px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin-bottom: 10px;
+}
+
+
+.colouring-picture-card h3 {
+
+    margin: 5px 0;
+
+    font-size: 19px;
+
+    color: #222;
+
+}
+
+
+.colouring-picture-card p {
+
+    margin: 5px 0 0;
+
+    font-size: 13px;
+
+    color: #666;
+
+}
+
+
+/* =========================================================
+   🎨 DRAWING PAGE
+   ========================================================= */
+
+.proper-colouring-page {
+
+    width: 100%;
+
+    max-width: 950px;
+
+    margin:
+        0 auto;
+
+    text-align:
+        center;
+
+}
+
+
+/* =========================================================
+   🛠️ TOOLBAR
+   ========================================================= */
+
+.colouring-toolbar {
+
+    display:
+        flex;
+
+    justify-content:
+        center;
+
+    align-items:
+        center;
+
+    flex-wrap:
+        wrap;
+
+    gap:
+        10px;
+
+    margin:
+        15px 0;
+
+}
+
+
+.colouring-tool-button {
+
+    border:
+        none;
+
+    border-radius:
+        14px;
+
+    padding:
+        11px 18px;
+
+    background:
+        white;
+
+    color:
+        #222;
+
+    font-size:
+        15px;
+
+    font-weight:
+        700;
+
+    cursor:
+        pointer;
+
+    box-shadow:
+        0 5px 16px rgba(0,0,0,0.13);
+
+    transition:
+        transform 0.15s ease,
+        background 0.15s ease;
+}
+
+
+.colouring-tool-button:hover {
+
+    transform:
+        translateY(-2px);
+
+}
+
+
+.colouring-tool-button.active-colouring-tool {
+
+    background:
+        #ffd000;
+
+    box-shadow:
+        0 5px 18px rgba(255,180,0,0.35);
+
+}
+
+
+/* =========================================================
+   🌈 COLOUR AREA
+   ========================================================= */
+
+.colouring-colour-area {
+
+    width:
+        100%;
+
+    background:
+        rgba(255,255,255,0.96);
+
+    border-radius:
+        22px;
+
+    padding:
+        16px;
+
+    box-sizing:
+        border-box;
+
+    box-shadow:
+        0 7px 22px rgba(0,0,0,0.10);
+
+    margin:
+        15px auto;
+
+}
+
+
+.current-colour-box {
+
+    display:
+        flex;
+
+    justify-content:
+        center;
+
+    align-items:
+        center;
+
+    gap:
+        10px;
+
+    margin-bottom:
+        15px;
+
+    font-weight:
+        700;
+
+}
+
+
+.current-colour {
+
+    width:
+        32px;
+
+    height:
+        32px;
+
+    border-radius:
+        50%;
+
+    display:
+        inline-block;
+
+    border:
+        3px solid #222;
+
+    box-shadow:
+        0 2px 7px rgba(0,0,0,0.2);
+
+}
+
+
+/* =========================================================
+   🎨 PALETTE
+   ========================================================= */
+
+.colouring-palette {
+
+    display:
+        flex;
+
+    justify-content:
+        center;
+
+    align-items:
+        center;
+
+    flex-wrap:
+        wrap;
+
+    gap:
+        10px;
+
+}
+
+
+.colouring-colour-button {
+
+    width:
+        39px;
+
+    height:
+        39px;
+
+    padding:
+        0;
+
+    border-radius:
+        50%;
+
+    border:
+        3px solid white;
+
+    outline:
+        2px solid rgba(0,0,0,0.18);
+
+    cursor:
+        pointer;
+
+    box-sizing:
+        border-box;
+
+    transition:
+        transform 0.15s ease,
+        outline 0.15s ease;
+
+}
+
+
+.colouring-colour-button:hover {
+
+    transform:
+        scale(1.13);
+
+}
+
+
+.colouring-colour-button.selected-colouring-color {
+
+    transform:
+        scale(1.18);
+
+    outline:
+        4px solid #222;
+
+}
+
+
+/* =========================================================
+   🖼️ DRAWING BOARD
+   ========================================================= */
+
+.colouring-drawing-board {
+
+    width:
+        100%;
+
+    max-width:
+        850px;
+
+    min-height:
+        430px;
+
+    margin:
+        20px auto;
+
+    padding:
+        15px;
+
+    box-sizing:
+        border-box;
+
+    background:
+        white;
+
+    border-radius:
+        26px;
+
+    box-shadow:
+        0 10px 30px rgba(0,0,0,0.15);
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    overflow:
+        hidden;
+
+}
+
+
+/* =========================================================
+   🎨 SVG
+   ========================================================= */
+
+.colouring-svg {
+
+    display:
+        block;
+
+    width:
+        100%;
+
+    max-width:
+        800px;
+
+    height:
+        auto;
+
+    margin:
+        auto;
+
+}
+
+
+/* =========================================================
+   🖌️ CLICKABLE DRAWING PART
+   ========================================================= */
+
+.colour-part {
+
+    cursor:
+        pointer;
+
+    transition:
+        fill 0.15s ease;
+
+}
+
+
+.colour-part:hover {
+
+    filter:
+        brightness(0.96);
+
+}
+
+
+/* =========================================================
+   💡 HELP
+   ========================================================= */
+
+.colouring-help {
+
+    max-width:
+        750px;
+
+    margin:
+        15px auto;
+
+    padding:
+        13px 18px;
+
+    border-radius:
+        16px;
+
+    background:
+        rgba(255,255,255,0.92);
+
+    font-size:
+        16px;
+
+    font-weight:
+        600;
+
+}
+
+
+/* =========================================================
+   📱 TABLET
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+    .colouring-picture-grid {
+
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+        gap:
+            15px;
+
+    }
+
+}
+
+
+/* =========================================================
+   📱 MOBILE
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    .colouring-world {
+
+        padding:
+            10px;
+
+    }
+
+
+    .colouring-picture-grid {
+
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+        gap:
+            10px;
+
+    }
+
+
+    .colouring-picture-card {
+
+        padding:
+            14px 8px;
+
+        border-radius:
+            18px;
+
+    }
+
+
+    .colouring-preview {
+
+        font-size:
+            48px;
+
+        min-height:
+            60px;
+
+    }
+
+
+    .colouring-picture-card h3 {
+
+        font-size:
+            15px;
+
+    }
+
+
+    .colouring-picture-card p {
+
+        font-size:
+            11px;
+
+    }
+
+
+    .colouring-toolbar {
+
+        gap:
+            7px;
+
+    }
+
+
+    .colouring-tool-button {
+
+        padding:
+            9px 11px;
+
+        font-size:
+            13px;
+
+        border-radius:
+            11px;
+
+    }
+
+
+    .colouring-colour-area {
+
+        padding:
+            12px;
+
+    }
+
+
+    .colouring-palette {
+
+        gap:
+            8px;
+
+    }
+
+
+    .colouring-colour-button {
+
+        width:
+            33px;
+
+        height:
+            33px;
+
+    }
+
+
+    .colouring-drawing-board {
+
+        min-height:
+            280px;
+
+        padding:
+            6px;
+
+        border-radius:
+            18px;
+
+    }
+
+
+    .colouring-help {
+
+        font-size:
+            13px;
+
+        padding:
+            10px;
+
+    }
+
+}
+
+
+/* =========================================================
+   📱 SMALL PHONE
+   ========================================================= */
+
+@media (max-width: 380px) {
+
+    .colouring-preview {
+
+        font-size:
+            42px;
+
+    }
+
+
+    .colouring-picture-card h3 {
+
+        font-size:
+            14px;
+
+    }
+
+
+    .colouring-colour-button {
+
+        width:
+            30px;
+
+        height:
+            30px;
+
+    }
+
+
+    .colouring-tool-button {
+
+        padding:
+            8px 9px;
+
+        font-size:
+            12px;
+
+    }
+
+}
