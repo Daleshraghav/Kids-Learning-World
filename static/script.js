@@ -5536,68 +5536,145 @@ function clearDrawingCanvas() {
     );
 }
 
-
 /* =========================================================
-   🌈 COLOURING
+   🌈 COLOURING WORLD
    ========================================================= */
 
 function openColouring() {
 
+    const pictures = [
+        ["🍎", "Apple"],
+        ["☀️", "Sun"],
+        ["🌸", "Flower"],
+        ["🦋", "Butterfly"],
+        ["🚗", "Car"],
+        ["🏠", "House"],
+        ["🌳", "Tree"],
+        ["🐟", "Fish"],
+        ["🎈", "Balloon"],
+        ["🍦", "Ice Cream"],
+        ["⭐", "Star"],
+        ["☁️", "Cloud"],
+        ["🐦", "Bird"],
+        ["🐱", "Cat"],
+        ["🐶", "Dog"],
+        ["🐰", "Rabbit"],
+        ["🚌", "Bus"],
+        ["🪁", "Kite"],
+        ["⛵", "Boat"],
+        ["🧁", "Cupcake"]
+    ];
+
+    const colours = [
+        ["#ff0000", "🔴 Red"],
+        ["#ff8c00", "🟠 Orange"],
+        ["#ffff00", "🟡 Yellow"],
+        ["#00aa00", "🟢 Green"],
+        ["#00bfff", "🔵 Sky Blue"],
+        ["#0000ff", "🔵 Blue"],
+        ["#8000ff", "🟣 Purple"],
+        ["#ff1493", "🩷 Pink"],
+        ["#8b4513", "🟤 Brown"],
+        ["#000000", "⚫ Black"],
+        ["#ffffff", "⚪ White"],
+        ["#808080", "🩶 Grey"],
+        ["#00ffff", "🩵 Cyan"],
+        ["#ff69b4", "🌸 Hot Pink"],
+        ["#32cd32", "💚 Lime"],
+        ["#ffd700", "✨ Gold"]
+    ];
+
     setupLearning(
-        "🌈",
-        "Colouring",
-        "Choose a colour and paint!",
+        "🎨",
+        "Colouring World",
+        "Choose a picture and colour it! 🌈",
         `
 
-        <div class="drawing-area">
+        <div class="colouring-world">
 
-            <div style="text-align:center;">
+            <!-- COLOUR PALETTE -->
 
-                <p>
-                    🎨 Choose your colour:
-                </p>
+            <div class="colouring-palette">
 
-                <input
-                    type="color"
-                    value="#ff4d6d"
-                    onchange="setDrawingColor(this.value)"
-                >
+                <h2>🎨 Choose Your Colour</h2>
+
+                <div class="colour-palette-grid">
+
+                    ${colours.map((colour, index) => `
+
+                        <button
+                            type="button"
+                            class="colour-choice"
+                            title="${colour[1]}"
+                            style="--colour:${colour[0]}"
+                            onclick="selectColour('${colour[0]}', this)"
+                        >
+
+                            <span
+                                class="colour-circle"
+                                style="background:${colour[0]}"
+                            ></span>
+
+                            <span class="colour-name">
+                                ${colour[1]}
+                            </span>
+
+                        </button>
+
+                    `).join("")}
+
+                </div>
+
+                <div class="selected-colour-box">
+
+                    Selected Colour:
+
+                    <span
+                        id="selectedColourPreview"
+                        style="background:#ff0000"
+                    ></span>
+
+                    <strong id="selectedColourName">
+                        Red
+                    </strong>
+
+                </div>
 
             </div>
 
 
-            <div class="cards-grid">
+            <!-- PICTURES -->
 
-                <div
-                    class="learning-card"
-                    onclick="speak('Apple', {lang:'en-US'})"
-                >
-                    🍎
-                    <h3>Apple</h3>
-                </div>
+            <div class="colouring-picture-section">
 
-                <div
-                    class="learning-card"
-                    onclick="speak('Sun', {lang:'en-US'})"
-                >
-                    ☀️
-                    <h3>Sun</h3>
-                </div>
+                <h2>🖼️ Choose What You Want To Colour</h2>
 
-                <div
-                    class="learning-card"
-                    onclick="speak('Flower', {lang:'en-US'})"
-                >
-                    🌸
-                    <h3>Flower</h3>
-                </div>
+                <div class="colouring-picture-grid">
 
-                <div
-                    class="learning-card"
-                    onclick="speak('Butterfly', {lang:'en-US'})"
-                >
-                    🦋
-                    <h3>Butterfly</h3>
+                    ${pictures.map((picture, index) => `
+
+                        <button
+                            type="button"
+                            class="colouring-picture-card"
+                            onclick="openColouringPicture(${index})"
+                        >
+
+                            <div class="colour-picture-emoji">
+                                ${picture[0]}
+                            </div>
+
+                            <div class="colour-picture-name">
+                                ${picture[1]}
+                            </div>
+
+                            <div class="colour-picture-text">
+                                🎨 Click to Colour
+                            </div>
+
+                        </button>
+
+                    `).join("")}
+
                 </div>
 
             </div>
@@ -5606,6 +5683,10 @@ function openColouring() {
 
         `
     );
+
+    window.colouringColours = colours;
+
+    window.selectedColour = "#ff0000";
 }
 
 
