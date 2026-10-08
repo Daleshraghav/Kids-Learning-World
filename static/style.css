@@ -12334,3 +12334,108 @@ table tr:hover {
         0 8px 0 #91d4a8,
         0 14px 25px rgba(32, 169, 87, 0.28) !important;
 }
+
+
+/* =========================================================
+   🔄 RESET
+   ========================================================= */
+
+.colouring-tool-button[onclick="resetColouringDrawing()"] {
+
+    border-color: #ff8a00;
+
+    background: linear-gradient(
+        145deg,
+        #fff4e5,
+        #ffffff
+    );
+
+    color: #d96b00;
+
+    box-shadow:
+        0 5px 0 #f4c48e,
+        0 10px 20px rgba(255, 138, 0, 0.20);
+}
+
+
+.colouring-tool-button[onclick="resetColouringDrawing()"]:hover {
+
+    border-color: #e87900;
+
+    box-shadow:
+        0 8px 0 #eeb87d,
+        0 14px 25px rgba(255, 138, 0, 0.28);
+}
+
+
+/* =========================================================
+   📱 MOBILE
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    .colouring-toolbar {
+
+        gap: 9px;
+
+        padding: 10px;
+
+        margin:
+            12px auto 16px;
+
+        border-radius:
+            18px;
+
+    }
+
+
+    .colouring-tool-button {
+
+        min-width:
+            calc(50% - 8px);
+
+        padding:
+            11px 8px;
+
+        font-size:
+            13px;
+
+        border-radius:
+            13px;
+
+    }
+
+}
+
+
+/* =========================================================
+   📱 VERY SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 380px) {
+
+    .colouring-toolbar {
+
+        gap:
+            7px;
+
+    }
+
+
+    .colouring-tool-button {
+
+        min-width:
+            calc(50% - 6px);
+
+        padding:
+            10px 5px;
+
+        font-size:
+            12px;
+
+        border-width:
+            2px;
+
+    }
+
+}
