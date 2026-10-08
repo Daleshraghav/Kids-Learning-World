@@ -5539,6 +5539,45 @@ function clearDrawingCanvas() {
 /* =========================================================
    🌈 PROPER COLOURING
    ========================================================= */
+/* =========================================================
+   🌈 COLOURING WORLD
+   ========================================================= */
+
+let colouringSelectedColor = "#ff3b30";
+let colouringEraser = false;
+
+
+/* =========================================================
+   🎨 COLOURS
+   ========================================================= */
+
+const colouringPalette = [
+    "#ff0000",
+    "#ff6b00",
+    "#ffd400",
+    "#00b83f",
+    "#00c853",
+    "#00bfff",
+    "#0066ff",
+    "#6a00ff",
+    "#b000ff",
+    "#ff00a8",
+    "#ff69b4",
+    "#8b4513",
+    "#000000",
+    "#ffffff",
+    "#777777",
+    "#00ffff",
+    "#7fff00",
+    "#ffd700",
+    "#ff4500",
+    "#8b0000"
+];
+
+
+/* =========================================================
+   🌈 COLOURING MAIN MENU
+   ========================================================= */
 
 function openColouring() {
 
@@ -5547,169 +5586,182 @@ function openColouring() {
         "Colouring World",
         "Choose a picture and start colouring!",
         `
+
         <div class="colouring-world">
 
             <div class="colouring-intro">
-                <h2>🎨 Choose a Picture</h2>
-                <p>Click any picture to start colouring!</p>
+
+                <h2>🎨 Choose Your Picture</h2>
+
+                <p>
+                    Click a picture and colour it!
+                </p>
+
             </div>
+
 
             <div class="colouring-picture-grid">
 
-                <div class="colouring-picture-card" onclick="openColouringPicture('apple')">
-                    <div class="colouring-preview">🍎</div>
-                    <h3>Apple</h3>
+
+                <!-- 1 -->
+                <div
+                    class="colouring-picture-card"
+                    onclick="openColouringPicture('luxuryhome')"
+                >
+                    <div class="colouring-preview">
+                        🏡
+                    </div>
+
+                    <h3>Luxury Home</h3>
+
+                    <p>
+                        Big beautiful house
+                    </p>
                 </div>
 
-                <div class="colouring-picture-card" onclick="openColouringPicture('sun')">
-                    <div class="colouring-preview">☀️</div>
-                    <h3>Sun</h3>
+
+                <!-- 2 -->
+                <div
+                    class="colouring-picture-card"
+                    onclick="openColouringPicture('mountainriver')"
+                >
+                    <div class="colouring-preview">
+                        🏔️
+                    </div>
+
+                    <h3>Mountain River</h3>
+
+                    <p>
+                        Home • River • Trees
+                    </p>
                 </div>
 
-                <div class="colouring-picture-card" onclick="openColouringPicture('flower')">
-                    <div class="colouring-preview">🌸</div>
-                    <h3>Flower</h3>
+
+                <!-- 3 -->
+                <div
+                    class="colouring-picture-card"
+                    onclick="openColouringPicture('bigtree')"
+                >
+                    <div class="colouring-preview">
+                        🌳
+                    </div>
+
+                    <h3>Big Tree</h3>
+
+                    <p>
+                        Large beautiful tree
+                    </p>
                 </div>
 
-                <div class="colouring-picture-card" onclick="openColouringPicture('butterfly')">
-                    <div class="colouring-preview">🦋</div>
-                    <h3>Butterfly</h3>
+
+                <!-- 4 -->
+                <div
+                    class="colouring-picture-card"
+                    onclick="openColouringPicture('realfish')"
+                >
+                    <div class="colouring-preview">
+                        🐟
+                    </div>
+
+                    <h3>Big Fish</h3>
+
+                    <p>
+                        Detailed fish
+                    </p>
                 </div>
 
-                <div class="colouring-picture-card" onclick="openColouringPicture('house')">
-                    <div class="colouring-preview">🏠</div>
-                    <h3>House</h3>
+
+                <!-- 5 -->
+                <div
+                    class="colouring-picture-card"
+                    onclick="openColouringPicture('waterbottles')"
+                >
+                    <div class="colouring-preview">
+                        🧴
+                    </div>
+
+                    <h3>10 Water Bottles</h3>
+
+                    <p>
+                        Colour every bottle
+                    </p>
                 </div>
 
-                <div class="colouring-picture-card" onclick="openColouringPicture('car')">
-                    <div class="colouring-preview">🚗</div>
-                    <h3>Car</h3>
+
+                <!-- 6 -->
+                <div
+                    class="colouring-picture-card"
+                    onclick="openColouringPicture('balloonsflowers')"
+                >
+                    <div class="colouring-preview">
+                        🎈🌸
+                    </div>
+
+                    <h3>Balloons & Flowers</h3>
+
+                    <p>
+                        10 balloons + 5 flowers
+                    </p>
                 </div>
 
-                <div class="colouring-picture-card" onclick="openColouringPicture('tree')">
-                    <div class="colouring-preview">🌳</div>
-                    <h3>Tree</h3>
+
+                <!-- 7 -->
+                <div
+                    class="colouring-picture-card"
+                    onclick="openColouringPicture('luxurycar')"
+                >
+                    <div class="colouring-preview">
+                        🚗
+                    </div>
+
+                    <h3>Luxury Sports Car</h3>
+
+                    <p>
+                        Premium car
+                    </p>
                 </div>
 
-                <div class="colouring-picture-card" onclick="openColouringPicture('fish')">
-                    <div class="colouring-preview">🐟</div>
-                    <h3>Fish</h3>
+
+                <!-- 8 -->
+                <div
+                    class="colouring-picture-card"
+                    onclick="openColouringPicture('fivestars')"
+                >
+                    <div class="colouring-preview">
+                        ⭐⭐⭐⭐⭐
+                    </div>
+
+                    <h3>5 Stars</h3>
+
+                    <p>
+                        Colour every star
+                    </p>
                 </div>
 
-                <div class="colouring-picture-card" onclick="openColouringPicture('balloon')">
-                    <div class="colouring-preview">🎈</div>
-                    <h3>Balloon</h3>
-                </div>
-
-                <div class="colouring-picture-card" onclick="openColouringPicture('icecream')">
-                    <div class="colouring-preview">🍦</div>
-                    <h3>Ice Cream</h3>
-                </div>
-
-                <div class="colouring-picture-card" onclick="openColouringPicture('star')">
-                    <div class="colouring-preview">⭐</div>
-                    <h3>Star</h3>
-                </div>
-
-                <div class="colouring-picture-card" onclick="openColouringPicture('cloud')">
-                    <div class="colouring-preview">☁️</div>
-                    <h3>Cloud</h3>
-                </div>
-
-                <div class="colouring-picture-card" onclick="openColouringPicture('bird')">
-                    <div class="colouring-preview">🐦</div>
-                    <h3>Bird</h3>
-                </div>
-
-                <div class="colouring-picture-card" onclick="openColouringPicture('cat')">
-                    <div class="colouring-preview">🐱</div>
-                    <h3>Cat</h3>
-                </div>
-
-                <div class="colouring-picture-card" onclick="openColouringPicture('dog')">
-                    <div class="colouring-preview">🐶</div>
-                    <h3>Dog</h3>
-                </div>
-
-                <div class="colouring-picture-card" onclick="openColouringPicture('rabbit')">
-                    <div class="colouring-preview">🐰</div>
-                    <h3>Rabbit</h3>
-                </div>
-
-                <div class="colouring-picture-card" onclick="openColouringPicture('bus')">
-                    <div class="colouring-preview">🚌</div>
-                    <h3>Bus</h3>
-                </div>
-
-                <div class="colouring-picture-card" onclick="openColouringPicture('kite')">
-                    <div class="colouring-preview">🪁</div>
-                    <h3>Kite</h3>
-                </div>
-
-                <div class="colouring-picture-card" onclick="openColouringPicture('boat')">
-                    <div class="colouring-preview">⛵</div>
-                    <h3>Boat</h3>
-                </div>
-
-                <div class="colouring-picture-card" onclick="openColouringPicture('cupcake')">
-                    <div class="colouring-preview">🧁</div>
-                    <h3>Cupcake</h3>
-                </div>
 
             </div>
 
         </div>
+
         `
     );
 }
 
+
 /* =========================================================
-   🎨 COLOURING PICTURE SYSTEM
+   🎨 PALETTE
    ========================================================= */
 
-let selectedColour = "#ff0000";
-let colouringEraser = false;
+function createColouringPalette() {
 
-
-/* ---------------------------------------------------------
-   🌈 COLOUR PALETTE
---------------------------------------------------------- */
-
-const colouringColours = [
-    "#ff0000",
-    "#ff7a00",
-    "#ffd400",
-    "#00b83f",
-    "#00cfff",
-    "#0066ff",
-    "#7b2cff",
-    "#ff00a8",
-    "#ff69b4",
-    "#8b4513",
-    "#000000",
-    "#ffffff",
-    "#808080",
-    "#00ffff",
-    "#7fff00",
-    "#ffd700",
-    "#ff4500",
-    "#32cd32"
-];
-
-
-/* ---------------------------------------------------------
-   🎨 COLOUR BUTTONS
---------------------------------------------------------- */
-
-function createColourPalette() {
-
-    return colouringColours.map(function(colour) {
+    return colouringPalette.map(function(color) {
 
         return `
             <button
+                type="button"
                 class="colouring-colour-button"
-                style="background:${colour};"
-                onclick="chooseColour('${colour}', this)"
+                style="background:${color};"
+                onclick="selectColouringColor('${color}', this)"
                 aria-label="Choose colour"
             ></button>
         `;
@@ -5718,163 +5770,250 @@ function createColourPalette() {
 }
 
 
-/* ---------------------------------------------------------
+/* =========================================================
    🎨 SELECT COLOUR
---------------------------------------------------------- */
+   ========================================================= */
 
-function chooseColour(colour, button) {
+function selectColouringColor(color, button) {
 
-    selectedColour = colour;
+    colouringSelectedColor = color;
     colouringEraser = false;
+
 
     document
         .querySelectorAll(".colouring-colour-button")
-        .forEach(function(btn) {
-            btn.classList.remove("selected-colour");
+        .forEach(function(item) {
+
+            item.classList.remove(
+                "selected-colouring-color"
+            );
+
         });
 
+
     if (button) {
-        button.classList.add("selected-colour");
+
+        button.classList.add(
+            "selected-colouring-color"
+        );
+
     }
 
-    const eraserButton = document.getElementById("colouringEraser");
 
-    if (eraserButton) {
-        eraserButton.classList.remove("active-tool");
+    const eraser =
+        document.getElementById(
+            "colouringEraserButton"
+        );
+
+
+    if (eraser) {
+
+        eraser.classList.remove(
+            "active-colouring-tool"
+        );
+
     }
 
-    const currentColour = document.getElementById("currentColour");
 
-    if (currentColour) {
-        currentColour.style.background = colour;
+    const indicator =
+        document.getElementById(
+            "colouringCurrentColor"
+        );
+
+
+    if (indicator) {
+
+        indicator.style.background =
+            color;
+
     }
 }
 
 
-/* ---------------------------------------------------------
+/* =========================================================
    🧽 ERASER
---------------------------------------------------------- */
+   ========================================================= */
 
-function useColouringEraser() {
+function activateColouringEraser() {
 
     colouringEraser = true;
 
+
     document
         .querySelectorAll(".colouring-colour-button")
-        .forEach(function(btn) {
-            btn.classList.remove("selected-colour");
+        .forEach(function(item) {
+
+            item.classList.remove(
+                "selected-colouring-color"
+            );
+
         });
 
-    const eraserButton = document.getElementById("colouringEraser");
 
-    if (eraserButton) {
-        eraserButton.classList.add("active-tool");
+    const eraser =
+        document.getElementById(
+            "colouringEraserButton"
+        );
+
+
+    if (eraser) {
+
+        eraser.classList.add(
+            "active-colouring-tool"
+        );
+
     }
 }
 
 
-/* ---------------------------------------------------------
-   🖌️ COLOR SVG PART
---------------------------------------------------------- */
+/* =========================================================
+   🖌️ COLOUR DRAWING PART
+   ========================================================= */
 
 function colourDrawingPart(part) {
 
-    if (!part) return;
+    if (!part) {
+        return;
+    }
+
 
     if (colouringEraser) {
 
         part.setAttribute(
             "fill",
-            part.getAttribute("data-original") || "#ffffff"
+            part.getAttribute(
+                "data-original"
+            ) || "#ffffff"
         );
 
         return;
     }
 
-    part.setAttribute("fill", selectedColour);
+
+    part.setAttribute(
+        "fill",
+        colouringSelectedColor
+    );
 }
 
 
-/* ---------------------------------------------------------
-   🔄 RESET DRAWING
---------------------------------------------------------- */
+/* =========================================================
+   🔄 RESET
+   ========================================================= */
 
-function resetColouring() {
+function resetColouringDrawing() {
 
-    const parts = document.querySelectorAll(".colour-part");
+    document
+        .querySelectorAll(".colour-part")
+        .forEach(function(part) {
 
-    parts.forEach(function(part) {
+            const original =
+                part.getAttribute(
+                    "data-original"
+                ) || "#ffffff";
 
-        const original =
-            part.getAttribute("data-original") || "#ffffff";
+            part.setAttribute(
+                "fill",
+                original
+            );
 
-        part.setAttribute("fill", original);
+        });
 
-    });
+
+    colouringSelectedColor = "#ff0000";
+    colouringEraser = false;
+
+
+    const indicator =
+        document.getElementById(
+            "colouringCurrentColor"
+        );
+
+
+    if (indicator) {
+
+        indicator.style.background =
+            "#ff0000";
+
+    }
 }
 
 
-/* ---------------------------------------------------------
-   🖼️ OPEN DRAWING
---------------------------------------------------------- */
+/* =========================================================
+   🖼️ OPEN SELECTED DRAWING
+   ========================================================= */
 
 function openColouringPicture(type) {
 
     let title = "Colouring";
 
-    if (type === "apple") title = "🍎 Apple";
-    if (type === "sun") title = "☀️ Sun";
-    if (type === "flower") title = "🌸 Flower";
-    if (type === "butterfly") title = "🦋 Butterfly";
-    if (type === "house") title = "🏠 House";
-    if (type === "car") title = "🚗 Car";
-    if (type === "tree") title = "🌳 Tree";
-    if (type === "fish") title = "🐟 Fish";
-    if (type === "balloon") title = "🎈 Balloon";
-    if (type === "icecream") title = "🍦 Ice Cream";
-    if (type === "star") title = "⭐ Star";
-    if (type === "cloud") title = "☁️ Cloud";
-    if (type === "bird") title = "🐦 Bird";
-    if (type === "cat") title = "🐱 Cat";
-    if (type === "dog") title = "🐶 Dog";
-    if (type === "rabbit") title = "🐰 Rabbit";
-    if (type === "bus") title = "🚌 Bus";
-    if (type === "kite") title = "🪁 Kite";
-    if (type === "boat") title = "⛵ Boat";
-    if (type === "cupcake") title = "🧁 Cupcake";
+
+    if (type === "luxuryhome")
+        title = "🏡 Luxury Home";
 
 
-    let drawing = getColouringSVG(type);
+    if (type === "mountainriver")
+        title = "🏔️ Mountain River";
+
+
+    if (type === "bigtree")
+        title = "🌳 Big Tree";
+
+
+    if (type === "realfish")
+        title = "🐟 Big Fish";
+
+
+    if (type === "waterbottles")
+        title = "🧴 10 Water Bottles";
+
+
+    if (type === "balloonsflowers")
+        title = "🎈 Balloons & 🌸 Flowers";
+
+
+    if (type === "luxurycar")
+        title = "🚗 Luxury Sports Car";
+
+
+    if (type === "fivestars")
+        title = "⭐ 5 Stars";
 
 
     setupLearning(
         "🎨",
         title,
-        "Choose a colour and click different parts of the picture!",
+        "Choose a colour and click any part of the drawing!",
         `
 
         <div class="proper-colouring-page">
 
+
             <div class="colouring-toolbar">
 
                 <button
+                    type="button"
                     class="colouring-tool-button"
                     onclick="openColouring()"
                 >
                     ⬅️ Pictures
                 </button>
 
+
                 <button
+                    type="button"
                     class="colouring-tool-button"
-                    id="colouringEraser"
-                    onclick="useColouringEraser()"
+                    id="colouringEraserButton"
+                    onclick="activateColouringEraser()"
                 >
                     🧽 Eraser
                 </button>
 
+
                 <button
+                    type="button"
                     class="colouring-tool-button"
-                    onclick="resetColouring()"
+                    onclick="resetColouringDrawing()"
                 >
                     🔄 Reset
                 </button>
@@ -5884,33 +6023,45 @@ function openColouringPicture(type) {
 
             <div class="colouring-colour-area">
 
+
                 <div class="current-colour-box">
-                    <span>Current:</span>
+
+                    <span>
+                        Current Colour:
+                    </span>
 
                     <span
-                        id="currentColour"
+                        id="colouringCurrentColor"
                         class="current-colour"
                     ></span>
+
                 </div>
 
 
                 <div class="colouring-palette">
-                    ${createColourPalette()}
+
+                    ${createColouringPalette()}
+
                 </div>
+
 
             </div>
 
 
             <div class="colouring-drawing-board">
 
-                ${drawing}
+                ${getColouringSVG(type)}
 
             </div>
 
 
             <div class="colouring-help">
-                🎨 Pick a colour and tap any part of the picture!
+
+                🎨 Pick a colour and tap different parts
+                of the picture!
+
             </div>
+
 
         </div>
 
@@ -5918,24 +6069,40 @@ function openColouringPicture(type) {
     );
 
 
-    selectedColour = "#ff0000";
+    colouringSelectedColor =
+        "#ff0000";
+
     colouringEraser = false;
 
 
     setTimeout(function() {
 
-        const currentColour =
-            document.getElementById("currentColour");
+        const indicator =
+            document.getElementById(
+                "colouringCurrentColor"
+            );
 
-        if (currentColour) {
-            currentColour.style.background = selectedColour;
+
+        if (indicator) {
+
+            indicator.style.background =
+                "#ff0000";
+
         }
 
+
         const firstButton =
-            document.querySelector(".colouring-colour-button");
+            document.querySelector(
+                ".colouring-colour-button"
+            );
+
 
         if (firstButton) {
-            firstButton.classList.add("selected-colour");
+
+            firstButton.classList.add(
+                "selected-colouring-color"
+            );
+
         }
 
     }, 50);
@@ -5948,668 +6115,959 @@ function openColouringPicture(type) {
 
 function getColouringSVG(type) {
 
-    const commonStart = `
+
+    const start = `
         <svg
             class="colouring-svg"
-            viewBox="0 0 500 500"
+            viewBox="0 0 700 600"
             xmlns="http://www.w3.org/2000/svg"
         >
     `;
 
-    const commonEnd = `</svg>`;
+
+    const end = `
+        </svg>
+    `;
 
 
-    /* 🍎 APPLE */
+    /* =====================================================
+       1️⃣ LUXURY HOME
+       ===================================================== */
 
-    if (type === "apple") {
+    if (type === "luxuryhome") {
 
-        return commonStart + `
+        return start + `
 
-            <ellipse
-                class="colour-part"
-                data-original="#ffffff"
-                fill="#ffffff"
-                stroke="#222"
-                stroke-width="8"
-                cx="250"
-                cy="280"
-                rx="145"
-                ry="130"
-                onclick="colourDrawingPart(this)"
-            />
-
-            <path
-                class="colour-part"
-                data-original="#ffffff"
-                fill="#ffffff"
-                stroke="#222"
-                stroke-width="8"
-                d="M250 155 C240 115 250 85 270 65"
-                onclick="colourDrawingPart(this)"
-            />
-
-            <path
-                class="colour-part"
-                data-original="#ffffff"
-                fill="#ffffff"
-                stroke="#222"
-                stroke-width="8"
-                d="M260 105 C315 55 365 85 385 125 C330 145 290 135 260 105Z"
-                onclick="colourDrawingPart(this)"
-            />
-
-        ` + commonEnd;
-    }
-
-
-    /* ☀️ SUN */
-
-    if (type === "sun") {
-
-        return commonStart + `
-
-            <circle
-                class="colour-part"
-                data-original="#ffffff"
-                fill="#ffffff"
-                stroke="#222"
-                stroke-width="8"
-                cx="250"
-                cy="250"
-                r="105"
-                onclick="colourDrawingPart(this)"
-            />
-
-            <g
-                class="colour-part"
-                data-original="#ffffff"
-                fill="#ffffff"
-                stroke="#222"
-                stroke-width="8"
-                onclick="colourDrawingPart(this)"
-            >
-                <path d="M250 35 L270 115 L230 115 Z"/>
-                <path d="M250 465 L270 385 L230 385 Z"/>
-                <path d="M35 250 L115 270 L115 230 Z"/>
-                <path d="M465 250 L385 270 L385 230 Z"/>
-                <path d="M100 100 L160 155 L135 180 Z"/>
-                <path d="M400 100 L340 155 L365 180 Z"/>
-                <path d="M100 400 L160 345 L135 320 Z"/>
-                <path d="M400 400 L340 345 L365 320 Z"/>
-            </g>
-
-        ` + commonEnd;
-    }
-
-
-    /* 🌸 FLOWER */
-
-    if (type === "flower") {
-
-        return commonStart + `
-
-            <circle class="colour-part"
-                data-original="#ffffff"
-                fill="#ffffff"
-                stroke="#222"
-                stroke-width="7"
-                cx="250" cy="145" r="65"
-                onclick="colourDrawingPart(this)"
-            />
-
-            <circle class="colour-part"
-                data-original="#ffffff"
-                fill="#ffffff"
-                stroke="#222"
-                stroke-width="7"
-                cx="165" cy="190" r="65"
-                onclick="colourDrawingPart(this)"
-            />
-
-            <circle class="colour-part"
-                data-original="#ffffff"
-                fill="#ffffff"
-                stroke="#222"
-                stroke-width="7"
-                cx="335" cy="190" r="65"
-                onclick="colourDrawingPart(this)"
-            />
-
-            <circle class="colour-part"
-                data-original="#ffffff"
-                fill="#ffffff"
-                stroke="#222"
-                stroke-width="7"
-                cx="190" cy="280" r="65"
-                onclick="colourDrawingPart(this)"
-            />
-
-            <circle class="colour-part"
-                data-original="#ffffff"
-                fill="#ffffff"
-                stroke="#222"
-                stroke-width="7"
-                cx="310" cy="280" r="65"
-                onclick="colourDrawingPart(this)"
-            />
-
-            <circle class="colour-part"
-                data-original="#ffffff"
-                fill="#ffffff"
-                stroke="#222"
-                stroke-width="7"
-                cx="250" cy="215" r="55"
-                onclick="colourDrawingPart(this)"
-            />
-
-            <rect
-                class="colour-part"
-                data-original="#ffffff"
-                fill="#ffffff"
-                stroke="#222"
-                stroke-width="7"
-                x="235" y="265"
-                width="30"
-                height="180"
-                rx="15"
-                onclick="colourDrawingPart(this)"
-            />
-
-            <ellipse
-                class="colour-part"
-                data-original="#ffffff"
-                fill="#ffffff"
-                stroke="#222"
-                stroke-width="7"
-                cx="205" cy="350"
-                rx="65"
-                ry="25"
-                transform="rotate(-25 205 350)"
-                onclick="colourDrawingPart(this)"
-            />
-
-            <ellipse
-                class="colour-part"
-                data-original="#ffffff"
-                fill="#ffffff"
-                stroke="#222"
-                stroke-width="7"
-                cx="295" cy="390"
-                rx="65"
-                ry="25"
-                transform="rotate(25 295 390)"
-                onclick="colourDrawingPart(this)"
-            />
-
-        ` + commonEnd;
-    }
-
-
-    /* 🦋 BUTTERFLY */
-
-    if (type === "butterfly") {
-
-        return commonStart + `
-
-            <ellipse
-                class="colour-part"
-                data-original="#ffffff"
-                fill="#ffffff"
-                stroke="#222"
-                stroke-width="8"
-                cx="170" cy="210"
-                rx="110"
-                ry="125"
-                onclick="colourDrawingPart(this)"
-            />
-
-            <ellipse
-                class="colour-part"
-                data-original="#ffffff"
-                fill="#ffffff"
-                stroke="#222"
-                stroke-width="8"
-                cx="330" cy="210"
-                rx="110"
-                ry="125"
-                onclick="colourDrawingPart(this)"
-            />
-
-            <ellipse
-                class="colour-part"
-                data-original="#ffffff"
-                fill="#ffffff"
-                stroke="#222"
-                stroke-width="8"
-                cx="185" cy="330"
-                rx="75"
-                ry="70"
-                onclick="colourDrawingPart(this)"
-            />
-
-            <ellipse
-                class="colour-part"
-                data-original="#ffffff"
-                fill="#ffffff"
-                stroke="#222"
-                stroke-width="8"
-                cx="315" cy="330"
-                rx="75"
-                ry="70"
-                onclick="colourDrawingPart(this)"
-            />
-
+            <!-- MAIN HOUSE -->
             <rect
                 class="colour-part"
                 data-original="#ffffff"
                 fill="#ffffff"
                 stroke="#222"
                 stroke-width="8"
-                x="230"
-                y="150"
-                width="40"
-                height="240"
+                x="120"
+                y="260"
+                width="460"
+                height="250"
+                rx="10"
+                onclick="colourDrawingPart(this)"
+            />
+
+
+            <!-- ROOF -->
+            <path
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="8"
+                d="
+                    M80 270
+                    L350 70
+                    L620 270
+                    Z
+                "
+                onclick="colourDrawingPart(this)"
+            />
+
+
+            <!-- LEFT BALCONY -->
+            <rect
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="7"
+                x="150"
+                y="205"
+                width="130"
+                height="90"
+                onclick="colourDrawingPart(this)"
+            />
+
+
+            <!-- RIGHT BALCONY -->
+            <rect
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="7"
+                x="420"
+                y="205"
+                width="130"
+                height="90"
+                onclick="colourDrawingPart(this)"
+            />
+
+
+            <!-- DOOR -->
+            <rect
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="8"
+                x="300"
+                y="365"
+                width="100"
+                height="145"
+                onclick="colourDrawingPart(this)"
+            />
+
+
+            <!-- LEFT WINDOW -->
+            <rect
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="7"
+                x="160"
+                y="330"
+                width="95"
+                height="85"
+                onclick="colourDrawingPart(this)"
+            />
+
+
+            <!-- RIGHT WINDOW -->
+            <rect
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="7"
+                x="445"
+                y="330"
+                width="95"
+                height="85"
+                onclick="colourDrawingPart(this)"
+            />
+
+
+            <!-- CHIMNEY -->
+            <rect
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="7"
+                x="470"
+                y="110"
+                width="60"
+                height="100"
+                onclick="colourDrawingPart(this)"
+            />
+
+
+            <!-- GARAGE -->
+            <rect
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="8"
+                x="90"
+                y="395"
+                width="110"
+                height="115"
+                onclick="colourDrawingPart(this)"
+            />
+
+
+            <!-- PATH -->
+            <path
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="7"
+                d="
+                    M300 510
+                    L400 510
+                    L470 590
+                    L230 590
+                    Z
+                "
+                onclick="colourDrawingPart(this)"
+            />
+
+
+        ` + end;
+    }
+
+
+    /* =====================================================
+       2️⃣ MOUNTAIN + RIVER + HOME + TREES
+       ===================================================== */
+
+    if (type === "mountainriver") {
+
+        return start + `
+
+            <!-- SKY -->
+            <rect
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="5"
+                x="10"
+                y="10"
+                width="680"
+                height="580"
                 rx="20"
                 onclick="colourDrawingPart(this)"
             />
 
-            <path
-                d="M240 165 Q190 80 155 90"
-                fill="none"
-                stroke="#222"
-                stroke-width="8"
-            />
 
-            <path
-                d="M260 165 Q310 80 345 90"
-                fill="none"
-                stroke="#222"
-                stroke-width="8"
-            />
-
-        ` + commonEnd;
-    }
-
-
-    /* 🏠 HOUSE */
-
-    if (type === "house") {
-
-        return commonStart + `
-
-            <rect
-                class="colour-part"
-                data-original="#ffffff"
-                fill="#ffffff"
-                stroke="#222"
-                stroke-width="8"
-                x="100" y="210"
-                width="300" height="220"
-                onclick="colourDrawingPart(this)"
-            />
-
+            <!-- BIG MOUNTAIN -->
             <path
                 class="colour-part"
                 data-original="#ffffff"
                 fill="#ffffff"
                 stroke="#222"
                 stroke-width="8"
-                d="M70 220 L250 70 L430 220 Z"
-                onclick="colourDrawingPart(this)"
-            />
-
-            <rect
-                class="colour-part"
-                data-original="#ffffff"
-                fill="#ffffff"
-                stroke="#222"
-                stroke-width="8"
-                x="205" y="310"
-                width="90"
-                height="120"
-                onclick="colourDrawingPart(this)"
-            />
-
-            <rect
-                class="colour-part"
-                data-original="#ffffff"
-                fill="#ffffff"
-                stroke="#222"
-                stroke-width="8"
-                x="135" y="260"
-                width="70"
-                height="70"
-                onclick="colourDrawingPart(this)"
-            />
-
-            <rect
-                class="colour-part"
-                data-original="#ffffff"
-                fill="#ffffff"
-                stroke="#222"
-                stroke-width="8"
-                x="295" y="260"
-                width="70"
-                height="70"
-                onclick="colourDrawingPart(this)"
-            />
-
-            <rect
-                class="colour-part"
-                data-original="#ffffff"
-                fill="#ffffff"
-                stroke="#222"
-                stroke-width="8"
-                x="320" y="105"
-                width="45"
-                height="80"
-                onclick="colourDrawingPart(this)"
-            />
-
-        ` + commonEnd;
-    }
-
-
-    /* 🚗 CAR */
-
-    if (type === "car") {
-
-        return commonStart + `
-
-            <rect
-                class="colour-part"
-                data-original="#ffffff"
-                fill="#ffffff"
-                stroke="#222"
-                stroke-width="8"
-                x="80" y="245"
-                width="340"
-                height="120"
-                rx="35"
-                onclick="colourDrawingPart(this)"
-            />
-
-            <path
-                class="colour-part"
-                data-original="#ffffff"
-                fill="#ffffff"
-                stroke="#222"
-                stroke-width="8"
-                d="M145 245 L185 165 L320 165 L365 245 Z"
-                onclick="colourDrawingPart(this)"
-            />
-
-            <path
-                class="colour-part"
-                data-original="#ffffff"
-                fill="#ffffff"
-                stroke="#222"
-                stroke-width="7"
-                d="M195 235 L215 185 L260 185 L260 235 Z"
-                onclick="colourDrawingPart(this)"
-            />
-
-            <path
-                class="colour-part"
-                data-original="#ffffff"
-                fill="#ffffff"
-                stroke="#222"
-                stroke-width="7"
-                d="M275 185 L315 185 L345 235 L275 235 Z"
-                onclick="colourDrawingPart(this)"
-            />
-
-            <circle
-                class="colour-part"
-                data-original="#ffffff"
-                fill="#ffffff"
-                stroke="#222"
-                stroke-width="8"
-                cx="155" cy="370" r="45"
-                onclick="colourDrawingPart(this)"
-            />
-
-            <circle
-                class="colour-part"
-                data-original="#ffffff"
-                fill="#ffffff"
-                stroke="#222"
-                stroke-width="8"
-                cx="345" cy="370" r="45"
-                onclick="colourDrawingPart(this)"
-            />
-
-        ` + commonEnd;
-    }
-
-
-    /* 🌳 TREE */
-
-    if (type === "tree") {
-
-        return commonStart + `
-
-            <rect
-                class="colour-part"
-                data-original="#ffffff"
-                fill="#ffffff"
-                stroke="#222"
-                stroke-width="8"
-                x="210" y="250"
-                width="80" height="190"
-                onclick="colourDrawingPart(this)"
-            />
-
-            <circle
-                class="colour-part"
-                data-original="#ffffff"
-                fill="#ffffff"
-                stroke="#222"
-                stroke-width="8"
-                cx="170" cy="210" r="90"
-                onclick="colourDrawingPart(this)"
-            />
-
-            <circle
-                class="colour-part"
-                data-original="#ffffff"
-                fill="#ffffff"
-                stroke="#222"
-                stroke-width="8"
-                cx="330" cy="210" r="90"
-                onclick="colourDrawingPart(this)"
-            />
-
-            <circle
-                class="colour-part"
-                data-original="#ffffff"
-                fill="#ffffff"
-                stroke="#222"
-                stroke-width="8"
-                cx="250" cy="130" r="100"
-                onclick="colourDrawingPart(this)"
-            />
-
-        ` + commonEnd;
-    }
-
-
-    /* 🐟 FISH */
-
-    if (type === "fish") {
-
-        return commonStart + `
-
-            <ellipse
-                class="colour-part"
-                data-original="#ffffff"
-                fill="#ffffff"
-                stroke="#222"
-                stroke-width="8"
-                cx="250" cy="250"
-                rx="145" ry="90"
-                onclick="colourDrawingPart(this)"
-            />
-
-            <path
-                class="colour-part"
-                data-original="#ffffff"
-                fill="#ffffff"
-                stroke="#222"
-                stroke-width="8"
-                d="M115 250 L45 175 L45 325 Z"
-                onclick="colourDrawingPart(this)"
-            />
-
-            <path
-                class="colour-part"
-                data-original="#ffffff"
-                fill="#ffffff"
-                stroke="#222"
-                stroke-width="8"
-                d="M250 160 L290 95 L320 180 Z"
-                onclick="colourDrawingPart(this)"
-            />
-
-            <circle
-                class="colour-part"
-                data-original="#ffffff"
-                fill="#ffffff"
-                stroke="#222"
-                stroke-width="7"
-                cx="335" cy="225" r="18"
-                onclick="colourDrawingPart(this)"
-            />
-
-        ` + commonEnd;
-    }
-
-
-    /* 🎈 BALLOON */
-
-    if (type === "balloon") {
-
-        return commonStart + `
-
-            <ellipse
-                class="colour-part"
-                data-original="#ffffff"
-                fill="#ffffff"
-                stroke="#222"
-                stroke-width="8"
-                cx="250" cy="190"
-                rx="120"
-                ry="145"
-                onclick="colourDrawingPart(this)"
-            />
-
-            <path
-                class="colour-part"
-                data-original="#ffffff"
-                fill="#ffffff"
-                stroke="#222"
-                stroke-width="8"
-                d="M230 330 L250 365 L270 330 Z"
-                onclick="colourDrawingPart(this)"
-            />
-
-            <path
-                d="M250 365 C230 405 270 425 250 470"
-                fill="none"
-                stroke="#222"
-                stroke-width="8"
-            />
-
-        ` + commonEnd;
-    }
-
-
-    /* 🍦 ICE CREAM */
-
-    if (type === "icecream") {
-
-        return commonStart + `
-
-            <circle
-                class="colour-part"
-                data-original="#ffffff"
-                fill="#ffffff"
-                stroke="#222"
-                stroke-width="8"
-                cx="250" cy="180" r="90"
-                onclick="colourDrawingPart(this)"
-            />
-
-            <path
-                class="colour-part"
-                data-original="#ffffff"
-                fill="#ffffff"
-                stroke="#222"
-                stroke-width="8"
-                d="M155 215 L345 215 L250 440 Z"
-                onclick="colourDrawingPart(this)"
-            />
-
-            <circle
-                class="colour-part"
-                data-original="#ffffff"
-                fill="#ffffff"
-                stroke="#222"
-                stroke-width="7"
-                cx="215" cy="140" r="18"
-                onclick="colourDrawingPart(this)"
-            />
-
-            <circle
-                class="colour-part"
-                data-original="#ffffff"
-                fill="#ffffff"
-                stroke="#222"
-                stroke-width="7"
-                cx="285" cy="165" r="18"
-                onclick="colourDrawingPart(this)"
-            />
-
-        ` + commonEnd;
-    }
-
-
-    /* ⭐ STAR */
-
-    if (type === "star") {
-
-        return commonStart + `
-
-            <polygon
-                class="colour-part"
-                data-original="#ffffff"
-                fill="#ffffff"
-                stroke="#222"
-                stroke-width="8"
-                points="
-                    250,55
-                    305,180
-                    440,190
-                    335,275
-                    370,410
-                    250,335
-                    130,410
-                    165,275
-                    60,190
-                    195,180
+                d="
+                    M20 350
+                    L210 100
+                    L300 210
+                    L400 80
+                    L680 350
+                    Z
                 "
                 onclick="colourDrawingPart(this)"
             />
 
-        ` + commonEnd;
+
+            <!-- SNOW -->
+            <path
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="6"
+                d="
+                    M210 100
+                    L155 175
+                    L205 160
+                    L230 185
+                    L260 145
+                    L300 210
+                    Z
+                "
+                onclick="colourDrawingPart(this)"
+            />
+
+
+            <!-- RIVER -->
+            <path
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="8"
+                d="
+                    M320 300
+                    C250 350 270 390 330 430
+                    C390 470 370 520 300 590
+                    L560 590
+                    C610 520 600 470 530 420
+                    C460 370 470 330 510 300
+                    Z
+                "
+                onclick="colourDrawingPart(this)"
+            />
+
+
+            <!-- HOME -->
+            <rect
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="7"
+                x="90"
+                y="300"
+                width="180"
+                height="150"
+                onclick="colourDrawingPart(this)"
+            />
+
+
+            <!-- HOME ROOF -->
+            <path
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="7"
+                d="
+                    M65 305
+                    L180 215
+                    L295 305
+                    Z
+                "
+                onclick="colourDrawingPart(this)"
+            />
+
+
+            <!-- HOME DOOR -->
+            <rect
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="6"
+                x="155"
+                y="365"
+                width="55"
+                height="85"
+                onclick="colourDrawingPart(this)"
+            />
+
+
+            <!-- TREE 1 -->
+            <rect
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="6"
+                x="40"
+                y="350"
+                width="30"
+                height="120"
+                onclick="colourDrawingPart(this)"
+            />
+
+            <circle
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="6"
+                cx="55"
+                cy="325"
+                r="65"
+                onclick="colourDrawingPart(this)"
+            />
+
+
+            <!-- TREE 2 -->
+            <rect
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="6"
+                x="600"
+                y="340"
+                width="30"
+                height="130"
+                onclick="colourDrawingPart(this)"
+            />
+
+            <circle
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="6"
+                cx="615"
+                cy="315"
+                r="70"
+                onclick="colourDrawingPart(this)"
+            />
+
+        ` + end;
     }
 
 
-    /* ☁️ CLOUD */
+    /* =====================================================
+       3️⃣ BIG TREE
+       ===================================================== */
 
-    if (type === "cloud") {
+    if (type === "bigtree") {
 
-        return commonStart + `
+        return start + `
+
+            <!-- TRUNK -->
+            <path
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="9"
+                d="
+                    M270 280
+                    L430 280
+                    L455 570
+                    L245 570
+                    Z
+                "
+                onclick="colourDrawingPart(this)"
+            />
+
+
+            <!-- MAIN CANOPY -->
+            <circle
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="9"
+                cx="350"
+                cy="200"
+                r="155"
+                onclick="colourDrawingPart(this)"
+            />
+
+
+            <!-- LEFT CANOPY -->
+            <circle
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="9"
+                cx="190"
+                cy="250"
+                r="115"
+                onclick="colourDrawingPart(this)"
+            />
+
+
+            <!-- RIGHT CANOPY -->
+            <circle
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="9"
+                cx="510"
+                cy="250"
+                r="115"
+                onclick="colourDrawingPart(this)"
+            />
+
+
+            <!-- BRANCH -->
+            <path
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="20"
+                d="
+                    M350 340
+                    L230 250
+                    M350 350
+                    L480 245
+                "
+                onclick="colourDrawingPart(this)"
+            />
+
+
+            <!-- FRUIT -->
+            <circle
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="6"
+                cx="150"
+                cy="220"
+                r="18"
+                onclick="colourDrawingPart(this)"
+            />
+
+            <circle
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="6"
+                cx="530"
+                cy="190"
+                r="18"
+                onclick="colourDrawingPart(this)"
+            />
+
+            <circle
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="6"
+                cx="350"
+                cy="110"
+                r="18"
+                onclick="colourDrawingPart(this)"
+            />
+
+        ` + end;
+    }
+
+
+    /* =====================================================
+       4️⃣ BIG DETAILED FISH
+       ===================================================== */
+
+    if (type === "realfish") {
+
+        return start + `
+
+            <!-- FISH BODY -->
+            <path
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="9"
+                d="
+                    M80 300
+                    C130 170 310 145 470 245
+                    C515 270 555 300 600 300
+                    C555 300 515 330 470 355
+                    C310 455 130 430 80 300
+                    Z
+                "
+                onclick="colourDrawingPart(this)"
+            />
+
+
+            <!-- TAIL -->
+            <path
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="9"
+                d="
+                    M470 245
+                    L640 150
+                    L610 300
+                    L640 450
+                    L470 355
+                    Z
+                "
+                onclick="colourDrawingPart(this)"
+            />
+
+
+            <!-- TOP FIN -->
+            <path
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="8"
+                d="
+                    M280 175
+                    L330 70
+                    L390 190
+                    Z
+                "
+                onclick="colourDrawingPart(this)"
+            />
+
+
+            <!-- BOTTOM FIN -->
+            <path
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="8"
+                d="
+                    M290 405
+                    L350 500
+                    L400 385
+                    Z
+                "
+                onclick="colourDrawingPart(this)"
+            />
+
+
+            <!-- SIDE FIN -->
+            <path
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="8"
+                d="
+                    M300 280
+                    L210 390
+                    L360 335
+                    Z
+                "
+                onclick="colourDrawingPart(this)"
+            />
+
+
+            <!-- EYE -->
+            <circle
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="7"
+                cx="170"
+                cy="260"
+                r="35"
+                onclick="colourDrawingPart(this)"
+            />
+
+
+            <!-- PUPIL -->
+            <circle
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="6"
+                cx="175"
+                cy="260"
+                r="14"
+                onclick="colourDrawingPart(this)"
+            />
+
+
+            <!-- SCALE 1 -->
+            <circle
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="5"
+                cx="270"
+                cy="240"
+                r="28"
+                onclick="colourDrawingPart(this)"
+            />
+
+
+            <!-- SCALE 2 -->
+            <circle
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="5"
+                cx="330"
+                cy="230"
+                r="28"
+                onclick="colourDrawingPart(this)"
+            />
+
+
+            <!-- SCALE 3 -->
+            <circle
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="5"
+                cx="390"
+                cy="250"
+                r="28"
+                onclick="colourDrawingPart(this)"
+            />
+
+        ` + end;
+    }
+
+
+    /* =====================================================
+       5️⃣ 10 WATER BOTTLES
+       ===================================================== */
+
+    if (type === "waterbottles") {
+
+        let bottles = "";
+
+
+        for (let i = 0; i < 10; i++) {
+
+            const x =
+                45 + (i % 5) * 130;
+
+            const y =
+                i < 5 ? 80 : 320;
+
+
+            bottles += `
+
+                <!-- BOTTLE BODY -->
+
+                <rect
+                    class="colour-part"
+                    data-original="#ffffff"
+                    fill="#ffffff"
+                    stroke="#222"
+                    stroke-width="6"
+                    x="${x}"
+                    y="${y + 50}"
+                    width="80"
+                    height="145"
+                    rx="20"
+                    onclick="colourDrawingPart(this)"
+                />
+
+
+                <!-- BOTTLE NECK -->
+
+                <rect
+                    class="colour-part"
+                    data-original="#ffffff"
+                    fill="#ffffff"
+                    stroke="#222"
+                    stroke-width="6"
+                    x="${x + 20}"
+                    y="${y + 15}"
+                    width="40"
+                    height="45"
+                    rx="8"
+                    onclick="colourDrawingPart(this)"
+                />
+
+
+                <!-- CAP -->
+
+                <rect
+                    class="colour-part"
+                    data-original="#ffffff"
+                    fill="#ffffff"
+                    stroke="#222"
+                    stroke-width="5"
+                    x="${x + 18}"
+                    y="${y}"
+                    width="44"
+                    height="22"
+                    rx="6"
+                    onclick="colourDrawingPart(this)"
+                />
+
+
+                <!-- LABEL -->
+
+                <rect
+                    class="colour-part"
+                    data-original="#ffffff"
+                    fill="#ffffff"
+                    stroke="#222"
+                    stroke-width="5"
+                    x="${x + 8}"
+                    y="${y + 105}"
+                    width="64"
+                    height="45"
+                    rx="6"
+                    onclick="colourDrawingPart(this)"
+                />
+
+            `;
+
+        }
+
+
+        return start + bottles + end;
+    }
+
+
+    /* =====================================================
+       6️⃣ 10 BALLOONS + 5 FLOWERS
+       ===================================================== */
+
+    if (type === "balloonsflowers") {
+
+        let items = "";
+
+
+        /* 10 BALLOONS */
+
+        for (let i = 0; i < 10; i++) {
+
+            const x =
+                75 + (i % 5) * 135;
+
+            const y =
+                i < 5 ? 110 : 285;
+
+
+            items += `
+
+                <ellipse
+                    class="colour-part"
+                    data-original="#ffffff"
+                    fill="#ffffff"
+                    stroke="#222"
+                    stroke-width="6"
+                    cx="${x}"
+                    cy="${y}"
+                    rx="45"
+                    ry="60"
+                    onclick="colourDrawingPart(this)"
+                />
+
+
+                <path
+                    class="colour-part"
+                    data-original="#ffffff"
+                    fill="#ffffff"
+                    stroke="#222"
+                    stroke-width="5"
+                    d="
+                        M${x - 8} ${y + 58}
+                        L${x} ${y + 75}
+                        L${x + 8} ${y + 58}
+                        Z
+                    "
+                    onclick="colourDrawingPart(this)"
+                />
+
+
+                <path
+                    d="
+                        M${x} ${y + 75}
+                        C${x - 10} ${y + 130}
+                        ${x + 10} ${y + 160}
+                        ${x} ${y + 190}
+                    "
+                    fill="none"
+                    stroke="#222"
+                    stroke-width="4"
+                />
+
+            `;
+
+        }
+
+
+        /* 5 FLOWERS */
+
+        for (let i = 0; i < 5; i++) {
+
+            const x =
+                100 + i * 125;
+
+            const y = 535;
+
+
+            items += `
+
+                <!-- PETALS -->
+
+                <circle
+                    class="colour-part"
+                    data-original="#ffffff"
+                    fill="#ffffff"
+                    stroke="#222"
+                    stroke-width="5"
+                    cx="${x}"
+                    cy="${y - 28}"
+                    r="24"
+                    onclick="colourDrawingPart(this)"
+                />
+
+                <circle
+                    class="colour-part"
+                    data-original="#ffffff"
+                    fill="#ffffff"
+                    stroke="#222"
+                    stroke-width="5"
+                    cx="${x - 27}"
+                    cy="${y}"
+                    r="24"
+                    onclick="colourDrawingPart(this)"
+                />
+
+                <circle
+                    class="colour-part"
+                    data-original="#ffffff"
+                    fill="#ffffff"
+                    stroke="#222"
+                    stroke-width="5"
+                    cx="${x + 27}"
+                    cy="${y}"
+                    r="24"
+                    onclick="colourDrawingPart(this)"
+                />
+
+
+                <!-- CENTER -->
+
+                <circle
+                    class="colour-part"
+                    data-original="#ffffff"
+                    fill="#ffffff"
+                    stroke="#222"
+                    stroke-width="5"
+                    cx="${x}"
+                    cy="${y}"
+                    r="20"
+                    onclick="colourDrawingPart(this)"
+                />
+
+
+                <!-- STEM -->
+
+                <rect
+                    class="colour-part"
+                    data-original="#ffffff"
+                    fill="#ffffff"
+                    stroke="#222"
+                    stroke-width="5"
+                    x="${x - 5}"
+                    y="${y + 18}"
+                    width="10"
+                    height="55"
+                    onclick="colourDrawingPart(this)"
+                />
+
+            `;
+
+        }
+
+
+        return start + items + end;
+    }
+
+
+    /* =====================================================
+       7️⃣ LUXURY SPORTS CAR
+       ===================================================== */
+
+    if (type === "luxurycar") {
+
+        return start + `
+
+            <!-- MAIN BODY -->
+
+            <path
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="9"
+                d="
+                    M70 350
+                    L110 270
+                    C135 220 190 190 250 180
+                    L410 180
+                    C470 190 520 230 555 280
+                    L625 330
+                    L625 390
+                    L70 390
+                    Z
+                "
+                onclick="colourDrawingPart(this)"
+            />
+
+
+            <!-- ROOF / CABIN -->
 
             <path
                 class="colour-part"
@@ -6617,526 +7075,282 @@ function getColouringSVG(type) {
                 fill="#ffffff"
                 stroke="#222"
                 stroke-width="8"
+                d="
+                    M175 260
+                    L225 190
+                    L405 190
+                    L495 270
+                    Z
+                "
+                onclick="colourDrawingPart(this)"
+            />
+
+
+            <!-- LEFT WINDOW -->
+
+            <path
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="6"
+                d="
+                    M220 250
+                    L250 205
+                    L315 205
+                    L315 250
+                    Z
+                "
+                onclick="colourDrawingPart(this)"
+            />
+
+
+            <!-- RIGHT WINDOW -->
+
+            <path
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="6"
+                d="
+                    M330 205
+                    L400 205
+                    L460 250
+                    L330 250
+                    Z
+                "
+                onclick="colourDrawingPart(this)"
+            />
+
+
+            <!-- FRONT LIGHT -->
+
+            <ellipse
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="6"
+                cx="565"
+                cy="325"
+                rx="35"
+                ry="18"
+                onclick="colourDrawingPart(this)"
+            />
+
+
+            <!-- FRONT GRILLE -->
+
+            <rect
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="6"
+                x="510"
+                y="350"
+                width="70"
+                height="30"
+                rx="8"
+                onclick="colourDrawingPart(this)"
+            />
+
+
+            <!-- WHEEL 1 -->
+
+            <circle
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="10"
+                cx="180"
+                cy="395"
+                r="55"
+                onclick="colourDrawingPart(this)"
+            />
+
+
+            <!-- WHEEL 2 -->
+
+            <circle
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="10"
+                cx="510"
+                cy="395"
+                r="55"
+                onclick="colourDrawingPart(this)"
+            />
+
+
+            <!-- WHEEL CENTER 1 -->
+
+            <circle
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="6"
+                cx="180"
+                cy="395"
+                r="22"
+                onclick="colourDrawingPart(this)"
+            />
+
+
+            <!-- WHEEL CENTER 2 -->
+
+            <circle
+                class="colour-part"
+                data-original="#ffffff"
+                fill="#ffffff"
+                stroke="#222"
+                stroke-width="6"
+                cx="510"
+                cy="395"
+                r="22"
+                onclick="colourDrawingPart(this)"
+            />
+
+
+            <!-- SIDE LINE -->
+
+            <path
                 d="
                     M100 330
-                    C70 300 90 245 135 235
-                    C135 165 220 135 270 190
-                    C320 145 400 180 395 240
-                    C440 245 455 310 415 335
-                    Z
+                    L500 330
                 "
-                onclick="colourDrawingPart(this)"
-            />
-
-            <circle
-                class="colour-part"
-                data-original="#ffffff"
-                fill="#ffffff"
-                stroke="#222"
-                stroke-width="7"
-                cx="170" cy="390" r="20"
-                onclick="colourDrawingPart(this)"
-            />
-
-            <circle
-                class="colour-part"
-                data-original="#ffffff"
-                fill="#ffffff"
-                stroke="#222"
-                stroke-width="7"
-                cx="250" cy="420" r="20"
-                onclick="colourDrawingPart(this)"
-            />
-
-            <circle
-                class="colour-part"
-                data-original="#ffffff"
-                fill="#ffffff"
-                stroke="#222"
-                stroke-width="7"
-                cx="330" cy="390" r="20"
-                onclick="colourDrawingPart(this)"
-            />
-
-        ` + commonEnd;
-    }
-
-
-    /* 🐦 BIRD */
-
-    if (type === "bird") {
-
-        return commonStart + `
-
-            <ellipse
-                class="colour-part"
-                data-original="#ffffff"
-                fill="#ffffff"
-                stroke="#222"
-                stroke-width="8"
-                cx="250" cy="270"
-                rx="125" ry="95"
-                onclick="colourDrawingPart(this)"
-            />
-
-            <ellipse
-                class="colour-part"
-                data-original="#ffffff"
-                fill="#ffffff"
-                stroke="#222"
-                stroke-width="8"
-                cx="225" cy="275"
-                rx="65" ry="50"
-                onclick="colourDrawingPart(this)"
-            />
-
-            <circle
-                class="colour-part"
-                data-original="#ffffff"
-                fill="#ffffff"
-                stroke="#222"
-                stroke-width="7"
-                cx="340" cy="220" r="15"
-                onclick="colourDrawingPart(this)"
-            />
-
-            <polygon
-                class="colour-part"
-                data-original="#ffffff"
-                fill="#ffffff"
-                stroke="#222"
-                stroke-width="7"
-                points="365,225 430,250 365,275"
-                onclick="colourDrawingPart(this)"
-            />
-
-        ` + commonEnd;
-    }
-
-
-    /* 🐱 CAT */
-
-    if (type === "cat") {
-
-        return commonStart + `
-
-            <circle
-                class="colour-part"
-                data-original="#ffffff"
-                fill="#ffffff"
-                stroke="#222"
-                stroke-width="8"
-                cx="250" cy="180" r="95"
-                onclick="colourDrawingPart(this)"
-            />
-
-            <ellipse
-                class="colour-part"
-                data-original="#ffffff"
-                fill="#ffffff"
-                stroke="#222"
-                stroke-width="8"
-                cx="250" cy="345"
-                rx="105" ry="120"
-                onclick="colourDrawingPart(this)"
-            />
-
-            <polygon
-                class="colour-part"
-                data-original="#ffffff"
-                fill="#ffffff"
-                stroke="#222"
-                stroke-width="8"
-                points="175,120 180,45 230,105"
-                onclick="colourDrawingPart(this)"
-            />
-
-            <polygon
-                class="colour-part"
-                data-original="#ffffff"
-                fill="#ffffff"
-                stroke="#222"
-                stroke-width="8"
-                points="325,120 320,45 270,105"
-                onclick="colourDrawingPart(this)"
-            />
-
-            <ellipse
-                class="colour-part"
-                data-original="#ffffff"
-                fill="#ffffff"
-                stroke="#222"
-                stroke-width="7"
-                cx="250" cy="395"
-                rx="35" ry="25"
-                onclick="colourDrawingPart(this)"
-            />
-
-        ` + commonEnd;
-    }
-
-
-    /* 🐶 DOG */
-
-    if (type === "dog") {
-
-        return commonStart + `
-
-            <circle
-                class="colour-part"
-                data-original="#ffffff"
-                fill="#ffffff"
-                stroke="#222"
-                stroke-width="8"
-                cx="250" cy="190" r="95"
-                onclick="colourDrawingPart(this)"
-            />
-
-            <ellipse
-                class="colour-part"
-                data-original="#ffffff"
-                fill="#ffffff"
-                stroke="#222"
-                stroke-width="8"
-                cx="250" cy="350"
-                rx="110" ry="120"
-                onclick="colourDrawingPart(this)"
-            />
-
-            <ellipse
-                class="colour-part"
-                data-original="#ffffff"
-                fill="#ffffff"
-                stroke="#222"
-                stroke-width="8"
-                cx="155" cy="185"
-                rx="45" ry="85"
-                transform="rotate(-20 155 185)"
-                onclick="colourDrawingPart(this)"
-            />
-
-            <ellipse
-                class="colour-part"
-                data-original="#ffffff"
-                fill="#ffffff"
-                stroke="#222"
-                stroke-width="8"
-                cx="345" cy="185"
-                rx="45" ry="85"
-                transform="rotate(20 345 185)"
-                onclick="colourDrawingPart(this)"
-            />
-
-            <circle
-                class="colour-part"
-                data-original="#ffffff"
-                fill="#ffffff"
-                stroke="#222"
-                stroke-width="7"
-                cx="250" cy="235" r="25"
-                onclick="colourDrawingPart(this)"
-            />
-
-        ` + commonEnd;
-    }
-
-
-    /* 🐰 RABBIT */
-
-    if (type === "rabbit") {
-
-        return commonStart + `
-
-            <ellipse
-                class="colour-part"
-                data-original="#ffffff"
-                fill="#ffffff"
-                stroke="#222"
-                stroke-width="8"
-                cx="210" cy="120"
-                rx="40" ry="100"
-                onclick="colourDrawingPart(this)"
-            />
-
-            <ellipse
-                class="colour-part"
-                data-original="#ffffff"
-                fill="#ffffff"
-                stroke="#222"
-                stroke-width="8"
-                cx="290" cy="120"
-                rx="40" ry="100"
-                onclick="colourDrawingPart(this)"
-            />
-
-            <circle
-                class="colour-part"
-                data-original="#ffffff"
-                fill="#ffffff"
-                stroke="#222"
-                stroke-width="8"
-                cx="250" cy="230" r="100"
-                onclick="colourDrawingPart(this)"
-            />
-
-            <ellipse
-                class="colour-part"
-                data-original="#ffffff"
-                fill="#ffffff"
-                stroke="#222"
-                stroke-width="8"
-                cx="250" cy="365"
-                rx="100" ry="105"
-                onclick="colourDrawingPart(this)"
-            />
-
-            <circle
-                class="colour-part"
-                data-original="#ffffff"
-                fill="#ffffff"
-                stroke="#222"
-                stroke-width="7"
-                cx="250" cy="270" r="20"
-                onclick="colourDrawingPart(this)"
-            />
-
-        ` + commonEnd;
-    }
-
-
-    /* 🚌 BUS */
-
-    if (type === "bus") {
-
-        return commonStart + `
-
-            <rect
-                class="colour-part"
-                data-original="#ffffff"
-                fill="#ffffff"
-                stroke="#222"
-                stroke-width="8"
-                x="70" y="140"
-                width="360" height="240"
-                rx="35"
-                onclick="colourDrawingPart(this)"
-            />
-
-            <rect
-                class="colour-part"
-                data-original="#ffffff"
-                fill="#ffffff"
-                stroke="#222"
-                stroke-width="7"
-                x="105" y="180"
-                width="80" height="75"
-                onclick="colourDrawingPart(this)"
-            />
-
-            <rect
-                class="colour-part"
-                data-original="#ffffff"
-                fill="#ffffff"
-                stroke="#222"
-                stroke-width="7"
-                x="205" y="180"
-                width="80" height="75"
-                onclick="colourDrawingPart(this)"
-            />
-
-            <rect
-                class="colour-part"
-                data-original="#ffffff"
-                fill="#ffffff"
-                stroke="#222"
-                stroke-width="7"
-                x="305" y="180"
-                width="80" height="75"
-                onclick="colourDrawingPart(this)"
-            />
-
-            <circle
-                class="colour-part"
-                data-original="#ffffff"
-                fill="#ffffff"
-                stroke="#222"
-                stroke-width="8"
-                cx="150" cy="390" r="40"
-                onclick="colourDrawingPart(this)"
-            />
-
-            <circle
-                class="colour-part"
-                data-original="#ffffff"
-                fill="#ffffff"
-                stroke="#222"
-                stroke-width="8"
-                cx="350" cy="390" r="40"
-                onclick="colourDrawingPart(this)"
-            />
-
-        ` + commonEnd;
-    }
-
-
-    /* 🪁 KITE */
-
-    if (type === "kite") {
-
-        return commonStart + `
-
-            <polygon
-                class="colour-part"
-                data-original="#ffffff"
-                fill="#ffffff"
-                stroke="#222"
-                stroke-width="8"
-                points="250,45 390,230 250,380 110,230"
-                onclick="colourDrawingPart(this)"
-            />
-
-            <path
-                d="M250 45 L250 380"
                 fill="none"
                 stroke="#222"
-                stroke-width="7"
+                stroke-width="6"
             />
 
-            <path
-                d="M110 230 L390 230"
-                fill="none"
-                stroke="#222"
-                stroke-width="7"
-            />
-
-            <path
-                d="M250 380 C220 410 280 430 250 470"
-                fill="none"
-                stroke="#222"
-                stroke-width="7"
-            />
-
-        ` + commonEnd;
+        ` + end;
     }
 
 
-    /* ⛵ BOAT */
+    /* =====================================================
+       8️⃣ FIVE STARS
+       ===================================================== */
 
-    if (type === "boat") {
+    if (type === "fivestars") {
 
-        return commonStart + `
+        const stars = [
 
-            <path
-                class="colour-part"
-                data-original="#ffffff"
-                fill="#ffffff"
-                stroke="#222"
-                stroke-width="8"
-                d="M80 320 L420 320 L350 410 L150 410 Z"
-                onclick="colourDrawingPart(this)"
-            />
+            {
+                x: 150,
+                y: 170,
+                size: 90
+            },
 
-            <path
-                class="colour-part"
-                data-original="#ffffff"
-                fill="#ffffff"
-                stroke="#222"
-                stroke-width="8"
-                d="M250 80 L250 320 L120 320 Z"
-                onclick="colourDrawingPart(this)"
-            />
+            {
+                x: 350,
+                y: 140,
+                size: 100
+            },
 
-            <path
-                class="colour-part"
-                data-original="#ffffff"
-                fill="#ffffff"
-                stroke="#222"
-                stroke-width="8"
-                d="M260 100 L380 250 L260 250 Z"
-                onclick="colourDrawingPart(this)"
-            />
+            {
+                x: 550,
+                y: 175,
+                size: 90
+            },
 
-            <rect
-                class="colour-part"
-                data-original="#ffffff"
-                fill="#ffffff"
-                stroke="#222"
-                stroke-width="7"
-                x="245" y="70"
-                width="12"
-                height="255"
-                onclick="colourDrawingPart(this)"
-            />
+            {
+                x: 250,
+                y: 390,
+                size: 105
+            },
 
-        ` + commonEnd;
+            {
+                x: 470,
+                y: 400,
+                size: 105
+            }
+
+        ];
+
+
+        let output = "";
+
+
+        stars.forEach(function(star) {
+
+            const x = star.x;
+            const y = star.y;
+            const r = star.size;
+
+
+            const points = [];
+
+            for (let i = 0; i < 10; i++) {
+
+                const angle =
+                    -Math.PI / 2 +
+                    i * Math.PI / 5;
+
+                const radius =
+                    i % 2 === 0
+                        ? r
+                        : r * 0.42;
+
+
+                points.push(
+                    (
+                        x +
+                        Math.cos(angle) * radius
+                    ) +
+                    "," +
+                    (
+                        y +
+                        Math.sin(angle) * radius
+                    )
+                );
+
+            }
+
+
+            output += `
+
+                <polygon
+                    class="colour-part"
+                    data-original="#ffffff"
+                    fill="#ffffff"
+                    stroke="#222"
+                    stroke-width="8"
+                    points="${points.join(" ")}"
+                    onclick="colourDrawingPart(this)"
+                />
+
+            `;
+
+        });
+
+
+        return start + output + end;
     }
 
 
-    /* 🧁 CUPCAKE */
+    /* FALLBACK */
 
-    if (type === "cupcake") {
+    return start + `
 
-        return commonStart + `
+        <circle
+            class="colour-part"
+            data-original="#ffffff"
+            fill="#ffffff"
+            stroke="#222"
+            stroke-width="8"
+            cx="350"
+            cy="300"
+            r="150"
+            onclick="colourDrawingPart(this)"
+        />
 
-            <path
-                class="colour-part"
-                data-original="#ffffff"
-                fill="#ffffff"
-                stroke="#222"
-                stroke-width="8"
-                d="
-                    M130 220
-                    C130 145 200 125 250 160
-                    C300 125 370 145 370 220
-                    C370 280 320 300 250 285
-                    C180 300 130 280 130 220
-                    Z
-                "
-                onclick="colourDrawingPart(this)"
-            />
-
-            <path
-                class="colour-part"
-                data-original="#ffffff"
-                fill="#ffffff"
-                stroke="#222"
-                stroke-width="8"
-                d="M145 280 L355 280 L325 430 L175 430 Z"
-                onclick="colourDrawingPart(this)"
-            />
-
-            <circle
-                class="colour-part"
-                data-original="#ffffff"
-                fill="#ffffff"
-                stroke="#222"
-                stroke-width="7"
-                cx="250" cy="130" r="35"
-                onclick="colourDrawingPart(this)"
-            />
-
-        ` + commonEnd;
-    }
-
-
-    return `
-        <svg
-            class="colouring-svg"
-            viewBox="0 0 500 500"
-        >
-            <circle
-                class="colour-part"
-                data-original="#ffffff"
-                fill="#ffffff"
-                stroke="#222"
-                stroke-width="8"
-                cx="250"
-                cy="250"
-                r="150"
-                onclick="colourDrawingPart(this)"
-            />
-        </svg>
-    `;
+    ` + end;
 }
 
 /* =========================================================
