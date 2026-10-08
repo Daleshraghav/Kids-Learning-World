@@ -1172,68 +1172,121 @@ function handleHindiKey(event, card, index) {
     }
 }
 
-
-
-
 /* =========================================================
-   💡 STUDY LAMP — OPEN HOME AFTER GLOW
-   ========================================================= */
+   🎁 LEARNING GIFT INTRO
+   Night → Gift Glow → Open Box → Books → Home
+========================================================= */
 
-/* =========================================================
-   💡 STUDY LAMP — FINAL VERSION
-   ========================================================= */
+function openLearningGift() {
 
-function turnLampOn() {
+    const intro = document.getElementById("giftIntro");
+    const giftBox = document.getElementById("learningGiftBox");
 
-    const intro = document.getElementById("studyIntro");
-    const home = document.getElementById("homePage");
-    const learning = document.getElementById("learningPage");
+    if (!intro || !giftBox) return;
 
-    console.log("💡 Lamp clicked");
-
-    /* If lamp screen is not found */
-    if (!intro) {
-        console.error("❌ studyIntro not found in HTML");
+    // Prevent double click
+    if (intro.classList.contains("gift-opening")) {
         return;
     }
 
-    /* Prevent double click */
-    if (intro.dataset.opening === "true") {
-        return;
-    }
+    // Start complete animation
+    intro.classList.add("gift-opening");
 
-    intro.dataset.opening = "true";
+    // Disable button during animation
+    giftBox.disabled = true;
 
-    /* Make sure Home is hidden while lamp animation runs */
-    if (home) {
-        home.style.display = "none";
-    }
 
-    if (learning) {
-        learning.style.display = "none";
-    }
+    /*
+       STEP 1
+       Yellow glow starts
+    */
 
-    /* 🌟 START GOLDEN LIGHT */
-    intro.classList.add("lamp-on");
-
-    /* 🟡 After glow animation → open Home */
     setTimeout(function () {
 
-        intro.classList.add("hide-intro");
+        intro.classList.add("gift-glowing");
 
-        if (home) {
-            home.style.display = "block";
-            home.style.opacity = "1";
+    }, 50);
+
+
+    /*
+       STEP 2
+       Gift box opens
+    */
+
+    setTimeout(function () {
+
+        intro.classList.add("gift-open");
+
+    }, 700);
+
+
+    /*
+       STEP 3
+       Books come out
+    */
+
+    setTimeout(function () {
+
+        intro.classList.add("books-coming-out");
+
+    }, 1200);
+
+
+    /*
+       STEP 4
+       Strong light / final animation
+    */
+
+    setTimeout(function () {
+
+        intro.classList.add("gift-final-glow");
+
+    }, 1900);
+
+
+    /*
+       STEP 5
+       Hide intro and show existing Home Page
+    */
+
+    setTimeout(function () {
+
+        intro.classList.add("gift-hide");
+
+        const homePage =
+            document.getElementById("homePage");
+
+        if (homePage) {
+
+            homePage.style.display = "block";
+
+            homePage.classList.add("home-page-opening");
+
         }
 
-        /* Remove intro completely after fade */
-        setTimeout(function () {
+    }, 2700);
 
-            intro.style.display = "none";
 
-        }, 900);
+    /*
+       STEP 6
+       Completely remove intro from visual flow
+    */
 
-    }, 2200);
+    setTimeout(function () {
+
+        intro.style.display = "none";
+
+        const homePage =
+            document.getElementById("homePage");
+
+        if (homePage) {
+
+            homePage.classList.remove("home-page-opening");
+
+        }
+
+    }, 3600);
+
 }
 
 
@@ -8339,27 +8392,3 @@ if (
     initializeApp();
 }
 
-/* =========================================================
-   💡 LAMP CLICK BACKUP
-   Makes the whole lamp screen clickable
-   ========================================================= */
-
-document.addEventListener("click", function (event) {
-
-    const intro = document.getElementById("studyIntro");
-
-    if (!intro) return;
-
-    /* Only work while lamp screen is visible */
-    if (intro.style.display === "none") {
-        return;
-    }
-
-    /* Click anywhere on lamp intro */
-    if (intro.contains(event.target)) {
-
-        turnLampOn();
-
-    }
-
-});
