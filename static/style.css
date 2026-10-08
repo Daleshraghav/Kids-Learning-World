@@ -8280,419 +8280,6 @@ table tr:hover {
 }
 
 
-/* =========================================================
-   LAMP INTRO - DO NOT BREAK EXISTING ANIMATION
-========================================================= */
-
-#studyIntro {
-    transition:
-        opacity 0.8s ease,
-        transform 0.8s ease,
-        filter 0.8s ease;
-}
-
-#studyIntro.lamp-on {
-    animation:
-        lampGlow 1.4s ease both;
-}
-
-#studyIntro.hide-intro {
-    opacity: 0;
-
-    transform:
-        translateY(-20px)
-        scale(0.96);
-
-    pointer-events: none;
-}
-
-@keyframes lampGlow {
-    0% {
-        filter:
-            brightness(0.7)
-            drop-shadow(0 0 0 transparent);
-    }
-
-    45% {
-        filter:
-            brightness(1.15)
-            drop-shadow(
-                0 0 25px
-                rgba(255,214,59,0.75)
-            );
-    }
-
-    100% {
-        filter:
-            brightness(1)
-            drop-shadow(0 0 0 transparent);
-    }
-}
-
-
-/* =========================================================
-   RESPONSIVE - TABLET
-========================================================= */
-
-@media (max-width: 1100px) {
-
-    .adventure-grid {
-        grid-template-columns:
-            repeat(2, minmax(0, 1fr));
-    }
-
-    .category-grid,
-    .learning-menu-grid,
-    .cards-grid,
-    .hindi-grid {
-        grid-template-columns:
-            repeat(3, minmax(0, 1fr)) !important;
-    }
-
-    .hero {
-        grid-template-columns:
-            1fr 0.8fr;
-
-        gap: 25px;
-    }
-
-    .hero-kid {
-        width: 190px;
-        height: 190px;
-
-        font-size: 110px;
-    }
-
-    .orbit-one {
-        width: 300px;
-        height: 300px;
-    }
-
-    .orbit-two {
-        width: 380px;
-        height: 380px;
-    }
-}
-
-
-/* =========================================================
-   RESPONSIVE - MOBILE
-========================================================= */
-
-@media (max-width: 700px) {
-
-    .navbar {
-        padding:
-            12px 5%;
-    }
-
-    .brand-icon {
-        width: 45px;
-        height: 45px;
-
-        font-size: 24px;
-    }
-
-    .brand h2 {
-        font-size: 17px;
-    }
-
-    .header-badge {
-        display: none;
-    }
-
-
-    .hero {
-        min-height: auto;
-
-        grid-template-columns: 1fr;
-
-        padding:
-            55px 6%
-            65px;
-
-        text-align: center;
-    }
-
-    .hero-left {
-        display: flex;
-
-        flex-direction: column;
-
-        align-items: center;
-    }
-
-    .hero h1 {
-        font-size:
-            clamp(38px, 12vw, 58px);
-
-        letter-spacing: -1px;
-    }
-
-    .hero p {
-        font-size: 15px;
-    }
-
-    .hero-right {
-        min-height: 320px;
-    }
-
-    .hero-kid {
-        width: 160px;
-        height: 160px;
-
-        font-size: 90px;
-    }
-
-    .orbit-one {
-        width: 250px;
-        height: 250px;
-    }
-
-    .orbit-two {
-        width: 310px;
-        height: 310px;
-    }
-
-    .floating-item {
-        width: 52px;
-        height: 52px;
-
-        font-size: 25px;
-    }
-
-
-    .category-section {
-        padding:
-            50px 5%
-            70px;
-    }
-
-    .section-heading h2 {
-        font-size: 29px;
-    }
-
-
-    .category-grid,
-    .learning-menu-grid,
-    .cards-grid,
-    .hindi-grid {
-        grid-template-columns:
-            repeat(2, minmax(0, 1fr)) !important;
-
-        gap: 14px !important;
-    }
-
-
-    .category-card {
-        min-height: 190px;
-
-        padding: 18px;
-
-        border-radius: 22px;
-    }
-
-    .category-icon {
-        width: 58px;
-        height: 58px;
-
-        border-radius: 17px;
-
-        font-size: 30px;
-    }
-
-    .category-card h3 {
-        margin-top: 14px;
-
-        font-size: 18px;
-    }
-
-    .category-card p {
-        font-size: 12px;
-    }
-
-
-    .learning-page {
-        padding:
-            20px 5%
-            70px;
-    }
-
-
-    .learning-top {
-        gap: 10px;
-
-        padding: 14px;
-
-        border-radius: 23px;
-    }
-
-    .back-button {
-        min-width: 78px;
-
-        padding:
-            10px 12px;
-
-        font-size: 13px;
-    }
-
-    #learningIcon {
-        width: 55px;
-        height: 55px;
-
-        border-radius: 18px;
-
-        font-size: 28px;
-    }
-
-    #learningTitle {
-        font-size: 23px;
-    }
-
-    #learningSubtitle {
-        font-size: 12px;
-    }
-
-
-    .adventure-grid {
-        grid-template-columns: 1fr;
-
-        gap: 16px;
-
-        padding:
-            0 5px;
-    }
-
-    .adventure-card {
-        min-height: 205px;
-
-        padding: 23px;
-
-        border-radius: 25px;
-    }
-
-    .adventure-icon {
-        width: 68px;
-        height: 68px;
-
-        border-radius: 20px;
-
-        font-size: 36px;
-    }
-
-    .adventure-card h3 {
-        margin-top: 16px;
-
-        font-size: 22px;
-    }
-
-    .adventure-card p {
-        font-size: 13px;
-    }
-
-
-    .adventure-heading h2 {
-        font-size: 29px;
-    }
-
-    .adventure-heading p {
-        font-size: 14px;
-    }
-
-
-    .learning-menu-existing-title h2 {
-        font-size: 25px;
-    }
-
-
-    .quiz-card,
-    .game-card,
-    .question-card {
-        padding: 20px;
-
-        border-radius: 23px;
-    }
-
-
-    .drawing-area {
-        padding: 12px;
-
-        border-radius: 23px;
-    }
-
-    .drawing-area canvas,
-    #drawingCanvas {
-        min-height: 300px;
-    }
-}
-
-
-/* =========================================================
-   VERY SMALL MOBILE
-========================================================= */
-
-@media (max-width: 390px) {
-
-    .category-grid,
-    .learning-menu-grid,
-    .cards-grid,
-    .hindi-grid {
-        gap: 10px !important;
-    }
-
-    .category-card {
-        min-height: 175px;
-
-        padding: 14px;
-    }
-
-    .category-icon {
-        width: 52px;
-        height: 52px;
-
-        font-size: 27px;
-    }
-
-    .category-card h3 {
-        font-size: 16px;
-    }
-
-    .category-card p {
-        font-size: 11px;
-    }
-
-    .arrow {
-        right: 12px;
-        bottom: 12px;
-
-        width: 30px;
-        height: 30px;
-
-        font-size: 16px;
-    }
-
-
-    .adventure-card {
-        min-height: 190px;
-
-        padding: 20px;
-    }
-
-    .adventure-icon {
-        width: 60px;
-        height: 60px;
-
-        font-size: 32px;
-    }
-
-    .adventure-card h3 {
-        font-size: 20px;
-    }
-
-    .adventure-card p {
-        font-size: 12px;
-    }
-}
 
 
 /* =========================================================
@@ -12441,413 +12028,1251 @@ table tr:hover {
 }
 
 /* =========================================================
-   💡 LAMP INTRO → HOME TRANSITION
-   ========================================================= */
+   🎁 NEW LEARNING GIFT INTRO
+   Night Sky + Moon + Luxury Gift + Books Animation
+========================================================= */
 
-#studyIntro {
 
+/* =========================================================
+   FULL NIGHT INTRO
+========================================================= */
+
+#giftIntro {
     position: fixed;
     inset: 0;
-
+    width: 100%;
+    height: 100vh;
+    height: 100dvh;
     z-index: 99999;
+    overflow: hidden;
 
-    cursor: pointer;
+    background:
+        radial-gradient(
+            circle at 50% 28%,
+            rgba(45, 58, 105, 0.35),
+            transparent 35%
+        ),
+        linear-gradient(
+            180deg,
+            #02030b 0%,
+            #050817 42%,
+            #090d21 72%,
+            #02030a 100%
+        );
 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    opacity: 1;
+    visibility: visible;
+
+    transition:
+        opacity 0.8s ease,
+        visibility 0.8s ease;
 }
 
 
 /* =========================================================
-   🌟 LAMP ON / GOLDEN GLOW
-   ========================================================= */
+   NIGHT SKY
+========================================================= */
 
-#studyIntro.lamp-on {
-
-    animation:
-        lampGlowUp 2.2s ease forwards;
-
+.gift-night-sky {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
 }
 
 
-/* Golden light spreading around lamp */
+/* =========================================================
+   STARS
+========================================================= */
 
-#studyIntro.lamp-on::after {
+.gift-stars {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
 
-    content: "";
-
+.gift-stars span {
     position: absolute;
 
-    left: 50%;
-    top: 53%;
+    color: rgba(255, 255, 255, 0.9);
 
-    width: 120px;
-    height: 120px;
+    font-size: clamp(10px, 1.4vw, 18px);
 
-    transform:
-        translate(-50%, -50%);
+    animation:
+        starTwinkle 2.8s ease-in-out infinite;
+
+    text-shadow:
+        0 0 6px rgba(255, 255, 255, 0.8),
+        0 0 15px rgba(150, 180, 255, 0.5);
+}
+
+
+/* Different star positions */
+
+.gift-stars span:nth-child(1) {
+    top: 10%;
+    left: 9%;
+    animation-delay: 0s;
+}
+
+.gift-stars span:nth-child(2) {
+    top: 18%;
+    left: 23%;
+    animation-delay: 0.7s;
+}
+
+.gift-stars span:nth-child(3) {
+    top: 9%;
+    right: 18%;
+    animation-delay: 1.2s;
+}
+
+.gift-stars span:nth-child(4) {
+    top: 28%;
+    right: 8%;
+    animation-delay: 0.4s;
+}
+
+.gift-stars span:nth-child(5) {
+    top: 39%;
+    left: 7%;
+    animation-delay: 1.5s;
+}
+
+.gift-stars span:nth-child(6) {
+    top: 33%;
+    left: 32%;
+    animation-delay: 0.9s;
+}
+
+.gift-stars span:nth-child(7) {
+    top: 14%;
+    right: 35%;
+    animation-delay: 1.8s;
+}
+
+.gift-stars span:nth-child(8) {
+    top: 45%;
+    right: 17%;
+    animation-delay: 0.6s;
+}
+
+.gift-stars span:nth-child(9) {
+    top: 54%;
+    left: 15%;
+    animation-delay: 1.1s;
+}
+
+.gift-stars span:nth-child(10) {
+    top: 61%;
+    right: 9%;
+    animation-delay: 1.7s;
+}
+
+.gift-stars span:nth-child(11) {
+    top: 24%;
+    left: 45%;
+    animation-delay: 0.3s;
+}
+
+.gift-stars span:nth-child(12) {
+    top: 48%;
+    right: 38%;
+    animation-delay: 1.4s;
+}
+
+
+@keyframes starTwinkle {
+
+    0%,
+    100% {
+        opacity: 0.25;
+        transform: scale(0.7);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.25);
+    }
+}
+
+
+/* =========================================================
+   REALISTIC MOON
+========================================================= */
+
+.gift-moon {
+    position: absolute;
+
+    top: 8%;
+    right: 9%;
+
+    width: clamp(110px, 13vw, 210px);
+    aspect-ratio: 1;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle at 34% 30%,
+            #fffef2 0%,
+            #f7f3d8 42%,
+            #d7d2b8 72%,
+            #aaa58f 100%
+        );
+
+    box-shadow:
+        0 0 25px rgba(255, 250, 210, 0.75),
+        0 0 65px rgba(255, 240, 180, 0.35),
+        0 0 130px rgba(255, 225, 140, 0.15);
+
+    overflow: hidden;
+
+    z-index: 2;
+}
+
+
+/* Moon surface details */
+
+.gift-moon::before,
+.gift-moon::after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(125, 120, 100, 0.18);
+    filter: blur(1px);
+}
+
+.gift-moon::before {
+    width: 25%;
+    height: 25%;
+    top: 19%;
+    left: 18%;
+    box-shadow:
+        50px 18px 0 rgba(120, 115, 95, 0.14),
+        18px 60px 0 rgba(120, 115, 95, 0.12),
+        72px 72px 0 rgba(120, 115, 95, 0.15);
+}
+
+.gift-moon::after {
+    width: 16%;
+    height: 16%;
+    right: 18%;
+    bottom: 22%;
+    box-shadow:
+        -45px 22px 0 rgba(120, 115, 95, 0.12),
+        -22px -40px 0 rgba(120, 115, 95, 0.16);
+}
+
+
+/* Moon craters */
+
+.moon-crater {
+    position: absolute;
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(115, 110, 90, 0.25),
+            rgba(160, 155, 130, 0.08)
+        );
+
+    box-shadow:
+        inset 2px 3px 5px rgba(90, 85, 70, 0.12);
+}
+
+.crater-one {
+    width: 18%;
+    height: 18%;
+    top: 24%;
+    left: 30%;
+}
+
+.crater-two {
+    width: 13%;
+    height: 13%;
+    top: 52%;
+    left: 18%;
+}
+
+.crater-three {
+    width: 21%;
+    height: 21%;
+    bottom: 17%;
+    right: 25%;
+}
+
+.crater-four {
+    width: 10%;
+    height: 10%;
+    top: 18%;
+    right: 25%;
+}
+
+.crater-five {
+    width: 14%;
+    height: 14%;
+    bottom: 30%;
+    left: 48%;
+}
+
+
+/* =========================================================
+   MOON GLOW
+========================================================= */
+
+.moon-glow {
+    position: absolute;
+
+    top: 2%;
+    right: 2%;
+
+    width: clamp(180px, 23vw, 340px);
+    aspect-ratio: 1;
 
     border-radius: 50%;
 
     background:
         radial-gradient(
             circle,
-            rgba(255, 226, 90, 0.95) 0%,
-            rgba(255, 203, 45, 0.65) 25%,
-            rgba(255, 184, 0, 0.30) 50%,
-            rgba(255, 184, 0, 0) 75%
+            rgba(255, 245, 200, 0.17),
+            transparent 68%
         );
 
-    filter:
-        blur(8px);
+    filter: blur(8px);
+
+    pointer-events: none;
+    z-index: 1;
+}
+
+
+/* =========================================================
+   GIFT BOX AREA
+========================================================= */
+
+.gift-box-area {
+    position: absolute;
+
+    left: 50%;
+    top: 56%;
+
+    width: min(430px, 80vw);
+    height: min(470px, 58vh);
+
+    transform: translate(-50%, -50%);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    z-index: 10;
+}
+
+
+/* =========================================================
+   YELLOW GLOW BEHIND BOX
+========================================================= */
+
+.gift-yellow-glow {
+    position: absolute;
+
+    width: 180px;
+    height: 180px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255, 215, 60, 0.95) 0%,
+            rgba(255, 180, 20, 0.5) 32%,
+            rgba(255, 150, 0, 0.15) 62%,
+            transparent 75%
+        );
+
+    filter: blur(12px);
 
     opacity: 0;
 
+    transform: scale(0.45);
+
+    transition:
+        opacity 0.9s ease,
+        transform 1.2s cubic-bezier(.17,.67,.25,1.25);
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   GIFT BOX
+========================================================= */
+
+.luxury-gift-box {
+    position: absolute;
+
+    left: 50%;
+    top: 55%;
+
+    width: clamp(190px, 25vw, 290px);
+    height: clamp(145px, 19vw, 215px);
+
+    transform: translate(-50%, -50%);
+
+    border: none;
+    padding: 0;
+
+    background: transparent;
+
+    cursor: pointer;
+
+    z-index: 20;
+
+    filter:
+        drop-shadow(0 22px 22px rgba(0, 0, 0, 0.45))
+        drop-shadow(0 0 12px rgba(255, 210, 70, 0.15));
+
+    animation:
+        giftFloat 3.4s ease-in-out infinite;
+
+    -webkit-tap-highlight-color: transparent;
+}
+
+
+.luxury-gift-box:focus {
+    outline: none;
+}
+
+
+@keyframes giftFloat {
+
+    0%,
+    100% {
+        transform: translate(-50%, -50%) translateY(0);
+    }
+
+    50% {
+        transform: translate(-50%, -50%) translateY(-9px);
+    }
+}
+
+
+/* =========================================================
+   GIFT BODY
+========================================================= */
+
+.gift-body {
+    position: absolute;
+
+    left: 5%;
+    right: 5%;
+    bottom: 3%;
+
+    height: 72%;
+
+    border-radius: 8px 8px 16px 16px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #8b0000 0%,
+            #c41414 28%,
+            #9d0000 53%,
+            #650000 100%
+        );
+
+    border: 3px solid rgba(255, 215, 120, 0.8);
+
+    box-shadow:
+        inset 8px 8px 15px rgba(255, 255, 255, 0.14),
+        inset -12px -12px 20px rgba(0, 0, 0, 0.3),
+        0 8px 20px rgba(0, 0, 0, 0.35);
+
+    overflow: hidden;
+}
+
+
+/* Vertical ribbon */
+
+.gift-ribbon-vertical {
+    position: absolute;
+
+    top: 0;
+    bottom: 0;
+
+    left: 50%;
+
+    width: 20%;
+
+    transform: translateX(-50%);
+
+    background:
+        linear-gradient(
+            90deg,
+            #c88b12,
+            #ffe27a,
+            #d7a21b,
+            #ffe889
+        );
+
+    box-shadow:
+        inset 2px 0 3px rgba(255, 255, 255, 0.4),
+        inset -2px 0 3px rgba(0, 0, 0, 0.2);
+}
+
+
+/* Horizontal ribbon */
+
+.gift-ribbon-horizontal {
+    position: absolute;
+
+    left: 0;
+    right: 0;
+
+    top: 45%;
+
+    height: 20%;
+
+    background:
+        linear-gradient(
+            180deg,
+            #d29a19,
+            #ffe67c,
+            #d09a18
+        );
+
+    box-shadow:
+        inset 0 2px 3px rgba(255, 255, 255, 0.4),
+        inset 0 -2px 3px rgba(0, 0, 0, 0.2);
+}
+
+
+/* Body shine */
+
+.gift-body-shine {
+    position: absolute;
+
+    top: 10%;
+    left: 8%;
+
+    width: 20%;
+    height: 65%;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255, 255, 255, 0.22),
+            transparent
+        );
+
+    transform: skewX(-15deg);
+
+    opacity: 0.7;
+}
+
+
+/* =========================================================
+   GIFT LID
+========================================================= */
+
+.gift-lid {
+    position: absolute;
+
+    left: 0;
+    top: 13%;
+
+    width: 100%;
+    height: 28%;
+
+    border-radius: 10px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #b30b0b,
+            #e01818 35%,
+            #a40000 70%,
+            #700000
+        );
+
+    border: 3px solid rgba(255, 220, 130, 0.85);
+
+    box-shadow:
+        inset 5px 5px 10px rgba(255, 255, 255, 0.16),
+        inset -8px -8px 15px rgba(0, 0, 0, 0.25),
+        0 8px 12px rgba(0, 0, 0, 0.3);
+
+    transform-origin: left bottom;
+
+    z-index: 5;
+
+    transition:
+        transform 1s cubic-bezier(.18,.8,.25,1),
+        top 1s ease;
+}
+
+
+/* Lid ribbon */
+
+.gift-lid-ribbon {
+    position: absolute;
+
+    left: 50%;
+    top: 0;
+    bottom: 0;
+
+    width: 20%;
+
+    transform: translateX(-50%);
+
+    background:
+        linear-gradient(
+            90deg,
+            #c18a12,
+            #ffe77c,
+            #d39c1d,
+            #fff09a
+        );
+}
+
+
+/* =========================================================
+   GIFT BOW
+========================================================= */
+
+.gift-bow {
+    position: absolute;
+
+    left: 50%;
+    top: -68%;
+
+    width: 100px;
+    height: 70px;
+
+    transform: translateX(-50%);
+
+    z-index: 10;
+}
+
+
+.bow-left,
+.bow-right {
+    position: absolute;
+
+    width: 48px;
+    height: 55px;
+
+    border: 5px solid #f4ca43;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ffe889,
+            #c79214
+        );
+
+    box-shadow:
+        0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+
+.bow-left {
+    left: 0;
+    top: 5px;
+
+    border-radius: 70% 20% 60% 30%;
+
+    transform: rotate(-25deg);
+}
+
+
+.bow-right {
+    right: 0;
+    top: 5px;
+
+    border-radius: 20% 70% 30% 60%;
+
+    transform: rotate(25deg);
+}
+
+
+.bow-center {
+    position: absolute;
+
+    left: 50%;
+    top: 25px;
+
+    width: 28px;
+    height: 28px;
+
+    transform: translateX(-50%);
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle at 35% 30%,
+            #fff09a,
+            #d39b17
+        );
+
+    border: 3px solid #f8d75b;
+
+    z-index: 5;
+}
+
+
+/* =========================================================
+   BOX INNER GLOW
+========================================================= */
+
+.gift-box-inner-glow {
+    position: absolute;
+
+    left: 50%;
+    top: 48%;
+
+    width: 55%;
+    height: 55%;
+
+    transform: translate(-50%, -50%);
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255, 240, 110, 0.9),
+            rgba(255, 190, 20, 0.25),
+            transparent 72%
+        );
+
+    filter: blur(15px);
+
+    opacity: 0;
+
+    z-index: 1;
+
+    transition:
+        opacity 0.8s ease,
+        transform 0.8s ease;
+}
+
+
+/* =========================================================
+   BOX SHADOW
+========================================================= */
+
+.gift-shadow {
+    position: absolute;
+
+    left: 50%;
+    bottom: -9%;
+
+    width: 85%;
+    height: 18px;
+
+    transform: translateX(-50%);
+
+    border-radius: 50%;
+
+    background: rgba(0, 0, 0, 0.5);
+
+    filter: blur(7px);
+
+    z-index: -1;
+
+    transition:
+        width 1s ease,
+        opacity 1s ease;
+}
+
+
+/* =========================================================
+   BOOKS
+========================================================= */
+
+.gift-books {
+    position: absolute;
+
+    left: 50%;
+    top: 38%;
+
+    width: 230px;
+    height: 230px;
+
+    transform: translate(-50%, -50%);
+
+    z-index: 12;
+
+    pointer-events: none;
+}
+
+
+.gift-book {
+    position: absolute;
+
+    left: 50%;
+    bottom: 5%;
+
+    width: 55px;
+    height: 72px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 48px;
+
+    opacity: 0;
+
+    transform:
+        translate(-50%, 80px)
+        scale(0.3)
+        rotate(0deg);
+
+    filter:
+        drop-shadow(0 8px 8px rgba(0, 0, 0, 0.35));
+
+    transition:
+        transform 1.15s cubic-bezier(.17,.67,.2,1.35),
+        opacity 0.35s ease;
+}
+
+
+/* Book positions */
+
+.book-blue {
+    margin-left: -75px;
+    transition-delay: 0.05s;
+}
+
+.book-red {
+    margin-left: -25px;
+    transition-delay: 0.15s;
+}
+
+.book-green {
+    margin-left: 28px;
+    transition-delay: 0.25s;
+}
+
+.book-yellow {
+    margin-left: 73px;
+    transition-delay: 0.35s;
+}
+
+
+/* =========================================================
+   GIFT MESSAGE
+========================================================= */
+
+.gift-message {
+    position: absolute;
+
+    left: 50%;
+    bottom: 3%;
+
+    transform: translateX(-50%);
+
+    width: max-content;
+    max-width: 90%;
+
+    padding: 12px 22px;
+
+    border-radius: 30px;
+
+    color: #fff8d8;
+
+    font-size: clamp(14px, 2vw, 19px);
+    font-weight: 700;
+
+    letter-spacing: 0.3px;
+
+    background:
+        rgba(5, 7, 20, 0.58);
+
+    border:
+        1px solid rgba(255, 225, 130, 0.4);
+
+    box-shadow:
+        0 8px 25px rgba(0, 0, 0, 0.25),
+        inset 0 1px 0 rgba(255, 255, 255, 0.12);
+
+    backdrop-filter: blur(8px);
+
+    animation:
+        messageFloat 2.5s ease-in-out infinite;
+
+    z-index: 30;
+}
+
+
+@keyframes messageFloat {
+
+    0%,
+    100% {
+        transform: translateX(-50%) translateY(0);
+    }
+
+    50% {
+        transform: translateX(-50%) translateY(-5px);
+    }
+}
+
+
+/* =========================================================
+   LIGHT PARTICLES
+========================================================= */
+
+.gift-light-particles {
+    position: absolute;
+
+    inset: 0;
+
     pointer-events: none;
 
+    z-index: 25;
+}
+
+
+.gift-light-particles span {
+    position: absolute;
+
+    left: 50%;
+    top: 52%;
+
+    color: #ffe86b;
+
+    font-size: 18px;
+
+    opacity: 0;
+
+    text-shadow:
+        0 0 8px #ffd83d,
+        0 0 18px #ffb300;
+}
+
+
+/* =========================================================
+   CLICKED / GLOWING STATE
+========================================================= */
+
+#giftIntro.gift-glowing .gift-yellow-glow {
+    opacity: 1;
+
+    transform: scale(2.8);
+}
+
+
+#giftIntro.gift-glowing .gift-box-inner-glow {
+    opacity: 1;
+
+    transform:
+        translate(-50%, -50%)
+        scale(1.8);
+}
+
+
+#giftIntro.gift-glowing .gift-message {
+    opacity: 0;
+}
+
+
+/* =========================================================
+   BOX OPENING
+========================================================= */
+
+#giftIntro.gift-open .gift-lid {
+
+    transform:
+        translateY(-45px)
+        rotate(-16deg);
+
+    top: 4%;
+}
+
+
+#giftIntro.gift-open .gift-box-inner-glow {
+    opacity: 1;
+
+    transform:
+        translate(-50%, -50%)
+        scale(2.4);
+}
+
+
+/* =========================================================
+   BOOKS COMING OUT
+========================================================= */
+
+#giftIntro.books-coming-out .gift-book {
+    opacity: 1;
+}
+
+
+/* Individual book trajectories */
+
+#giftIntro.books-coming-out .book-blue {
+    transform:
+        translate(-75px, -115px)
+        scale(1)
+        rotate(-18deg);
+}
+
+
+#giftIntro.books-coming-out .book-red {
+    transform:
+        translate(-25px, -150px)
+        scale(1.05)
+        rotate(-4deg);
+}
+
+
+#giftIntro.books-coming-out .book-green {
+    transform:
+        translate(25px, -128px)
+        scale(1)
+        rotate(12deg);
+}
+
+
+#giftIntro.books-coming-out .book-yellow {
+    transform:
+        translate(75px, -100px)
+        scale(0.95)
+        rotate(20deg);
+}
+
+
+/* =========================================================
+   FINAL GLOW
+========================================================= */
+
+#giftIntro.gift-final-glow .gift-yellow-glow {
+    opacity: 1;
+
+    transform: scale(4.5);
+
+    filter: blur(8px);
+}
+
+
+#giftIntro.gift-final-glow .gift-books {
+    transform:
+        translate(-50%, -58%)
+        scale(1.08);
+
+    transition:
+        transform 0.6s ease;
+}
+
+
+/* =========================================================
+   INTRO EXIT
+========================================================= */
+
+#giftIntro.gift-hide {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+
+    transition:
+        opacity 0.9s ease,
+        visibility 0.9s ease;
+}
+
+
+/* =========================================================
+   HOME PAGE OPENING
+========================================================= */
+
+#homePage.home-page-opening {
+
     animation:
-        lampLightGlow 2.2s ease forwards;
-
-}
-
-
-/* =========================================================
-   ✨ LIGHT ANIMATION
-   ========================================================= */
-
-@keyframes lampLightGlow {
-
-    0% {
-
-        width: 100px;
-        height: 100px;
-
-        opacity: 0;
-
-    }
-
-    25% {
-
-        width: 230px;
-        height: 230px;
-
-        opacity: 0.75;
-
-    }
-
-    55% {
-
-        width: 480px;
-        height: 480px;
-
-        opacity: 0.55;
-
-    }
-
-    100% {
-
-        width: 900px;
-        height: 900px;
-
-        opacity: 0.08;
-
-    }
-
-}
-
-
-/* =========================================================
-   💡 WHOLE LAMP SCREEN BECOMES WARM
-   ========================================================= */
-
-@keyframes lampGlowUp {
-
-    0% {
-
-        filter:
-            brightness(1);
-
-    }
-
-    30% {
-
-        filter:
-            brightness(1.15);
-
-    }
-
-    60% {
-
-        filter:
-            brightness(1.35);
-
-    }
-
-    100% {
-
-        filter:
-            brightness(1.7);
-
-    }
-
-}
-
-
-/* =========================================================
-   🌙 FADE OUT INTRO
-   ========================================================= */
-
-#studyIntro.hide-intro {
-
-    animation:
-        lampIntroFadeOut 0.8s ease forwards;
-
-    pointer-events:
-        none;
-
-}
-
-
-@keyframes lampIntroFadeOut {
-
-    from {
-
-        opacity: 1;
-
-        visibility: visible;
-
-    }
-
-    to {
-
-        opacity: 0;
-
-        visibility: hidden;
-
-    }
-
-}
-
-
-/* =========================================================
-   🏠 HOME PAGE APPEAR
-   ========================================================= */
-
-#homePage.home-page-visible {
-
-    animation:
-        homePageReveal 0.7s ease forwards;
-
+        homePageReveal 0.9s ease both;
 }
 
 
 @keyframes homePageReveal {
 
     from {
-
         opacity: 0;
-
-        transform:
-            translateY(12px);
-
+        transform: scale(0.97);
     }
 
     to {
-
         opacity: 1;
+        transform: scale(1);
+    }
+}
 
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 700px) {
+
+    #giftIntro {
+        min-height: 100dvh;
+    }
+
+
+    .gift-moon {
+
+        top: 6%;
+        right: 7%;
+
+        width: clamp(95px, 25vw, 145px);
+    }
+
+
+    .moon-glow {
+
+        top: 1%;
+        right: 0;
+
+        width: 190px;
+    }
+
+
+    .gift-box-area {
+
+        top: 55%;
+
+        width: 92vw;
+        height: 52vh;
+    }
+
+
+    .luxury-gift-box {
+
+        width: clamp(180px, 58vw, 250px);
+        height: clamp(140px, 45vw, 190px);
+    }
+
+
+    .gift-books {
+
+        width: 210px;
+        height: 210px;
+    }
+
+
+    .gift-message {
+
+        bottom: 4%;
+
+        padding: 10px 16px;
+
+        font-size: 14px;
+
+        white-space: nowrap;
+    }
+
+
+    #giftIntro.books-coming-out .book-blue {
         transform:
-            translateY(0);
+            translate(-58px, -105px)
+            scale(0.9)
+            rotate(-18deg);
+    }
 
-       /* =========================================================
-   💡 FINAL LAMP SCREEN
-   ========================================================= */
 
-#studyIntro {
+    #giftIntro.books-coming-out .book-red {
+        transform:
+            translate(-20px, -135px)
+            scale(0.95)
+            rotate(-4deg);
+    }
 
-    position: fixed;
 
-    inset: 0;
+    #giftIntro.books-coming-out .book-green {
+        transform:
+            translate(20px, -115px)
+            scale(0.9)
+            rotate(12deg);
+    }
 
-    width: 100%;
-    height: 100vh;
 
-    z-index: 999999;
-
-    cursor: pointer;
-
-    overflow: hidden;
-
+    #giftIntro.books-coming-out .book-yellow {
+        transform:
+            translate(58px, -92px)
+            scale(0.85)
+            rotate(20deg);
+    }
 }
 
 
 /* =========================================================
-   🌟 GOLDEN LIGHT
-   ========================================================= */
+   SMALL PHONES
+========================================================= */
 
-#studyIntro.lamp-on::after {
+@media (max-width: 400px) {
 
-    content: "";
+    .gift-moon {
 
-    position: absolute;
+        top: 5%;
+        right: 6%;
 
-    left: 50%;
-    top: 52%;
+        width: 85px;
+    }
 
-    width: 120px;
-    height: 120px;
 
-    transform:
-        translate(-50%, -50%);
+    .gift-box-area {
 
-    border-radius: 50%;
+        top: 53%;
 
-    background:
-        radial-gradient(
-            circle,
-            rgba(255, 235, 120, 1) 0%,
-            rgba(255, 215, 70, 0.85) 20%,
-            rgba(255, 190, 30, 0.55) 40%,
-            rgba(255, 180, 0, 0.25) 60%,
-            transparent 78%
-        );
+        height: 50vh;
+    }
 
-    filter: blur(8px);
 
-    pointer-events: none;
+    .luxury-gift-box {
 
-    z-index: 5;
+        width: 175px;
+        height: 135px;
+    }
 
-    animation:
-        lampGoldenGlow 2.2s ease forwards;
 
+    .gift-books {
+
+        width: 185px;
+        height: 185px;
+    }
+
+
+    .gift-book {
+
+        font-size: 40px;
+    }
+
+
+    .gift-message {
+
+        font-size: 12px;
+
+        padding: 9px 13px;
+    }
 }
 
 
 /* =========================================================
-   ✨ GLOW EXPANDS
-   ========================================================= */
+   ACCESSIBILITY
+========================================================= */
 
-@keyframes lampGoldenGlow {
+@media (prefers-reduced-motion: reduce) {
 
-    0% {
+    #giftIntro *,
+    #homePage.home-page-opening {
 
-        width: 100px;
-        height: 100px;
-
-        opacity: 0;
-
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
     }
-
-    20% {
-
-        width: 220px;
-        height: 220px;
-
-        opacity: 1;
-
-    }
-
-    45% {
-
-        width: 420px;
-        height: 420px;
-
-        opacity: 0.9;
-
-    }
-
-    70% {
-
-        width: 700px;
-        height: 700px;
-
-        opacity: 0.65;
-
-    }
-
-    100% {
-
-        width: 1200px;
-        height: 1200px;
-
-        opacity: 0.15;
-
-    }
-
-}
-
-
-/* =========================================================
-   💡 SCREEN BECOMES BRIGHT
-   ========================================================= */
-
-#studyIntro.lamp-on {
-
-    animation:
-        lampScreenBright 2.2s ease forwards;
-
-}
-
-
-@keyframes lampScreenBright {
-
-    0% {
-
-        filter: brightness(1);
-
-    }
-
-    30% {
-
-        filter: brightness(1.12);
-
-    }
-
-    60% {
-
-        filter: brightness(1.35);
-
-    }
-
-    100% {
-
-        filter: brightness(1.65);
-
-    }
-
-}
-
-
-/* =========================================================
-   🌙 INTRO FADE OUT
-   ========================================================= */
-
-#studyIntro.hide-intro {
-
-    opacity: 0;
-
-    visibility: hidden;
-
-    pointer-events: none;
-
-    transition:
-        opacity 0.8s ease,
-        visibility 0.8s ease;
-
-}
-
-
-/* =========================================================
-   🏠 HOME PAGE
-   ========================================================= */
-
-#homePage {
-
-    position: relative;
-
-    z-index: 1;
-
-}
-
-    }
-
 }
