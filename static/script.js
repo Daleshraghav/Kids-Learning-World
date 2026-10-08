@@ -2152,20 +2152,58 @@ function openEasyWords() {
    📖 STORIES
    ========================================================= */
 
+```javascript
 function openStories() {
 
     const stories = [
         {
-            title: "🐰 The Little Rabbit",
-            text: "A little rabbit lived near a green forest. Every morning, it jumped happily in the grass."
+            title: "🐰 The Little Rabbit and the Magic Garden",
+            text: "Once upon a time, a little rabbit named Bunny lived near a beautiful green forest. One morning, Bunny found a tiny golden key under a big tree. He followed a trail of colorful flowers and discovered a secret garden. The garden was filled with butterflies, singing birds, and delicious carrots. But the garden had one rule: everyone had to share. Bunny invited his forest friends to the garden, and together they shared the fruits and vegetables. Bunny learned that happiness becomes bigger when we share it with our friends."
         },
+
         {
-            title: "🦁 The Kind Lion",
-            text: "A kind lion helped a small mouse. Later, the mouse helped the lion too."
+            title: "🦁 The Kind Lion and the Little Mouse",
+            text: "One sunny afternoon, a big lion was sleeping peacefully under a tree. A little mouse accidentally ran across his paw. The lion woke up and caught the mouse. The mouse was frightened and said, 'Please let me go. One day I may help you.' The lion laughed but decided to be kind and released him. A few days later, the lion became trapped in a hunter's net. He roared loudly for help. The little mouse heard him, came running, and quickly chewed through the ropes. The lion was free again. From that day, the lion and the mouse became the best of friends. They learned that even the smallest friend can do something big."
         },
+
         {
-            title: "🐦 The Little Bird",
-            text: "A little bird learned to fly. It was scared at first, but soon it flew high in the blue sky."
+            title: "🐦 The Little Bird Who Was Afraid to Fly",
+            text: "High in a tall green tree lived a little bird named Sunny. Sunny watched all the other birds flying through the blue sky, but she was afraid to leave her nest. Her mother gently told her, 'You don't have to be perfect on your first try. Just believe in yourself.' Sunny took a deep breath, opened her wings, and jumped. At first, she fell a little, but she quickly moved her wings and began to fly. She flew from one branch to another and then higher and higher. Sunny was so happy that she sang a beautiful song. She learned that being brave does not mean having no fear. It means trying even when you are afraid."
+        },
+
+        {
+            title: "🐘 Ellie the Elephant and the Lost Baby Deer",
+            text: "Ellie was a kind elephant who lived near a large forest lake. One morning, while drinking water, she heard a tiny cry. She looked around and found a baby deer who had lost his mother. The baby deer was scared and didn't know which way to go. Ellie promised to help him. She carefully walked through the forest, asking birds, monkeys, and rabbits if they had seen the deer's mother. Finally, a little bird showed Ellie the way to a quiet meadow. There they found the worried mother deer searching everywhere. The baby deer ran happily to his mother. Ellie smiled and said, 'Helping someone who is lost is always worth the journey.'"
+        },
+
+        {
+            title: "🐻 The Bear Who Loved Honey",
+            text: "There was once a young bear named Bruno who loved honey more than anything in the world. Every morning, he searched the forest for a beehive. One day, he found a huge beehive hanging from a tall tree. Bruno climbed the tree and took a big piece of honey. But instead of eating it alone, he remembered his friends. He invited a rabbit, a squirrel, and a little bird to share it with him. Everyone enjoyed the sweet honey together. The next day, Bruno found that the forest animals had brought him berries, apples, and nuts as a thank-you gift. Bruno realized that sharing brings more happiness than keeping everything for yourself."
+        },
+
+        {
+            title: "🐿️ Sammy Squirrel's Big Adventure",
+            text: "Sammy was a little squirrel who dreamed of exploring the forest. One morning, he packed three nuts in his tiny backpack and started his adventure. He crossed a small stream, climbed a tall hill, and discovered a beautiful waterfall. Near the waterfall, he found a colorful butterfly that seemed to be lost. Sammy followed the butterfly and discovered a hidden meadow full of flowers. Suddenly, dark clouds appeared in the sky and rain began to fall. Sammy quickly found a safe hollow tree and waited there. When the rain stopped, a rainbow appeared across the sky. Sammy returned home with a big smile and told everyone about his wonderful adventure."
+        },
+
+        {
+            title: "🐒 The Clever Monkey and the Mango Tree",
+            text: "Momo the monkey loved eating sweet mangoes. One summer morning, he found the biggest mango tree in the forest. The mangoes were delicious, but many of them were too high for Momo to reach. Instead of giving up, Momo thought carefully. He called his friends, the parrots and squirrels, and asked them to help. The parrots flew to the highest branches and dropped mangoes down, while the squirrels collected them safely. Momo then shared all the mangoes with his friends. Everyone had enough to eat. Momo learned that teamwork can solve problems that are difficult to solve alone."
+        },
+
+        {
+            title: "🐶 Max the Brave Little Puppy",
+            text: "Max was a small puppy who lived with a loving family near a quiet village. One evening, Max heard a strange sound coming from the garden. He was a little scared, but he decided to investigate. He slowly walked toward the bushes and discovered a tiny kitten stuck between two branches. The kitten was frightened and couldn't get out. Max barked loudly until his owner came outside. Together, they carefully rescued the kitten. The kitten was reunited with its mother, and Max became a hero in the neighborhood. Max learned that you don't have to be big or strong to be brave. Sometimes, being brave simply means helping someone who needs you."
+        },
+
+        {
+            title: "🦋 The Butterfly and the Beautiful Flower",
+            text: "A little butterfly named Bella lived in a colorful garden. Every day she flew from flower to flower, enjoying the warm sunshine. One morning, she noticed a small flower growing alone near a rock. The flower looked sad because no butterflies or bees visited it. Bella decided to visit the flower every day. She carried tiny grains of pollen from other flowers and helped the little flower grow. After several days, the flower became bright and beautiful. Other butterflies noticed it and began visiting too. Bella was happy because her small act of kindness had made the garden even more beautiful."
+        },
+
+        {
+            title: "🌈 The Rainbow Adventure",
+            text: "One morning, three friends named Leo the lion cub, Mimi the rabbit, and Coco the parrot decided to explore the forest. After a short rain shower, they saw a huge rainbow in the sky. They wondered where the rainbow ended, so they decided to follow it. They crossed a little bridge, walked through a field of flowers, and climbed a small hill. At the top, they discovered a sparkling pond surrounded by colorful flowers. There was no treasure made of gold, but there was something much better: a beautiful place where all the forest animals could play together. The three friends realized that the best treasure is not something we can keep. It is the wonderful memories we make with our friends."
         }
     ];
 
@@ -2229,6 +2267,7 @@ function speakStory(index) {
         }
     );
 }
+```
 
 
 /* =========================================================
