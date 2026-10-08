@@ -9850,3 +9850,66 @@ table tr:hover {
     }
 
 }
+
+/* =========================================================
+   📱 MOBILE PERFORMANCE MODE
+   Kids Learning World
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    /* Cards ko heavy animation se bachao */
+    .learning-card,
+    .hindi-card,
+    .adventure-card,
+    .learning-menu-card {
+
+        animation-delay: 0ms !important;
+
+        transition:
+            transform 0.15s ease,
+            opacity 0.15s ease !important;
+
+    }
+
+
+    /* Heavy hover effects mobile par unnecessary hain */
+    .learning-card:hover,
+    .hindi-card:hover,
+    .adventure-card:hover,
+    .learning-menu-card:hover {
+
+        transform: none !important;
+
+    }
+
+
+    /* Images/emojis ko continuously animate mat karo */
+    .learning-emoji,
+    .menu-icon,
+    .adventure-icon {
+
+        animation: none !important;
+
+    }
+
+
+    /* Smooth scrolling mobile par reduce */
+    html {
+
+        scroll-behavior: auto !important;
+
+    }
+
+
+    /* Shadows ko lightweight rakho */
+    .learning-card,
+    .hindi-card,
+    .adventure-card,
+    .learning-menu-card {
+
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.10) !important;
+
+    }
+
+}
