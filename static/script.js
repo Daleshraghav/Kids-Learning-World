@@ -1,3 +1,4 @@
+
 /* =========================================================
    🌈 KIDS LEARNING WORLD
    COMPLETE JAVASCRIPT
@@ -1171,108 +1172,6 @@ function handleHindiKey(event, card, index) {
         );
     }
 }
-
-<!-- =========================================================
-     🎁 LEARNING GIFT INTRO
-========================================================= -->
-
-<div id="giftIntro">
-
-    <div class="gift-night-sky">
-
-        <!-- STARS -->
-        <div class="gift-stars" aria-hidden="true">
-            <span>✦</span>
-            <span>✧</span>
-            <span>✦</span>
-            <span>·</span>
-            <span>✧</span>
-            <span>✦</span>
-            <span>·</span>
-            <span>✧</span>
-            <span>✦</span>
-            <span>·</span>
-            <span>✧</span>
-            <span>✦</span>
-        </div>
-
-        <!-- MOON -->
-        <div class="gift-moon" aria-hidden="true">
-            <div class="moon-crater crater-one"></div>
-            <div class="moon-crater crater-two"></div>
-            <div class="moon-crater crater-three"></div>
-            <div class="moon-crater crater-four"></div>
-            <div class="moon-crater crater-five"></div>
-        </div>
-
-        <div class="moon-glow" aria-hidden="true"></div>
-
-        <!-- GIFT AREA -->
-        <div id="giftBoxArea" class="gift-box-area">
-
-            <!-- YELLOW LIGHT -->
-            <div class="gift-yellow-glow" aria-hidden="true"></div>
-
-            <!-- PARTICLES -->
-            <div class="gift-light-particles" aria-hidden="true">
-                <span style="--x:-1; --y:-1;">✦</span>
-                <span style="--x:1; --y:-1;">✧</span>
-                <span style="--x:-1; --y:1;">•</span>
-                <span style="--x:1; --y:1;">✦</span>
-                <span style="--x:-2; --y:-1;">•</span>
-                <span style="--x:2; --y:-1;">✧</span>
-                <span style="--x:-2; --y:1;">✦</span>
-                <span style="--x:2; --y:1;">•</span>
-            </div>
-
-            <!-- BOOKS -->
-            <div class="gift-books" aria-hidden="true">
-                <div class="gift-book book-blue">📘</div>
-                <div class="gift-book book-red">📕</div>
-                <div class="gift-book book-green">📗</div>
-                <div class="gift-book book-yellow">📙</div>
-            </div>
-
-            <!-- GIFT BOX -->
-            <button
-                id="learningGiftBox"
-                class="luxury-gift-box"
-                type="button"
-                onclick="openLearningGift()"
-                aria-label="Open learning gift">
-
-                <span class="gift-box-inner-glow"></span>
-
-                <span class="gift-lid">
-                    <span class="gift-lid-ribbon"></span>
-
-                    <span class="gift-bow">
-                        <span class="bow-left"></span>
-                        <span class="bow-right"></span>
-                        <span class="bow-center"></span>
-                    </span>
-                </span>
-
-                <span class="gift-body">
-                    <span class="gift-ribbon-vertical"></span>
-                    <span class="gift-ribbon-horizontal"></span>
-                    <span class="gift-body-shine"></span>
-                </span>
-
-                <span class="gift-shadow"></span>
-
-            </button>
-
-            <!-- ONLY TEXT — NOT CLICKABLE -->
-            <div
-                class="gift-message"
-                id="giftMessage">
-                🎁 Open your learning gift
-            </div>
-
-        </div>
-    </div>
-</div>
 
 /* =========================================================
    🎁 LEARNING GIFT INTRO
