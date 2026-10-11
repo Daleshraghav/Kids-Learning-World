@@ -3008,6 +3008,7 @@ function openNumbers() {
 
 
 
+
 /* =========================================================
    👑 LUXURY ADDITION PRACTICE — 50 QUESTIONS
    Questions only • No game mechanics
@@ -3238,6 +3239,7 @@ function showAdditionResults() {
         "🏆",
         "Addition Practice Complete",
         "You solved all 50 questions!",
+        `
         <section class="addition-luxury addition-results">
             <div class="addition-crown">🏆</div>
             <h2>Well Done!</h2>
@@ -3256,8 +3258,10 @@ function showAdditionResults() {
                 Practise Again 🔄
             </button>
         </section>
+        `
     );
 }
+
 
 /* =========================================================
    ➖ SUBTRACTION
