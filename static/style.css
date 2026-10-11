@@ -13654,3 +13654,48 @@ body {
         transition: none !important;
     }
 }
+
+
+
+/* ==========================================
+   👑 SUBTRACTION LUXURY STYLING
+   Reuses the existing Addition luxury styles
+========================================== */
+
+.subtraction-luxury .subtraction-minus {
+    color: #ffb7cf;
+    text-shadow: 0 0 20px rgba(255, 143, 184, .45);
+    animation: subtractionMinusGlow 2s ease-in-out infinite;
+}
+
+.subtraction-luxury .addition-question-card {
+    border-color: rgba(255, 183, 207, .75);
+    background:
+        radial-gradient(circle at top, rgba(255, 255, 255, .09), transparent 65%),
+        linear-gradient(135deg, #35224f, #18384c);
+}
+
+.subtraction-luxury .addition-progress-fill {
+    background: linear-gradient(90deg, #d6a4ff, #ff9fc5, #ffdc85);
+}
+
+.subtraction-luxury .addition-next-button {
+    background: linear-gradient(100deg, #dca0ff, #ffd0e3, #ffcf85);
+}
+
+@keyframes subtractionMinusGlow {
+    0%, 100% {
+        transform: scale(1);
+        text-shadow: 0 0 8px rgba(255, 143, 184, .25);
+    }
+    50% {
+        transform: scale(1.12);
+        text-shadow: 0 0 22px rgba(255, 143, 184, .7);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .subtraction-luxury .subtraction-minus {
+        animation: none !important;
+    }
+}
