@@ -4264,7 +4264,7 @@ function openNumberNames() {
 
 /* =====================================================
    ASCENDING ORDER — KIDS LEARNING WORLD
-   20 QUESTIONS | RANDOM NUMBERS | CIRCULAR ANSWERS
+   20 QUESTIONS | AUTO CHECK | EDITABLE ANSWERS
    ===================================================== */
 
 let ascendingState = {
@@ -4276,7 +4276,8 @@ let ascendingState = {
     locked: false
 };
 
-/* Fresh session whenever the activity opens */
+
+/* OPEN ACTIVITY */
 function openAscendingOrder() {
     ascendingState = {
         question: 0,
@@ -4310,7 +4311,7 @@ function openAscendingOrder() {
             </div>
 
             <h3 class="ascending-instruction">
-                ✨ Tap numbers in the correct order ✨
+                ✨ Tap numbers from smallest to largest ✨
             </h3>
 
             <div id="ascendingNumbers"
@@ -4328,6 +4329,7 @@ function openAscendingOrder() {
             <button id="ascendingReset"
                     class="ascending-reset"
                     style="display:none"
+                    type="button"
                     onclick="resetAscendingAnswer()">
                 ↻ Try Again
             </button>
@@ -4335,6 +4337,7 @@ function openAscendingOrder() {
             <button id="ascendingNext"
                     class="ascending-next"
                     style="display:none"
+                    type="button"
                     onclick="nextAscendingQuestion()">
                 Next Question →
             </button>
@@ -4347,12 +4350,12 @@ function openAscendingOrder() {
 }
 
 
-/* Generate new, non-repeating number combinations */
+/* GENERATE RANDOM, NON-REPEATING QUESTIONS */
 function createAscendingNumbers(index) {
     const count = Math.random() < 0.5 ? 5 : 6;
 
-    // Gradually increase difficulty
-    let min, max;
+    let min;
+    let max;
 
     if (index < 5) {
         min = 1;
@@ -4379,7 +4382,6 @@ function createAscendingNumbers(index) {
 
         numbers = [...numberSet];
 
-        // Track the combination regardless of its displayed order
         key = [...numbers]
             .sort((a, b) => a - b)
             .join(",");
@@ -4388,7 +4390,7 @@ function createAscendingNumbers(index) {
 
     ascendingState.usedQuestions.add(key);
 
-    // Randomize the displayed order
+    // Shuffle the displayed numbers
     for (let i = numbers.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [numbers[i], numbers[j]] = [numbers[j], numbers[i]];
@@ -4398,7 +4400,7 @@ function createAscendingNumbers(index) {
 }
 
 
-/* Display one question */
+/* RENDER CURRENT QUESTION */
 function renderAscendingQuestion() {
     const numbersBox = document.getElementById("ascendingNumbers");
     const answersBox = document.getElementById("ascendingAnswers");
@@ -4423,7 +4425,7 @@ function renderAscendingQuestion() {
         ascendingState.score;
 
     document.getElementById("ascendingProgressFill").style.width =
-        `${ascendingState.question / 20 * 100}%`;
+        `${(ascendingState.question / 20) * 100}%`;
 
     document.getElementById("ascendingFeedback").textContent = "";
     document.getElementById("ascendingReset").style.display = "none";
@@ -4432,8 +4434,7 @@ function renderAscendingQuestion() {
     numbersBox.innerHTML = "";
     answersBox.innerHTML = "";
 
-    // Create circular number buttons
-    ascendingState.numbers.forEach((number) => {
+    ascendingState.numbers.forEach(number => {
         const button = document.createElement("button");
 
         button.type = "button";
@@ -4441,104 +4442,227 @@ function renderAscendingQuestion() {
         button.textContent = String(number).padStart(2, "0");
         button.setAttribute("aria-label", `Choose ${number}`);
 
-        button.onclick = () => {
-            selectAscendingNumber(number, button);
-        };
+        button.onclick = () => selectAscendingNumber(number);
 
         numbersBox.appendChild(button);
     });
 
-    // Empty answer circles; answers are never shown in advance
     ascendingState.numbers.forEach(() => {
-        const slot = document.createElement("div");
+        const slot = document.createElement("button");
 
+        slot.type = "button";
         slot.className = "ascending-answer-circle";
+        slot.textContent = "";
         slot.setAttribute("aria-label", "Empty answer slot");
+        slot.title = "Choose a number above first";
+        slot.onclick = null;
 
         answersBox.appendChild(slot);
     });
+
+    renderAscendingAnswers();
 }
 
 
-/* Move the clicked number into the next answer circle */
-function selectAscendingNumber(number, button) {
-    if (ascendingState.locked || button.disabled) return;
+/* SELECT A NUMBER */
+function selectAscendingNumber(number) {
+    if (ascendingState.locked) return;
+
+    if (ascendingState.selected.includes(number)) return;
+
+    if (ascendingState.selected.length >= ascendingState.numbers.length) {
+        return;
+    }
 
     ascendingState.selected.push(number);
 
-    button.disabled = true;
-    button.classList.add("ascending-picked");
+    renderAscendingAnswers();
 
+    // Check automatically as soon as every slot is filled
+    if (ascendingState.selected.length === ascendingState.numbers.length) {
+        checkAscendingAnswer();
+    }
+}
+
+
+/* DRAW ANSWERS AND KEEP FILLED SLOTS EDITABLE */
+function renderAscendingAnswers() {
     const slots = document.querySelectorAll(
         "#ascendingAnswers .ascending-answer-circle"
     );
 
-    const slot = slots[ascendingState.selected.length - 1];
+    const numberButtons = document.querySelectorAll(
+        "#ascendingNumbers .ascending-number-circle"
+    );
 
-    if (slot) {
-        slot.textContent = String(number).padStart(2, "0");
-        slot.classList.add("ascending-filled");
-        slot.setAttribute("aria-label", `Selected ${number}`);
+    numberButtons.forEach(button => {
+        const value = Number(button.textContent);
 
-        // Click the answer circle to remove that number
-        slot.style.cursor = "pointer";
-        slot.title = "Tap to remove this number";
+        const isSelected = ascendingState.selected.includes(value);
 
-        slot.onclick = () => {
-            if (ascendingState.locked) return;
+        button.disabled = isSelected || ascendingState.locked;
+        button.classList.toggle("ascending-picked", isSelected);
+    });
 
-            const index = ascendingState.selected.indexOf(number);
+    slots.forEach((slot, index) => {
+        const value = ascendingState.selected[index];
+        const filled = value !== undefined;
 
-            if (index === -1) return;
+        slot.textContent = filled
+            ? String(value).padStart(2, "0")
+            : "";
 
-            // Remove the selected number
-            ascendingState.selected.splice(index, 1);
+        slot.classList.toggle("ascending-filled", filled);
+        slot.classList.remove("ascending-correct-slot");
 
-            // Enable the original question number again
-            const buttons = document.querySelectorAll(
-                "#ascendingNumbers .ascending-number-circle"
-            );
+        slot.setAttribute(
+            "aria-label",
+            filled ? `Remove ${value} from answer` : "Empty answer slot"
+        );
 
-            buttons.forEach(questionButton => {
-                if (
-                    questionButton.textContent ===
-                    String(number).padStart(2, "0")
-                ) {
-                    questionButton.disabled = false;
-                    questionButton.classList.remove("ascending-picked");
+        slot.style.cursor = filled && !ascendingState.locked
+            ? "pointer"
+            : "default";
+
+        slot.title = filled && !ascendingState.locked
+            ? "Click to remove this number"
+            : "";
+
+        // Always attach the correct current slot handler
+        slot.onclick = filled && !ascendingState.locked
+            ? () => removeAscendingNumber(index)
+            : null;
+    });
+}
+
+
+/* REMOVE A NUMBER FROM AN ANSWER SLOT */
+function removeAscendingNumber(index) {
+    if (ascendingState.locked) return;
+
+    if (index < 0 || index >= ascendingState.selected.length) return;
+
+    ascendingState.selected.splice(index, 1);
+
+    document.getElementById("ascendingFeedback").textContent = "";
+    document.getElementById("ascendingReset").style.display = "none";
+    document.getElementById("ascendingNext").style.display = "none";
+
+    renderAscendingAnswers();
+}
+
+
+/* CHECK ANSWER AUTOMATICALLY */
+function checkAscendingAnswer() {
+    if (ascendingState.locked) return;
+
+    const feedback = document.getElementById("ascendingFeedback");
+    const resetButton = document.getElementById("ascendingReset");
+    const nextButton = document.getElementById("ascendingNext");
+
+    if (!feedback || !resetButton || !nextButton) return;
+
+    if (ascendingState.selected.length !== ascendingState.numbers.length) {
+        return;
+    }
+
+    const correctOrder = [...ascendingState.numbers].sort(
+        (a, b) => a - b
+    );
+
+    const isCorrect = ascendingState.selected.every(
+        (number, index) => number === correctOrder[index]
+    );
+
+    if (isCorrect) {
+        ascendingState.locked = true;
+        ascendingState.score++;
+
+        feedback.textContent = "🎉 Correct! Excellent work!";
+        feedback.style.color = "#16803c";
+
+        document.getElementById("ascendingScore").textContent =
+            ascendingState.score;
+
+        document.getElementById("ascendingProgressFill").style.width =
+            `${((ascendingState.question + 1) / 20) * 100}%`;
+
+        resetButton.style.display = "none";
+        nextButton.style.display = "inline-block";
+
+        renderAscendingAnswers();
+
+    } else {
+        feedback.textContent =
+            "❌ Not quite! Remove a number by clicking its answer circle, or tap Try Again.";
+
+        feedback.style.color = "#d62828";
+
+        resetButton.style.display = "inline-block";
+        nextButton.style.display = "none";
+    }
+}
+
+
+/* CLEAR CURRENT ANSWER */
+function resetAscendingAnswer() {
+    if (ascendingState.locked) return;
+
+    ascendingState.selected = [];
+
+    document.getElementById("ascendingFeedback").textContent = "";
+    document.getElementById("ascendingReset").style.display = "none";
+    document.getElementById("ascendingNext").style.display = "none";
+
+    renderAscendingAnswers();
+}
+
+
+/* NEXT QUESTION */
+function nextAscendingQuestion() {
+    if (!ascendingState.locked) return;
+
+    ascendingState.question++;
+
+    if (ascendingState.question >= 20) {
+        showAscendingResults();
+        return;
+    }
+
+    renderAscendingQuestion();
+}
+
+
+/* FINAL RESULTS */
+function showAscendingResults() {
+    const container = document.querySelector(".ascending-luxury");
+
+    if (!container) return;
+
+    container.innerHTML = `
+        <div class="ascending-top">
+            <span>🏆 MATHS WORLD 🏆</span>
+            <h2>Activity Completed!</h2>
+            <p>You completed all 20 questions!</p>
+        </div>
+
+        <div class="ascending-final-score">
+            <h2>⭐ Your Score: ${ascendingState.score} / 20</h2>
+            <p>
+                ${
+                    ascendingState.score === 20
+                        ? "Perfect score! Amazing! 🌟"
+                        : "Well done! Keep practising! 🎉"
                 }
-            });
+            </p>
+        </div>
 
-            // Rebuild answer slots in their current order
-            const currentSlots = document.querySelectorAll(
-                "#ascendingAnswers .ascending-answer-circle"
-            );
-
-            currentSlots.forEach((answerSlot, i) => {
-                answerSlot.textContent = ascendingState.selected[i] !== undefined
-                    ? String(ascendingState.selected[i]).padStart(2, "0")
-                    : "";
-
-                answerSlot.classList.toggle(
-                    "ascending-filled",
-                    ascendingState.selected[i] !== undefined
-                );
-
-                answerSlot.classList.remove("ascending-correct-slot");
-                answerSlot.onclick = null;
-                answerSlot.style.cursor = "default";
-                answerSlot.title = "";
-            });
-
-            document.getElementById("ascendingFeedback").textContent = "";
-            document.getElementById("ascendingReset").style.display = "none";
-        };
-    }
-
-    // Check only when all numbers have been selected
-    if (ascendingState.selected.length === ascendingState.numbers.length) {
-        checkAscendingAnswer();
-    }
+        <button type="button"
+                class="ascending-next"
+                onclick="openAscendingOrder()">
+            ↻ Play Again
+        </button>
+    `;
 }
 
 
