@@ -4666,485 +4666,676 @@ function showAscendingResults() {
 }
 
 
-/* =========================================================
-   ✨ SHAPES STUDIO — LUXURY 2D + INTERACTIVE 3D
-   Replaces the existing openShapes() function
-   ========================================================= */
+
+/* =====================================================
+   LUXURY SHAPES STUDIO
+   12 TWO-DIMENSIONAL + 9 THREE-DIMENSIONAL SHAPES
+   ===================================================== */
 
 const SHAPES_STUDIO_DATA = [
-    // 2D SHAPES
-    {
-        id: "circle", name: "Circle", type: "2D",
-        description: "A round, flat shape. Every point on its boundary is equally far from its centre.",
-        properties: "1 curved boundary, 0 corners, 0 straight sides",
-        formulas: [
-            ["Area", "A = πr²"],
-            ["Circumference", "C = 2πr"],
-            ["Diameter", "d = 2r"]
-        ],
-        example: "Coin, clock, wheel",
-        svg: `<circle cx="100" cy="100" r="66" fill="url(#shapeFill)" stroke="#4777d4" stroke-width="4"/>`
-    },
-    {
-        id: "triangle", name: "Triangle", type: "2D",
-        description: "A polygon with three straight sides and three vertices.",
-        properties: "3 sides, 3 vertices, interior angles total 180°",
-        formulas: [
-            ["Area", "A = ½ × base × height"],
-            ["Perimeter", "P = a + b + c"]
-        ],
-        example: "Warning signs, roof shapes",
-        svg: `<polygon points="100,25 24,170 176,170" fill="url(#shapeFill)" stroke="#4777d4" stroke-width="4" stroke-linejoin="round"/>`
-    },
-    {
-        id: "square", name: "Square", type: "2D",
-        description: "A quadrilateral with four equal sides and four right angles.",
-        properties: "4 equal sides, 4 vertices, 4 right angles",
-        formulas: [
-            ["Area", "A = side²"],
-            ["Perimeter", "P = 4 × side"],
-            ["Diagonal", "d = side × √2"]
-        ],
-        example: "Chessboard tile, floor tile",
-        svg: `<rect x="37" y="37" width="126" height="126" rx="3" fill="url(#shapeFill)" stroke="#4777d4" stroke-width="4"/>`
-    },
-    {
-        id: "rectangle", name: "Rectangle", type: "2D",
-        description: "A quadrilateral with four right angles and opposite sides equal.",
-        properties: "4 sides, 4 vertices, 4 right angles",
-        formulas: [
-            ["Area", "A = length × width"],
-            ["Perimeter", "P = 2(length + width)"],
-            ["Diagonal", "d = √(length² + width²)"]
-        ],
-        example: "Book, door, phone screen",
-        svg: `<rect x="20" y="52" width="160" height="96" rx="3" fill="url(#shapeFill)" stroke="#4777d4" stroke-width="4"/>`
-    },
-    {
-        id: "oval", name: "Oval / Ellipse", type: "2D",
-        description: "A smooth, closed curve shaped like a stretched circle.",
-        properties: "0 vertices, 0 straight sides, 1 curved boundary",
-        formulas: [
-            ["Area", "A = πab"],
-            ["Approx. perimeter", "P ≈ π[3(a+b) − √((3a+b)(a+3b))]"]
-        ],
-        example: "Egg outline, oval mirror",
-        svg: `<ellipse cx="100" cy="100" rx="77" ry="52" fill="url(#shapeFill)" stroke="#4777d4" stroke-width="4"/>`
-    },
-    {
-        id: "pentagon", name: "Pentagon", type: "2D",
-        description: "A polygon with five sides. This diagram shows a regular pentagon.",
-        properties: "5 sides, 5 vertices",
-        formulas: [
-            ["Perimeter", "P = sum of all 5 sides"],
-            ["Regular pentagon area", "A = ¼√(5(5+2√5)) × side²"]
-        ],
-        example: "Some badges and building designs",
-        svg: `<polygon points="100,23 173,76 145,163 55,163 27,76" fill="url(#shapeFill)" stroke="#4777d4" stroke-width="4" stroke-linejoin="round"/>`
-    },
-    {
-        id: "hexagon", name: "Hexagon", type: "2D",
-        description: "A polygon with six sides. This diagram shows a regular hexagon.",
-        properties: "6 sides, 6 vertices",
-        formulas: [
-            ["Perimeter", "P = 6 × side"],
-            ["Regular hexagon area", "A = (3√3 / 2) × side²"]
-        ],
-        example: "Honeycomb cells, hexagonal tiles",
-        svg: `<polygon points="55,30 145,30 190,100 145,170 55,170 10,100" fill="url(#shapeFill)" stroke="#4777d4" stroke-width="4" stroke-linejoin="round"/>`
-    },
-    {
-        id: "octagon", name: "Octagon", type: "2D",
-        description: "A polygon with eight sides. This diagram shows a regular octagon.",
-        properties: "8 sides, 8 vertices",
-        formulas: [
-            ["Perimeter", "P = 8 × side"],
-            ["Regular octagon area", "A = 2(1 + √2) × side²"]
-        ],
-        example: "Stop signs",
-        svg: `<polygon points="72,20 128,20 180,72 180,128 128,180 72,180 20,128 20,72" fill="url(#shapeFill)" stroke="#4777d4" stroke-width="4" stroke-linejoin="round"/>`
-    },
-    {
-        id: "rhombus", name: "Rhombus", type: "2D",
-        description: "A quadrilateral with all four sides equal; opposite angles are equal.",
-        properties: "4 equal sides, 4 vertices",
-        formulas: [
-            ["Area", "A = base × height"],
-            ["Area using diagonals", "A = ½ × d₁ × d₂"],
-            ["Perimeter", "P = 4 × side"]
-        ],
-        example: "Diamond-shaped patterns",
-        svg: `<polygon points="100,22 174,100 100,178 26,100" fill="url(#shapeFill)" stroke="#4777d4" stroke-width="4" stroke-linejoin="round"/>`
-    },
-    {
-        id: "parallelogram", name: "Parallelogram", type: "2D",
-        description: "A quadrilateral whose opposite sides are parallel and equal.",
-        properties: "4 sides, opposite sides parallel",
-        formulas: [
-            ["Area", "A = base × perpendicular height"],
-            ["Perimeter", "P = 2(a + b)"]
-        ],
-        example: "Slanted tile patterns",
-        svg: `<polygon points="58,40 180,40 142,160 20,160" fill="url(#shapeFill)" stroke="#4777d4" stroke-width="4" stroke-linejoin="round"/>`
-    },
-    {
-        id: "trapezium", name: "Trapezium", type: "2D",
-        description: "A quadrilateral with one pair of parallel sides (in the usual UK/Indian definition).",
-        properties: "4 sides, one pair of parallel sides",
-        formulas: [
-            ["Area", "A = ½ × (a + b) × height"],
-            ["Perimeter", "P = sum of all sides"]
-        ],
-        example: "Some bridge supports and table bases",
-        svg: `<polygon points="48,48 152,48 183,157 17,157" fill="url(#shapeFill)" stroke="#4777d4" stroke-width="4" stroke-linejoin="round"/>`
-    },
-    {
-        id: "semicircle", name: "Semicircle", type: "2D",
-        description: "Half of a circle, formed by a diameter and a curved arc.",
-        properties: "1 straight diameter, 1 curved arc, 2 boundary endpoints",
-        formulas: [
-            ["Area", "A = ½πr²"],
-            ["Perimeter", "P = πr + 2r"]
-        ],
-        example: "Arched windows, half-circle designs",
-        svg: `<path d="M 25 110 A 75 75 0 0 1 175 110 L 25 110 Z" fill="url(#shapeFill)" stroke="#4777d4" stroke-width="4"/>`
-    },
-
-    // 3D SHAPES
-    {
-        id: "cube", name: "Cube", type: "3D",
-        description: "A solid with six equal square faces.",
-        properties: "6 faces, 12 edges, 8 vertices",
-        formulas: [
-            ["Volume", "V = a³"],
-            ["Total surface area", "TSA = 6a²"],
-            ["Lateral surface area", "LSA = 4a²"],
-            ["Space diagonal", "d = a√3"]
-        ],
-        example: "Dice, Rubik's Cube, ice cube",
-        svg: `<polygon points="55,55 125,25 175,55 105,85" fill="#b9d8ff" stroke="#3568bb" stroke-width="3"/><polygon points="55,55 105,85 105,165 55,135" fill="#5796e8" stroke="#3568bb" stroke-width="3"/><polygon points="105,85 175,55 175,135 105,165" fill="#3471c8" stroke="#244f95" stroke-width="3"/>`
-    },
-    {
-        id: "cuboid", name: "Cuboid", type: "3D",
-        description: "A box-shaped solid with six rectangular faces.",
-        properties: "6 faces, 12 edges, 8 vertices",
-        formulas: [
-            ["Volume", "V = l × w × h"],
-            ["Total surface area", "TSA = 2(lw + lh + wh)"],
-            ["Lateral surface area", "LSA = 2h(l + w)"],
-            ["Space diagonal", "d = √(l² + w² + h²)"]
-        ],
-        example: "Book, brick, parcel box",
-        svg: `<polygon points="35,62 115,32 177,57 97,88" fill="#c4e7ff" stroke="#3568bb" stroke-width="3"/><polygon points="35,62 97,88 97,158 35,132" fill="#70b3ed" stroke="#3568bb" stroke-width="3"/><polygon points="97,88 177,57 177,127 97,158" fill="#3471c8" stroke="#244f95" stroke-width="3"/>`
-    },
-    {
-        id: "sphere", name: "Sphere", type: "3D",
-        description: "A perfectly round solid; every point on its surface is the same distance from the centre.",
-        properties: "1 curved surface, 0 edges, 0 vertices",
-        formulas: [
-            ["Volume", "V = ⁴⁄₃πr³"],
-            ["Surface area", "SA = 4πr²"]
-        ],
-        example: "Ball, globe, marble",
-        svg: `<circle cx="100" cy="100" r="70" fill="url(#sphereFill)" stroke="#3568bb" stroke-width="2"/><ellipse cx="77" cy="72" rx="28" ry="17" fill="#ffffff" opacity=".36" transform="rotate(-30 77 72)"/>`
-    },
-    {
-        id: "cylinder", name: "Cylinder", type: "3D",
-        description: "A solid with two equal, parallel circular bases and one curved surface.",
-        properties: "2 circular flat faces, 1 curved surface, 2 curved edges, 0 vertices",
-        formulas: [
-            ["Volume", "V = πr²h"],
-            ["Curved surface area", "CSA = 2πrh"],
-            ["Total surface area", "TSA = 2πr(h + r)"]
-        ],
-        example: "Tin can, pipe, candle",
-        svg: `<path d="M 35 50 A 65 20 0 0 1 165 50 L 165 150 A 65 20 0 0 1 35 150 Z" fill="#4e8fe0" stroke="#2e63ac" stroke-width="3"/><ellipse cx="100" cy="50" rx="65" ry="20" fill="#c5e4ff" stroke="#2e63ac" stroke-width="3"/><path d="M35 150 A65 20 0 0 0 165 150" fill="none" stroke="#2e63ac" stroke-width="3"/>`
-    },
-    {
-        id: "cone", name: "Cone", type: "3D",
-        description: "A solid with one circular base that narrows to a single vertex.",
-        properties: "1 circular base, 1 curved surface, 1 circular edge, 1 vertex",
-        formulas: [
-            ["Volume", "V = ⅓πr²h"],
-            ["Slant height", "l = √(r² + h²)"],
-            ["Curved surface area", "CSA = πrl"],
-            ["Total surface area", "TSA = πr(l + r)"]
-        ],
-        example: "Ice-cream cone, party hat",
-        svg: `<path d="M100 22 L30 155 A70 22 0 0 0 170 155 Z" fill="#69a6f3" stroke="#2e63ac" stroke-width="3"/><ellipse cx="100" cy="155" rx="70" ry="22" fill="#c5e4ff" stroke="#2e63ac" stroke-width="3"/><path d="M100 22 L100 155" stroke="#ffffff" stroke-width="2" stroke-dasharray="5 5" opacity=".7"/>`
-    },
-    {
-        id: "pyramid", name: "Square Pyramid", type: "3D",
-        description: "A solid with a square base and four triangular side faces meeting at one apex.",
-        properties: "5 faces, 8 edges, 5 vertices",
-        formulas: [
-            ["Volume", "V = ⅓ × base area × height"],
-            ["Square-base volume", "V = ⅓a²h"],
-            ["Total surface area", "TSA = base area + 4 triangular face areas"]
-        ],
-        example: "Egyptian pyramids, pyramid models",
-        svg: `<polygon points="100,22 28,143 100,170" fill="#8fc2ff" stroke="#3568bb" stroke-width="3"/><polygon points="100,22 100,170 172,143" fill="#4f91df" stroke="#3568bb" stroke-width="3"/><polygon points="100,22 28,143 100,115" fill="#c8e5ff" stroke="#3568bb" stroke-width="3"/><polygon points="100,22 100,115 172,143" fill="#3471c8" stroke="#244f95" stroke-width="3"/><polygon points="28,143 100,115 172,143 100,170" fill="#75aeea" stroke="#3568bb" stroke-width="3"/>`
-    },
-    {
-        id: "prism", name: "Triangular Prism", type: "3D",
-        description: "A solid with two matching, parallel triangular ends connected by rectangular faces.",
-        properties: "5 faces, 9 edges, 6 vertices",
-        formulas: [
-            ["Volume", "V = triangle base area × prism length"],
-            ["Surface area", "SA = 2 × triangle area + length × triangle perimeter"]
-        ],
-        example: "Tent shape, triangular chocolate box",
-        svg: `<polygon points="35,65 75,25 115,65" fill="#c5e4ff" stroke="#3568bb" stroke-width="3"/><polygon points="95,125 135,85 175,125" fill="#c5e4ff" stroke="#3568bb" stroke-width="3"/><polygon points="35,65 75,25 135,85 95,125" fill="#5796e8" stroke="#3568bb" stroke-width="3"/><polygon points="75,25 115,65 175,125 135,85" fill="#3471c8" stroke="#244f95" stroke-width="3"/><polygon points="35,65 115,65 175,125 95,125" fill="#8fc2ff" stroke="#3568bb" stroke-width="3"/>`
-    },
-    {
-        id: "hemisphere", name: "Hemisphere", type: "3D",
-        description: "Half of a sphere, with one flat circular base and one curved surface.",
-        properties: "1 circular face, 1 curved surface, 1 circular edge",
-        formulas: [
-            ["Volume", "V = ⅔πr³"],
-            ["Curved surface area", "CSA = 2πr²"],
-            ["Total surface area", "TSA = 3πr²"]
-        ],
-        example: "Bowl, dome",
-        svg: `<path d="M30 105 A70 65 0 0 1 170 105 Z" fill="url(#sphereFill)" stroke="#3568bb" stroke-width="3"/><ellipse cx="100" cy="105" rx="70" ry="20" fill="#c5e4ff" stroke="#3568bb" stroke-width="3"/>`
-    },
-    {
-        id: "torus", name: "Torus", type: "3D",
-        description: "A ring-shaped solid, similar to a doughnut.",
-        properties: "1 continuous curved surface; no flat faces, edges or vertices",
-        formulas: [
-            ["Volume", "V = 2π²Rr²"],
-            ["Surface area", "SA = 4π²Rr"]
-        ],
-        example: "Doughnut, ring-shaped float",
-        svg: `<ellipse cx="100" cy="100" rx="75" ry="55" fill="#3676c9" stroke="#244f95" stroke-width="3"/><ellipse cx="100" cy="100" rx="34" ry="22" fill="#f4f7ff" stroke="#244f95" stroke-width="3"/><path d="M25 100 C45 25 155 25 175 100" fill="none" stroke="#a9d8ff" stroke-width="8" opacity=".75"/>`
-    }
+  {
+    id:"circle", name:"Circle", hi:"वृत्त", type:"2D",
+    example:"Clock / घड़ी",
+    description:"A round, flat shape. Every point on its boundary is equally distant from the centre.",
+    descHi:"एक समतल गोल आकृति, जिसकी सीमा का हर बिंदु केंद्र से समान दूरी पर होता है।",
+    formulas:[
+      ["Area / क्षेत्रफल","πr²"],
+      ["Circumference / परिधि","2πr"],
+      ["Diameter / व्यास","2r"]
+    ],
+    properties:["1 curved boundary / 1 वक्र सीमा","No vertices / कोई शीर्ष नहीं"],
+    symbols:"r = radius / त्रिज्या; π ≈ 3.14159",
+    sides:0, geometry:"circle"
+  },
+  {
+    id:"triangle", name:"Triangle", hi:"त्रिभुज", type:"2D",
+    example:"Road sign / सड़क का संकेत",
+    description:"A polygon with three sides and three angles.",
+    descHi:"तीन भुजाओं और तीन कोणों वाली बहुभुज आकृति।",
+    formulas:[
+      ["Area / क्षेत्रफल","½ × base × height"],
+      ["Perimeter / परिमाप","a + b + c"],
+      ["Angle sum / कोणों का योग","180°"]
+    ],
+    properties:["3 sides / 3 भुजाएँ","3 vertices / 3 शीर्ष"],
+    symbols:"a,b,c = sides / भुजाएँ; h = height / ऊँचाई",
+    sides:3, geometry:"triangle"
+  },
+  {
+    id:"square", name:"Square", hi:"वर्ग", type:"2D",
+    example:"Chessboard tile / शतरंज का खाना",
+    description:"A quadrilateral with four equal sides and four right angles.",
+    descHi:"चार समान भुजाओं और चार समकोणों वाली आकृति।",
+    formulas:[
+      ["Area / क्षेत्रफल","a²"],
+      ["Perimeter / परिमाप","4a"],
+      ["Diagonal / विकर्ण","a√2"]
+    ],
+    properties:["4 equal sides / 4 समान भुजाएँ","4 right angles / 4 समकोण"],
+    symbols:"a = side / भुजा",
+    sides:4, geometry:"square"
+  },
+  {
+    id:"rectangle", name:"Rectangle", hi:"आयत", type:"2D",
+    example:"Book / किताब",
+    description:"A quadrilateral with opposite sides equal and four right angles.",
+    descHi:"विपरीत भुजाओं के समान और चार समकोण वाली आकृति।",
+    formulas:[
+      ["Area / क्षेत्रफल","l × w"],
+      ["Perimeter / परिमाप","2(l + w)"],
+      ["Diagonal / विकर्ण","√(l² + w²)"]
+    ],
+    properties:["4 sides / 4 भुजाएँ","4 right angles / 4 समकोण"],
+    symbols:"l = length / लंबाई; w = width / चौड़ाई",
+    sides:4, geometry:"rectangle"
+  },
+  {
+    id:"oval", name:"Oval / Ellipse", hi:"अंडाकार", type:"2D",
+    example:"Egg / अंडा",
+    description:"An oval-like closed curve. An ellipse has two axes of different lengths.",
+    descHi:"एक बंद अंडाकार वक्र। दीर्घवृत्त की दो अक्षों की लंबाइयाँ अलग हो सकती हैं।",
+    formulas:[
+      ["Area / क्षेत्रफल","πab"],
+      ["Approx. perimeter / लगभग परिधि","π[3(a+b) − √((3a+b)(a+3b))]"]
+    ],
+    properties:["Curved boundary / वक्र सीमा","No corners / कोई कोना नहीं"],
+    symbols:"a,b = semi-axes / अर्ध-अक्ष",
+    sides:0, geometry:"oval"
+  },
+  {
+    id:"pentagon", name:"Pentagon", hi:"पंचभुज", type:"2D",
+    example:"Five-sided badge / पाँच भुजाओं का बैज",
+    description:"A polygon with five sides.",
+    descHi:"पाँच भुजाओं वाली बहुभुज आकृति।",
+    formulas:[
+      ["Interior angle sum / आंतरिक कोणों का योग","540°"],
+      ["Regular area / नियमित क्षेत्रफल","¼√(5(5+2√5))a²"],
+      ["Regular perimeter / परिमाप","5a"]
+    ],
+    properties:["5 sides / 5 भुजाएँ","5 vertices / 5 शीर्ष"],
+    symbols:"a = side / भुजा; regular pentagon formulas assume equal sides",
+    sides:5, geometry:"polygon5"
+  },
+  {
+    id:"hexagon", name:"Hexagon", hi:"षट्भुज", type:"2D",
+    example:"Honeycomb / मधुमक्खी का छत्ता",
+    description:"A polygon with six sides.",
+    descHi:"छह भुजाओं वाली बहुभुज आकृति।",
+    formulas:[
+      ["Interior angle sum / कोणों का योग","720°"],
+      ["Regular area / क्षेत्रफल","(3√3/2)a²"],
+      ["Regular perimeter / परिमाप","6a"]
+    ],
+    properties:["6 sides / 6 भुजाएँ","6 vertices / 6 शीर्ष"],
+    symbols:"a = side / भुजा; regular hexagon / नियमित षट्भुज",
+    sides:6, geometry:"polygon6"
+  },
+  {
+    id:"octagon", name:"Octagon", hi:"अष्टभुज", type:"2D",
+    example:"Stop sign / स्टॉप संकेत",
+    description:"A polygon with eight sides.",
+    descHi:"आठ भुजाओं वाली बहुभुज आकृति।",
+    formulas:[
+      ["Interior angle sum / कोणों का योग","1080°"],
+      ["Regular area / क्षेत्रफल","2(1+√2)a²"],
+      ["Regular perimeter / परिमाप","8a"]
+    ],
+    properties:["8 sides / 8 भुजाएँ","8 vertices / 8 शीर्ष"],
+    symbols:"a = side / भुजा; regular octagon / नियमित अष्टभुज",
+    sides:8, geometry:"polygon8"
+  },
+  {
+    id:"rhombus", name:"Rhombus", hi:"समचतुर्भुज", type:"2D",
+    example:"Diamond-shaped sign / हीरे जैसा संकेत",
+    description:"A quadrilateral with four equal sides.",
+    descHi:"चार समान भुजाओं वाली चतुर्भुज आकृति।",
+    formulas:[
+      ["Area / क्षेत्रफल","½ × d₁ × d₂"],
+      ["Perimeter / परिमाप","4a"],
+      ["Area using base / आधार से क्षेत्रफल","base × height"]
+    ],
+    properties:["4 equal sides / 4 समान भुजाएँ","Opposite angles equal / विपरीत कोण समान"],
+    symbols:"d₁,d₂ = diagonals / विकर्ण; a = side / भुजा",
+    sides:4, geometry:"rhombus"
+  },
+  {
+    id:"parallelogram", name:"Parallelogram", hi:"समांतर चतुर्भुज", type:"2D",
+    example:"Slanted tile / तिरछी टाइल",
+    description:"A quadrilateral whose opposite sides are parallel.",
+    descHi:"ऐसी चतुर्भुज आकृति जिसकी विपरीत भुजाएँ समानांतर होती हैं।",
+    formulas:[
+      ["Area / क्षेत्रफल","base × height"],
+      ["Perimeter / परिमाप","2(a+b)"]
+    ],
+    properties:["Opposite sides parallel / विपरीत भुजाएँ समानांतर","Opposite angles equal / विपरीत कोण समान"],
+    symbols:"a,b = side lengths / भुजाएँ; h = height / ऊँचाई",
+    sides:4, geometry:"parallelogram"
+  },
+  {
+    id:"trapezium", name:"Trapezium", hi:"समलंब चतुर्भुज", type:"2D",
+    example:"Trapezoid-shaped table / समलंब मेज",
+    description:"A quadrilateral with one pair of parallel sides (Indian/UK convention).",
+    descHi:"एक जोड़ी समानांतर भुजाओं वाली चतुर्भुज आकृति।",
+    formulas:[
+      ["Area / क्षेत्रफल","½(a+b)h"],
+      ["Perimeter / परिमाप","a+b+c+d"]
+    ],
+    properties:["4 sides / 4 भुजाएँ","One pair of parallel sides / एक जोड़ी समानांतर भुजाएँ"],
+    symbols:"a,b = parallel sides / समानांतर भुजाएँ; h = height / ऊँचाई",
+    sides:4, geometry:"trapezium"
+  },
+  {
+    id:"semicircle", name:"Semicircle", hi:"अर्धवृत्त", type:"2D",
+    example:"Half-round window / अर्धगोल खिड़की",
+    description:"Half of a circle divided by its diameter.",
+    descHi:"व्यास से विभाजित वृत्त का आधा भाग।",
+    formulas:[
+      ["Area / क्षेत्रफल","½πr²"],
+      ["Perimeter / परिमाप","πr + 2r"],
+      ["Curved arc / वक्र चाप","πr"]
+    ],
+    properties:["One curved arc / एक वक्र चाप","One diameter / एक व्यास"],
+    symbols:"r = radius / त्रिज्या",
+    sides:0, geometry:"semicircle"
+  },
+  {
+    id:"cube", name:"Cube", hi:"घन", type:"3D",
+    example:"Dice / पासा",
+    description:"A solid with six equal square faces.",
+    descHi:"छह समान वर्गाकार फलकों वाला ठोस।",
+    formulas:[
+      ["Volume / आयतन","a³"],
+      ["Total surface area / कुल पृष्ठीय क्षेत्रफल","6a²"],
+      ["Lateral surface area / पार्श्व क्षेत्रफल","4a²"],
+      ["Space diagonal / अंतरिक्ष विकर्ण","a√3"]
+    ],
+    properties:["6 faces / 6 फलक","12 edges / 12 किनारे","8 vertices / 8 शीर्ष"],
+    symbols:"a = edge length / किनारे की लंबाई",
+    geometry:"cube"
+  },
+  {
+    id:"cuboid", name:"Cuboid", hi:"घनाभ", type:"3D",
+    example:"Brick / ईंट",
+    description:"A solid with six rectangular faces.",
+    descHi:"छह आयताकार फलकों वाला ठोस।",
+    formulas:[
+      ["Volume / आयतन","l × w × h"],
+      ["Total surface area / कुल पृष्ठीय क्षेत्रफल","2(lw+wh+hl)"],
+      ["Lateral surface area / पार्श्व क्षेत्रफल","2h(l+w)"],
+      ["Space diagonal / अंतरिक्ष विकर्ण","√(l²+w²+h²)"]
+    ],
+    properties:["6 faces / 6 फलक","12 edges / 12 किनारे","8 vertices / 8 शीर्ष"],
+    symbols:"l = length / लंबाई; w = width / चौड़ाई; h = height / ऊँचाई",
+    geometry:"cuboid"
+  },
+  {
+    id:"sphere", name:"Sphere", hi:"गोला", type:"3D",
+    example:"Ball / गेंद",
+    description:"A perfectly round solid whose surface points are equally distant from its centre.",
+    descHi:"एक गोल ठोस जिसकी सतह का प्रत्येक बिंदु केंद्र से समान दूरी पर होता है।",
+    formulas:[
+      ["Volume / आयतन","(4/3)πr³"],
+      ["Surface area / पृष्ठीय क्षेत्रफल","4πr²"]
+    ],
+    properties:["One curved surface / एक वक्र सतह","No edges or vertices / किनारे या शीर्ष नहीं"],
+    symbols:"r = radius / त्रिज्या",
+    geometry:"sphere"
+  },
+  {
+    id:"cylinder", name:"Cylinder", hi:"बेलन", type:"3D",
+    example:"Tin can / डिब्बा",
+    description:"A solid with two equal circular bases and one curved surface.",
+    descHi:"दो समान वृत्ताकार आधारों और एक वक्र सतह वाला ठोस।",
+    formulas:[
+      ["Volume / आयतन","πr²h"],
+      ["Curved surface area / वक्र पृष्ठीय क्षेत्रफल","2πrh"],
+      ["Total surface area / कुल पृष्ठीय क्षेत्रफल","2πr(r+h)"]
+    ],
+    properties:["2 circular bases / 2 वृत्ताकार आधार","1 curved surface / 1 वक्र सतह"],
+    symbols:"r = radius / त्रिज्या; h = height / ऊँचाई",
+    geometry:"cylinder"
+  },
+  {
+    id:"cone", name:"Cone", hi:"शंकु", type:"3D",
+    example:"Ice-cream cone / आइसक्रीम कोन",
+    description:"A solid with a circular base and one pointed vertex.",
+    descHi:"एक वृत्ताकार आधार और एक नुकीले शीर्ष वाला ठोस।",
+    formulas:[
+      ["Volume / आयतन","⅓πr²h"],
+      ["Curved surface area / वक्र पृष्ठीय क्षेत्रफल","πrl"],
+      ["Total surface area / कुल पृष्ठीय क्षेत्रफल","πr(l+r)"],
+      ["Slant height / तिर्यक ऊँचाई","l = √(r²+h²)"]
+    ],
+    properties:["1 circular base / 1 वृत्ताकार आधार","1 vertex / 1 शीर्ष"],
+    symbols:"r = radius / त्रिज्या; h = height / ऊँचाई; l = slant height / तिर्यक ऊँचाई",
+    geometry:"cone"
+  },
+  {
+    id:"pyramid", name:"Square Pyramid", hi:"वर्गाकार पिरामिड", type:"3D",
+    example:"Pyramid monument / पिरामिड",
+    description:"A solid with a square base and four triangular side faces.",
+    descHi:"वर्गाकार आधार और चार त्रिकोणीय पार्श्व फलकों वाला ठोस।",
+    formulas:[
+      ["Volume / आयतन","⅓a²h"],
+      ["Lateral surface area / पार्श्व क्षेत्रफल","2al"],
+      ["Total surface area / कुल पृष्ठीय क्षेत्रफल","a²+2al"]
+    ],
+    properties:["5 faces / 5 फलक","8 edges / 8 किनारे","5 vertices / 5 शीर्ष"],
+    symbols:"a = base side / आधार भुजा; h = vertical height / ऊर्ध्वाधर ऊँचाई; l = slant height / तिर्यक ऊँचाई",
+    geometry:"pyramid"
+  },
+  {
+    id:"triangular-prism", name:"Triangular Prism", hi:"त्रिभुजीय प्रिज्म", type:"3D",
+    example:"Tent / तंबू",
+    description:"A solid with two parallel triangular bases.",
+    descHi:"दो समानांतर त्रिकोणीय आधारों वाला ठोस।",
+    formulas:[
+      ["Volume / आयतन","Base area × prism length"],
+      ["Surface area / पृष्ठीय क्षेत्रफल","2B + PL"]
+    ],
+    properties:["5 faces / 5 फलक","9 edges / 9 किनारे","6 vertices / 6 शीर्ष"],
+    symbols:"B = triangle area / त्रिभुज का क्षेत्रफल; P = base perimeter / आधार का परिमाप; L = prism length / प्रिज्म की लंबाई",
+    geometry:"triangular-prism"
+  },
+  {
+    id:"hemisphere", name:"Hemisphere", hi:"अर्धगोला", type:"3D",
+    example:"Bowl / कटोरा",
+    description:"Half of a sphere.",
+    descHi:"गोले का आधा भाग।",
+    formulas:[
+      ["Volume / आयतन","(2/3)πr³"],
+      ["Curved surface area / वक्र पृष्ठीय क्षेत्रफल","2πr²"],
+      ["Total surface area / कुल पृष्ठीय क्षेत्रफल","3πr²"]
+    ],
+    properties:["1 curved surface / 1 वक्र सतह","1 circular base / 1 वृत्ताकार आधार"],
+    symbols:"r = radius / त्रिज्या",
+    geometry:"hemisphere"
+  },
+  {
+    id:"torus", name:"Torus", hi:"वलयाकार ठोस", type:"3D",
+    example:"Doughnut / डोनट",
+    description:"A ring-shaped solid formed by revolving a circle around an axis outside it.",
+    descHi:"एक वलयाकार ठोस, जो वृत्त को उसके बाहर स्थित अक्ष के चारों ओर घुमाने से बनता है।",
+    formulas:[
+      ["Volume / आयतन","2π²Rr²"],
+      ["Surface area / पृष्ठीय क्षेत्रफल","4π²Rr"]
+    ],
+    properties:["Ring-shaped surface / वलयाकार सतह","No flat faces / समतल फलक नहीं"],
+    symbols:"R = major radius / बड़ा त्रिज्या; r = minor radius / छोटा त्रिज्या",
+    geometry:"torus"
+  }
 ];
 
+let shapesStudioPreviousHTML = "";
+let shapesStudioRotation = { x: 0.35, y: 0.55 };
+let shapesStudioRenderer = null;
+let shapesStudioScene = null;
+let shapesStudioCamera = null;
+let shapesStudioFrame = null;
+let shapesStudioObject = null;
+let shapesStudioControls = null;
+let shapesStudioResizeHandler = null;
 
-/* OPEN SHAPES GALLERY */
 function openShapes() {
-    setupLearning(
-        "🔷",
-        "Shapes Studio",
-        "Explore 2D shapes and interactive 3D solids",
-        `
-        <section class="shapes-studio">
-            <header class="shapes-hero">
-                <span class="shapes-eyebrow">✦ MATHS WORLD ✦</span>
-                <h2>Shapes Studio</h2>
-                <p>Discover shapes. Explore dimensions. Master formulas.</p>
-            </header>
+  const root = document.getElementById("learningContent");
+  if (!root) return;
 
-            <div class="shapes-section-heading">
-                <div>
-                    <h3>◈ 2D Shapes</h3>
-                    <p>Flat shapes with length and width</p>
-                </div>
-                <span class="shapes-count">12 shapes</span>
-            </div>
-
-            <div class="shapes-gallery-grid">
-                ${SHAPES_STUDIO_DATA.filter(s => s.type === "2D").map(s =>
-                    shapesStudioCard(s)
-                ).join("")}
-            </div>
-
-            <div class="shapes-section-heading shapes-second-heading">
-                <div>
-                    <h3>◆ 3D Shapes</h3>
-                    <p>Solid shapes with length, width and height</p>
-                </div>
-                <span class="shapes-count">9 solids</span>
-            </div>
-
-            <div class="shapes-gallery-grid">
-                ${SHAPES_STUDIO_DATA.filter(s => s.type === "3D").map(s =>
-                    shapesStudioCard(s)
-                ).join("")}
-            </div>
-
-            <p class="shapes-footer-note">
-                ✨ Select any shape to explore its diagram, properties and formulas.
-            </p>
-        </section>
-        `
-    );
+  root.innerHTML = `
+    <section class="shapes-studio">
+      <header class="shapes-hero">
+        <span class="shapes-eyebrow">EXPLORE • LEARN • DISCOVER</span>
+        <h2>🔷 Shapes Studio</h2>
+        <p>Discover 21 amazing shapes — Hindi & English names, formulas, properties and interactive 3D models.</p>
+        <p>21 आकृतियाँ सीखें — नाम, सूत्र, गुणधर्म और 3D मॉडल।</p>
+      </header>
+      ${shapesGallerySection("2D SHAPES • समतल आकृतियाँ",
+        "Flat shapes with length and width", "12", "2D")}
+      ${shapesGallerySection("3D SHAPES • ठोस आकृतियाँ",
+        "Solid shapes with length, width and height", "9", "3D")}
+      <p class="shapes-footer-note">✨ Tap any shape to explore its details and formulas. किसी भी आकृति पर क्लिक करें।</p>
+    </section>`;
 }
 
+function shapesGallerySection(title, subtitle, count, type) {
+  return `
+    <section class="${type === "3D" ? "shapes-second-section" : ""}">
+      <div class="shapes-section-heading">
+        <div><h3>${title}</h3><p>${subtitle}</p></div>
+        <span class="shapes-count">${count} SHAPES</span>
+      </div>
+      <div class="shapes-gallery-grid">
+        ${SHAPES_STUDIO_DATA.filter(s => s.type === type).map(shapesStudioCard).join("")}
+      </div>
+    </section>`;
+}
 
-/* CREATE ONE SHAPE CARD */
 function shapesStudioCard(shape) {
-    return `
-        <button type="button"
-                class="shapes-card"
-                onclick="openShapeDetail('${shape.id}')"
-                aria-label="Explore ${shape.name}">
-            <span class="shapes-card-type">${shape.type}</span>
-            <span class="shapes-card-visual">
-                ${shapeVisualMarkup(shape, false)}
-            </span>
-            <span class="shapes-card-name">${shape.name}</span>
-            <span class="shapes-card-action">Explore shape ↗</span>
-        </button>
-    `;
+  return `
+    <button class="shapes-card" type="button"
+      onclick="openShapeDetail('${shape.id}')"
+      aria-label="${shape.name}, ${shape.hi}">
+      <span class="shapes-card-type">${shape.type}</span>
+      <span class="shapes-card-visual">${shapePreviewSVG(shape)}</span>
+      <span class="shapes-card-name">${shape.name}</span>
+      <span class="shapes-card-hindi">${shape.hi}</span>
+      <span class="shapes-card-action">Explore ↗</span>
+    </button>`;
 }
 
+function shapePreviewSVG(shape) {
+  const c = "#8062c9";
+  const g = "#d8c7ff";
+  const common = `fill="${g}" stroke="${c}" stroke-width="3" stroke-linejoin="round"`;
+  let element = "";
 
-/* DRAW A SHAPE USING SVG */
-function shapeVisualMarkup(shape, large) {
-    return `
-        <svg class="shape-svg ${large ? "shape-svg-large" : ""}"
-             viewBox="0 0 200 200"
-             role="img"
-             aria-label="${shape.name} diagram">
-            <defs>
-                <linearGradient id="shapeFill" x1="0" y1="0" x2="1" y2="1">
-                    <stop offset="0%" stop-color="#c8e6ff"/>
-                    <stop offset="55%" stop-color="#79b4f5"/>
-                    <stop offset="100%" stop-color="#3676c9"/>
-                </linearGradient>
-                <radialGradient id="sphereFill" cx="30%" cy="25%" r="75%">
-                    <stop offset="0%" stop-color="#ffffff"/>
-                    <stop offset="25%" stop-color="#bfe5ff"/>
-                    <stop offset="65%" stop-color="#65a4ed"/>
-                    <stop offset="100%" stop-color="#285ba9"/>
-                </radialGradient>
-            </defs>
-            ${shape.svg}
-        </svg>
-    `;
+  switch (shape.geometry) {
+    case "circle":
+      element = `<circle cx="60" cy="60" r="36" ${common}/>`; break;
+    case "triangle":
+      element = `<polygon points="60,19 100,94 20,94" ${common}/>`; break;
+    case "square":
+      element = `<rect x="25" y="25" width="70" height="70" rx="2" ${common}/>`; break;
+    case "rectangle":
+      element = `<rect x="13" y="34" width="94" height="52" rx="2" ${common}/>`; break;
+    case "oval":
+      element = `<ellipse cx="60" cy="60" rx="43" ry="29" ${common}/>`; break;
+    case "pentagon":
+      element = `<polygon points="60,17 100,46 85,94 35,94 20,46" ${common}/>`; break;
+    case "hexagon":
+      element = `<polygon points="35,22 85,22 108,60 85,98 35,98 12,60" ${common}/>`; break;
+    case "octagon":
+      element = `<polygon points="42,15 78,15 105,42 105,78 78,105 42,105 15,78 15,42" ${common}/>`; break;
+    case "rhombus":
+      element = `<polygon points="60,13 101,60 60,107 19,60" ${common}/>`; break;
+    case "parallelogram":
+      element = `<polygon points="38,25 108,25 82,95 12,95" ${common}/>`; break;
+    case "trapezium":
+      element = `<polygon points="38,25 82,25 106,95 14,95" ${common}/>`; break;
+    case "semicircle":
+      element = `<path d="M18 72 A42 42 0 0 1 102 72 L18 72 Z" ${common}/>`; break;
+    case "cube":
+      element = `<polygon points="60,13 99,35 60,57 21,35" fill="#eee7ff" stroke="${c}" stroke-width="2.5"/><polygon points="21,35 60,57 60,102 21,80" fill="#bba5f5" stroke="${c}" stroke-width="2.5"/><polygon points="60,57 99,35 99,80 60,102" fill="#9274dc" stroke="${c}" stroke-width="2.5"/>`; break;
+    case "cuboid":
+      element = `<polygon points="44,22 104,35 104,79 44,66" fill="#eee7ff" stroke="${c}" stroke-width="2.5"/><polygon points="44,22 15,43 15,87 44,66" fill="#bba5f5" stroke="${c}" stroke-width="2.5"/><polygon points="15,43 75,56 104,35 44,22" fill="#d8c7ff" stroke="${c}" stroke-width="2.5"/><polygon points="15,87 75,100 104,79 44,66" fill="#9274dc" stroke="${c}" stroke-width="2.5"/><polygon points="75,56 104,35 104,79 75,100" fill="#8062c9" stroke="${c}" stroke-width="2.5"/>`; break;
+    case "sphere":
+      element = `<defs><radialGradient id="sg${shape.id}"><stop offset="0" stop-color="#fff"/><stop offset=".55" stop-color="#bba5f5"/><stop offset="1" stop-color="#8062c9"/></radialGradient></defs><circle cx="60" cy="60" r="42" fill="url(#sg${shape.id})" stroke="${c}" stroke-width="2"/>`; break;
+    case "cylinder":
+      element = `<path d="M22 30 L22 87 A38 13 0 0 0 98 87 L98 30" fill="#bba5f5" stroke="${c}" stroke-width="2.5"/><ellipse cx="60" cy="30" rx="38" ry="13" fill="#eee7ff" stroke="${c}" stroke-width="2.5"/><path d="M22 87 A38 13 0 0 0 98 87" fill="none" stroke="${c}" stroke-width="2.5"/>`; break;
+    case "cone":
+      element = `<path d="M60 17 L20 88 A40 13 0 0 0 100 88 Z" fill="#bba5f5" stroke="${c}" stroke-width="2.5"/><ellipse cx="60" cy="88" rx="40" ry="13" fill="#eee7ff" stroke="${c}" stroke-width="2.5"/>`; break;
+    case "pyramid":
+      element = `<polygon points="60,14 15,86 60,105" fill="#bba5f5" stroke="${c}" stroke-width="2.5"/><polygon points="60,14 60,105 105,86" fill="#9274dc" stroke="${c}" stroke-width="2.5"/><polygon points="15,86 60,69 105,86 60,105" fill="#d8c7ff" stroke="${c}" stroke-width="2.5"/>`; break;
+    case "triangular-prism":
+      element = `<polygon points="22,38 22,87 62,63" fill="#bba5f5" stroke="${c}" stroke-width="2.5"/><polygon points="22,38 62,63 103,38" fill="#eee7ff" stroke="${c}" stroke-width="2.5"/><polygon points="22,87 62,63 103,87" fill="#9274dc" stroke="${c}" stroke-width="2.5"/><polygon points="62,63 103,38 103,87" fill="#8062c9" stroke="${c}" stroke-width="2.5"/>`; break;
+    case "hemisphere":
+      element = `<path d="M18 66 A42 42 0 0 1 102 66 Z" fill="#bba5f5" stroke="${c}" stroke-width="2.5"/><ellipse cx="60" cy="66" rx="42" ry="12" fill="#eee7ff" stroke="${c}" stroke-width="2.5"/>`; break;
+    case "torus":
+      element = `<ellipse cx="60" cy="60" rx="43" ry="29" fill="none" stroke="#8062c9" stroke-width="23"/><ellipse cx="60" cy="60" rx="43" ry="29" fill="none" stroke="#d8c7ff" stroke-width="14"/>`; break;
+  }
+
+  return `<svg class="shape-svg" viewBox="0 0 120 120" role="img" aria-label="${shape.name}">${element}</svg>`;
 }
 
-
-/* OPEN INDIVIDUAL SHAPE DETAILS */
 function openShapeDetail(shapeId) {
-    const shape = SHAPES_STUDIO_DATA.find(s => s.id === shapeId);
-    if (!shape) return;
+  const shape = SHAPES_STUDIO_DATA.find(s => s.id === shapeId);
+  const root = document.getElementById("learningContent");
+  if (!shape || !root) return;
 
-    setupLearning(
-        shape.type === "2D" ? "◈" : "◆",
-        shape.name,
-        `${shape.type} Shape • Explore and learn`,
-        `
-        <section class="shape-detail-page">
-            <button type="button"
-                    class="shape-back-button"
-                    onclick="openShapes()">
-                ← Back to Shapes
-            </button>
+  destroyShape3D();
 
-            <div class="shape-detail-hero">
-                <span class="shapes-eyebrow">${shape.type} SHAPE</span>
-                <h2>${shape.name}</h2>
-                <p>${shape.description}</p>
+  root.innerHTML = `
+    <section class="shape-detail-page">
+      <button class="shape-back-button" onclick="openShapes()" type="button">← All Shapes / सभी आकृतियाँ</button>
+      <header class="shape-detail-hero">
+        <span class="shapes-eyebrow">${shape.type} SHAPE • ${shape.type === "2D" ? "समतल आकृति" : "ठोस आकृति"}</span>
+        <h2>${shape.name}</h2>
+        <h3>${shape.hi}</h3>
+        <p>${shape.description}</p>
+        <p lang="hi">${shape.descHi}</p>
+      </header>
+
+      <div class="shape-detail-layout">
+        <article class="shape-viewer-card">
+          <div class="shape-viewer-toolbar">
+            <span>✨ Shape Explorer</span>
+            <span class="shape-live-pill">${shape.type === "3D" ? "INTERACTIVE 3D" : "2D MODEL"}</span>
+          </div>
+          <div class="shape-rotation-stage" id="shape3DStage">
+            ${shape.type === "3D"
+              ? `<div class="shape-three-host" id="shapeThreeHost"></div>`
+              : `<div class="shape-flat-large">${shapePreviewSVG(shape)}</div>`}
+          </div>
+          ${shape.type === "3D"
+            ? `<p class="shape-viewer-hint">Drag to rotate • Scroll/pinch to zoom • खींचकर घुमाएँ</p>`
+            : `<p class="shape-viewer-hint">A flat, two-dimensional shape / समतल आकृति</p>`}
+          <div class="shape-example-box">
+            <span>REAL-WORLD EXAMPLE • वास्तविक उदाहरण</span>
+            <strong>${shape.example}</strong>
+          </div>
+        </article>
+
+        <article class="shape-facts-card">
+          <h3>📐 Formulas / सूत्र</h3>
+          <div class="shape-formula-list">
+            ${shape.formulas.map(f => `<div class="shape-formula-row"><span>${f[0]}</span><strong>${f[1]}</strong></div>`).join("")}
+          </div>
+          <h3 class="shape-formula-heading">⭐ Properties / गुणधर्म</h3>
+          <ul class="shape-property-list">${shape.properties.map(p => `<li>${p}</li>`).join("")}</ul>
+          <div class="shape-symbol-note">
+            <strong>Symbols / संकेतों का अर्थ</strong>
+            <p>${shape.symbols}</p>
+          </div>
+          <div class="shape-learning-note">
+            <span>💡</span>
+            <div><strong>Remember / याद रखें</strong>
+              <p>${shape.type === "3D"
+                ? "3D shapes have length, width and height. / 3D आकृतियों में लंबाई, चौड़ाई और ऊँचाई होती है।"
+                : "2D shapes have length and width. / 2D आकृतियों में लंबाई और चौड़ाई होती है।"}</p>
             </div>
+          </div>
+        </article>
+      </div>
+    </section>`;
 
-            <div class="shape-detail-layout">
-                <div class="shape-viewer-card">
-                    <div class="shape-viewer-toolbar">
-                        <span>✦ Interactive Model</span>
-                        <span class="shape-live-pill">LIVE VIEW</span>
-                    </div>
-
-                    <div class="shape-rotation-stage"
-                         id="shapeRotationStage">
-                        <div class="shape-rotation-object"
-                             id="shapeRotationObject">
-                            ${shapeVisualMarkup(shape, true)}
-                        </div>
-                    </div>
-
-                    <div class="shape-rotation-controls">
-                        <label for="shapeRotateX">Tilt</label>
-                        <input id="shapeRotateX"
-                               type="range"
-                               min="-60"
-                               max="60"
-                               value="0"
-                               oninput="rotateShapeModel()">
-
-                        <label for="shapeRotateY">Rotate</label>
-                        <input id="shapeRotateY"
-                               type="range"
-                               min="-180"
-                               max="180"
-                               value="0"
-                               oninput="rotateShapeModel()">
-
-                        <button type="button"
-                                onclick="resetShapeRotation()">
-                            ↻ Reset view
-                        </button>
-                    </div>
-
-                    <p class="shape-viewer-hint">
-                        Move the sliders to rotate the diagram.
-                    </p>
-                </div>
-
-                <div class="shape-facts-card">
-                    <h3>📘 Shape facts</h3>
-                    <p>${shape.properties}</p>
-
-                    <div class="shape-example-box">
-                        <span>🌍 Real-life examples</span>
-                        <strong>${shape.example}</strong>
-                    </div>
-
-                    <h3 class="shape-formula-heading">📐 Formulas</h3>
-                    <div class="shape-formula-list">
-                        ${shape.formulas.map(formula => `
-                            <div class="shape-formula-row">
-                                <span>${formula[0]}</span>
-                                <strong>${formula[1]}</strong>
-                            </div>
-                        `).join("")}
-                    </div>
-
-                    <div class="shape-symbol-note">
-                        <strong>Symbols:</strong>
-                        <p>r = radius · a = side · h = height · l = length or slant height, as defined by the formula · π ≈ 3.14159</p>
-                        <p>For a torus, R is the major radius and r is the tube radius.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="shape-learning-note">
-                <span>💡</span>
-                <div>
-                    <strong>Remember</strong>
-                    <p>${shape.description} Tap “Back to Shapes” to explore another model.</p>
-                </div>
-            </div>
-        </section>
-        `
-    );
+  if (shape.type === "3D") {
+    loadShapeThreeJS(() => createShape3D(shape));
+  }
 }
 
+function loadShapeThreeJS(callback) {
+  if (window.THREE) {
+    callback();
+    return;
+  }
 
-/* INTERACTIVE ROTATION */
-function rotateShapeModel() {
-    const object = document.getElementById("shapeRotationObject");
-    const rotateX = document.getElementById("shapeRotateX");
-    const rotateY = document.getElementById("shapeRotateY");
+  if (document.getElementById("shapes-three-script")) {
+    const check = setInterval(() => {
+      if (window.THREE) {
+        clearInterval(check);
+        callback();
+      }
+    }, 100);
+    setTimeout(() => clearInterval(check), 10000);
+    return;
+  }
 
-    if (!object || !rotateX || !rotateY) return;
-
-    object.style.transform =
-        `rotateX(${Number(rotateX.value)}deg) rotateY(${Number(rotateY.value)}deg)`;
+  const script = document.createElement("script");
+  script.id = "shapes-three-script";
+  script.src = "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js";
+  script.onload = callback;
+  script.onerror = () => {
+    const host = document.getElementById("shapeThreeHost");
+    if (host) host.innerHTML = "<p>3D model could not load. Please check your internet connection. / इंटरनेट कनेक्शन जाँचें।</p>";
+  };
+  document.head.appendChild(script);
 }
 
+function createShape3D(shape) {
+  const host = document.getElementById("shapeThreeHost");
+  if (!host || !window.THREE) return;
 
-/* RESET ROTATION */
-function resetShapeRotation() {
-    const rotateX = document.getElementById("shapeRotateX");
-    const rotateY = document.getElementById("shapeRotateY");
+  destroyShape3D();
 
-    if (rotateX) rotateX.value = 0;
-    if (rotateY) rotateY.value = 0;
+  const T = window.THREE;
+  const width = Math.max(host.clientWidth, 240);
+  const height = Math.max(host.clientHeight, 240);
 
-    rotateShapeModel();
+  shapesStudioScene = new T.Scene();
+  shapesStudioScene.background = new T.Color("#f0eaff");
+
+  shapesStudioCamera = new T.PerspectiveCamera(40, width / height, 0.1, 100);
+  shapesStudioCamera.position.set(4, 3, 5);
+  shapesStudioCamera.lookAt(0, 0, 0);
+
+  shapesStudioRenderer = new T.WebGLRenderer({ antialias: true, alpha: true });
+  shapesStudioRenderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+  shapesStudioRenderer.setSize(width, height);
+  shapesStudioRenderer.shadowMap.enabled = true;
+  host.appendChild(shapesStudioRenderer.domElement);
+
+  shapesStudioScene.add(new T.AmbientLight(0xffffff, 2.0));
+
+  const keyLight = new T.DirectionalLight(0xffffff, 3);
+  keyLight.position.set(4, 6, 5);
+  shapesStudioScene.add(keyLight);
+
+  const fillLight = new T.PointLight(0xbba5ff, 25);
+  fillLight.position.set(-4, 2, -3);
+  shapesStudioScene.add(fillLight);
+
+  const material = new T.MeshStandardMaterial({
+    color: "#9b82e8",
+    roughness: 0.34,
+    metalness: 0.08,
+    flatShading: false
+  });
+  const edgeMaterial = new T.LineBasicMaterial({ color: "#6045a6" });
+
+  let geometry;
+
+  switch (shape.geometry) {
+    case "cube":
+      geometry = new T.BoxGeometry(2, 2, 2); break;
+    case "cuboid":
+      geometry = new T.BoxGeometry(2.7, 1.7, 1.3); break;
+    case "sphere":
+      geometry = new T.SphereGeometry(1.35, 48, 32); break;
+    case "cylinder":
+      geometry = new T.CylinderGeometry(1, 1, 2.2, 48); break;
+    case "cone":
+      geometry = new T.ConeGeometry(1.2, 2.4, 48); break;
+    case "pyramid":
+      geometry = new T.ConeGeometry(1.3, 2.2, 4);
+      break;
+    case "triangular-prism":
+      geometry = new T.CylinderGeometry(1.05, 1.05, 2.1, 3, 1);
+      geometry.rotateY(Math.PI / 2);
+      break;
+    case "hemisphere":
+      geometry = new T.SphereGeometry(1.3, 48, 32, 0, Math.PI * 2, 0, Math.PI / 2);
+      break;
+    case "torus":
+      geometry = new T.TorusGeometry(0.9, 0.42, 24, 72); break;
+    default:
+      return;
+  }
+
+  shapesStudioObject = new T.Mesh(geometry, material);
+  shapesStudioObject.rotation.set(0.2, 0.35, 0);
+  shapesStudioScene.add(shapesStudioObject);
+
+  const edges = new T.LineSegments(new T.EdgesGeometry(geometry), edgeMaterial);
+  shapesStudioObject.add(edges);
+
+  let dragging = false;
+  let previousX = 0;
+  let previousY = 0;
+  let pinchDistance = 0;
+  const canvas = shapesStudioRenderer.domElement;
+
+  canvas.style.touchAction = "none";
+  canvas.style.cursor = "grab";
+
+  canvas.addEventListener("pointerdown", e => {
+    dragging = true;
+    previousX = e.clientX;
+    previousY = e.clientY;
+    canvas.setPointerCapture(e.pointerId);
+    canvas.style.cursor = "grabbing";
+  });
+
+  canvas.addEventListener("pointermove", e => {
+    if (!dragging || !shapesStudioObject) return;
+    shapesStudioObject.rotation.y += (e.clientX - previousX) * 0.012;
+    shapesStudioObject.rotation.x += (e.clientY - previousY) * 0.012;
+    previousX = e.clientX;
+    previousY = e.clientY;
+  });
+
+  const stopDrag = () => {
+    dragging = false;
+    canvas.style.cursor = "grab";
+  };
+  canvas.addEventListener("pointerup", stopDrag);
+  canvas.addEventListener("pointercancel", stopDrag);
+  canvas.addEventListener("pointerleave", stopDrag);
+
+  canvas.addEventListener("wheel", e => {
+    e.preventDefault();
+    shapesStudioCamera.position.multiplyScalar(e.deltaY > 0 ? 1.08 : 0.92);
+    const distance = shapesStudioCamera.position.length();
+    if (distance < 2.5) shapesStudioCamera.position.setLength(2.5);
+    if (distance > 10) shapesStudioCamera.position.setLength(10);
+  }, { passive: false });
+
+  shapesStudioResizeHandler = () => {
+    if (!host.isConnected || !shapesStudioRenderer) return;
+    const w = Math.max(host.clientWidth, 240);
+    const h = Math.max(host.clientHeight, 240);
+    shapesStudioCamera.aspect = w / h;
+    shapesStudioCamera.updateProjectionMatrix();
+    shapesStudioRenderer.setSize(w, h);
+  };
+  window.addEventListener("resize", shapesStudioResizeHandler);
+
+  function animate() {
+    if (!shapesStudioRenderer || !host.isConnected) return;
+    shapesStudioFrame = requestAnimationFrame(animate);
+    shapesStudioRenderer.render(shapesStudioScene, shapesStudioCamera);
+  }
+  animate();
+}
+
+function destroyShape3D() {
+  if (shapesStudioFrame) cancelAnimationFrame(shapesStudioFrame);
+  shapesStudioFrame = null;
+
+  if (shapesStudioResizeHandler) {
+    window.removeEventListener("resize", shapesStudioResizeHandler);
+    shapesStudioResizeHandler = null;
+  }
+
+  if (shapesStudioObject && shapesStudioScene) {
+    shapesStudioScene.remove(shapesStudioObject);
+    shapesStudioObject.traverse(obj => {
+      if (obj.geometry) obj.geometry.dispose();
+      if (obj.material) {
+        if (Array.isArray(obj.material)) obj.material.forEach(m => m.dispose());
+        else obj.material.dispose();
+      }
+    });
+  }
+
+  if (shapesStudioRenderer) {
+    shapesStudioRenderer.dispose();
+    shapesStudioRenderer.domElement.remove();
+  }
+
+  shapesStudioRenderer = null;
+  shapesStudioScene = null;
+  shapesStudioCamera = null;
+  shapesStudioObject = null;
+  shapesStudioControls = null;
 }
 
 /* =========================================================
