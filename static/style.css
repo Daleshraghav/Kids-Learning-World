@@ -14925,40 +14925,84 @@ body {
     }
 }
 
-/* =====================================
-   👑 MATHS WORLD — 3 LUXURY DARK COLOURS
-===================================== */
+```css
+/* 🇮🇳 HINDI ALPHABET — MOBILE FIX */
 
-#learningContent:has(.maths-world-grid) {
-    background: linear-gradient(
-        135deg,
-        #080B18 0%,
-        #111127 48%,
-        #19112B 100%
-    ) !important;
+@media (max-width: 700px) {
+    .hindi-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+        width: 100%;
+        padding: 8px 4px 30px;
+        box-sizing: border-box;
+    }
 
-    border: 1px solid rgba(140, 120, 190, 0.22);
-    border-radius: 28px;
-    padding: 30px 22px;
+    .hindi-card {
+        width: 100%;
+        min-width: 0;
+        min-height: 0;
+        height: auto;
+        padding: 16px 8px;
+        box-sizing: border-box;
+        overflow-wrap: anywhere;
+    }
 
-    box-shadow:
-        0 18px 50px rgba(0, 0, 0, 0.40),
-        inset 0 1px 0 rgba(255, 255, 255, 0.04);
+    .hindi-letter {
+        width: clamp(54px, 19vw, 76px);
+        height: clamp(54px, 19vw, 76px);
+        max-width: 100%;
+        margin: 5px auto 12px;
+        font-size: clamp(34px, 10vw, 46px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 
-    position: relative;
-    overflow: hidden;
-}
+    .hindi-word {
+        font-size: clamp(15px, 4.5vw, 21px);
+        line-height: 1.5;
+        overflow-wrap: anywhere;
+        text-align: center;
+    }
 
-/* Luxury heading */
-#learningContent .maths-world-heading {
-    color: #F1EAFB;
-    text-shadow: 0 2px 18px rgba(150, 120, 210, 0.18);
-}
+    .hindi-emoji {
+        font-size: 25px;
+    }
 
-/* Mobile */
-@media (max-width: 600px) {
-    #learningContent:has(.maths-world-grid) {
-        padding: 20px 12px;
-        border-radius: 20px;
+    .hindi-meaning {
+        max-width: 100%;
+        box-sizing: border-box;
+        overflow-wrap: anywhere;
+    }
+
+    .hindi-sound-btn {
+        width: 46px;
+        height: 46px;
+        margin: 10px auto;
+        touch-action: manipulation;
     }
 }
+
+/* EXTRA SMALL PHONES */
+
+@media (max-width: 360px) {
+    .hindi-grid {
+        gap: 8px;
+        padding-left: 2px;
+        padding-right: 2px;
+    }
+
+    .hindi-card {
+        padding: 12px 5px;
+    }
+
+    .hindi-letter {
+        font-size: 34px;
+    }
+
+    .hindi-word {
+        font-size: 15px;
+    }
+}
+```
