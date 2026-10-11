@@ -1993,87 +1993,143 @@ function speakCurrentWritingLetter() {
 }
 
 
-/* =========================================================
-   🔊 PRONUNCIATION
-   ========================================================= */
+/* ==========================================
+   📖 WORD MEANING - 50 WORDS
+========================================== */
 
-function openPronunciation() {
-
-    setupLearning(
-        "🔊",
-        "ABC Pronunciation",
-        "Tap any letter to hear it!",
-        renderAlphabet()
-    );
+function startWordMeaning() {
+    currentCategory = "wordmeaning";
+    window.wordMeaningPage = 0;
+    renderWordMeaningPage();
 }
 
+function renderWordMeaningPage() {
+    const words = [
+        ["Apple", "🍎", "सेब", "A round fruit that can be red or green."],
+        ["Brave", "🦁", "बहादुर", "Ready to face danger without fear."],
+        ["Beautiful", "🌸", "सुंदर", "Something that looks very pretty."],
+        ["Honest", "🤝", "ईमानदार", "A person who tells the truth."],
+        ["Kind", "💗", "दयालु", "Someone who cares about others."],
+        ["Clever", "🧠", "चतुर", "Quick to understand and learn."],
+        ["Happy", "😊", "खुश", "Feeling joy or pleasure."],
+        ["Sad", "😢", "उदास", "Feeling unhappy."],
+        ["Strong", "💪", "मज़बूत", "Having great power or strength."],
+        ["Polite", "🙏", "विनम्र", "Showing good manners and respect."],
+        ["Tiny", "🐜", "बहुत छोटा", "Very small in size."],
+        ["Huge", "🐘", "विशाल", "Extremely big."],
+        ["Quick", "🐇", "तेज़", "Moving or doing something fast."],
+        ["Slow", "🐢", "धीमा", "Moving without much speed."],
+        ["Ancient", "🏛️", "प्राचीन", "Very old; from a long time ago."],
+        ["Modern", "🏙️", "आधुनिक", "Belonging to the present time."],
+        ["Begin", "🚦", "शुरू करना", "To start something."],
+        ["Finish", "🏁", "समाप्त करना", "To bring something to an end."],
+        ["Quiet", "🤫", "शांत", "Making little or no noise."],
+        ["Noisy", "🥁", "शोरगुल वाला", "Making a lot of noise."],
+        ["Bright", "☀️", "चमकीला", "Giving out lots of light."],
+        ["Dark", "🌙", "अँधेरा", "Having little or no light."],
+        ["Clean", "🧼", "साफ़", "Free from dirt."],
+        ["Dirty", "🟤", "गंदा", "Not clean."],
+        ["Empty", "🫙", "खाली", "Having nothing inside."],
+        ["Full", "🎒", "भरा हुआ", "Containing as much as possible."],
+        ["Friend", "🧒", "दोस्त", "A person you like and trust."],
+        ["Family", "👨‍👩‍👧‍👦", "परिवार", "People who are related to one another."],
+        ["Garden", "🌻", "बगीचा", "A place where plants and flowers grow."],
+        ["Forest", "🌳", "जंगल", "A large area covered with trees."],
+        ["River", "🏞️", "नदी", "A natural stream of flowing water."],
+        ["Mountain", "⛰️", "पहाड़", "A very high area of land."],
+        ["Weather", "🌦️", "मौसम", "The condition of the air outside."],
+        ["Season", "🍂", "ऋतु", "One part of the year with its own weather."],
+        ["Journey", "🚌", "यात्रा", "The act of travelling from one place to another."],
+        ["Village", "🏡", "गाँव", "A small place where people live."],
+        ["City", "🏙️", "शहर", "A large town where many people live."],
+        ["Protect", "🛡️", "रक्षा करना", "To keep someone or something safe."],
+        ["Discover", "🔍", "खोज करना", "To find something for the first time."],
+        ["Improve", "📈", "सुधारना", "To make something better."],
+        ["Careful", "⚠️", "सावधान", "Taking care to avoid mistakes or danger."],
+        ["Healthy", "🥗", "स्वस्थ", "Being well and free from illness."],
+        ["Thirsty", "🥤", "प्यासा", "Needing or wanting a drink."],
+        ["Hungry", "🍲", "भूखा", "Needing or wanting food."],
+        ["Borrow", "📚", "उधार लेना", "To take something for a while and return it."],
+        ["Return", "↩️", "लौटाना", "To give something back."],
+        ["Promise", "🤞", "वादा", "A statement that you will do something."],
+        ["Respect", "🙏", "सम्मान", "Showing care and value for someone."],
+        ["Success", "🏆", "सफलता", "Achieving something you wanted to do."],
+        ["Knowledge", "📖", "ज्ञान", "Information and understanding gained by learning."],
+        ["Environment", "🌍", "पर्यावरण", "The world around us, including air, water and land."]
+    ];
 
-/* =========================================================
-   🔗 WORD MATCHING
-   ========================================================= */
-
-function startWordMatching() {
-
-    const selected =
-        shuffleArray(alphabet).slice(0, 8);
+    const pageSize = 9;
+    const page = window.wordMeaningPage || 0;
+    const start = page * pageSize;
+    const visibleWords = words.slice(start, start + pageSize);
+    const totalPages = Math.ceil(words.length / pageSize);
 
     setupLearning(
-        "🔗",
-        "Word Matching",
-        "Match the letter with the correct word!",
+        "📖",
+        "Word Meaning",
+        "50 useful English words with Hindi meanings",
         `
-
-        <div class="cards-grid">
-
-            ${selected.map((item, index) => `
-
-                <div
-                    class="learning-card"
-                    onclick="checkLetterWordMatch(this, '${item.letter}', '${item.word}')"
-                >
-
-                    <div class="letter">
-                        ${item.letter}
-                    </div>
-
-                    <div class="learning-emoji">
-                        ${item.emoji}
-                    </div>
-
-                    <div class="word">
-                        ${item.word}
-                    </div>
-
+        <section class="word-meaning-section">
+            <div class="word-meaning-intro">
+                <span class="word-meaning-badge">✨ LEARN • READ • GROW</span>
+                <h2>📚 Word Meaning World</h2>
+                <p>Learn a new word, understand its meaning and grow your vocabulary!</p>
+                <div class="word-meaning-progress">
+                    <span>📘 50 Words</span>
+                    <span>🇮🇳 Hindi Meanings</span>
+                    <span>🎨 Picture Cards</span>
                 </div>
+            </div>
 
-            `).join("")}
+            <div class="word-meaning-grid">
+                ${visibleWords.map((item, index) => `
+                    <article class="word-meaning-card"
+                        style="--word-delay:${index * 55}ms">
+                        <div class="word-meaning-number">${start + index + 1}</div>
+                        <div class="word-meaning-picture">${item[1]}</div>
+                        <h3>${item[0]}</h3>
+                        <div class="word-meaning-hindi">${item[2]}</div>
+                        <p>${item[3]}</p>
+                        <button class="word-speak-button"
+                            onclick="speakWordMeaning('${item[0]}', '${item[2]}')">
+                            🔊 Listen
+                        </button>
+                    </article>
+                `).join("")}
+            </div>
 
-        </div>
-
+            <div class="word-meaning-pagination">
+                <button onclick="changeWordMeaningPage(-1)"
+                    ${page === 0 ? "disabled" : ""}>
+                    ← Previous
+                </button>
+                <span>Page ${page + 1} of ${totalPages}</span>
+                <button onclick="changeWordMeaningPage(1)"
+                    ${page >= totalPages - 1 ? "disabled" : ""}>
+                    Next →
+                </button>
+            </div>
+            <p class="word-meaning-tip">💡 Tip: Read the English word, say its Hindi meaning, and use it in a sentence!</p>
+        </section>
         `
     );
 }
 
+function changeWordMeaningPage(direction) {
+    const totalPages = 6;
+    const nextPage = (window.wordMeaningPage || 0) + direction;
 
-function checkLetterWordMatch(card, letter, word) {
+    if (nextPage < 0 || nextPage >= totalPages) return;
 
-    speak(
-        `${letter} for ${word}`,
-        {
-            lang: "en-US",
-            rate: 0.68
-        }
-    );
+    window.wordMeaningPage = nextPage;
+    renderWordMeaningPage();
+}
 
-    if (card) {
-        card.style.transform = "scale(1.05)";
-
-        setTimeout(() => {
-            card.style.transform = "";
-        }, 300);
-    }
-
-    addStars(1);
+function speakWordMeaning(word, hindi) {
+    speak(word, {
+        lang: "en-US",
+        rate: 0.75
+    });
 }
 
 
