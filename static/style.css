@@ -12321,312 +12321,378 @@ table tr:hover {
 }
 
 
+
 /* =====================================================
-   📱 MOBILE RESPONSIVE FIX — KIDS LEARNING WORLD
-   Add this at the VERY END of style.css
+   🌈 KIDS LEARNING WORLD — RESPONSIVE + PREMIUM ANIMATIONS
+   ABC • Hindi • Days • Months • Tables • Fruits
+   Body Parts • Animals • Colours
 ===================================================== */
 
-/* Prevent unwanted horizontal scrolling */
+/* Prevent horizontal scrolling */
 html,
 body {
-    width: 100%;
     max-width: 100%;
     overflow-x: clip;
 }
 
-*,
-*::before,
-*::after {
-    box-sizing: border-box;
-}
-
-img,
-video,
-canvas,
-svg {
-    max-width: 100%;
-}
-
-/* Keep main pages within the phone screen */
-#homePage,
 #learningPage,
 .learning-page,
-.learning-content,
-#learningContent {
+#learningContent,
+.learning-content {
     min-width: 0;
     max-width: 100%;
 }
 
 .learning-page {
-    padding-left: 16px;
-    padding-right: 16px;
+    padding-left: clamp(12px, 4vw, 60px);
+    padding-right: clamp(12px, 4vw, 60px);
 }
 
-/* Home page: make category cards wider */
+/* Learning headings */
+.learning-heading,
+.hindi-learning-heading {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto 25px;
+    padding: 18px 12px;
+    text-align: center;
+    overflow-wrap: anywhere;
+}
+
+.learning-heading h2,
+.hindi-learning-heading h2 {
+    font-size: clamp(23px, 4vw, 34px);
+    line-height: 1.3;
+    color: #273c75;
+}
+
+.learning-heading p,
+.hindi-learning-heading p {
+    margin-top: 8px;
+    font-size: clamp(13px, 2vw, 16px);
+    line-height: 1.6;
+    color: #707991;
+}
+
+/* Common grid for ABC, days, months, fruits,
+   body parts, animals and colours */
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    align-items: stretch;
+    gap: clamp(10px, 2vw, 22px);
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Premium learning cards */
+.learning-card {
+    position: relative;
+    isolation: isolate;
+    min-width: 0;
+    min-height: 190px;
+    height: auto;
+    padding: clamp(12px, 2vw, 24px);
+    border-radius: 24px;
+    overflow: hidden;
+    overflow-wrap: anywhere;
+    text-align: center;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    transform: translateY(0);
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease,
+        border-color 0.3s ease;
+}
+
+/* Soft animated glow */
+.learning-card::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: -55%;
+    left: -70%;
+    width: 65%;
+    height: 200%;
+    pointer-events: none;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.65),
+        transparent
+    );
+    transform: rotate(22deg);
+    transition: left 0.65s ease;
+}
+
+.learning-card:hover::before {
+    left: 120%;
+}
+
+.learning-card:hover {
+    transform: translateY(-7px) scale(1.025);
+    box-shadow: 0 18px 35px rgba(68, 72, 125, 0.16);
+}
+
+.learning-card:active {
+    transform: scale(0.96);
+}
+
+.learning-card:focus-visible {
+    outline: 3px solid #8b5cf6;
+    outline-offset: 4px;
+}
+
+.learning-emoji {
+    display: block;
+    max-width: 100%;
+    font-size: clamp(30px, 4vw, 52px);
+    line-height: 1.35;
+    margin-bottom: 10px;
+    transform-origin: center;
+    animation: kidsEmojiFloat 3s ease-in-out infinite;
+}
+
+.learning-card:hover .learning-emoji {
+    animation: kidsEmojiPop 0.45s ease both;
+}
+
+.letter {
+    font-size: clamp(38px, 5vw, 65px);
+    line-height: 1.15;
+    overflow-wrap: anywhere;
+}
+
+.word {
+    max-width: 100%;
+    font-size: clamp(14px, 2vw, 22px);
+    line-height: 1.35;
+    overflow-wrap: anywhere;
+    word-break: normal;
+}
+
+.mini-text {
+    max-width: 100%;
+    font-size: clamp(11px, 1.5vw, 13px);
+    line-height: 1.5;
+    text-align: center;
+    overflow-wrap: anywhere;
+}
+
+/* Hindi cards: equal width and natural height */
+.hindi-grid {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    align-items: stretch;
+    gap: clamp(10px, 1.8vw, 18px);
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.hindi-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    min-width: 0;
+    min-height: 155px;
+    height: auto;
+    padding: 16px 8px;
+    border-radius: 22px;
+    overflow-wrap: anywhere;
+    text-align: center;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.hindi-card:hover {
+    transform: translateY(-6px) scale(1.025);
+    box-shadow: 0 15px 30px rgba(70, 70, 120, 0.16);
+}
+
+.hindi-card:active {
+    transform: scale(0.96);
+}
+
+.hindi-letter {
+    max-width: 100%;
+    font-size: clamp(28px, 4vw, 43px);
+    line-height: 1.35;
+    text-align: center;
+    overflow-wrap: anywhere;
+}
+
+.hindi-emoji {
+    max-width: 100%;
+    font-size: clamp(24px, 3vw, 35px);
+    line-height: 1.3;
+}
+
+.hindi-word {
+    max-width: 100%;
+    font-size: clamp(12px, 1.5vw, 16px);
+    line-height: 1.5;
+    text-align: center;
+    overflow-wrap: anywhere;
+}
+
+.hindi-card button {
+    max-width: 100%;
+    min-height: 34px;
+    cursor: pointer;
+}
+
+/* Colour circles stay inside their cards */
+.colour-circle {
+    width: clamp(55px, 7vw, 90px);
+    height: clamp(55px, 7vw, 90px);
+    flex-shrink: 0;
+}
+
+/* Multiplication table buttons */
+.table-choice {
+    width: 100%;
+    max-width: 900px;
+    min-width: 0;
+}
+
+.table-buttons {
+    display: grid;
+    grid-template-columns: repeat(8, minmax(0, 1fr));
+    gap: 10px;
+}
+
+.table-number {
+    min-width: 0;
+    width: 100%;
+    min-height: 44px;
+    height: auto;
+    padding: 8px 3px;
+}
+
+/* Animated entrance for all learning cards */
+@keyframes kidsEmojiFloat {
+    0%, 100% {
+        transform: translateY(0) rotate(0);
+    }
+    50% {
+        transform: translateY(-5px) rotate(3deg);
+    }
+}
+
+@keyframes kidsEmojiPop {
+    0% {
+        transform: scale(1);
+    }
+    55% {
+        transform: scale(1.2) rotate(-5deg);
+    }
+    100% {
+        transform: scale(1.08) rotate(3deg);
+    }
+}
+
+/* Tablets and small laptops */
+@media (max-width: 1000px) {
+    .cards-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .hindi-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .table-buttons {
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+    }
+}
+
+/* Phones */
 @media (max-width: 600px) {
-
-    .hero {
-        min-height: auto;
-        padding: 35px 18px;
-        gap: 20px;
-    }
-
-    .hero h1 {
-        font-size: clamp(32px, 8vw, 44px);
-        line-height: 1.12;
-        letter-spacing: -1px;
-        overflow-wrap: break-word;
-    }
-
-    .hero p {
-        font-size: 15px;
-        line-height: 1.6;
-    }
-
-    .hero-right {
-        min-height: 240px;
-        overflow: hidden;
-    }
-
-    .hero-kid {
-        width: 150px;
-        height: 150px;
-        font-size: 85px;
-    }
-
-    .orbit-one {
-        width: 230px;
-        height: 230px;
-    }
-
-    .orbit-two {
-        width: 280px;
-        height: 280px;
-    }
-
-    .category-section {
-        padding: 35px 14px 55px;
-    }
-
-    .section-heading {
-        margin-bottom: 24px;
-    }
-
-    .section-heading h2 {
-        font-size: clamp(25px, 6vw, 32px);
-        line-height: 1.2;
-    }
-
-    .category-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 12px;
-        width: 100%;
-    }
-
-    .category-card {
-        min-width: 0;
-        min-height: 205px;
-        padding: 16px 12px;
-        border-radius: 23px;
-        overflow-wrap: anywhere;
-    }
-
-    .category-icon {
-        width: 55px;
-        height: 55px;
-        border-radius: 17px;
-        font-size: 29px;
-    }
-
-    .category-card h3 {
-        margin-top: 14px;
-        font-size: clamp(17px, 4.5vw, 21px);
-        line-height: 1.25;
-        overflow-wrap: anywhere;
-    }
-
-    .category-card p {
-        font-size: 13px;
-        line-height: 1.5;
-        overflow-wrap: anywhere;
-    }
-
-    .arrow {
-        right: 12px;
-        bottom: 10px;
-        width: 28px;
-        height: 28px;
-    }
-
-    /* Learning World menu cards */
-    .learning-menu-grid {
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 12px;
-        width: 100%;
-    }
-
-    .learning-menu-card {
-        min-width: 0;
-        width: 100%;
-        min-height: 185px;
-        height: auto;
-        padding: 16px 10px;
-        border-radius: 20px;
-        white-space: normal;
-        overflow-wrap: anywhere;
-    }
-
-    .learning-menu-card h3 {
-        font-size: clamp(16px, 4.2vw, 20px);
-        line-height: 1.3;
-        overflow-wrap: anywhere;
-        word-break: normal;
-    }
-
-    .learning-menu-card p {
-        font-size: 13px;
-        line-height: 1.5;
-        overflow-wrap: anywhere;
-    }
-
-    /* Learning page heading */
     .learning-page {
-        padding: 18px 12px 60px;
+        padding: 16px 12px 55px;
     }
 
     .learning-top {
-        display: flex;
         flex-wrap: wrap;
-        gap: 12px;
-        margin-bottom: 25px;
-        padding: 16px 12px;
-        border-radius: 20px;
-    }
-
-    .back-button {
-        padding: 10px 13px;
-        font-size: 14px;
-    }
-
-    #learningIcon {
-        width: 48px;
-        height: 48px;
-        font-size: 27px;
-        border-radius: 15px;
-        flex-shrink: 0;
+        gap: 10px;
+        padding: 14px 12px;
+        margin-bottom: 22px;
     }
 
     #learningTitle {
         min-width: 0;
-        font-size: clamp(22px, 6vw, 29px);
-        line-height: 1.25;
+        font-size: clamp(21px, 6vw, 29px);
+        line-height: 1.3;
         overflow-wrap: anywhere;
     }
 
     #learningSubtitle {
-        font-size: 14px;
+        font-size: 13px;
         line-height: 1.5;
         overflow-wrap: anywhere;
     }
 
-    .learning-heading,
-    .hindi-learning-heading {
-        width: 100%;
-        padding: 12px 6px;
-        text-align: center;
-    }
-
-    .learning-heading h2,
-    .hindi-learning-heading h2 {
-        font-size: clamp(23px, 6vw, 30px);
-        line-height: 1.35;
-        overflow-wrap: anywhere;
-    }
-
-    .learning-heading p,
-    .hindi-learning-heading p {
-        font-size: 14px;
-        line-height: 1.6;
-    }
-
-    /* General alphabet and learning cards */
     .cards-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 12px;
-        width: 100%;
+        gap: 11px;
     }
 
     .learning-card {
-        min-width: 0;
-        min-height: 155px;
-        padding: 15px 8px;
-        border-radius: 20px;
+        min-height: 150px;
+        padding: 14px 8px;
+        border-radius: 19px;
     }
 
     .letter {
-        font-size: 48px;
+        font-size: clamp(37px, 10vw, 49px);
     }
 
     .learning-emoji {
-        font-size: 39px;
+        font-size: clamp(30px, 8vw, 40px);
     }
 
     .word {
-        font-size: 17px;
-        overflow-wrap: anywhere;
+        font-size: clamp(14px, 4vw, 18px);
     }
 
     .mini-text {
-        font-size: 12px;
-        text-align: center;
-        overflow-wrap: anywhere;
+        font-size: 11px;
     }
 
-    /* Hindi Alphabet: remove narrow, stretched cards */
     .hindi-grid {
-        display: grid;
         grid-template-columns: repeat(3, minmax(0, 1fr));
-        align-items: stretch;
         gap: 10px;
-        width: 100%;
     }
 
     .hindi-card {
-        width: 100%;
-        min-width: 0;
-        min-height: 0;
-        height: auto;
-        padding: 14px 6px;
-        border-radius: 20px;
-        overflow: hidden;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: flex-start;
-        gap: 8px;
+        min-height: 125px;
+        padding: 12px 5px;
+        border-radius: 17px;
     }
 
     .hindi-letter {
-        max-width: 100%;
-        font-size: clamp(27px, 7vw, 38px);
-        line-height: 1.25;
-        overflow-wrap: anywhere;
-        text-align: center;
+        font-size: clamp(27px, 8vw, 37px);
     }
 
-    .hindi-card .hindi-emoji {
-        font-size: 30px;
-        max-width: 100%;
+    .hindi-emoji {
+        font-size: 27px;
     }
 
-    .hindi-card button {
-        max-width: 100%;
+    .hindi-word {
+        font-size: 12px;
     }
 
-    /* Keep tables usable on phones */
     .table-choice {
-        padding: 16px 10px;
+        padding: 15px 10px;
     }
 
     .table-buttons {
@@ -12635,45 +12701,40 @@ svg {
     }
 
     .table-number {
-        min-width: 0;
-        height: 43px;
-        font-size: 15px;
+        min-height: 42px;
+        font-size: 14px;
     }
 }
 
-/* Extra-small phones */
-@media (max-width: 380px) {
-
-    .category-grid,
-    .learning-menu-grid {
-        gap: 9px;
+/* Very narrow phones */
+@media (max-width: 360px) {
+    .cards-grid {
+        gap: 8px;
     }
 
-    .category-card {
-        padding: 13px 9px;
-        min-height: 190px;
-    }
-
-    .learning-menu-card {
-        padding: 13px 8px;
-        min-height: 170px;
+    .learning-card {
+        padding: 12px 5px;
     }
 
     .hindi-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 12px;
-    }
-
-    .hindi-card {
-        padding: 16px 8px;
-    }
-
-    .hindi-letter {
-        font-size: 36px;
-    }
-
-    .cards-grid {
-        gap: 9px;
+        gap: 10px;
     }
 }
 
+/* Respect device motion settings */
+@media (prefers-reduced-motion: reduce) {
+    .learning-card,
+    .learning-card::before,
+    .learning-emoji,
+    .hindi-card {
+        animation: none !important;
+        transition: none !important;
+        scroll-behavior: auto !important;
+    }
+
+    .learning-card:hover,
+    .hindi-card:hover {
+        transform: none;
+    }
+}
