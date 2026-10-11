@@ -12737,3 +12737,165 @@ body {
         transform: none;
     }
 }
+
+
+/* ==================================================
+   📱 KIDS LEARNING WORLD — PHONE FIX
+   Laptop design ko change nahi karega
+================================================== */
+
+@media (max-width: 600px) {
+
+    /* Main page: 6 Learning World cards */
+    .category-section {
+        padding: 30px 12px 45px;
+    }
+
+    .section-heading {
+        margin-bottom: 22px;
+    }
+
+    .section-heading h2 {
+        font-size: 27px;
+        line-height: 1.25;
+        overflow-wrap: break-word;
+    }
+
+    .section-heading p {
+        font-size: 14px;
+        line-height: 1.5;
+    }
+
+    /* 6 cards = 2 columns x 3 rows */
+    .category-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+        width: 100%;
+    }
+
+    .category-card {
+        min-width: 0;
+        min-height: 190px;
+        height: auto;
+        padding: 16px 12px;
+        border-radius: 20px;
+        text-align: center;
+        overflow-wrap: break-word;
+    }
+
+    .category-icon {
+        width: 58px;
+        height: 58px;
+        margin: 0 auto;
+        border-radius: 17px;
+        font-size: 31px;
+    }
+
+    .category-card h3 {
+        margin-top: 13px;
+        font-size: 18px;
+        line-height: 1.3;
+        overflow-wrap: break-word;
+        word-break: normal;
+    }
+
+    .category-card p {
+        margin-top: 7px;
+        font-size: 13px;
+        line-height: 1.5;
+        overflow-wrap: break-word;
+        word-break: normal;
+    }
+
+    .category-card .arrow {
+        position: static;
+        width: auto;
+        height: auto;
+        margin: 10px auto 0;
+        background: transparent;
+        font-size: 18px;
+    }
+
+    /* ABC, Days, Months, Fruits, etc. */
+    .cards-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+    }
+
+    .learning-card {
+        min-width: 0;
+        min-height: 145px;
+        height: auto;
+        padding: 12px 7px;
+        border-radius: 17px;
+    }
+
+    .word {
+        font-size: 15px;
+        line-height: 1.35;
+        overflow-wrap: break-word;
+    }
+
+    .mini-text {
+        font-size: 11px;
+        line-height: 1.4;
+        overflow-wrap: break-word;
+    }
+
+    /* Hindi alphabet */
+    .hindi-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 8px;
+    }
+
+    .hindi-card {
+        min-width: 0;
+        min-height: 115px;
+        padding: 10px 4px;
+    }
+
+    .hindi-word {
+        font-size: 11px;
+        overflow-wrap: break-word;
+    }
+
+    /* Multiplication tables */
+    .table-buttons {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 7px;
+    }
+
+    .table-number {
+        min-width: 0;
+        min-height: 40px;
+        padding: 7px 2px;
+        font-size: 13px;
+    }
+
+    /* Prevent phone-width overflow */
+    .category-grid > *,
+    .cards-grid > *,
+    .hindi-grid > * {
+        max-width: 100%;
+    }
+}
+
+/* Extra-small phones */
+@media (max-width: 360px) {
+    .category-grid {
+        gap: 8px;
+    }
+
+    .category-card {
+        padding: 12px 8px;
+        min-height: 180px;
+    }
+
+    .category-card h3 {
+        font-size: 16px;
+    }
+
+    .category-card p {
+        font-size: 12px;
+    }
+}
