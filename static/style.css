@@ -14221,3 +14221,15 @@ body {
         margin-top: 23px;
     }
 }
+
+
+.ascending-answer-circle {
+    cursor: pointer;
+    user-select: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.ascending-answer-circle.ascending-filled:hover {
+    transform: scale(1.06);
+    box-shadow: 0 0 12px rgba(126, 94, 205, 0.3);
+}
