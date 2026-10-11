@@ -3342,7 +3342,7 @@ function renderSubtractionQuestion() {
         `
         <section class="addition-luxury subtraction-luxury">
             <div class="addition-sparkles" aria-hidden="true">
-                ✨ ⭐ ✦ ✨ ⭐
+               
             </div>
 
             <header class="addition-heading">
