@@ -3089,7 +3089,7 @@ function renderAdditionQuestion() {
         `
         <section class="addition-luxury">
             <div class="addition-sparkles" aria-hidden="true">
-                ✨ ⭐ ✦ ✨ ⭐
+              
             </div>
 
             <header class="addition-heading">
