@@ -14747,3 +14747,251 @@ body {
   }
 }
 
+
+/* =====================================================
+   ✨ MATH WORLD — LUXURY PASTEL UI
+   Scoped styling: Math World category cards only
+   ===================================================== */
+
+/* Luxury background */
+#mathWorld,
+.math-world,
+.math-world-page,
+#mathWorldPage {
+    background:
+        radial-gradient(
+            circle at 10% 10%,
+            rgba(255, 221, 180, 0.28),
+            transparent 35%
+        ),
+        radial-gradient(
+            circle at 90% 15%,
+            rgba(204, 190, 255, 0.28),
+            transparent 35%
+        ),
+        linear-gradient(
+            135deg,
+            #fffaf0 0%,
+            #f7f3ff 48%,
+            #effcf8 100%
+        ) !important;
+
+    padding: 22px;
+    border-radius: 24px;
+}
+
+/* Category grid */
+#mathWorld .categories-grid,
+.math-world .categories-grid,
+.math-world-page .categories-grid,
+#mathWorldPage .categories-grid,
+#mathWorld .learning-grid,
+.math-world .learning-grid {
+    gap: 22px;
+    align-items: stretch;
+}
+
+/* Luxury category cards */
+#mathWorld .category-card,
+.math-world .category-card,
+.math-world-page .category-card,
+#mathWorldPage .category-card,
+#mathWorld .learning-card,
+.math-world .learning-card {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255, 255, 255, 0.97),
+            rgba(255, 249, 239, 0.94)
+        ) !important;
+
+    border: 1px solid rgba(202, 164, 92, 0.38) !important;
+    border-radius: 23px !important;
+
+    box-shadow:
+        0 8px 24px rgba(77, 58, 106, 0.09),
+        inset 0 1px 0 rgba(255, 255, 255, 0.95);
+
+    transition:
+        transform 0.35s ease,
+        box-shadow 0.35s ease,
+        border-color 0.35s ease,
+        background 0.35s ease;
+
+    animation: mathLuxuryAppear 0.7s ease both;
+}
+
+/* Soft moving light */
+#mathWorld .category-card::before,
+.math-world .category-card::before,
+.math-world-page .category-card::before,
+#mathWorldPage .category-card::before,
+#mathWorld .learning-card::before,
+.math-world .learning-card::before {
+    content: "";
+    position: absolute;
+    inset: -60%;
+
+    background: linear-gradient(
+        115deg,
+        transparent 42%,
+        rgba(255, 255, 255, 0.65) 50%,
+        transparent 58%
+    );
+
+    transform: translateX(-65%) rotate(12deg);
+    transition: transform 0.8s ease;
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* Hover luxury glow */
+#mathWorld .category-card:hover,
+.math-world .category-card:hover,
+.math-world-page .category-card:hover,
+#mathWorldPage .category-card:hover,
+#mathWorld .learning-card:hover,
+.math-world .learning-card:hover {
+    transform: translateY(-9px) scale(1.025);
+
+    border-color: #dfbb68 !important;
+
+    box-shadow:
+        0 18px 38px rgba(112, 82, 151, 0.17),
+        0 0 0 3px rgba(236, 210, 151, 0.16),
+        0 0 24px rgba(255, 211, 126, 0.18);
+}
+
+#mathWorld .category-card:hover::before,
+.math-world .category-card:hover::before,
+.math-world-page .category-card:hover::before,
+#mathWorldPage .category-card:hover::before,
+#mathWorld .learning-card:hover::before,
+.math-world .learning-card:hover::before {
+    transform: translateX(65%) rotate(12deg);
+}
+
+/* Category headings */
+#mathWorld .category-card h2,
+#mathWorld .category-card h3,
+.math-world .category-card h2,
+.math-world .category-card h3,
+.math-world-page .category-card h2,
+.math-world-page .category-card h3,
+#mathWorldPage .category-card h2,
+#mathWorldPage .category-card h3,
+#mathWorld .learning-card h2,
+#mathWorld .learning-card h3 {
+    color: #40335e !important;
+    font-weight: 800;
+    letter-spacing: 0.25px;
+    transition: color 0.3s ease;
+}
+
+/* Card text */
+#mathWorld .category-card p,
+.math-world .category-card p,
+.math-world-page .category-card p,
+#mathWorldPage .category-card p,
+#mathWorld .learning-card p,
+.math-world .learning-card p {
+    color: #716781;
+    line-height: 1.65;
+}
+
+/* Emoji and icons */
+#mathWorld .category-card .icon,
+.math-world .category-card .icon,
+.math-world-page .category-card .icon,
+#mathWorldPage .category-card .icon,
+#mathWorld .learning-card .icon,
+.math-world .learning-card .icon {
+    display: inline-block;
+    transform-origin: center;
+    transition: transform 0.35s ease;
+}
+
+#mathWorld .category-card:hover .icon,
+.math-world .category-card:hover .icon,
+.math-world-page .category-card:hover .icon,
+#mathWorldPage .category-card:hover .icon,
+#mathWorld .learning-card:hover .icon,
+.math-world .learning-card:hover .icon {
+    transform: translateY(-4px) rotate(-7deg) scale(1.13);
+}
+
+/* Smooth entrance */
+@keyframes mathLuxuryAppear {
+    from {
+        opacity: 0;
+        transform: translateY(18px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Click feedback */
+#mathWorld .category-card:active,
+.math-world .category-card:active,
+.math-world-page .category-card:active,
+#mathWorldPage .category-card:active,
+#mathWorld .learning-card:active,
+.math-world .learning-card:active {
+    transform: scale(0.975);
+}
+
+/* Keyboard accessibility */
+#mathWorld .category-card:focus-visible,
+.math-world .category-card:focus-visible,
+.math-world-page .category-card:focus-visible,
+#mathWorldPage .category-card:focus-visible {
+    outline: 3px solid #b69ae8;
+    outline-offset: 4px;
+}
+
+/* Mobile responsive */
+@media (max-width: 600px) {
+    #mathWorld,
+    .math-world,
+    .math-world-page,
+    #mathWorldPage {
+        padding: 12px;
+        border-radius: 18px;
+    }
+
+    #mathWorld .category-card,
+    .math-world .category-card,
+    .math-world-page .category-card,
+    #mathWorldPage .category-card,
+    #mathWorld .learning-card,
+    .math-world .learning-card {
+        border-radius: 18px !important;
+    }
+
+    #mathWorld .category-card:hover,
+    .math-world .category-card:hover,
+    .math-world-page .category-card:hover,
+    #mathWorldPage .category-card:hover {
+        transform: translateY(-3px);
+    }
+}
+
+/* Respect reduced-motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    #mathWorld *,
+    .math-world *,
+    .math-world-page *,
+    #mathWorldPage * {
+        animation: none !important;
+        transition: none !important;
+        scroll-behavior: auto !important;
+    }
+}
+
