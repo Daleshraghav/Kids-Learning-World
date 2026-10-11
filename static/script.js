@@ -596,6 +596,24 @@ function goBackFromLearning() {
         ? learningTitle.textContent.trim()
         : "";
 
+    // More Learning topics se Back par main learning menu kholo
+    const moreLearningTopics = [
+        "abc",
+        "hindi",
+        "days",
+        "months",
+        "tables",
+        "fruits",
+        "bodyparts",
+        "animals",
+        "colours"
+    ];
+
+    if (moreLearningTopics.includes(currentCategory)) {
+        openLearningMenu();
+        return;
+    }
+
     // Agar World menu par hain, toh main 6 categories par jao
     const worldTitles = [
         "Language World",
