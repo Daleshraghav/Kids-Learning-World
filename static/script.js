@@ -592,14 +592,8 @@ function goHome() {
 
 
 
-function goBackFromLearning() {
-    // World ke andar se main 6 categories par wapas jao
-    if (adventureMenuOpen) {
-        adventureMenuOpen = false;
-        openLearningMenu();
-        return;
-    }
 
+function goBackFromLearning() {
     const menu = window.currentAdventureMenu;
 
     if (menu === "language") {
@@ -664,6 +658,7 @@ function goBackFromLearning() {
 
     openLearningMenu();
 }
+
 
 /* =========================================================
    🎬 CARD ANIMATION
