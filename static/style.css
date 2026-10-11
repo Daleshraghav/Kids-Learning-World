@@ -13895,3 +13895,56 @@ body {
         animation: none !important;
     }
 }
+
+/* ==========================================
+   ➗ DIVISION LUXURY DESIGN
+========================================== */
+
+.division-luxury .division-sign {
+    color: #b8ffd9;
+    text-shadow: 0 0 18px rgba(100, 255, 190, 0.55);
+    animation: divisionGlow 2s ease-in-out infinite;
+}
+
+.division-luxury .addition-question-card {
+    border-color: rgba(184, 255, 217, 0.75);
+    background:
+        radial-gradient(circle at top, rgba(255,255,255,.1), transparent 65%),
+        linear-gradient(135deg, #183b42, #26345e);
+}
+
+.division-luxury .addition-progress-fill {
+    background: linear-gradient(
+        90deg,
+        #8fffd0,
+        #8bdfff,
+        #c1b4ff
+    );
+}
+
+.division-luxury .addition-next-button {
+    background: linear-gradient(
+        100deg,
+        #8fffd0,
+        #a9e9ff,
+        #d2c0ff
+    );
+}
+
+@keyframes divisionGlow {
+    0%, 100% {
+        transform: scale(1);
+        text-shadow: 0 0 8px rgba(100, 255, 190, .3);
+    }
+
+    50% {
+        transform: scale(1.12);
+        text-shadow: 0 0 22px rgba(100, 255, 190, .8);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .division-luxury .division-sign {
+        animation: none !important;
+    }
+}
