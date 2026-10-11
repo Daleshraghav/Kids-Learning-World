@@ -13842,3 +13842,56 @@ body {
         padding: 8px 20px !important;
     }
 }
+
+/* ==========================================
+   ✖️ MULTIPLICATION LUXURY DESIGN
+========================================== */
+
+.multiplication-luxury .multiplication-sign {
+    color: #a9f3ff;
+    text-shadow: 0 0 18px rgba(100, 225, 255, 0.6);
+    animation: multiplicationGlow 2s ease-in-out infinite;
+}
+
+.multiplication-luxury .addition-question-card {
+    border-color: rgba(169, 243, 255, 0.75);
+    background:
+        radial-gradient(circle at top, rgba(255,255,255,.1), transparent 65%),
+        linear-gradient(135deg, #172b58, #174b59);
+}
+
+.multiplication-luxury .addition-progress-fill {
+    background: linear-gradient(
+        90deg,
+        #83e8ff,
+        #9bafff,
+        #d7a6ff
+    );
+}
+
+.multiplication-luxury .addition-next-button {
+    background: linear-gradient(
+        100deg,
+        #83e8ff,
+        #b4c7ff,
+        #e2b5ff
+    );
+}
+
+@keyframes multiplicationGlow {
+    0%, 100% {
+        transform: scale(1);
+        text-shadow: 0 0 8px rgba(100, 225, 255, .3);
+    }
+
+    50% {
+        transform: scale(1.12);
+        text-shadow: 0 0 22px rgba(100, 225, 255, .8);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .multiplication-luxury .multiplication-sign {
+        animation: none !important;
+    }
+}
