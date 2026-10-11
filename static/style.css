@@ -12027,3 +12027,297 @@ table tr:hover {
 
 }
 
+/* ==========================================
+   📖 WORD MEANING - RESPONSIVE DESIGN
+========================================== */
+
+.word-meaning-section {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 12px;
+    box-sizing: border-box;
+}
+
+.word-meaning-intro {
+    text-align: center;
+    padding: 24px 16px;
+    margin-bottom: 22px;
+    border-radius: 24px;
+    background: linear-gradient(135deg, #e0f2fe, #f3e8ff, #fce7f3);
+    box-shadow: 0 10px 28px rgba(75, 65, 150, 0.12);
+}
+
+.word-meaning-badge {
+    display: inline-block;
+    padding: 7px 13px;
+    border-radius: 30px;
+    background: #fff;
+    color: #6d28d9;
+    font-size: 12px;
+    font-weight: 900;
+    letter-spacing: 1px;
+}
+
+.word-meaning-intro h2 {
+    color: #27366d;
+    font-size: clamp(22px, 4vw, 34px);
+    margin: 12px 0 8px;
+}
+
+.word-meaning-intro p {
+    color: #46516e;
+    line-height: 1.6;
+    margin: 0;
+}
+
+.word-meaning-progress {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 16px;
+}
+
+.word-meaning-progress span {
+    background: rgba(255,255,255,.85);
+    padding: 8px 12px;
+    border-radius: 30px;
+    color: #374151;
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.word-meaning-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.word-meaning-card {
+    position: relative;
+    min-width: 0;
+    overflow: hidden;
+    padding: 18px 12px 16px;
+    border: 2px solid rgba(255,255,255,.9);
+    border-radius: 22px;
+    text-align: center;
+    background: linear-gradient(145deg, #ffffff, #eff6ff);
+    box-shadow: 0 8px 22px rgba(45, 55, 100, .10);
+    animation: wordMeaningAppear .55s ease both;
+    animation-delay: var(--word-delay, 0ms);
+    transition: transform .25s ease, box-shadow .25s ease;
+}
+
+.word-meaning-card:nth-child(3n + 1) {
+    background: linear-gradient(145deg, #dbeafe, #f0f9ff);
+}
+
+.word-meaning-card:nth-child(3n + 2) {
+    background: linear-gradient(145deg, #fef3c7, #fff7ed);
+}
+
+.word-meaning-card:nth-child(3n) {
+    background: linear-gradient(145deg, #f3e8ff, #fce7f3);
+}
+
+.word-meaning-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 14px 28px rgba(45, 55, 100, .17);
+}
+
+.word-meaning-number {
+    position: absolute;
+    top: 8px;
+    left: 9px;
+    width: 26px;
+    height: 26px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: #ffffff;
+    color: #5145a5;
+    font-size: 11px;
+    font-weight: 900;
+}
+
+.word-meaning-picture {
+    font-size: clamp(30px, 4vw, 48px);
+    line-height: 1.3;
+    margin: 8px 0;
+    animation: wordPictureFloat 3s ease-in-out infinite;
+}
+
+.word-meaning-card h3 {
+    color: #25356b;
+    font-size: clamp(14px, 2vw, 21px);
+    overflow-wrap: anywhere;
+    margin: 8px 0;
+}
+
+.word-meaning-hindi {
+    display: inline-block;
+    max-width: 100%;
+    padding: 6px 10px;
+    border-radius: 20px;
+    background: #fff;
+    color: #9d174d;
+    font-size: clamp(12px, 1.7vw, 16px);
+    font-weight: 900;
+    overflow-wrap: anywhere;
+}
+
+.word-meaning-card p {
+    color: #374151;
+    font-size: clamp(11px, 1.5vw, 14px);
+    line-height: 1.5;
+    margin: 12px 0;
+    overflow-wrap: anywhere;
+}
+
+.word-speak-button {
+    border: 0;
+    border-radius: 30px;
+    padding: 8px 13px;
+    background: linear-gradient(135deg, #6366f1, #9333ea);
+    color: white;
+    font-size: 12px;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.word-speak-button:active {
+    transform: scale(.95);
+}
+
+.word-meaning-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin: 24px 0 12px;
+}
+
+.word-meaning-pagination button {
+    border: none;
+    border-radius: 14px;
+    padding: 12px 16px;
+    background: linear-gradient(135deg, #4f46e5, #9333ea);
+    color: white;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.word-meaning-pagination button:disabled {
+    opacity: .4;
+    cursor: not-allowed;
+}
+
+.word-meaning-pagination span {
+    color: #303b68;
+    font-weight: 900;
+}
+
+.word-meaning-tip {
+    text-align: center;
+    color: #4b5563;
+    line-height: 1.6;
+    font-size: 14px;
+    padding: 10px;
+}
+
+@keyframes wordMeaningAppear {
+    from {
+        opacity: 0;
+        transform: translateY(15px) scale(.97);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes wordPictureFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-4px); }
+}
+
+@media (max-width: 600px) {
+    .word-meaning-section {
+        padding: 5px;
+    }
+
+    .word-meaning-intro {
+        padding: 18px 10px;
+        border-radius: 18px;
+    }
+
+    .word-meaning-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 8px;
+    }
+
+    .word-meaning-card {
+        padding: 12px 5px;
+        border-radius: 15px;
+    }
+
+    .word-meaning-number {
+        top: 5px;
+        left: 5px;
+        width: 20px;
+        height: 20px;
+        font-size: 10px;
+    }
+
+    .word-meaning-picture {
+        font-size: 28px;
+        margin: 10px 0 5px;
+    }
+
+    .word-meaning-card h3 {
+        font-size: 13px;
+        margin: 6px 0;
+    }
+
+    .word-meaning-hindi {
+        font-size: 11px;
+        padding: 5px 6px;
+    }
+
+    .word-meaning-card p {
+        font-size: 11px;
+        line-height: 1.4;
+        margin: 8px 0;
+    }
+
+    .word-speak-button {
+        width: 100%;
+        padding: 8px 3px;
+        font-size: 11px;
+    }
+
+    .word-meaning-pagination {
+        gap: 8px;
+    }
+
+    .word-meaning-pagination button {
+        padding: 11px 12px;
+        font-size: 12px;
+    }
+
+    .word-meaning-pagination span {
+        font-size: 12px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .word-meaning-card,
+    .word-meaning-picture {
+        animation: none;
+        transition: none;
+    }
+}
+
+
