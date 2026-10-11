@@ -538,6 +538,7 @@ function setupLearning(icon, title, subtitle, content) {
 /* 🚀 START LEARNING BUTTON FIX */
 
 function openLearningMenu() {
+   alert("Start Learning function chal raha hai!");
     if (!homePage || !learningPage || !learningContent) {
         console.error("Learning page elements nahi mile!");
         return;
