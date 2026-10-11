@@ -36,6 +36,7 @@ const learningIcon = document.getElementById("learningIcon");
    ========================================================= */
 
 let currentCategory = "";
+let adventureMenuOpen = false;
 let currentSpeech = null;
 let speechSupported = "speechSynthesis" in window;
 
@@ -590,7 +591,15 @@ function goHome() {
 
 
 
+
 function goBackFromLearning() {
+    // World ke andar se main 6 categories par wapas jao
+    if (adventureMenuOpen) {
+        adventureMenuOpen = false;
+        openLearningMenu();
+        return;
+    }
+
     const menu = window.currentAdventureMenu;
 
     if (menu === "language") {
@@ -655,7 +664,6 @@ function goBackFromLearning() {
 
     openLearningMenu();
 }
-
 
 /* =========================================================
    🎬 CARD ANIMATION
@@ -1580,6 +1588,7 @@ function openAdventure(type) {
 
     currentCategory = type;
    window.currentAdventureMenu = type;
+   adventureMenuOpen = true;
 
     if (type === "language") {
 
