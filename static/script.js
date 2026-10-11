@@ -3827,23 +3827,310 @@ function showMultiplicationResults() {
 }
 
 
-/* =========================================================
-   ➗ DIVISION
-   ========================================================= */
+/* ==========================================
+   ➗ DIVISION PRACTICE — 50 QUESTIONS
+========================================== */
+
+let divisionPractice = {
+    questions: [],
+    index: 0,
+    answered: false,
+    correct: 0,
+    wrong: 0
+};
+
+function createDivisionQuestions() {
+    const questions = [];
+
+    for (let i = 0; i < 50; i++) {
+        let minDivisor, maxDivisor, level;
+
+        if (i < 20) {
+            minDivisor = 2;
+            maxDivisor = 10;
+            level = "Easy Practice · Divisors 2–10";
+        } else if (i < 30) {
+            minDivisor = 2;
+            maxDivisor = 15;
+            level = "Medium Practice · Divisors 2–15";
+        } else {
+            minDivisor = 2;
+            maxDivisor = 20;
+            level = "Challenge Practice · Divisors 2–20";
+        }
+
+        const divisor = Math.floor(
+            Math.random() * (maxDivisor - minDivisor + 1)
+        ) + minDivisor;
+
+        const quotient = Math.floor(Math.random() * 12) + 1;
+        const dividend = divisor * quotient;
+
+        questions.push({
+            a: dividend,
+            b: divisor,
+            answer: quotient,
+            level
+        });
+    }
+
+    return questions;
+}
 
 function startDivisionGame() {
+    divisionPractice = {
+        questions: createDivisionQuestions(),
+        index: 0,
+        answered: false,
+        correct: 0,
+        wrong: 0
+    };
 
-    const b = Math.floor(Math.random() * 9) + 1;
-    const answer = Math.floor(Math.random() * 10) + 1;
-    const a = b * answer;
+    renderDivisionQuestion();
+}
 
-    showMathQuestion(
-        "➗ Division",
-        `${a} ÷ ${b} = ?`,
-        answer
+function renderDivisionQuestion() {
+    const game = divisionPractice;
+    const q = game.questions[game.index];
+
+    if (!q) return;
+
+    game.answered = false;
+
+    const number = game.index + 1;
+    const options = new Set([q.answer]);
+
+    while (options.size < 4) {
+        const offset = Math.floor(Math.random() * 11) - 5;
+        const choice = q.answer + offset;
+
+        if (choice >= 0 && choice !== q.answer) {
+            options.add(choice);
+        }
+    }
+
+    const shuffledOptions =
+        typeof shuffleArray === "function"
+            ? shuffleArray([...options])
+            : [...options].sort(() => Math.random() - 0.5);
+
+    setupLearning(
+        "➗",
+        "Division Practice",
+        `Question ${number} of 50`,
+        `
+        <section class="addition-luxury division-luxury">
+
+            <div class="addition-sparkles" aria-hidden="true">
+                
+            </div>
+
+            <header class="addition-heading">
+                <div class="addition-crown">👑</div>
+                <h2>Let's Learn Division!</h2>
+                <p>${q.level}</p>
+            </header>
+
+            <div class="addition-progress-info">
+                <span>QUESTION ${number} / 50</span>
+                <span>⭐ ${game.correct} correct</span>
+            </div>
+
+            <div class="addition-progress-track">
+                <div class="addition-progress-fill"
+                     style="width:${number * 2}%"></div>
+            </div>
+
+            <div class="addition-question-card">
+                <div class="addition-question-label">
+                    💫 Solve the question
+                </div>
+
+                <div class="addition-equation">
+                    <span>${q.a}</span>
+                    <span class="division-sign">÷</span>
+                    <span>${q.b}</span>
+                </div>
+
+                <div class="addition-equals">= ?</div>
+            </div>
+
+            <p class="addition-prompt">
+                Choose the correct answer
+            </p>
+
+            <div class="addition-options">
+                ${shuffledOptions.map((option, i) => `
+                    <button
+                        type="button"
+                        class="addition-option"
+                        style="--option-index:${i}"
+                        onclick="checkDivisionAnswer(${option}, this)">
+                        ${option}
+                    </button>
+                `).join("")}
+            </div>
+
+            <div id="division-feedback"
+                 class="addition-feedback"
+                 aria-live="polite">
+                🌟 You can do it!
+            </div>
+
+            <button
+                type="button"
+                class="addition-next-button"
+                id="division-next-button"
+                onclick="nextDivisionQuestion()"
+                disabled>
+                ${number === 50
+                    ? "View Final Result 🏆"
+                    : "Next Question →"}
+            </button>
+
+            <p class="addition-score-line"
+               id="division-score-line">
+                Correct: ${game.correct} · Incorrect: ${game.wrong}
+            </p>
+
+        </section>
+        `
     );
 }
 
+function checkDivisionAnswer(answer, button) {
+    const game = divisionPractice;
+
+    if (!game || game.answered) return;
+
+    const q = game.questions[game.index];
+
+    const feedback = document.getElementById("division-feedback");
+    const next = document.getElementById("division-next-button");
+
+    if (!feedback || !next) return;
+
+    game.answered = true;
+
+    document.querySelectorAll(
+        ".division-luxury .addition-option"
+    ).forEach(option => {
+        option.disabled = true;
+
+        if (Number(option.textContent.trim()) === q.answer) {
+            option.classList.add("addition-correct");
+        }
+    });
+
+    if (answer === q.answer) {
+        game.correct++;
+        button.classList.add("addition-correct");
+
+        feedback.className =
+            "addition-feedback addition-feedback-correct";
+
+        feedback.textContent =
+            "🎉 Excellent! Your answer is correct!";
+
+        if (typeof addScore === "function") addScore(10);
+        if (typeof addStars === "function") addStars(1);
+
+    } else {
+        game.wrong++;
+        button.classList.add("addition-wrong");
+
+        feedback.className =
+            "addition-feedback addition-feedback-wrong";
+
+        feedback.textContent =
+            `💛 Good try! The correct answer is ${q.answer}.`;
+    }
+
+    next.disabled = false;
+
+    const scoreLine = document.getElementById("division-score-line");
+
+    if (scoreLine) {
+        scoreLine.textContent =
+            `Correct: ${game.correct} · Incorrect: ${game.wrong}`;
+    }
+}
+
+function nextDivisionQuestion() {
+    const game = divisionPractice;
+
+    if (!game || !game.answered) return;
+
+    if (game.index === 49) {
+        showDivisionResults();
+        return;
+    }
+
+    game.index++;
+    renderDivisionQuestion();
+}
+
+function showDivisionResults() {
+    const game = divisionPractice;
+    const percentage = Math.round((game.correct / 50) * 100);
+
+    let message = "Keep practising! You are learning every day. 💛";
+
+    if (percentage >= 90) {
+        message = "Amazing! You are a Division Star! 🌟";
+    } else if (percentage >= 70) {
+        message = "Wonderful work! Keep learning! 🎉";
+    } else if (percentage >= 50) {
+        message = "Good effort! You are getting better! 👏";
+    }
+
+    setupLearning(
+        "🏆",
+        "Division Complete",
+        "You solved all 50 questions!",
+        `
+        <section class="addition-luxury division-luxury addition-results">
+
+            <div class="addition-crown">🏆</div>
+
+            <h2>Well Done!</h2>
+
+            <div class="addition-final-score">
+                ${game.correct} / 50
+            </div>
+
+            <p class="addition-result-message">
+                ${message}
+            </p>
+
+            <div class="addition-result-stats">
+                <div>
+                    ✅ Correct
+                    <strong>${game.correct}</strong>
+                </div>
+
+                <div>
+                    ❌ Incorrect
+                    <strong>${game.wrong}</strong>
+                </div>
+
+                <div>
+                    🎯 Score
+                    <strong>${percentage}%</strong>
+                </div>
+            </div>
+
+            <button
+                type="button"
+                class="addition-next-button"
+                onclick="startDivisionGame()">
+                Practise Again 🔄
+            </button>
+
+        </section>
+        `
+    );
+}
 
 /* =========================================================
    🧮 MATH QUESTION
