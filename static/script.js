@@ -535,6 +535,41 @@ function setupLearning(icon, title, subtitle, content) {
 }
 
 
+/* 🚀 START LEARNING BUTTON FIX */
+
+function openLearningMenu() {
+    if (!homePage || !learningPage || !learningContent) {
+        console.error("Learning page elements nahi mile!");
+        return;
+    }
+
+    stopSpeech();
+
+    currentCategory = "menu";
+
+    homePage.style.display = "none";
+    learningPage.style.display = "block";
+    learningPage.classList.add("learning-menu-page");
+
+    if (learningIcon) {
+        learningIcon.textContent = "🌟";
+    }
+
+    if (learningTitle) {
+        learningTitle.textContent = "Choose Your Learning World";
+    }
+
+    if (learningSubtitle) {
+        learningSubtitle.textContent =
+            "Learn • Play • Explore • Create";
+    }
+
+    learningContent.innerHTML = renderLearningMenu();
+
+    scrollToTop();
+    animateLearningCards();
+}
+
 function goHome() {
 
     stopSpeech();
