@@ -4262,24 +4262,28 @@ function openNumberNames() {
 
 
 
-/* ==========================================
-   ASCENDING ORDER - KIDS LEARNING WORLD
-   ========================================== */
+/* =====================================================
+   ASCENDING ORDER — KIDS LEARNING WORLD
+   20 QUESTIONS | RANDOM NUMBERS | CIRCULAR ANSWERS
+   ===================================================== */
 
 let ascendingState = {
     question: 0,
     score: 0,
     numbers: [],
     selected: [],
+    usedQuestions: new Set(),
     locked: false
 };
 
+/* Fresh session whenever the activity opens */
 function openAscendingOrder() {
     ascendingState = {
         question: 0,
         score: 0,
         numbers: [],
         selected: [],
+        usedQuestions: new Set(),
         locked: false
     };
 
@@ -4289,6 +4293,7 @@ function openAscendingOrder() {
         "Arrange from smallest to largest",
         `
         <section class="ascending-luxury">
+
             <div class="ascending-top">
                 <span>✨ MATHS WORLD ✨</span>
                 <h2>Ascending Order</h2>
@@ -4316,20 +4321,24 @@ function openAscendingOrder() {
             <div id="ascendingAnswers"
                  class="ascending-answer-circles"></div>
 
-            <p id="ascendingFeedback" class="ascending-feedback"
+            <p id="ascendingFeedback"
+               class="ascending-feedback"
                aria-live="polite"></p>
 
             <button id="ascendingReset"
                     class="ascending-reset"
+                    style="display:none"
                     onclick="resetAscendingAnswer()">
                 ↻ Try Again
             </button>
 
             <button id="ascendingNext"
                     class="ascending-next"
+                    style="display:none"
                     onclick="nextAscendingQuestion()">
                 Next Question →
             </button>
+
         </section>
         `
     );
@@ -4337,33 +4346,59 @@ function openAscendingOrder() {
     renderAscendingQuestion();
 }
 
-function createAscendingNumbers(index) {
-    const questions = [
-        [12, 25, 45, 36, 14, 3],
-        [18, 7, 32, 21, 5],
-        [42, 16, 9, 27, 11, 34],
-        [65, 23, 48, 12, 39],
-        [54, 8, 31, 19, 46, 2],
-        [72, 35, 14, 58, 26],
-        [91, 43, 67, 18, 52, 29],
-        [38, 11, 75, 24, 6],
-        [84, 32, 57, 13, 69, 41],
-        [95, 28, 63, 7, 44],
-        [105, 48, 76, 23, 91, 37],
-        [132, 65, 18, 109, 54],
-        [215, 87, 146, 32, 178, 64],
-        [304, 125, 267, 89, 193],
-        [425, 168, 312, 76, 239, 184],
-        [518, 246, 397, 125, 463],
-        [625, 184, 739, 352, 491, 267],
-        [804, 316, 572, 148, 693],
-        [925, 471, 238, 816, 359, 604],
-        [1205, 875, 1432, 692, 1086, 954]
-    ];
 
-    return [...questions[index]];
+/* Generate new, non-repeating number combinations */
+function createAscendingNumbers(index) {
+    const count = Math.random() < 0.5 ? 5 : 6;
+
+    // Gradually increase difficulty
+    let min, max;
+
+    if (index < 5) {
+        min = 1;
+        max = 100;
+    } else if (index < 12) {
+        min = 20;
+        max = 500;
+    } else {
+        min = 100;
+        max = 1500;
+    }
+
+    let numbers;
+    let key;
+
+    do {
+        const numberSet = new Set();
+
+        while (numberSet.size < count) {
+            numberSet.add(
+                Math.floor(Math.random() * (max - min + 1)) + min
+            );
+        }
+
+        numbers = [...numberSet];
+
+        // Track the combination regardless of its displayed order
+        key = [...numbers]
+            .sort((a, b) => a - b)
+            .join(",");
+
+    } while (ascendingState.usedQuestions.has(key));
+
+    ascendingState.usedQuestions.add(key);
+
+    // Randomize the displayed order
+    for (let i = numbers.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [numbers[i], numbers[j]] = [numbers[j], numbers[i]];
+    }
+
+    return numbers;
 }
 
+
+/* Display one question */
 function renderAscendingQuestion() {
     const numbersBox = document.getElementById("ascendingNumbers");
     const answersBox = document.getElementById("ascendingAnswers");
@@ -4397,49 +4432,67 @@ function renderAscendingQuestion() {
     numbersBox.innerHTML = "";
     answersBox.innerHTML = "";
 
-    ascendingState.numbers.forEach((number, index) => {
+    // Create circular number buttons
+    ascendingState.numbers.forEach((number) => {
         const button = document.createElement("button");
+
+        button.type = "button";
         button.className = "ascending-number-circle";
         button.textContent = String(number).padStart(2, "0");
-        button.type = "button";
         button.setAttribute("aria-label", `Choose ${number}`);
 
-        button.onclick = () => selectAscendingNumber(number, button);
+        button.onclick = () => {
+            selectAscendingNumber(number, button);
+        };
 
         numbersBox.appendChild(button);
     });
 
+    // Empty answer circles; answers are never shown in advance
     ascendingState.numbers.forEach(() => {
         const slot = document.createElement("div");
+
         slot.className = "ascending-answer-circle";
-        slot.textContent = "";
+        slot.setAttribute("aria-label", "Empty answer slot");
+
         answersBox.appendChild(slot);
     });
 }
 
+
+/* Move the clicked number into the next answer circle */
 function selectAscendingNumber(number, button) {
-    if (ascendingState.locked) return;
-    if (ascendingState.selected.includes(number)) return;
+    if (ascendingState.locked || button.disabled) return;
 
     ascendingState.selected.push(number);
-    button.classList.add("ascending-picked");
-    button.disabled = true;
 
-    const slots = document.querySelectorAll(".ascending-answer-circle");
+    button.disabled = true;
+    button.classList.add("ascending-picked");
+
+    const slots = document.querySelectorAll(
+        "#ascendingAnswers .ascending-answer-circle"
+    );
+
     const slot = slots[ascendingState.selected.length - 1];
 
     if (slot) {
         slot.textContent = String(number).padStart(2, "0");
         slot.classList.add("ascending-filled");
+        slot.setAttribute("aria-label", `Selected ${number}`);
     }
 
+    // Check only after all numbers have been selected
     if (ascendingState.selected.length === ascendingState.numbers.length) {
         checkAscendingAnswer();
     }
 }
 
+
+/* Check the complete sequence */
 function checkAscendingAnswer() {
-    const correctOrder = [...ascendingState.numbers].sort((a, b) => a - b);
+    const correctOrder = [...ascendingState.numbers]
+        .sort((a, b) => a - b);
+
     const isCorrect = ascendingState.selected.every(
         (number, index) => number === correctOrder[index]
     );
@@ -4454,69 +4507,95 @@ function checkAscendingAnswer() {
             ascendingState.score;
 
         feedback.textContent = "🎉 Excellent! Correct Answer!";
-        feedback.className = "ascending-feedback ascending-correct";
+        feedback.className =
+            "ascending-feedback ascending-correct";
 
-        document.querySelectorAll(".ascending-answer-circle")
-            .forEach(slot => slot.classList.add("ascending-correct-slot"));
+        document.querySelectorAll(
+            "#ascendingAnswers .ascending-answer-circle"
+        ).forEach(slot => {
+            slot.classList.add("ascending-correct-slot");
+        });
 
         document.getElementById("ascendingProgressFill").style.width =
-            `${(ascendingState.question + 1) / 20 * 100}%`;
+            `${((ascendingState.question + 1) / 20) * 100}%`;
 
-        if (ascendingState.question < 19) {
-            document.getElementById("ascendingNext").style.display = "block";
-        } else {
-            document.getElementById("ascendingNext").textContent =
-                "View Results 🏆";
-            document.getElementById("ascendingNext").style.display = "block";
-        }
+        const nextButton = document.getElementById("ascendingNext");
+
+        nextButton.textContent =
+            ascendingState.question === 19
+                ? "View Results 🏆"
+                : "Next Question →";
+
+        nextButton.style.display = "block";
+
     } else {
         feedback.textContent = "💜 Not quite! Try again.";
-        feedback.className = "ascending-feedback ascending-wrong";
+        feedback.className =
+            "ascending-feedback ascending-wrong";
 
-        document.getElementById("ascendingReset").style.display = "block";
+        document.getElementById("ascendingReset").style.display =
+            "block";
     }
 }
 
-function resetAscendingAnswer() {
-    ascendingState.selected = [];
-    ascendingState.locked = false;
 
-    document.querySelectorAll(".ascending-number-circle").forEach(button => {
+/* Retry the same question */
+function resetAscendingAnswer() {
+    if (ascendingState.locked) return;
+
+    ascendingState.selected = [];
+
+    document.querySelectorAll(
+        "#ascendingNumbers .ascending-number-circle"
+    ).forEach(button => {
         button.disabled = false;
         button.classList.remove("ascending-picked");
     });
 
-    document.querySelectorAll(".ascending-answer-circle").forEach(slot => {
+    document.querySelectorAll(
+        "#ascendingAnswers .ascending-answer-circle"
+    ).forEach(slot => {
         slot.textContent = "";
         slot.classList.remove(
             "ascending-filled",
             "ascending-correct-slot"
         );
+        slot.setAttribute("aria-label", "Empty answer slot");
     });
 
     document.getElementById("ascendingFeedback").textContent = "";
     document.getElementById("ascendingReset").style.display = "none";
 }
 
+
+/* Move to the next question */
 function nextAscendingQuestion() {
     if (!ascendingState.locked) return;
 
     ascendingState.question++;
+
     renderAscendingQuestion();
 }
 
+
+/* Final results */
 function showAscendingResults() {
     const content = document.querySelector(".ascending-luxury");
+
     if (!content) return;
 
     content.innerHTML = `
         <div class="ascending-results">
             <div class="ascending-trophy">🏆</div>
             <h2>Wonderful Work!</h2>
-            <p>You completed all 20 questions.</p>
+            <p>You completed all 20 questions!</p>
+
             <div class="ascending-final-score">
                 ⭐ ${ascendingState.score} / 20
             </div>
+
+            <p>Keep learning and keep shining! ✨</p>
+
             <button class="ascending-next"
                     onclick="openAscendingOrder()">
                 Play Again ↻
