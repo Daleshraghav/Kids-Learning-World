@@ -1177,135 +1177,100 @@ function handleHindiKey(event, card, index) {
    🎁 LEARNING GIFT INTRO
    Glow → Shake → Open → Books → Home
 ========================================================= */
-window.openLearningGift = function () {
 
-    const intro = document.getElementById("giftIntro");
-    const giftBox = document.getElementById("learningGiftBox");
-    const homePage = document.getElementById("homePage");
+(function () {
+    "use strict";
 
-    if (!intro || !giftBox) {
-        console.error("Gift box not found!");
-        return;
-    }
+    let giftAnimationStarted = false;
 
-    if (intro.classList.contains("gift-opening")) {
-        return;
-    }
+    function openLearningGift() {
+        const intro = document.getElementById("giftIntro");
+        const giftBox = document.getElementById("learningGiftBox");
+        const homePage = document.getElementById("homePage");
 
-    console.log("🎁 Gift clicked!");
-
-    intro.classList.add("gift-opening");
-
-    giftBox.disabled = true;
-
-    /* STEP 1 - Yellow glow */
-    setTimeout(function () {
-        intro.classList.add("gift-glowing");
-    }, 50);
-
-    /* STEP 2 - Lid opens */
-    setTimeout(function () {
-        intro.classList.add("gift-open");
-    }, 800);
-
-    /* STEP 3 - Books */
-    setTimeout(function () {
-        intro.classList.add("books-coming-out");
-    }, 1300);
-
-    /* STEP 4 - Final glow */
-    setTimeout(function () {
-        intro.classList.add("gift-final-glow");
-    }, 2000);
-
-    /* STEP 5 - Home */
-    setTimeout(function () {
-
-        if (homePage) {
-            homePage.style.display = "block";
-            homePage.classList.add("home-page-opening");
+        if (!intro || !giftBox) {
+            console.error(
+                "Gift opening failed: giftIntro or learningGiftBox not found."
+            );
+            return;
         }
 
-        intro.classList.add("gift-hide");
-
-    }, 2900);
-
-    /* STEP 6 */
-    setTimeout(function () {
-
-        intro.style.display = "none";
-
-        if (homePage) {
-            homePage.style.display = "block";
-            homePage.classList.remove("home-page-opening");
+        if (giftAnimationStarted) {
+            return;
         }
 
-    }, 4000);
-};
+        giftAnimationStarted = true;
+        console.log("Gift clicked! Starting animation.");
 
-/* =========================================================
-   📚 LEARNING MENU
-   ========================================================= */
+        giftBox.disabled = true;
+        giftBox.setAttribute("aria-label", "Opening learning gift");
 
-function openLearningMenu() {
+        // STEP 1: Start the yellow glow
+        intro.classList.add("gift-opening");
 
-    stopSpeech();
+        setTimeout(function () {
+            intro.classList.add("gift-glowing");
+        }, 50);
 
-    currentCategory = "menu";
+        // STEP 2: Open the lid
+        setTimeout(function () {
+            intro.classList.add("gift-open");
+        }, 800);
 
-    if (homePage) {
-        homePage.style.display = "none";
+        // STEP 3: Books rise from the gift
+        setTimeout(function () {
+            intro.classList.add("books-coming-out");
+        }, 1300);
+
+        // STEP 4: Final magical glow
+        setTimeout(function () {
+            intro.classList.add("gift-final-glow");
+        }, 2000);
+
+        // STEP 5: Reveal the home page behind the intro
+        setTimeout(function () {
+            if (homePage) {
+                homePage.style.display = "block";
+                homePage.classList.add("home-page-opening");
+            }
+        }, 2400);
+
+        // STEP 6: Remove the intro screen
+        setTimeout(function () {
+            intro.classList.add("gift-hide");
+        }, 2900);
+
+        // STEP 7: Finish the transition
+        setTimeout(function () {
+            intro.style.display = "none";
+
+            if (homePage) {
+                homePage.style.display = "block";
+                homePage.classList.remove("home-page-opening");
+            }
+
+            console.log("Gift animation completed.");
+        }, 3800);
     }
 
-    if (learningPage) {
-        learningPage.style.display = "block";
-        learningPage.classList.add("learning-menu-page");
+    // Expose function for HTML and browser debugging
+    window.openLearningGift = openLearningGift;
+
+    // Attach click handler directly to the gift button
+    function setupGiftButton() {
+        const giftBox = document.getElementById("learningGiftBox");
+
+        if (giftBox) {
+            giftBox.addEventListener("click", openLearningGift);
+        }
     }
 
-    if (learningIcon) {
-        learningIcon.textContent = "🚀";
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", setupGiftButton);
+    } else {
+        setupGiftButton();
     }
-
-    if (learningTitle) {
-        learningTitle.textContent =
-            "What do you want to learn?";
-    }
-
-    if (learningSubtitle) {
-        learningSubtitle.textContent =
-            "Choose a topic and let's start learning! ✨";
-    }
-
-    if (learningContent) {
-        learningContent.innerHTML =
-            renderLearningMenu();
-    }
-
-    scrollToTop();
-
-    animateLearningCards();
-}
-
-
-function backToLearningMenu() {
-   
-   if (currentCategory === "menu") {
-        goHome();
-        return;
-    }
-
-    openLearningMenu();
-}
-function removeLearningMenuMode() {
-
-    if (learningPage) {
-        learningPage.classList.remove(
-            "learning-menu-page"
-        );
-    }
-}
-
-   
+})();
 
 /* =========================================================
    🌟 MAIN ADVENTURE MENU
