@@ -1509,6 +1509,12 @@ function renderLearningMenu() {
    🚀 OPEN ADVENTURE
    ========================================================= */
 
+function removeLearningMenuMode() {
+    if (learningPage) {
+        learningPage.classList.remove("learning-menu-page");
+    }
+}
+
 function openAdventure(type) {
 
     stopSpeech();
