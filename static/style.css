@@ -12990,91 +12990,117 @@ body {
     }
 }
 
-```css
-/* 🌈 PREMIUM PASTEL NUMBER NAMES DESIGN */
+/* 🌈 NUMBER NAMES — COLOURFUL & MOBILE FRIENDLY */
+
+.number-names-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 14px;
+    width: 100%;
+    margin: 18px auto;
+}
 
 .number-name-card {
+    min-width: 0;
+    min-height: 130px;
+    padding: 14px 8px;
+    border: 2px solid rgba(255,255,255,.95);
+    border-radius: 22px;
     background: linear-gradient(
         145deg,
-        hsl(var(--card-hue), 90%, 97%),
-        hsl(calc(var(--card-hue) + 25), 85%, 91%)
-    ) !important;
-
-    border: 2px solid rgba(255, 255, 255, 0.98) !important;
-    border-radius: 22px !important;
-
-    box-shadow:
-        0 5px 0 rgba(91, 69, 150, 0.10),
-        0 8px 22px rgba(91, 69, 150, 0.10) !important;
-
-    transition:
-        transform 0.25s ease,
-        box-shadow 0.25s ease !important;
+        hsl(var(--card-hue), 90%, 96%),
+        hsl(calc(var(--card-hue) + 25), 85%, 87%)
+    );
+    box-shadow: 0 5px 0 rgba(70, 50, 120, .12);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    cursor: pointer;
+    font-family: inherit;
+    overflow-wrap: anywhere;
+    animation: numberCardPop .45s ease both;
+    transition: transform .22s ease, box-shadow .22s ease;
+    -webkit-tap-highlight-color: transparent;
 }
-
-/* 🔢 BIG, BOLD & HIGHLIGHTED NUMBER */
-
-.number-name-number {
-    font-size: clamp(2rem, 5vw, 2.7rem) !important;
-    font-weight: 1000 !important;
-    line-height: 1.1 !important;
-    color: #5132A5 !important;
-
-    text-shadow:
-        0 2px 0 #FFFFFF,
-        0 4px 12px rgba(81, 50, 165, 0.13) !important;
-}
-
-/* ✨ CLEAR & BOLD NUMBER NAME */
-
-.number-name-word {
-    font-size: clamp(0.95rem, 2vw, 1.2rem) !important;
-    font-weight: 900 !important;
-    color: #30204F !important;
-    line-height: 1.3 !important;
-    text-align: center !important;
-    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
-}
-
-/* 🔊 SPEAK LABEL */
-
-.number-name-speak {
-    color: #625184 !important;
-    font-weight: 750 !important;
-    opacity: 1 !important;
-}
-
-/* 💫 SMOOTH HOVER & TAP */
 
 .number-name-card:hover {
-    transform: translateY(-5px) scale(1.025) !important;
-    box-shadow:
-        0 7px 0 rgba(91, 69, 150, 0.08),
-        0 14px 26px rgba(91, 69, 150, 0.16) !important;
+    transform: translateY(-5px) scale(1.025);
+    box-shadow: 0 10px 20px rgba(70, 50, 120, .18);
 }
 
 .number-name-card:active {
-    transform: scale(0.96) !important;
+    transform: scale(.94);
+}
+
+.number-name-number {
+    font-size: clamp(25px, 3vw, 38px);
+    line-height: 1.1;
+    font-weight: 900;
+    color: #5132A5;
+}
+
+.number-name-word {
+    font-size: clamp(13px, 1.5vw, 17px);
+    font-weight: 800;
+    color: #292044;
+    text-align: center;
+}
+
+.number-name-sound {
+    font-size: 17px;
+}
+
+@keyframes numberCardPop {
+    from {
+        opacity: 0;
+        transform: translateY(12px) scale(.96);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
 }
 
 /* 📱 MOBILE PHONE */
-
 @media (max-width: 700px) {
     .number-names-grid {
-        gap: 10px !important;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 9px;
+        padding: 4px;
     }
 
     .number-name-card {
-        min-height: 112px !important;
-        padding: 12px 5px !important;
-        border-radius: 18px !important;
+        min-height: 105px;
+        padding: 10px 4px;
+        border-radius: 17px;
+        gap: 7px;
     }
 
     .number-name-number {
-        font-size: 2rem !important;
+        font-size: 27px;
     }
 
     .number-name-word {
-        font-size: 0.95rem !important;
+        font-size: 13px;
+    }
+
+    .number-name-sound {
+        font-size: 15px;
+    }
+}
+
+/* 📱 VERY SMALL PHONES */
+@media (max-width: 360px) {
+    .number-names-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .number-name-card {
+        animation: none;
+        transition: none;
     }
 }
