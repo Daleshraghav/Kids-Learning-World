@@ -2969,37 +2969,39 @@ function showMathsMenu() {
    ========================================================= */
 
 function openNumbers() {
+    const numberCards = Array.from({ length: 100 }, (_, index) => {
+        const number = index + 1;
+
+        return `
+            <button
+                type="button"
+                class="number-100-card"
+                style="--number-index: ${index};"
+                onclick="speak('${number}', {lang:'en-US'})"
+                aria-label="Number ${number}, tap to hear"
+            >
+                <span class="number-100-value">${number}</span>
+                <span class="number-100-sound">🔊 Tap to hear</span>
+            </button>
+        `;
+    }).join("");
 
     setupLearning(
         "🔢",
         "Numbers 1–100",
-        "Let's count together!",
+        "✨ Learn numbers in the correct order!",
         `
+            <div class="numbers-100-wrapper">
+                <div class="numbers-100-heading">
+                    <span>👑</span>
+                    <h2>Let's Learn 1 to 100!</h2>
+                    <p>Tap any number to hear it aloud.</p>
+                </div>
 
-        <div class="cards-grid">
-
-            ${Array.from({ length: 100 }, (_, i) => i + 1)
-                .map(number => `
-
-                    <div
-                        class="learning-card"
-                        onclick="speak('${number}', {lang:'en-US'})"
-                    >
-
-                        <div class="letter">
-                            ${number}
-                        </div>
-
-                        <div class="mini-text">
-                            🔊
-                        </div>
-
-                    </div>
-
-                `).join("")}
-
-        </div>
-
+                <div class="numbers-100-grid">
+                    ${numberCards}
+                </div>
+            </div>
         `
     );
 }
