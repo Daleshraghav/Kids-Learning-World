@@ -12321,3 +12321,359 @@ table tr:hover {
 }
 
 
+/* =====================================================
+   📱 MOBILE RESPONSIVE FIX — KIDS LEARNING WORLD
+   Add this at the VERY END of style.css
+===================================================== */
+
+/* Prevent unwanted horizontal scrolling */
+html,
+body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: clip;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+img,
+video,
+canvas,
+svg {
+    max-width: 100%;
+}
+
+/* Keep main pages within the phone screen */
+#homePage,
+#learningPage,
+.learning-page,
+.learning-content,
+#learningContent {
+    min-width: 0;
+    max-width: 100%;
+}
+
+.learning-page {
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+/* Home page: make category cards wider */
+@media (max-width: 600px) {
+
+    .hero {
+        min-height: auto;
+        padding: 35px 18px;
+        gap: 20px;
+    }
+
+    .hero h1 {
+        font-size: clamp(32px, 8vw, 44px);
+        line-height: 1.12;
+        letter-spacing: -1px;
+        overflow-wrap: break-word;
+    }
+
+    .hero p {
+        font-size: 15px;
+        line-height: 1.6;
+    }
+
+    .hero-right {
+        min-height: 240px;
+        overflow: hidden;
+    }
+
+    .hero-kid {
+        width: 150px;
+        height: 150px;
+        font-size: 85px;
+    }
+
+    .orbit-one {
+        width: 230px;
+        height: 230px;
+    }
+
+    .orbit-two {
+        width: 280px;
+        height: 280px;
+    }
+
+    .category-section {
+        padding: 35px 14px 55px;
+    }
+
+    .section-heading {
+        margin-bottom: 24px;
+    }
+
+    .section-heading h2 {
+        font-size: clamp(25px, 6vw, 32px);
+        line-height: 1.2;
+    }
+
+    .category-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+        width: 100%;
+    }
+
+    .category-card {
+        min-width: 0;
+        min-height: 205px;
+        padding: 16px 12px;
+        border-radius: 23px;
+        overflow-wrap: anywhere;
+    }
+
+    .category-icon {
+        width: 55px;
+        height: 55px;
+        border-radius: 17px;
+        font-size: 29px;
+    }
+
+    .category-card h3 {
+        margin-top: 14px;
+        font-size: clamp(17px, 4.5vw, 21px);
+        line-height: 1.25;
+        overflow-wrap: anywhere;
+    }
+
+    .category-card p {
+        font-size: 13px;
+        line-height: 1.5;
+        overflow-wrap: anywhere;
+    }
+
+    .arrow {
+        right: 12px;
+        bottom: 10px;
+        width: 28px;
+        height: 28px;
+    }
+
+    /* Learning World menu cards */
+    .learning-menu-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+        width: 100%;
+    }
+
+    .learning-menu-card {
+        min-width: 0;
+        width: 100%;
+        min-height: 185px;
+        height: auto;
+        padding: 16px 10px;
+        border-radius: 20px;
+        white-space: normal;
+        overflow-wrap: anywhere;
+    }
+
+    .learning-menu-card h3 {
+        font-size: clamp(16px, 4.2vw, 20px);
+        line-height: 1.3;
+        overflow-wrap: anywhere;
+        word-break: normal;
+    }
+
+    .learning-menu-card p {
+        font-size: 13px;
+        line-height: 1.5;
+        overflow-wrap: anywhere;
+    }
+
+    /* Learning page heading */
+    .learning-page {
+        padding: 18px 12px 60px;
+    }
+
+    .learning-top {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-bottom: 25px;
+        padding: 16px 12px;
+        border-radius: 20px;
+    }
+
+    .back-button {
+        padding: 10px 13px;
+        font-size: 14px;
+    }
+
+    #learningIcon {
+        width: 48px;
+        height: 48px;
+        font-size: 27px;
+        border-radius: 15px;
+        flex-shrink: 0;
+    }
+
+    #learningTitle {
+        min-width: 0;
+        font-size: clamp(22px, 6vw, 29px);
+        line-height: 1.25;
+        overflow-wrap: anywhere;
+    }
+
+    #learningSubtitle {
+        font-size: 14px;
+        line-height: 1.5;
+        overflow-wrap: anywhere;
+    }
+
+    .learning-heading,
+    .hindi-learning-heading {
+        width: 100%;
+        padding: 12px 6px;
+        text-align: center;
+    }
+
+    .learning-heading h2,
+    .hindi-learning-heading h2 {
+        font-size: clamp(23px, 6vw, 30px);
+        line-height: 1.35;
+        overflow-wrap: anywhere;
+    }
+
+    .learning-heading p,
+    .hindi-learning-heading p {
+        font-size: 14px;
+        line-height: 1.6;
+    }
+
+    /* General alphabet and learning cards */
+    .cards-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+        width: 100%;
+    }
+
+    .learning-card {
+        min-width: 0;
+        min-height: 155px;
+        padding: 15px 8px;
+        border-radius: 20px;
+    }
+
+    .letter {
+        font-size: 48px;
+    }
+
+    .learning-emoji {
+        font-size: 39px;
+    }
+
+    .word {
+        font-size: 17px;
+        overflow-wrap: anywhere;
+    }
+
+    .mini-text {
+        font-size: 12px;
+        text-align: center;
+        overflow-wrap: anywhere;
+    }
+
+    /* Hindi Alphabet: remove narrow, stretched cards */
+    .hindi-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        align-items: stretch;
+        gap: 10px;
+        width: 100%;
+    }
+
+    .hindi-card {
+        width: 100%;
+        min-width: 0;
+        min-height: 0;
+        height: auto;
+        padding: 14px 6px;
+        border-radius: 20px;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 8px;
+    }
+
+    .hindi-letter {
+        max-width: 100%;
+        font-size: clamp(27px, 7vw, 38px);
+        line-height: 1.25;
+        overflow-wrap: anywhere;
+        text-align: center;
+    }
+
+    .hindi-card .hindi-emoji {
+        font-size: 30px;
+        max-width: 100%;
+    }
+
+    .hindi-card button {
+        max-width: 100%;
+    }
+
+    /* Keep tables usable on phones */
+    .table-choice {
+        padding: 16px 10px;
+    }
+
+    .table-buttons {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 8px;
+    }
+
+    .table-number {
+        min-width: 0;
+        height: 43px;
+        font-size: 15px;
+    }
+}
+
+/* Extra-small phones */
+@media (max-width: 380px) {
+
+    .category-grid,
+    .learning-menu-grid {
+        gap: 9px;
+    }
+
+    .category-card {
+        padding: 13px 9px;
+        min-height: 190px;
+    }
+
+    .learning-menu-card {
+        padding: 13px 8px;
+        min-height: 170px;
+    }
+
+    .hindi-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+    }
+
+    .hindi-card {
+        padding: 16px 8px;
+    }
+
+    .hindi-letter {
+        font-size: 36px;
+    }
+
+    .cards-grid {
+        gap: 9px;
+    }
+}
+
