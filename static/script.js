@@ -1765,14 +1765,6 @@ ${createWorldCard(
 
 
             ${createWorldCard(
-                "🎵",
-                "Nursery Rhymes",
-                "Fun rhymes for kids",
-                "openRhymes()"
-            )}
-
-
-            ${createWorldCard(
                 "म",
                 "Hindi Matra",
                 "Learn Hindi matras",
