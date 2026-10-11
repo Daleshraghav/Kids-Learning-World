@@ -639,14 +639,6 @@ function goBackFromLearning() {
             "Language World",
             "Letters, words, reading and stories!",
             showLanguageMenu()
-           
-${createWorldCard(
-    "📖",
-    "Word Meaning",
-    "Learn English words with Hindi meanings",
-    "startWordMeaning()"
-)}
-
         );
         return;
     }
