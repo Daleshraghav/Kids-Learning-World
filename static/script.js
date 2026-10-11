@@ -3008,23 +3008,251 @@ function openNumbers() {
 
 
 /* =========================================================
-   ➕ ADDITION
-   ========================================================= */
+   👑 LUXURY ADDITION CHALLENGE — 50 QUESTIONS
+   One question per screen + answer checking + navigation
+========================================================= */
+
+window.additionGameState = {
+    questions: [],
+    index: 0,
+    answered: false,
+    correct: 0,
+    wrong: 0
+};
+
+function createAdditionQuestions() {
+    const questions = [];
+    const used = new Set();
+
+    while (questions.length < 50) {
+        // Challenging two-digit and three-digit addition
+        const a = Math.floor(Math.random() * 900) + 50;
+        const b = Math.floor(Math.random() * 900) + 50;
+        const key = `${Math.min(a, b)}+${Math.max(a, b)}`;
+
+        if (used.has(key)) continue;
+
+        used.add(key);
+        questions.push({ a, b, answer: a + b });
+    }
+
+    return questions;
+}
 
 function startAdditionGame() {
+    window.additionGameState = {
+        questions: createAdditionQuestions(),
+        index: 0,
+        answered: false,
+        correct: 0,
+        wrong: 0
+    };
 
-    const a = Math.floor(Math.random() * 10) + 1;
-    const b = Math.floor(Math.random() * 10) + 1;
+    renderAdditionQuestion();
+}
 
-    const answer = a + b;
+function renderAdditionQuestion() {
+    const game = window.additionGameState;
+    const question = game.questions[game.index];
 
-    showMathQuestion(
-        "➕ Addition",
-        `${a} + ${b} = ?`,
-        answer
+    if (!question) return;
+
+    game.answered = false;
+
+    const questionNumber = game.index + 1;
+    const progress = (questionNumber / 50) * 100;
+
+    // Create three wrong choices and one correct choice
+    const choices = new Set([question.answer]);
+
+    while (choices.size < 4) {
+        const offset = Math.floor(Math.random() * 41) - 20;
+        if (offset !== 0 && question.answer + offset > 0) {
+            choices.add(question.answer + offset);
+        }
+    }
+
+    const options = shuffleArray([...choices]);
+
+    setupLearning(
+        "➕",
+        "Addition Challenge",
+        `Question ${questionNumber} of 50 · Think carefully!`,
+        `
+        <div class="addition-luxury">
+
+            <div class="addition-top">
+                <span class="addition-crown">👑</span>
+                <h2>Master Addition</h2>
+                <p>Challenge your brain and earn your stars!</p>
+            </div>
+
+            <div class="addition-progress-info">
+                <span>QUESTION ${questionNumber} / 50</span>
+                <span>⭐ ${game.correct} correct</span>
+            </div>
+
+            <div class="addition-progress-track">
+                <div class="addition-progress-fill"
+                     style="width:${progress}%"></div>
+            </div>
+
+            <div class="addition-question-card">
+                <div class="addition-question-label">
+                    ✨ Solve this!
+                </div>
+
+                <div class="addition-equation">
+                    <span>${question.a}</span>
+                    <span class="addition-plus">+</span>
+                    <span>${question.b}</span>
+                </div>
+
+                <div class="addition-equals">= ?</div>
+            </div>
+
+            <p class="addition-prompt">Choose your answer</p>
+
+            <div class="addition-options">
+                ${options.map((option, i) => `
+                    <button
+                        type="button"
+                        class="addition-option"
+                        onclick="checkAdditionAnswer(${option}, this)"
+                        style="--option-index:${i}"
+                    >${option}</button>
+                `).join("")}
+            </div>
+
+            <div id="addition-feedback"
+                 class="addition-feedback"
+                 aria-live="polite">
+                Select an answer to continue.
+            </div>
+
+            <div class="addition-navigation">
+                <button
+                    type="button"
+                    class="addition-next-button"
+                    id="addition-next-button"
+                    onclick="nextAdditionQuestion()"
+                    disabled
+                >
+                    ${questionNumber === 50
+                        ? "🏆 See My Result"
+                        : "Next Question →"}
+                </button>
+            </div>
+
+            <p class="addition-score-line">
+                Correct: ${game.correct} · Incorrect: ${game.wrong}
+            </p>
+        </div>
+        `
     );
 }
 
+function checkAdditionAnswer(answer, button) {
+    const game = window.additionGameState;
+
+    if (!game || game.answered) return;
+
+    const question = game.questions[game.index];
+    const feedback = document.getElementById("addition-feedback");
+    const nextButton = document.getElementById("addition-next-button");
+
+    if (!feedback || !nextButton) return;
+
+    game.answered = true;
+
+    document.querySelectorAll(".addition-option").forEach(option => {
+        option.disabled = true;
+
+        if (Number(option.textContent) === question.answer) {
+            option.classList.add("addition-correct");
+        }
+    });
+
+    if (answer === question.answer) {
+        game.correct++;
+
+        button.classList.add("addition-correct");
+        feedback.className = "addition-feedback addition-feedback-correct";
+        feedback.textContent = "🎉 Correct Answer! Excellent work!";
+
+        addScore(10);
+        addStars(1);
+    } else {
+        game.wrong++;
+
+        button.classList.add("addition-wrong");
+        feedback.className = "addition-feedback addition-feedback-wrong";
+        feedback.textContent =
+            `❌ Wrong Answer! The correct answer is ${question.answer}.`;
+    }
+
+    nextButton.disabled = false;
+
+    if (game.index === 49) {
+        nextButton.textContent = "🏆 See My Result";
+    }
+
+    const scoreLine = document.querySelector(".addition-score-line");
+    if (scoreLine) {
+        scoreLine.textContent =
+            `Correct: ${game.correct} · Incorrect: ${game.wrong}`;
+    }
+}
+
+function nextAdditionQuestion() {
+    const game = window.additionGameState;
+
+    if (!game || !game.answered) return;
+
+    if (game.index === 49) {
+        showAdditionResults();
+        return;
+    }
+
+    game.index++;
+    renderAdditionQuestion();
+}
+
+function showAdditionResults() {
+    const game = window.additionGameState;
+    const percentage = Math.round((game.correct / 50) * 100);
+
+    let message = "Keep practising — you will improve!";
+    if (percentage >= 90) message = "🌟 Outstanding! You are an addition star!";
+    else if (percentage >= 70) message = "🎉 Great work! Keep shining!";
+    else if (percentage >= 50) message = "👏 Good effort! Practise to get even better!";
+
+    setupLearning(
+        "🏆",
+        "Addition Challenge Complete!",
+        "You completed all 50 questions!",
+        `
+        <div class="addition-luxury addition-results">
+            <div class="addition-crown">🏆</div>
+            <h2>Your Final Result</h2>
+            <div class="addition-final-score">${game.correct} / 50</div>
+            <p class="addition-result-message">${message}</p>
+
+            <div class="addition-result-stats">
+                <div>✅ Correct<strong>${game.correct}</strong></div>
+                <div>❌ Incorrect<strong>${game.wrong}</strong></div>
+                <div>🎯 Score<strong>${percentage}%</strong></div>
+            </div>
+
+            <button type="button"
+                    class="addition-next-button"
+                    onclick="startAdditionGame()">
+                🔄 Play Again
+            </button>
+        </div>
+        `
+    );
+}
 
 /* =========================================================
    ➖ SUBTRACTION
