@@ -1748,12 +1748,12 @@ function showLanguageMenu() {
             )}
 
 
-            ${createWorldCard(
-                "🔗",
-                "Word Matching",
-                "Match letters with words",
-                "startWordMatching()"
-            )}
+${createWorldCard(
+    "📖",
+    "Word Meaning",
+    "Learn English words with Hindi meanings",
+    "startWordMeaning()"
+)}
 
 
             ${createWorldCard(
