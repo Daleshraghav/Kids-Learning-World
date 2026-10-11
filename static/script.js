@@ -3314,7 +3314,6 @@ function renderSubtractionQuestion() {
     const q = game.questions[game.index];
 
     if (!q) return;
-
     game.answered = false;
 
     const number = game.index + 1;
