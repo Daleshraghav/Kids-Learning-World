@@ -589,11 +589,30 @@ function goHome() {
     scrollToTop();
 }
 
-
-
-
-
 function goBackFromLearning() {
+
+    // Current page ka title check karo
+    const pageTitle = learningTitle
+        ? learningTitle.textContent.trim()
+        : "";
+
+    // Agar World menu par hain, toh main 6 categories par jao
+    const worldTitles = [
+        "Language World",
+        "Maths World",
+        "General Knowledge",
+        "Science World",
+        "Games & Quizzes",
+        "Creative World"
+    ];
+
+    if (worldTitles.includes(pageTitle)) {
+        openLearningMenu();
+        return;
+    }
+
+    // Agar kisi category ke andar hain,
+    // toh usi World ke menu par wapas jao
     const menu = window.currentAdventureMenu;
 
     if (menu === "language") {
@@ -656,6 +675,7 @@ function goBackFromLearning() {
         return;
     }
 
+    // Koi World select nahi hai toh main menu kholo
     openLearningMenu();
 }
 
