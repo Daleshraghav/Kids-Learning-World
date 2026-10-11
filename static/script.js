@@ -1732,22 +1732,6 @@ function showLanguageMenu() {
             )}
 
 
-            ${createWorldCard(
-                "✍️",
-                "Letter Writing",
-                "Practice writing letters",
-                "openLetterWriting()"
-            )}
-
-
-            ${createWorldCard(
-                "🔊",
-                "ABC Pronunciation",
-                "Listen and repeat",
-                "openPronunciation()"
-            )}
-
-
 ${createWorldCard(
     "📖",
     "Word Meaning",
