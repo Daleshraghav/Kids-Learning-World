@@ -3516,21 +3516,313 @@ function showSubtractionResults() {
     );
 }
 
-/* =========================================================
-   ✖️ MULTIPLICATION
-   ========================================================= */
+/* ==========================================
+   ✖️ MULTIPLICATION PRACTICE — 50 QUESTIONS
+========================================== */
+
+let multiplicationPractice = {
+    questions: [],
+    index: 0,
+    answered: false,
+    correct: 0,
+    wrong: 0
+};
+
+function createMultiplicationQuestions() {
+    const questions = [];
+
+    for (let i = 0; i < 50; i++) {
+        let minTable, maxTable, level;
+
+        if (i < 20) {
+            minTable = 2;
+            maxTable = 10;
+            level = "Easy Practice · Tables 2–10";
+        } else if (i < 30) {
+            minTable = 2;
+            maxTable = 15;
+            level = "Medium Practice · Tables 2–15";
+        } else {
+            minTable = 2;
+            maxTable = 20;
+            level = "Challenge Practice · Tables 2–20";
+        }
+
+        const a = Math.floor(
+            Math.random() * (maxTable - minTable + 1)
+        ) + minTable;
+
+        // Multiplication table questions: ×1 to ×12
+        const b = Math.floor(Math.random() * 12) + 1;
+
+        questions.push({
+            a,
+            b,
+            answer: a * b,
+            level
+        });
+    }
+
+    return questions;
+}
 
 function startMultiplicationGame() {
+    multiplicationPractice = {
+        questions: createMultiplicationQuestions(),
+        index: 0,
+        answered: false,
+        correct: 0,
+        wrong: 0
+    };
 
-    const a = Math.floor(Math.random() * 10) + 1;
-    const b = Math.floor(Math.random() * 10) + 1;
+    renderMultiplicationQuestion();
+}
 
-    const answer = a * b;
+function renderMultiplicationQuestion() {
+    const game = multiplicationPractice;
+    const q = game.questions[game.index];
 
-    showMathQuestion(
-        "✖️ Multiplication",
-        `${a} × ${b} = ?`,
-        answer
+    if (!q) return;
+
+    game.answered = false;
+
+    const number = game.index + 1;
+    const options = new Set([q.answer]);
+
+    while (options.size < 4) {
+        const offset = Math.floor(Math.random() * 21) - 10;
+        const choice = q.answer + offset;
+
+        if (choice >= 0) {
+            options.add(choice);
+        }
+    }
+
+    const shuffledOptions =
+        typeof shuffleArray === "function"
+            ? shuffleArray([...options])
+            : [...options].sort(() => Math.random() - 0.5);
+
+    setupLearning(
+        "✖️",
+        "Multiplication Practice",
+        `Question ${number} of 50`,
+        `
+        <section class="addition-luxury multiplication-luxury">
+
+            <div class="addition-sparkles" aria-hidden="true">
+                
+            </div>
+
+            <header class="addition-heading">
+                <div class="addition-crown">🏆</div>
+                <h2>Let's Learn Multiplication!</h2>
+                <p>${q.level}</p>
+            </header>
+
+            <div class="addition-progress-info">
+                <span>QUESTION ${number} / 50</span>
+                <span>⭐ ${game.correct} correct</span>
+            </div>
+
+            <div class="addition-progress-track">
+                <div class="addition-progress-fill"
+                     style="width:${number * 2}%"></div>
+            </div>
+
+            <div class="addition-question-card">
+                <div class="addition-question-label">
+                    💫 Solve the question
+                </div>
+
+                <div class="addition-equation">
+                    <span>${q.a}</span>
+                    <span class="multiplication-sign">×</span>
+                    <span>${q.b}</span>
+                </div>
+
+                <div class="addition-equals">= ?</div>
+            </div>
+
+            <p class="addition-prompt">
+                Choose the correct answer
+            </p>
+
+            <div class="addition-options">
+                ${shuffledOptions.map((option, i) => `
+                    <button
+                        type="button"
+                        class="addition-option"
+                        style="--option-index:${i}"
+                        onclick="checkMultiplicationAnswer(${option}, this)">
+                        ${option}
+                    </button>
+                `).join("")}
+            </div>
+
+            <div id="multiplication-feedback"
+                 class="addition-feedback"
+                 aria-live="polite">
+                🌟 You can do it!
+            </div>
+
+            <button
+                type="button"
+                class="addition-next-button"
+                id="multiplication-next-button"
+                onclick="nextMultiplicationQuestion()"
+                disabled>
+                ${number === 50
+                    ? "View Final Result 🏆"
+                    : "Next Question →"}
+            </button>
+
+            <p class="addition-score-line"
+               id="multiplication-score-line">
+                Correct: ${game.correct} · Incorrect: ${game.wrong}
+            </p>
+
+        </section>
+        `
+    );
+}
+
+function checkMultiplicationAnswer(answer, button) {
+    const game = multiplicationPractice;
+
+    if (!game || game.answered) return;
+
+    const q = game.questions[game.index];
+    const feedback = document.getElementById(
+        "multiplication-feedback"
+    );
+    const next = document.getElementById(
+        "multiplication-next-button"
+    );
+
+    if (!feedback || !next) return;
+
+    game.answered = true;
+
+    document.querySelectorAll(
+        ".multiplication-luxury .addition-option"
+    ).forEach(option => {
+        option.disabled = true;
+
+        if (Number(option.textContent.trim()) === q.answer) {
+            option.classList.add("addition-correct");
+        }
+    });
+
+    if (answer === q.answer) {
+        game.correct++;
+        button.classList.add("addition-correct");
+
+        feedback.className =
+            "addition-feedback addition-feedback-correct";
+
+        feedback.textContent =
+            "🎉 Excellent! Your answer is correct!";
+
+        if (typeof addScore === "function") addScore(10);
+        if (typeof addStars === "function") addStars(1);
+
+    } else {
+        game.wrong++;
+        button.classList.add("addition-wrong");
+
+        feedback.className =
+            "addition-feedback addition-feedback-wrong";
+
+        feedback.textContent =
+            `💛 Good try! The correct answer is ${q.answer}.`;
+    }
+
+    next.disabled = false;
+
+    const scoreLine = document.getElementById(
+        "multiplication-score-line"
+    );
+
+    if (scoreLine) {
+        scoreLine.textContent =
+            `Correct: ${game.correct} · Incorrect: ${game.wrong}`;
+    }
+}
+
+function nextMultiplicationQuestion() {
+    const game = multiplicationPractice;
+
+    if (!game || !game.answered) return;
+
+    if (game.index === 49) {
+        showMultiplicationResults();
+        return;
+    }
+
+    game.index++;
+    renderMultiplicationQuestion();
+}
+
+function showMultiplicationResults() {
+    const game = multiplicationPractice;
+    const percentage = Math.round((game.correct / 50) * 100);
+
+    let message = "Keep practising! You are learning every day. 💛";
+
+    if (percentage >= 90) {
+        message = "Amazing! You are a Multiplication Star! 🌟";
+    } else if (percentage >= 70) {
+        message = "Wonderful work! Keep learning! 🎉";
+    } else if (percentage >= 50) {
+        message = "Good effort! You are getting better! 👏";
+    }
+
+    setupLearning(
+        "🏆",
+        "Multiplication Complete",
+        "You solved all 50 questions!",
+        `
+        <section class="addition-luxury multiplication-luxury addition-results">
+
+            <div class="addition-crown">🏆</div>
+
+            <h2>Well Done!</h2>
+
+            <div class="addition-final-score">
+                ${game.correct} / 50
+            </div>
+
+            <p class="addition-result-message">
+                ${message}
+            </p>
+
+            <div class="addition-result-stats">
+                <div>
+                    ✅ Correct
+                    <strong>${game.correct}</strong>
+                </div>
+
+                <div>
+                    ❌ Incorrect
+                    <strong>${game.wrong}</strong>
+                </div>
+
+                <div>
+                    🎯 Score
+                    <strong>${percentage}%</strong>
+                </div>
+            </div>
+
+            <button
+                type="button"
+                class="addition-next-button"
+                onclick="startMultiplicationGame()">
+                Practise Again 🔄
+            </button>
+
+        </section>
+        `
     );
 }
 
