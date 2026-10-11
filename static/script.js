@@ -4479,130 +4479,68 @@ function selectAscendingNumber(number, button) {
         slot.textContent = String(number).padStart(2, "0");
         slot.classList.add("ascending-filled");
         slot.setAttribute("aria-label", `Selected ${number}`);
+
+        // Click the answer circle to remove that number
+        slot.style.cursor = "pointer";
+        slot.title = "Tap to remove this number";
+
+        slot.onclick = () => {
+            if (ascendingState.locked) return;
+
+            const index = ascendingState.selected.indexOf(number);
+
+            if (index === -1) return;
+
+            // Remove the selected number
+            ascendingState.selected.splice(index, 1);
+
+            // Enable the original question number again
+            const buttons = document.querySelectorAll(
+                "#ascendingNumbers .ascending-number-circle"
+            );
+
+            buttons.forEach(questionButton => {
+                if (
+                    questionButton.textContent ===
+                    String(number).padStart(2, "0")
+                ) {
+                    questionButton.disabled = false;
+                    questionButton.classList.remove("ascending-picked");
+                }
+            });
+
+            // Rebuild answer slots in their current order
+            const currentSlots = document.querySelectorAll(
+                "#ascendingAnswers .ascending-answer-circle"
+            );
+
+            currentSlots.forEach((answerSlot, i) => {
+                answerSlot.textContent = ascendingState.selected[i] !== undefined
+                    ? String(ascendingState.selected[i]).padStart(2, "0")
+                    : "";
+
+                answerSlot.classList.toggle(
+                    "ascending-filled",
+                    ascendingState.selected[i] !== undefined
+                );
+
+                answerSlot.classList.remove("ascending-correct-slot");
+                answerSlot.onclick = null;
+                answerSlot.style.cursor = "default";
+                answerSlot.title = "";
+            });
+
+            document.getElementById("ascendingFeedback").textContent = "";
+            document.getElementById("ascendingReset").style.display = "none";
+        };
     }
 
-    // Check only after all numbers have been selected
+    // Check only when all numbers have been selected
     if (ascendingState.selected.length === ascendingState.numbers.length) {
         checkAscendingAnswer();
     }
 }
 
-
-/* Check the complete sequence */
-function checkAscendingAnswer() {
-    const correctOrder = [...ascendingState.numbers]
-        .sort((a, b) => a - b);
-
-    const isCorrect = ascendingState.selected.every(
-        (number, index) => number === correctOrder[index]
-    );
-
-    const feedback = document.getElementById("ascendingFeedback");
-
-    if (isCorrect) {
-        ascendingState.locked = true;
-        ascendingState.score++;
-
-        document.getElementById("ascendingScore").textContent =
-            ascendingState.score;
-
-        feedback.textContent = "🎉 Excellent! Correct Answer!";
-        feedback.className =
-            "ascending-feedback ascending-correct";
-
-        document.querySelectorAll(
-            "#ascendingAnswers .ascending-answer-circle"
-        ).forEach(slot => {
-            slot.classList.add("ascending-correct-slot");
-        });
-
-        document.getElementById("ascendingProgressFill").style.width =
-            `${((ascendingState.question + 1) / 20) * 100}%`;
-
-        const nextButton = document.getElementById("ascendingNext");
-
-        nextButton.textContent =
-            ascendingState.question === 19
-                ? "View Results 🏆"
-                : "Next Question →";
-
-        nextButton.style.display = "block";
-
-    } else {
-        feedback.textContent = "💜 Not quite! Try again.";
-        feedback.className =
-            "ascending-feedback ascending-wrong";
-
-        document.getElementById("ascendingReset").style.display =
-            "block";
-    }
-}
-
-
-/* Retry the same question */
-function resetAscendingAnswer() {
-    if (ascendingState.locked) return;
-
-    ascendingState.selected = [];
-
-    document.querySelectorAll(
-        "#ascendingNumbers .ascending-number-circle"
-    ).forEach(button => {
-        button.disabled = false;
-        button.classList.remove("ascending-picked");
-    });
-
-    document.querySelectorAll(
-        "#ascendingAnswers .ascending-answer-circle"
-    ).forEach(slot => {
-        slot.textContent = "";
-        slot.classList.remove(
-            "ascending-filled",
-            "ascending-correct-slot"
-        );
-        slot.setAttribute("aria-label", "Empty answer slot");
-    });
-
-    document.getElementById("ascendingFeedback").textContent = "";
-    document.getElementById("ascendingReset").style.display = "none";
-}
-
-
-/* Move to the next question */
-function nextAscendingQuestion() {
-    if (!ascendingState.locked) return;
-
-    ascendingState.question++;
-
-    renderAscendingQuestion();
-}
-
-
-/* Final results */
-function showAscendingResults() {
-    const content = document.querySelector(".ascending-luxury");
-
-    if (!content) return;
-
-    content.innerHTML = `
-        <div class="ascending-results">
-            <div class="ascending-trophy">🏆</div>
-            <h2>Wonderful Work!</h2>
-            <p>You completed all 20 questions!</p>
-
-            <div class="ascending-final-score">
-                ⭐ ${ascendingState.score} / 20
-            </div>
-
-            <p>Keep learning and keep shining! ✨</p>
-
-            <button class="ascending-next"
-                    onclick="openAscendingOrder()">
-                Play Again ↻
-            </button>
-        </div>
-    `;
-}
 
 /* =========================================================
    🔷 SHAPES
