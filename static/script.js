@@ -589,10 +589,67 @@ function goHome() {
 }
 
 
-function goBackFromLearning() {
 
-    if (currentCategory === "menu") {
-        goHome();
+function goBackFromLearning() {
+    const menu = window.currentAdventureMenu;
+
+    if (menu === "language") {
+        setupLearning(
+            "🔤",
+            "Language World",
+            "Letters, words, reading and stories!",
+            showLanguageMenu()
+        );
+        return;
+    }
+
+    if (menu === "maths") {
+        setupLearning(
+            "🔢",
+            "Maths World",
+            "Let's play with numbers!",
+            showMathsMenu()
+        );
+        return;
+    }
+
+    if (menu === "gk") {
+        setupLearning(
+            "🌍",
+            "General Knowledge",
+            "Discover our amazing world!",
+            showGKMenu()
+        );
+        return;
+    }
+
+    if (menu === "science") {
+        setupLearning(
+            "🔬",
+            "Science World",
+            "Let's discover how things work!",
+            showScienceMenu()
+        );
+        return;
+    }
+
+    if (menu === "games") {
+        setupLearning(
+            "🎮",
+            "Games & Quizzes",
+            "Play games and earn stars!",
+            showGamesMenu()
+        );
+        return;
+    }
+
+    if (menu === "creativity") {
+        setupLearning(
+            "🎨",
+            "Creative World",
+            "Draw, colour and create!",
+            showCreativityMenu()
+        );
         return;
     }
 
@@ -1522,6 +1579,7 @@ function openAdventure(type) {
     removeLearningMenuMode();
 
     currentCategory = type;
+   window.currentAdventureMenu = type;
 
     if (type === "language") {
 
