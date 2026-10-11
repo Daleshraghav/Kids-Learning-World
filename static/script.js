@@ -2931,25 +2931,12 @@ function showMathsMenu() {
             )}
 
             ${createWorldCard(
-                "🔎",
-                "Missing Numbers",
-                "Find the missing number",
-                "startMissingNumbersGame()"
-            )}
-
-            ${createWorldCard(
                 "🔷",
                 "Shapes",
                 "Learn basic shapes",
                 "openShapes()"
             )}
 
-            ${createWorldCard(
-                "📏",
-                "Measurement",
-                "Big, small, long, short",
-                "openMeasurement()"
-            )}
 
             ${createWorldCard(
                 "🧠",
@@ -4272,196 +4259,347 @@ function openNumberNames() {
 }
 
 
-/* =========================================================
-   ⚖️ GREATER / LESS
-   ========================================================= */
+/* ==========================================
+   👑 GREATER / LESS THAN — LUXURY LEARNING
+   2 modes × 20 questions each
+========================================== */
 
-function startComparisonGame() {
+let comparePractice = {
+    mode: "",
+    questions: [],
+    index: 0,
+    correct: 0,
+    answered: false
+};
 
-    const a =
-        Math.floor(Math.random() * 20) + 1;
+// Create 20 questions for the selected mode
+function createCompareQuestions(mode) {
+    const questions = [];
 
-    let b =
-        Math.floor(Math.random() * 20) + 1;
+    for (let i = 0; i < 20; i++) {
+        // Questions 1–10: easy
+        // Questions 11–20: harder
+        const min = i < 10 ? 1 : 20;
+        const max = i < 10 ? 20 : 100;
 
-    while (b === a) {
-        b =
-            Math.floor(Math.random() * 20) + 1;
+        let a = Math.floor(Math.random() * (max - min + 1)) + min;
+        let b = Math.floor(Math.random() * (max - min + 1)) + min;
+
+        // Avoid equal numbers so every question has a clear answer
+        while (a === b) {
+            b = Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+        const answer = mode === "greater"
+            ? Math.max(a, b)
+            : Math.min(a, b);
+
+        questions.push({
+            a,
+            b,
+            answer,
+            level: i < 10 ? "Easy Explorer" : "Super Challenge"
+        });
     }
 
-    let answer;
+    return questions;
+}
 
-    if (a > b) {
-        answer = ">";
-    } else {
-        answer = "<";
-    }
+// Open the two choices
+function openCompareMenu() {
+    setupLearning(
+        "⚖️",
+        "Greater / Less Than",
+        "Choose your challenge!",
+        `
+        <section class="compare-luxury">
+            <div class="compare-sparkles" aria-hidden="true">
+                ✨ ⭐ ✦ 💎 ✦ ⭐ ✨
+            </div>
 
-    window.currentComparisonAnswer = answer;
+            <div class="compare-menu-heading">
+                <div class="compare-trophy">👑</div>
+                <h2>Number Champions!</h2>
+                <p>Which number is bigger or smaller?</p>
+            </div>
+
+            <div class="compare-mode-grid">
+                <button class="compare-mode greater-mode"
+                        onclick="startCompareGame('greater')">
+                    <span class="compare-mode-emoji">🚀</span>
+                    <span class="compare-mode-title">Greater Than</span>
+                    <span class="compare-mode-symbol">&gt;</span>
+                    <span class="compare-mode-description">
+                        Find the bigger number
+                    </span>
+                    <span class="compare-mode-bottom">
+                        20 Questions · Start Now →
+                    </span>
+                </button>
+
+                <button class="compare-mode less-mode"
+                        onclick="startCompareGame('less')">
+                    <span class="compare-mode-emoji">🌈</span>
+                    <span class="compare-mode-title">Less Than</span>
+                    <span class="compare-mode-symbol">&lt;</span>
+                    <span class="compare-mode-description">
+                        Find the smaller number
+                    </span>
+                    <span class="compare-mode-bottom">
+                        20 Questions · Start Now →
+                    </span>
+                </button>
+            </div>
+
+            <p class="compare-footer">
+                🌟 Learn · Think · Shine 🌟
+            </p>
+        </section>
+        `
+    );
+}
+
+// Start selected mode
+function startCompareGame(mode) {
+    comparePractice = {
+        mode,
+        questions: createCompareQuestions(mode),
+        index: 0,
+        correct: 0,
+        answered: false
+    };
+
+    renderCompareQuestion();
+}
+
+// Show one question at a time
+function renderCompareQuestion() {
+    const game = comparePractice;
+    const q = game.questions[game.index];
+
+    if (!q) return;
+
+    game.answered = false;
+
+    const number = game.index + 1;
+    const isGreater = game.mode === "greater";
+
+    const title = isGreater ? "Greater Than" : "Less Than";
+    const symbol = isGreater ? ">" : "<";
+    const instruction = isGreater
+        ? "Choose the BIGGER number"
+        : "Choose the SMALLER number";
+
+    const options = typeof shuffleArray === "function"
+        ? shuffleArray([q.a, q.b])
+        : [q.a, q.b].sort(() => Math.random() - 0.5);
 
     setupLearning(
         "⚖️",
-        "Greater or Less?",
-        "Choose the correct sign.",
+        title,
+        `Question ${number} of 20`,
         `
+        <section class="compare-luxury compare-question-page
+                       ${isGreater ? "compare-greater" : "compare-less"}">
 
-        <div class="quiz-box">
-
-            <div class="quiz-question">
-                ${a} ? ${b}
+            <div class="compare-sparkles" aria-hidden="true">
+                ✨ ⭐ ✦ 💎 ✦ ⭐ ✨
             </div>
 
-            <div class="quiz-options">
+            <header class="compare-question-heading">
+                <div class="compare-trophy">
+                    ${isGreater ? "🚀" : "🌈"}
+                </div>
+                <h2>${title} Challenge!</h2>
+                <p>${q.level} · ${instruction}</p>
+            </header>
 
-                <button
-                    onclick="checkComparisonAnswer('>')"
-                >
-                    ${a} &gt; ${b}
-                </button>
-
-                <button
-                    onclick="checkComparisonAnswer('<')"
-                >
-                    ${a} &lt; ${b}
-                </button>
-
+            <div class="compare-progress-info">
+                <span>QUESTION ${number} / 20</span>
+                <span>⭐ ${game.correct} correct</span>
             </div>
 
-        </div>
+            <div class="compare-progress-track">
+                <div class="compare-progress-fill"
+                     style="width:${number * 5}%"></div>
+            </div>
 
+            <div class="compare-question-card">
+                <div class="compare-question-label">
+                    💫 ${instruction}
+                </div>
+
+                <div class="compare-number-row">
+                    <span class="compare-number-ball">${q.a}</span>
+                    <span class="compare-vs">${symbol}</span>
+                    <span class="compare-number-ball">${q.b}</span>
+                </div>
+
+                <p class="compare-hint">
+                    Tap the number that is ${isGreater ? "greater" : "less"}!
+                </p>
+            </div>
+
+            <div class="compare-answer-options">
+                ${options.map((option, i) => `
+                    <button type="button"
+                            class="compare-answer-button"
+                            onclick="checkCompareAnswer(${option}, this)">
+                        <span class="compare-answer-letter">
+                            ${i === 0 ? "A" : "B"}
+                        </span>
+                        <span>${option}</span>
+                        <span class="compare-answer-star">✦</span>
+                    </button>
+                `).join("")}
+            </div>
+
+            <div id="compare-feedback"
+                 class="compare-feedback"
+                 aria-live="polite">
+                🌟 You can do it!
+            </div>
+
+            <button type="button"
+                    id="compare-next-button"
+                    class="compare-next-button"
+                    onclick="nextCompareQuestion()"
+                    disabled>
+                ${number === 20 ? "See My Result 🏆" : "Next Question →"}
+            </button>
+
+            <p class="compare-score-line" id="compare-score-line">
+                Correct: ${game.correct} / 20
+            </p>
+        </section>
         `
     );
 }
 
+// Check answer
+function checkCompareAnswer(answer, button) {
+    const game = comparePractice;
 
-function checkComparisonAnswer(answer) {
+    if (!game || game.answered) return;
 
-    playerAnswered++;
+    const q = game.questions[game.index];
+    const feedback = document.getElementById("compare-feedback");
+    const next = document.getElementById("compare-next-button");
 
-    if (
-        answer ===
-        window.currentComparisonAnswer
-    ) {
+    if (!feedback || !next) return;
 
-        playerCorrect++;
-        addScore(10);
-        addStars(1);
+    const isCorrect = answer === q.answer;
 
-        showSuccessMessage(
-            "🎉 Correct!",
-            "Excellent comparison!"
-        );
+    if (isCorrect) {
+        game.answered = true;
+        game.correct++;
 
+        button.classList.add("compare-answer-correct");
+
+        document.querySelectorAll(".compare-answer-button").forEach(btn => {
+            btn.disabled = true;
+
+            if (Number(btn.querySelector("span:nth-child(2)")?.textContent) === q.answer) {
+                btn.classList.add("compare-answer-correct");
+            }
+        });
+
+        feedback.className = "compare-feedback compare-feedback-correct";
+        feedback.textContent = "🎉 Brilliant! That's the correct answer!";
+
+        next.disabled = false;
+
+        if (typeof addScore === "function") addScore(10);
+        if (typeof addStars === "function") addStars(1);
     } else {
+        button.classList.add("compare-answer-wrong");
+        feedback.className = "compare-feedback compare-feedback-wrong";
+        feedback.textContent = "💛 Not quite! Try again, champion!";
 
-        showSuccessMessage(
-            "😊 Try Again!",
-            `The correct sign is ${window.currentComparisonAnswer}.`
-        );
+        // Allow another attempt; the next question stays locked
+        button.disabled = true;
+    }
+
+    const scoreLine = document.getElementById("compare-score-line");
+
+    if (scoreLine) {
+        scoreLine.textContent = `Correct: ${game.correct} / 20`;
     }
 }
 
+// Go to next question
+function nextCompareQuestion() {
+    const game = comparePractice;
 
-/* =========================================================
-   🔎 MISSING NUMBERS
-   ========================================================= */
+    if (!game || !game.answered) return;
 
-function startMissingNumbersGame() {
+    if (game.index === 19) {
+        showCompareResults();
+        return;
+    }
 
-    const start =
-        Math.floor(Math.random() * 10) + 1;
+    game.index++;
+    renderCompareQuestion();
+}
 
-    const missingIndex =
-        Math.floor(Math.random() * 3) + 1;
+// Final score
+function showCompareResults() {
+    const game = comparePractice;
+    const percentage = Math.round((game.correct / 20) * 100);
 
-    const numbers = [
-        start,
-        start + 1,
-        start + 2,
-        start + 3,
-        start + 4
-    ];
+    let message = "Keep practising! Every question makes you stronger. 💛";
 
-    const answer =
-        numbers[missingIndex];
+    if (percentage >= 90) {
+        message = "Incredible! You're a Number Superstar! 🌟";
+    } else if (percentage >= 70) {
+        message = "Wonderful work, little champion! 🎉";
+    } else if (percentage >= 50) {
+        message = "Good effort! Keep growing your maths skills! 👏";
+    }
 
-    window.currentMissingAnswer = answer;
-
-    const display =
-        numbers.map((number, index) =>
-            index === missingIndex
-                ? "?"
-                : number
-        ).join(" , ");
-
-    const options =
-        shuffleArray([
-            answer,
-            answer + 1,
-            answer - 1,
-            answer + 2
-        ]);
+    const title = game.mode === "greater"
+        ? "Greater Than Complete!"
+        : "Less Than Complete!";
 
     setupLearning(
-        "🔎",
-        "Missing Number",
-        "Find the missing number!",
+        "🏆",
+        title,
+        "You finished all 20 questions!",
         `
+        <section class="compare-luxury compare-results">
+            <div class="compare-result-trophy">🏆</div>
+            <h2>Fantastic Work!</h2>
 
-        <div class="quiz-box">
-
-            <div class="quiz-question">
-                ${display}
+            <div class="compare-final-score">
+                ${game.correct}<span>/20</span>
             </div>
 
-            <div class="quiz-options">
+            <p class="compare-result-message">${message}</p>
 
-                ${options.map(option => `
-
-                    <button
-                        onclick="checkMissingAnswer(${option})"
-                    >
-                        ${option}
-                    </button>
-
-                `).join("")}
-
+            <div class="compare-result-stats">
+                <div>
+                    🌟 Correct
+                    <strong>${game.correct}</strong>
+                </div>
+                <div>
+                    🎯 Accuracy
+                    <strong>${percentage}%</strong>
+                </div>
             </div>
 
-        </div>
+            <button class="compare-next-button"
+                    onclick="startCompareGame('${game.mode}')">
+                Play Again 🔄
+            </button>
 
+            <button class="compare-menu-button"
+                    onclick="openCompareMenu()">
+                Choose Another Challenge ↩
+            </button>
+        </section>
         `
     );
 }
-
-
-function checkMissingAnswer(answer) {
-
-    playerAnswered++;
-
-    if (
-        answer ===
-        window.currentMissingAnswer
-    ) {
-
-        playerCorrect++;
-        addScore(10);
-        addStars(1);
-
-        showSuccessMessage(
-            "🌟 Amazing!",
-            "You found the missing number!"
-        );
-
-    } else {
-
-        showSuccessMessage(
-            "😊 Keep Trying!",
-            `The answer was ${window.currentMissingAnswer}.`
-        );
-    }
-}
-
 
 /* =========================================================
    🔷 SHAPES
@@ -4512,58 +4650,6 @@ function openShapes() {
         `
     );
 }
-
-
-/* =========================================================
-   📏 MEASUREMENT
-   ========================================================= */
-
-function openMeasurement() {
-
-    const concepts = [
-        ["Big", "🐘"],
-        ["Small", "🐭"],
-        ["Long", "📏"],
-        ["Short", "✏️"],
-        ["Heavy", "🏋️"],
-        ["Light", "🪶"],
-        ["Tall", "🦒"],
-        ["Short", "🐜"]
-    ];
-
-    setupLearning(
-        "📏",
-        "Measurement",
-        "Learn basic measurement ideas!",
-        `
-
-        <div class="cards-grid">
-
-            ${concepts.map(item => `
-
-                <div
-                    class="learning-card"
-                    onclick="speak('${item[0]}', {lang:'en-US'})"
-                >
-
-                    <div class="learning-emoji">
-                        ${item[1]}
-                    </div>
-
-                    <div class="word">
-                        ${item[0]}
-                    </div>
-
-                </div>
-
-            `).join("")}
-
-        </div>
-
-        `
-    );
-}
-
 
 /* =========================================================
    🧠 MATH QUIZ
