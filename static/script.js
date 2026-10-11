@@ -2923,12 +2923,14 @@ function showMathsMenu() {
                 "openNumberNames()"
             )}
 
-            ${createWorldCard(
-                "⚖️",
-                "Greater / Less",
-                "Compare numbers",
-                "startComparisonGame()"
-            )}
+           
+${createWorldCard(
+    "📈",
+    "Ascending Order",
+    "Arrange numbers from smallest to largest",
+    "openAscendingOrder()"
+)}
+
 
             ${createWorldCard(
                 "🔷",
@@ -4259,346 +4261,268 @@ function openNumberNames() {
 }
 
 
-/* ==========================================
-   👑 GREATER / LESS THAN — LUXURY LEARNING
-   2 modes × 20 questions each
-========================================== */
 
-let comparePractice = {
-    mode: "",
-    questions: [],
-    index: 0,
-    correct: 0,
-    answered: false
+/* ==========================================
+   ASCENDING ORDER - KIDS LEARNING WORLD
+   ========================================== */
+
+let ascendingState = {
+    question: 0,
+    score: 0,
+    numbers: [],
+    selected: [],
+    locked: false
 };
 
-// Create 20 questions for the selected mode
-function createCompareQuestions(mode) {
-    const questions = [];
-
-    for (let i = 0; i < 20; i++) {
-        // Questions 1–10: easy
-        // Questions 11–20: harder
-        const min = i < 10 ? 1 : 20;
-        const max = i < 10 ? 20 : 100;
-
-        let a = Math.floor(Math.random() * (max - min + 1)) + min;
-        let b = Math.floor(Math.random() * (max - min + 1)) + min;
-
-        // Avoid equal numbers so every question has a clear answer
-        while (a === b) {
-            b = Math.floor(Math.random() * (max - min + 1)) + min;
-        }
-
-        const answer = mode === "greater"
-            ? Math.max(a, b)
-            : Math.min(a, b);
-
-        questions.push({
-            a,
-            b,
-            answer,
-            level: i < 10 ? "Easy Explorer" : "Super Challenge"
-        });
-    }
-
-    return questions;
-}
-
-// Open the two choices
-function openCompareMenu() {
-    setupLearning(
-        "⚖️",
-        "Greater / Less Than",
-        "Choose your challenge!",
-        `
-        <section class="compare-luxury">
-            <div class="compare-sparkles" aria-hidden="true">
-                ✨ ⭐ ✦ 💎 ✦ ⭐ ✨
-            </div>
-
-            <div class="compare-menu-heading">
-                <div class="compare-trophy">👑</div>
-                <h2>Number Champions!</h2>
-                <p>Which number is bigger or smaller?</p>
-            </div>
-
-            <div class="compare-mode-grid">
-                <button class="compare-mode greater-mode"
-                        onclick="startCompareGame('greater')">
-                    <span class="compare-mode-emoji">🚀</span>
-                    <span class="compare-mode-title">Greater Than</span>
-                    <span class="compare-mode-symbol">&gt;</span>
-                    <span class="compare-mode-description">
-                        Find the bigger number
-                    </span>
-                    <span class="compare-mode-bottom">
-                        20 Questions · Start Now →
-                    </span>
-                </button>
-
-                <button class="compare-mode less-mode"
-                        onclick="startCompareGame('less')">
-                    <span class="compare-mode-emoji">🌈</span>
-                    <span class="compare-mode-title">Less Than</span>
-                    <span class="compare-mode-symbol">&lt;</span>
-                    <span class="compare-mode-description">
-                        Find the smaller number
-                    </span>
-                    <span class="compare-mode-bottom">
-                        20 Questions · Start Now →
-                    </span>
-                </button>
-            </div>
-
-            <p class="compare-footer">
-                🌟 Learn · Think · Shine 🌟
-            </p>
-        </section>
-        `
-    );
-}
-
-// Start selected mode
-function startCompareGame(mode) {
-    comparePractice = {
-        mode,
-        questions: createCompareQuestions(mode),
-        index: 0,
-        correct: 0,
-        answered: false
+function openAscendingOrder() {
+    ascendingState = {
+        question: 0,
+        score: 0,
+        numbers: [],
+        selected: [],
+        locked: false
     };
 
-    renderCompareQuestion();
-}
-
-// Show one question at a time
-function renderCompareQuestion() {
-    const game = comparePractice;
-    const q = game.questions[game.index];
-
-    if (!q) return;
-
-    game.answered = false;
-
-    const number = game.index + 1;
-    const isGreater = game.mode === "greater";
-
-    const title = isGreater ? "Greater Than" : "Less Than";
-    const symbol = isGreater ? ">" : "<";
-    const instruction = isGreater
-        ? "Choose the BIGGER number"
-        : "Choose the SMALLER number";
-
-    const options = typeof shuffleArray === "function"
-        ? shuffleArray([q.a, q.b])
-        : [q.a, q.b].sort(() => Math.random() - 0.5);
-
     setupLearning(
-        "⚖️",
-        title,
-        `Question ${number} of 20`,
+        "📈",
+        "Ascending Order",
+        "Arrange from smallest to largest",
         `
-        <section class="compare-luxury compare-question-page
-                       ${isGreater ? "compare-greater" : "compare-less"}">
-
-            <div class="compare-sparkles" aria-hidden="true">
-                ✨ ⭐ ✦ 💎 ✦ ⭐ ✨
+        <section class="ascending-luxury">
+            <div class="ascending-top">
+                <span>✨ MATHS WORLD ✨</span>
+                <h2>Ascending Order</h2>
+                <p>Arrange from smallest to largest</p>
             </div>
 
-            <header class="compare-question-heading">
-                <div class="compare-trophy">
-                    ${isGreater ? "🚀" : "🌈"}
-                </div>
-                <h2>${title} Challenge!</h2>
-                <p>${q.level} · ${instruction}</p>
-            </header>
-
-            <div class="compare-progress-info">
-                <span>QUESTION ${number} / 20</span>
-                <span>⭐ ${game.correct} correct</span>
+            <div class="ascending-progress">
+                <span id="ascendingQuestionNo">Question 1 / 20</span>
+                <span>⭐ <b id="ascendingScore">0</b></span>
             </div>
 
-            <div class="compare-progress-track">
-                <div class="compare-progress-fill"
-                     style="width:${number * 5}%"></div>
+            <div class="ascending-progress-track">
+                <div id="ascendingProgressFill"></div>
             </div>
 
-            <div class="compare-question-card">
-                <div class="compare-question-label">
-                    💫 ${instruction}
-                </div>
+            <h3 class="ascending-instruction">
+                ✨ Tap numbers in the correct order ✨
+            </h3>
 
-                <div class="compare-number-row">
-                    <span class="compare-number-ball">${q.a}</span>
-                    <span class="compare-vs">${symbol}</span>
-                    <span class="compare-number-ball">${q.b}</span>
-                </div>
+            <div id="ascendingNumbers"
+                 class="ascending-question-circles"></div>
 
-                <p class="compare-hint">
-                    Tap the number that is ${isGreater ? "greater" : "less"}!
-                </p>
-            </div>
+            <h3 class="ascending-answer-title">Your Answer</h3>
 
-            <div class="compare-answer-options">
-                ${options.map((option, i) => `
-                    <button type="button"
-                            class="compare-answer-button"
-                            onclick="checkCompareAnswer(${option}, this)">
-                        <span class="compare-answer-letter">
-                            ${i === 0 ? "A" : "B"}
-                        </span>
-                        <span>${option}</span>
-                        <span class="compare-answer-star">✦</span>
-                    </button>
-                `).join("")}
-            </div>
+            <div id="ascendingAnswers"
+                 class="ascending-answer-circles"></div>
 
-            <div id="compare-feedback"
-                 class="compare-feedback"
-                 aria-live="polite">
-                🌟 You can do it!
-            </div>
+            <p id="ascendingFeedback" class="ascending-feedback"
+               aria-live="polite"></p>
 
-            <button type="button"
-                    id="compare-next-button"
-                    class="compare-next-button"
-                    onclick="nextCompareQuestion()"
-                    disabled>
-                ${number === 20 ? "See My Result 🏆" : "Next Question →"}
+            <button id="ascendingReset"
+                    class="ascending-reset"
+                    onclick="resetAscendingAnswer()">
+                ↻ Try Again
             </button>
 
-            <p class="compare-score-line" id="compare-score-line">
-                Correct: ${game.correct} / 20
-            </p>
+            <button id="ascendingNext"
+                    class="ascending-next"
+                    onclick="nextAscendingQuestion()">
+                Next Question →
+            </button>
         </section>
         `
     );
+
+    renderAscendingQuestion();
 }
 
-// Check answer
-function checkCompareAnswer(answer, button) {
-    const game = comparePractice;
+function createAscendingNumbers(index) {
+    const questions = [
+        [12, 25, 45, 36, 14, 3],
+        [18, 7, 32, 21, 5],
+        [42, 16, 9, 27, 11, 34],
+        [65, 23, 48, 12, 39],
+        [54, 8, 31, 19, 46, 2],
+        [72, 35, 14, 58, 26],
+        [91, 43, 67, 18, 52, 29],
+        [38, 11, 75, 24, 6],
+        [84, 32, 57, 13, 69, 41],
+        [95, 28, 63, 7, 44],
+        [105, 48, 76, 23, 91, 37],
+        [132, 65, 18, 109, 54],
+        [215, 87, 146, 32, 178, 64],
+        [304, 125, 267, 89, 193],
+        [425, 168, 312, 76, 239, 184],
+        [518, 246, 397, 125, 463],
+        [625, 184, 739, 352, 491, 267],
+        [804, 316, 572, 148, 693],
+        [925, 471, 238, 816, 359, 604],
+        [1205, 875, 1432, 692, 1086, 954]
+    ];
 
-    if (!game || game.answered) return;
-
-    const q = game.questions[game.index];
-    const feedback = document.getElementById("compare-feedback");
-    const next = document.getElementById("compare-next-button");
-
-    if (!feedback || !next) return;
-
-    const isCorrect = answer === q.answer;
-
-    if (isCorrect) {
-        game.answered = true;
-        game.correct++;
-
-        button.classList.add("compare-answer-correct");
-
-        document.querySelectorAll(".compare-answer-button").forEach(btn => {
-            btn.disabled = true;
-
-            if (Number(btn.querySelector("span:nth-child(2)")?.textContent) === q.answer) {
-                btn.classList.add("compare-answer-correct");
-            }
-        });
-
-        feedback.className = "compare-feedback compare-feedback-correct";
-        feedback.textContent = "🎉 Brilliant! That's the correct answer!";
-
-        next.disabled = false;
-
-        if (typeof addScore === "function") addScore(10);
-        if (typeof addStars === "function") addStars(1);
-    } else {
-        button.classList.add("compare-answer-wrong");
-        feedback.className = "compare-feedback compare-feedback-wrong";
-        feedback.textContent = "💛 Not quite! Try again, champion!";
-
-        // Allow another attempt; the next question stays locked
-        button.disabled = true;
-    }
-
-    const scoreLine = document.getElementById("compare-score-line");
-
-    if (scoreLine) {
-        scoreLine.textContent = `Correct: ${game.correct} / 20`;
-    }
+    return [...questions[index]];
 }
 
-// Go to next question
-function nextCompareQuestion() {
-    const game = comparePractice;
+function renderAscendingQuestion() {
+    const numbersBox = document.getElementById("ascendingNumbers");
+    const answersBox = document.getElementById("ascendingAnswers");
 
-    if (!game || !game.answered) return;
+    if (!numbersBox || !answersBox) return;
 
-    if (game.index === 19) {
-        showCompareResults();
+    if (ascendingState.question >= 20) {
+        showAscendingResults();
         return;
     }
 
-    game.index++;
-    renderCompareQuestion();
+    ascendingState.numbers =
+        createAscendingNumbers(ascendingState.question);
+
+    ascendingState.selected = [];
+    ascendingState.locked = false;
+
+    document.getElementById("ascendingQuestionNo").textContent =
+        `Question ${ascendingState.question + 1} / 20`;
+
+    document.getElementById("ascendingScore").textContent =
+        ascendingState.score;
+
+    document.getElementById("ascendingProgressFill").style.width =
+        `${ascendingState.question / 20 * 100}%`;
+
+    document.getElementById("ascendingFeedback").textContent = "";
+    document.getElementById("ascendingReset").style.display = "none";
+    document.getElementById("ascendingNext").style.display = "none";
+
+    numbersBox.innerHTML = "";
+    answersBox.innerHTML = "";
+
+    ascendingState.numbers.forEach((number, index) => {
+        const button = document.createElement("button");
+        button.className = "ascending-number-circle";
+        button.textContent = String(number).padStart(2, "0");
+        button.type = "button";
+        button.setAttribute("aria-label", `Choose ${number}`);
+
+        button.onclick = () => selectAscendingNumber(number, button);
+
+        numbersBox.appendChild(button);
+    });
+
+    ascendingState.numbers.forEach(() => {
+        const slot = document.createElement("div");
+        slot.className = "ascending-answer-circle";
+        slot.textContent = "";
+        answersBox.appendChild(slot);
+    });
 }
 
-// Final score
-function showCompareResults() {
-    const game = comparePractice;
-    const percentage = Math.round((game.correct / 20) * 100);
+function selectAscendingNumber(number, button) {
+    if (ascendingState.locked) return;
+    if (ascendingState.selected.includes(number)) return;
 
-    let message = "Keep practising! Every question makes you stronger. 💛";
+    ascendingState.selected.push(number);
+    button.classList.add("ascending-picked");
+    button.disabled = true;
 
-    if (percentage >= 90) {
-        message = "Incredible! You're a Number Superstar! 🌟";
-    } else if (percentage >= 70) {
-        message = "Wonderful work, little champion! 🎉";
-    } else if (percentage >= 50) {
-        message = "Good effort! Keep growing your maths skills! 👏";
+    const slots = document.querySelectorAll(".ascending-answer-circle");
+    const slot = slots[ascendingState.selected.length - 1];
+
+    if (slot) {
+        slot.textContent = String(number).padStart(2, "0");
+        slot.classList.add("ascending-filled");
     }
 
-    const title = game.mode === "greater"
-        ? "Greater Than Complete!"
-        : "Less Than Complete!";
+    if (ascendingState.selected.length === ascendingState.numbers.length) {
+        checkAscendingAnswer();
+    }
+}
 
-    setupLearning(
-        "🏆",
-        title,
-        "You finished all 20 questions!",
-        `
-        <section class="compare-luxury compare-results">
-            <div class="compare-result-trophy">🏆</div>
-            <h2>Fantastic Work!</h2>
-
-            <div class="compare-final-score">
-                ${game.correct}<span>/20</span>
-            </div>
-
-            <p class="compare-result-message">${message}</p>
-
-            <div class="compare-result-stats">
-                <div>
-                    🌟 Correct
-                    <strong>${game.correct}</strong>
-                </div>
-                <div>
-                    🎯 Accuracy
-                    <strong>${percentage}%</strong>
-                </div>
-            </div>
-
-            <button class="compare-next-button"
-                    onclick="startCompareGame('${game.mode}')">
-                Play Again 🔄
-            </button>
-
-            <button class="compare-menu-button"
-                    onclick="openCompareMenu()">
-                Choose Another Challenge ↩
-            </button>
-        </section>
-        `
+function checkAscendingAnswer() {
+    const correctOrder = [...ascendingState.numbers].sort((a, b) => a - b);
+    const isCorrect = ascendingState.selected.every(
+        (number, index) => number === correctOrder[index]
     );
+
+    const feedback = document.getElementById("ascendingFeedback");
+
+    if (isCorrect) {
+        ascendingState.locked = true;
+        ascendingState.score++;
+
+        document.getElementById("ascendingScore").textContent =
+            ascendingState.score;
+
+        feedback.textContent = "🎉 Excellent! Correct Answer!";
+        feedback.className = "ascending-feedback ascending-correct";
+
+        document.querySelectorAll(".ascending-answer-circle")
+            .forEach(slot => slot.classList.add("ascending-correct-slot"));
+
+        document.getElementById("ascendingProgressFill").style.width =
+            `${(ascendingState.question + 1) / 20 * 100}%`;
+
+        if (ascendingState.question < 19) {
+            document.getElementById("ascendingNext").style.display = "block";
+        } else {
+            document.getElementById("ascendingNext").textContent =
+                "View Results 🏆";
+            document.getElementById("ascendingNext").style.display = "block";
+        }
+    } else {
+        feedback.textContent = "💜 Not quite! Try again.";
+        feedback.className = "ascending-feedback ascending-wrong";
+
+        document.getElementById("ascendingReset").style.display = "block";
+    }
+}
+
+function resetAscendingAnswer() {
+    ascendingState.selected = [];
+    ascendingState.locked = false;
+
+    document.querySelectorAll(".ascending-number-circle").forEach(button => {
+        button.disabled = false;
+        button.classList.remove("ascending-picked");
+    });
+
+    document.querySelectorAll(".ascending-answer-circle").forEach(slot => {
+        slot.textContent = "";
+        slot.classList.remove(
+            "ascending-filled",
+            "ascending-correct-slot"
+        );
+    });
+
+    document.getElementById("ascendingFeedback").textContent = "";
+    document.getElementById("ascendingReset").style.display = "none";
+}
+
+function nextAscendingQuestion() {
+    if (!ascendingState.locked) return;
+
+    ascendingState.question++;
+    renderAscendingQuestion();
+}
+
+function showAscendingResults() {
+    const content = document.querySelector(".ascending-luxury");
+    if (!content) return;
+
+    content.innerHTML = `
+        <div class="ascending-results">
+            <div class="ascending-trophy">🏆</div>
+            <h2>Wonderful Work!</h2>
+            <p>You completed all 20 questions.</p>
+            <div class="ascending-final-score">
+                ⭐ ${ascendingState.score} / 20
+            </div>
+            <button class="ascending-next"
+                    onclick="openAscendingOrder()">
+                Play Again ↻
+            </button>
+        </div>
+    `;
 }
 
 /* =========================================================
