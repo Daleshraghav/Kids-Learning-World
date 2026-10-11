@@ -87,75 +87,104 @@
 
 <div id="giftIntro">
 
-    <!-- NIGHT SKY -->
-    <div class="gift-night-sky">
+        <!-- NIGHT SKY -->
+        <div class="gift-night-sky">
 
-        <!-- STARS -->
-        <div class="gift-stars" aria-hidden="true">
-            <span>✦</span>
-            <span>✧</span>
-            <span>✦</span>
-            <span>·</span>
-            <span>✧</span>
-            <span>✦</span>
-            <span>·</span>
-            <span>✧</span>
-            <span>✦</span>
-            <span>·</span>
-            <span>✧</span>
-            <span>✦</span>
-        </div>
-
-
-        <!-- REALISTIC MOON -->
-        <div class="gift-moon" aria-hidden="true">
-
-            <div class="moon-crater crater-one"></div>
-            <div class="moon-crater crater-two"></div>
-            <div class="moon-crater crater-three"></div>
-            <div class="moon-crater crater-four"></div>
-            <div class="moon-crater crater-five"></div>
-
-        </div>
-
-
-        <!-- SOFT MOON GLOW -->
-        <div class="moon-glow" aria-hidden="true"></div>
-
-
-        <!-- =================================================
-             GIFT BOX AREA
-        ================================================== -->
-
-        <div
-            id="giftBoxArea"
-            class="gift-box-area">
-
-
-            <!-- GLOW BEHIND BOX -->
-
-            <div
-                class="gift-yellow-glow"
-                aria-hidden="true">
-            </div>
-
-
-            <!-- LIGHT PARTICLES -->
-
-            <div
-                class="gift-light-particles"
-                aria-hidden="true">
-
+            <!-- STARS -->
+            <div class="gift-stars" aria-hidden="true">
                 <span>✦</span>
                 <span>✧</span>
-                <span>•</span>
                 <span>✦</span>
-                <span>•</span>
+                <span>·</span>
                 <span>✧</span>
                 <span>✦</span>
-                <span>•</span>
+                <span>·</span>
+                <span>✧</span>
+                <span>✦</span>
+                <span>·</span>
+                <span>✧</span>
+                <span>✦</span>
+            </div>
+
+            <!-- MOON -->
+            <div class="gift-moon" aria-hidden="true">
+                <div class="moon-crater crater-one"></div>
+                <div class="moon-crater crater-two"></div>
+                <div class="moon-crater crater-three"></div>
+                <div class="moon-crater crater-four"></div>
+                <div class="moon-crater crater-five"></div>
+            </div>
+
+            <!-- MOON GLOW -->
+            <div class="moon-glow" aria-hidden="true"></div>
+
+            <!-- GIFT BOX AREA -->
+            <div id="giftBoxArea" class="gift-box-area">
+
+                <!-- GLOW BEHIND BOX -->
+                <div class="gift-yellow-glow" aria-hidden="true"></div>
+
+                <!-- LIGHT PARTICLES -->
+                <div class="gift-light-particles" aria-hidden="true">
+                    <span>✦</span>
+                    <span>✧</span>
+                    <span>•</span>
+                    <span>✦</span>
+                    <span>•</span>
+                    <span>✧</span>
+                    <span>✦</span>
+                    <span>•</span>
+                </div>
+
+                <!-- BOOKS COMING OUT OF BOX -->
+                <div class="gift-books" aria-hidden="true">
+                    <div class="gift-book book-blue">📘</div>
+                    <div class="gift-book book-red">📕</div>
+                    <div class="gift-book book-green">📗</div>
+                    <div class="gift-book book-yellow">📙</div>
+                </div>
+
+                <!-- GIFT BOX BUTTON -->
+                <button
+                    id="learningGiftBox"
+                    class="luxury-gift-box"
+                    type="button"
+                    onclick="window.openLearningGift(); return false;"
+                    aria-label="Open learning gift">
+
+                    <span class="gift-box-inner-glow" aria-hidden="true"></span>
+
+                    <!-- LID -->
+                    <span class="gift-lid" aria-hidden="true">
+                        <span class="gift-lid-ribbon"></span>
+                        <span class="gift-bow">
+                            <span class="bow-left"></span>
+                            <span class="bow-right"></span>
+                            <span class="bow-center"></span>
+                        </span>
+                    </span>
+
+                    <!-- BODY -->
+                    <span class="gift-body" aria-hidden="true">
+                        <span class="gift-ribbon-vertical"></span>
+                        <span class="gift-ribbon-horizontal"></span>
+                        <span class="gift-body-shine"></span>
+                    </span>
+
+                    <!-- FLOOR SHADOW -->
+                    <span class="gift-shadow" aria-hidden="true"></span>
+
+                </button>
+
+                <!-- TAP MESSAGE -->
+                <div class="gift-message" id="giftMessage">
+                    🎁 Open your learning gift
+                </div>
 
             </div>
+        </div>
+    </div>
+
 
 
             <!-- =================================================
