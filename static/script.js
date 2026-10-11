@@ -3161,66 +3161,64 @@ function checkMathAnswer(answer) {
     }
 }
 
-
 /* =========================================================
-   🔤 NUMBER NAMES
+   🔤 NUMBER NAMES — 1 TO 100
    ========================================================= */
 
-const numberNames = {
-    1: "One",
-    2: "Two",
-    3: "Three",
-    4: "Four",
-    5: "Five",
-    6: "Six",
-    7: "Seven",
-    8: "Eight",
-    9: "Nine",
-    10: "Ten",
-    11: "Eleven",
-    12: "Twelve",
-    13: "Thirteen",
-    14: "Fourteen",
-    15: "Fifteen",
-    16: "Sixteen",
-    17: "Seventeen",
-    18: "Eighteen",
-    19: "Nineteen",
-    20: "Twenty"
-};
+function numberToWords(n) {
+    const ones = [
+        "", "One", "Two", "Three", "Four", "Five",
+        "Six", "Seven", "Eight", "Nine"
+    ];
 
+    const teens = [
+        "Ten", "Eleven", "Twelve", "Thirteen", "Fourteen",
+        "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen"
+    ];
+
+    const tens = [
+        "", "", "Twenty", "Thirty", "Forty",
+        "Fifty", "Sixty", "Seventy", "Eighty", "Ninety"
+    ];
+
+    if (n === 100) return "One Hundred";
+    if (n < 10) return ones[n];
+    if (n < 20) return teens[n - 10];
+
+    const ten = Math.floor(n / 10);
+    const one = n % 10;
+
+    return tens[ten] + (one ? " " + ones[one] : "");
+}
 
 function openNumberNames() {
+    const cards = Array.from({ length: 100 }, (_, i) => {
+        const num = i + 1;
+        const name = numberToWords(num);
+
+        return `
+            <button
+                type="button"
+                class="number-name-card"
+                style="--card-hue: ${(num * 37) % 360}"
+                onclick="speak('${name}', {lang:'en-US'})"
+                aria-label="${num}, ${name}. Tap to hear pronunciation"
+            >
+                <span class="number-name-number">${num}</span>
+                <span class="number-name-word">${name}</span>
+                <span class="number-name-sound" aria-hidden="true">🔊</span>
+            </button>
+        `;
+    }).join("");
 
     setupLearning(
         "🔤",
-        "Number Names",
-        "Learn numbers in words!",
+        "Number Names (1–100)",
+        "Tap any number to hear its name!",
         `
-
-        <div class="cards-grid">
-
-            ${Object.entries(numberNames).map(([num, name]) => `
-
-                <div
-                    class="learning-card"
-                    onclick="speak('${name}', {lang:'en-US'})"
-                >
-
-                    <div class="letter">
-                        ${num}
-                    </div>
-
-                    <div class="word">
-                        ${name}
-                    </div>
-
-                </div>
-
-            `).join("")}
-
-        </div>
-
+            <div class="number-names-grid">
+                ${cards}
+            </div>
         `
     );
 }
