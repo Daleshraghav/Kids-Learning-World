@@ -2939,14 +2939,6 @@ ${createWorldCard(
                 "openShapes()"
             )}
 
-
-            ${createWorldCard(
-                "🧠",
-                "Maths Quiz",
-                "Test your maths",
-                "startMathQuiz()"
-            )}
-
         </div>
 
     `;
