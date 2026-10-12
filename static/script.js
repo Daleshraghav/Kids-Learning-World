@@ -5820,10 +5820,10 @@ async function loadFamousPlacePhotos() {
     await Promise.allSettled(photoJobs);
 }
 
-```javascript
-/* =====================================================
-   🪐 LUXURY SOLAR SYSTEM — FIXED VERSION
-   ===================================================== */
+
+/* =========================================================
+   🪐 LUXURY SOLAR SYSTEM — KIDS LEARNING WORLD
+   ========================================================= */
 
 function openSolarSystem() {
     const planets = [
@@ -5831,135 +5831,143 @@ function openSolarSystem() {
             name: "Mercury",
             order: 1,
             colour: "Rocky grey",
-            fact: "Mercury is the closest planet to the Sun.",
-            image: "https://commons.wikimedia.org/wiki/Special:FilePath/Mercury_in_true_color.jpg"
+            fact: "The smallest planet and the closest to the Sun.",
+            image: "https://science.nasa.gov/wp-content/uploads/2023/09/mercury-messenger-globe.jpg"
         },
         {
             name: "Venus",
             order: 2,
-            colour: "Yellowish white",
+            colour: "Cream and yellow",
             fact: "Venus is the hottest planet in our Solar System.",
-            image: "https://commons.wikimedia.org/wiki/Special:FilePath/Venus_globe.jpg"
+            image: "https://science.nasa.gov/wp-content/uploads/2023/09/venus.jpg"
         },
         {
             name: "Earth",
             order: 3,
-            colour: "Blue and green",
-            fact: "Earth is the only known planet with life.",
-            image: "https://commons.wikimedia.org/wiki/Special:FilePath/The_Earth_seen_from_Apollo_17.jpg"
+            colour: "Blue, green and white",
+            fact: "Our home planet is known to support life.",
+            image: "https://science.nasa.gov/wp-content/uploads/2023/05/earth.jpg"
         },
         {
             name: "Mars",
             order: 4,
-            colour: "Red",
-            fact: "Mars is known as the Red Planet.",
-            image: "https://commons.wikimedia.org/wiki/Special:FilePath/OSIRIS_Mars_true_color.jpg"
+            colour: "Rusty red",
+            fact: "Mars has the giant volcano Olympus Mons.",
+            image: "https://science.nasa.gov/wp-content/uploads/2023/09/mars.jpg"
         },
         {
             name: "Jupiter",
             order: 5,
-            colour: "Cream and brown",
+            colour: "Cream, orange and brown",
             fact: "Jupiter is the largest planet in our Solar System.",
-            image: "https://commons.wikimedia.org/wiki/Special:FilePath/Jupiter.jpg"
+            image: "https://science.nasa.gov/wp-content/uploads/2023/09/jupiter.jpg"
         },
         {
             name: "Saturn",
             order: 6,
             colour: "Golden yellow",
-            fact: "Saturn is famous for its beautiful rings.",
-            image: "https://commons.wikimedia.org/wiki/Special:FilePath/Saturn_during_Equinox.jpg"
+            fact: "Saturn has a spectacular system of rings.",
+            image: "https://science.nasa.gov/wp-content/uploads/2023/09/saturn.jpg"
         },
         {
             name: "Uranus",
             order: 7,
-            colour: "Pale blue",
-            fact: "Uranus rotates on its side.",
-            image: "https://commons.wikimedia.org/wiki/Special:FilePath/Uranus2.jpg"
+            colour: "Pale cyan",
+            fact: "Uranus rotates almost on its side.",
+            image: "https://science.nasa.gov/wp-content/uploads/2023/09/uranus.jpg"
         },
         {
             name: "Neptune",
             order: 8,
             colour: "Deep blue",
-            fact: "Neptune is known for its powerful winds.",
-            image: "https://commons.wikimedia.org/wiki/Special:FilePath/Neptune.jpg"
+            fact: "Neptune has extremely fast winds.",
+            image: "https://science.nasa.gov/wp-content/uploads/2023/09/neptune.jpg"
         }
     ];
 
-    const content = `
+    const content = 
         <section class="planet-space-section">
 
-            <div class="planet-space-heading">
-                <span class="planet-heading-icon">✦</span>
-                <h2>Solar System</h2>
-                <p>Explore the eight amazing planets in space</p>
-                <div class="planet-heading-line"></div>
+            <div class="planet-stars" aria-hidden="true">
+                <span>✦</span>
+                <span>·</span>
+                <span>✧</span>
+                <span>·</span>
+                <span>✦</span>
+                <span>✧</span>
             </div>
 
+            <header class="planet-space-heading">
+                <span class="planet-heading-icon">🪐</span>
+                <h2>Our Solar System</h2>
+                <p>Explore the eight planets of our cosmic neighbourhood</p>
+                <div class="planet-heading-line"></div>
+            </header>
+
             <div class="planet-luxury-grid">
+                ${planets.map(planet => 
+                    <article class="planet-luxury-card">
 
-                ${planets.map(function (planet) {
-                    return `
-                        <article class="planet-luxury-card">
+                        <div class="planet-image-wrap">
+                            <span class="planet-number">
+                                PLANET ${planet.order}
+                            </span>
 
-                            <div class="planet-image-wrap">
-                                <span class="planet-number">
-                                    PLANET ${planet.order}
-                                </span>
+                            <img
+                                class="planet-image"
+                                src="${planet.image}"
+                                alt="Real photograph of ${planet.name}"
+                                loading="lazy"
+                                onerror="
+                                    this.style.display='none';
+                                    this.parentElement.classList.add('planet-image-unavailable');
+                                    this.parentElement.setAttribute(
+                                        'data-planet',
+                                        '${planet.name}'
+                                    );
+                                "
+                            >
+                        </div>
 
-                                <img
-                                    class="planet-image"
-                                    src="${planet.image}"
-                                    alt="${planet.name} planet"
-                                    loading="lazy"
-                                    onerror="this.onerror=null; this.src='https://placehold.co/600x400/111329/F5D58A?text=${planet.name}'; this.classList.add('planet-image-fallback');"
-                                >
-                            </div>
+                        <div class="planet-card-content">
+                            <h3 class="planet-name">${planet.name}</h3>
 
-                            <div class="planet-card-content">
-                                <h3 class="planet-name">
-                                    ${planet.name}
-                                </h3>
+                            <p class="planet-colour">
+                                <span class="planet-gold-dot"></span>
+                                ${planet.colour}
+                            </p>
 
-                                <p class="planet-colour">
-                                    <span class="planet-gold-dot"></span>
-                                    Colour: ${planet.colour}
-                                </p>
+                            <p class="planet-fact">${planet.fact}</p>
 
-                                <p class="planet-fact">
-                                    ${planet.fact}
-                                </p>
+                            <button
+                                type="button"
+                                class="planet-listen-btn"
+                                onclick="speak('${planet.name}', {lang:'en-US'})"
+                                aria-label="Listen to ${planet.name} pronunciation"
+                            >
+                                <span aria-hidden="true">🔊</span>
+                                Listen to Name
+                            </button>
 
-                                <button
-                                    type="button"
-                                    class="planet-listen-btn"
-                                    onclick="speak('${planet.name}', {lang:'en-US'})"
-                                    aria-label="Listen to ${planet.name}"
-                                >
-                                    🔊 Listen
-                                </button>
-                            </div>
-
-                        </article>
-                    `;
-                }).join("")}
-
+                        </div>
+                    </article>
+                `).join("")}
             </div>
 
             <p class="planet-footer-note">
-                ✦ Eight planets, one beautiful Solar System ✦
+                ✦ Discover • Learn • Explore ✦
             </p>
-
         </section>
     `;
 
     setupLearning(
         "🪐",
         "Planets of the Solar System",
-        "Discover the planets, their colours and amazing facts!",
+        "Meet all eight planets and discover amazing facts!",
         content
     );
 }
-```
+
 /* =========================================================
    🐾 WILD ANIMALS
    ========================================================= */
