@@ -15473,3 +15473,13 @@ body {
         transform: none !important;
     }
 }
+
+
+#learningContent .famous-place-country {
+    margin: 0;
+    padding: 0 7px 12px;
+    color: #d8c9ed;
+    font-size: 12px;
+    line-height: 1.4;
+    text-align: center;
+}
