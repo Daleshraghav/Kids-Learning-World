@@ -15218,318 +15218,258 @@ body {
 }
 
 ```css
-/* ============================================
-   LUXURY FAMOUS PLACES
+
+
+/* =====================================================
+   FAMOUS PLACES - LUXURY RESPONSIVE DESIGN
    Laptop: 5 columns | Mobile: 2 columns
-   ============================================ */
+===================================================== */
 
 #learningContent .famous-places-grid {
     display: grid !important;
     grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
-    gap: 17px !important;
-    width: 100% !important;
-    padding: 12px !important;
-    margin: 0 auto !important;
-    box-sizing: border-box !important;
-}
-
-#learningContent .famous-place-card {
-    min-width: 0 !important;
-    overflow: hidden !important;
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: stretch !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    border: 1px solid #c8a96a !important;
-    border-radius: 17px !important;
-    background: linear-gradient(145deg, #17152b, #24203b 60%, #302342) !important;
-    box-shadow: 0 7px 22px #0004, inset 0 0 0 1px #ffffff0c;
-    animation: famousPlaceReveal .5s ease both;
-    transition: transform .25s ease, box-shadow .25s ease;
-    cursor: pointer;
-}
-
-#learningContent .famous-place-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 12px 28px #c8a96a35;
-}
-
-#learningContent .famous-place-photo-wrap {
-    position: relative !important;
-    width: 100% !important;
-    height: 145px !important;
-    min-height: 145px !important;
-    overflow: hidden !important;
-    background: #17152b !important;
-}
-
-#learningContent .famous-place-photo {
-    display: block !important;
-    width: 100% !important;
-    height: 100% !important;
-    object-fit: cover !important;
-    object-position: center !important;
-    transition: transform .4s ease, filter .4s ease;
-}
-
-#learningContent .famous-place-card:hover .famous-place-photo {
-    transform: scale(1.06);
-    filter: saturate(1.12);
-}
-
-#learningContent .famous-place-number {
-    position: absolute !important;
-    top: 8px !important;
-    left: 8px !important;
-    display: grid !important;
-    place-items: center !important;
-    width: 27px !important;
-    height: 27px !important;
-    border-radius: 50% !important;
-    color: #17152b !important;
-    background: linear-gradient(135deg, #f8e5a1, #c8a96a) !important;
-    font-size: 12px !important;
-    font-weight: 900 !important;
-    box-shadow: 0 2px 8px #0005;
-}
-
-#learningContent .famous-place-name {
-    margin: 0 !important;
-    padding: 12px 7px 5px !important;
-    color: #f6df9b !important;
-    font-size: 15px !important;
-    font-weight: 900 !important;
-    line-height: 1.35 !important;
-    text-align: center !important;
-    overflow-wrap: anywhere !important;
-    text-shadow: 0 1px 10px #c8a96a30;
-}
-
-#learningContent .famous-place-listen {
-    align-self: center !important;
-    margin: 7px 0 12px !important;
-    padding: 7px 13px !important;
-    border: 1px solid #e6ce8a !important;
-    border-radius: 25px !important;
-    color: #17152b !important;
-    background: linear-gradient(135deg, #f8e5a1, #c8a96a) !important;
-    font-size: 12px !important;
-    font-weight: 900 !important;
-    cursor: pointer;
-    transition: filter .2s ease, transform .2s ease;
-}
-
-#learningContent .famous-place-listen:hover {
-    filter: brightness(1.08);
-    transform: scale(1.04);
-}
-
-@keyframes famousPlaceReveal {
-    from {
-        opacity: 0;
-        transform: translateY(14px) scale(.98);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-    }
-}
-
-/* Smaller laptops/tablets */
-@media (min-width: 601px) and (max-width: 1050px) {
-    #learningContent .famous-places-grid {
-        grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-        gap: 12px !important;
-    }
-
-    #learningContent .famous-place-photo-wrap {
-        height: 130px !important;
-        min-height: 130px !important;
-    }
-}
-
-/* MOBILE: 2 columns */
-@media (max-width: 600px) {
-    #learningContent .famous-places-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-        gap: 9px !important;
-        padding: 7px !important;
-    }
-
-    #learningContent .famous-place-card {
-        border-radius: 13px !important;
-    }
-
-    #learningContent .famous-place-photo-wrap {
-        height: 108px !important;
-        min-height: 108px !important;
-    }
-
-    #learningContent .famous-place-name {
-        padding: 9px 5px 4px !important;
-        font-size: 12px !important;
-    }
-
-    #learningContent .famous-place-listen {
-        margin: 5px 0 9px !important;
-        padding: 6px 9px !important;
-        font-size: 10px !important;
-    }
-}
-
-@media (prefers-reduced-motion: reduce) {
-    #learningContent .famous-place-card,
-    #learningContent .famous-place-photo {
-        animation: none !important;
-        transition: none !important;
-    }
-}
-```
-
-
-/* ===== FAMOUS PLACES: LUXURY DESIGN ===== */
-
-#learningContent .famous-places-grid {
-    display: grid;
-    grid-template-columns: repeat(5, minmax(0, 1fr));
     gap: 16px;
     width: 100%;
-    padding: 12px;
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 14px;
     box-sizing: border-box;
 }
 
+/* PLACE CARD */
+
 #learningContent .famous-place-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
     min-width: 0;
     overflow: hidden;
-    border: 1px solid #d6b66d;
-    border-radius: 16px;
-    background: linear-gradient(145deg, #201b35, #10101d);
-    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.25);
+    border: 1px solid #d8b765;
+    border-radius: 17px;
+    background: linear-gradient(145deg, #27213e, #11101e);
+    box-shadow: 0 5px 18px rgba(15, 10, 35, 0.22);
     text-align: center;
-    animation: famousPlaceEnter 0.5s ease both;
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    animation: famousPlaceAppear 0.55s ease both;
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease,
+        border-color 0.3s ease;
 }
 
 #learningContent .famous-place-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(214, 182, 109, 0.3);
+    transform: translateY(-6px);
+    border-color: #ffe7a0;
+    box-shadow: 0 12px 28px rgba(214, 182, 109, 0.3);
 }
+
+/* PHOTO AREA */
 
 #learningContent .famous-place-photo-wrap {
     position: relative;
     width: 100%;
-    height: 150px;
+    height: 165px;
+    flex-shrink: 0;
     overflow: hidden;
-    background: #28223b;
+    background: linear-gradient(135deg, #322748, #17152b);
 }
 
 #learningContent .famous-place-photo {
     display: block;
     width: 100%;
     height: 100%;
+    max-width: none;
+    margin: 0;
     object-fit: cover;
-    transition: transform 0.4s ease;
+    object-position: center;
+    transition: transform 0.45s ease, filter 0.35s ease;
 }
 
 #learningContent .famous-place-card:hover .famous-place-photo {
-    transform: scale(1.06);
+    transform: scale(1.07);
+    filter: brightness(1.08);
 }
+
+/* GOLDEN NUMBER BADGE */
 
 #learningContent .famous-place-number {
     position: absolute;
-    top: 8px;
-    left: 8px;
-    padding: 4px 8px;
-    border: 1px solid #f5df9b;
+    top: 9px;
+    left: 9px;
+    z-index: 2;
+    display: inline-block;
+    min-width: 28px;
+    padding: 5px 8px;
+    border: 1px solid #ffe6a0;
     border-radius: 20px;
-    background: #17152be8;
-    color: #ffe7a0;
+    background: rgba(19, 16, 34, 0.9);
+    color: #ffe6a0;
     font-size: 12px;
-    font-weight: 800;
+    font-weight: 900;
+    box-shadow: 0 2px 10px #0005;
 }
 
+/* PLACE NAME */
+
 #learningContent .famous-place-name {
+    display: block;
+    width: 100%;
     margin: 0;
     padding: 12px 7px 8px;
+    box-sizing: border-box;
     color: #ffe7a0;
     font-size: 15px;
     font-weight: 900;
     line-height: 1.4;
+    text-align: center;
     overflow-wrap: anywhere;
-    text-shadow: 0 0 10px #d6b66d55;
+    text-shadow: 0 0 10px rgba(255, 215, 120, 0.2);
 }
 
+/* LISTEN BUTTON */
+
 #learningContent .famous-place-listen {
-    margin: 4px 0 12px;
-    padding: 8px 14px;
-    border: 1px solid #f5df9b;
-    border-radius: 22px;
-    background: linear-gradient(135deg, #b58a3b, #f5df9b);
-    color: #21182c;
-    font-weight: 800;
+    align-self: center;
+    margin: auto 0 12px;
+    padding: 8px 15px;
+    border: 1px solid #ffe6a0;
+    border-radius: 24px;
+    background: linear-gradient(135deg, #b58a3b, #f8e3a0);
+    color: #20182b;
+    font-size: 12px;
+    font-weight: 900;
     cursor: pointer;
+    box-shadow: 0 3px 10px #0003;
+    transition: transform 0.2s ease, filter 0.2s ease;
 }
 
 #learningContent .famous-place-listen:hover {
-    filter: brightness(1.1);
+    transform: scale(1.05);
+    filter: brightness(1.08);
 }
 
-@keyframes famousPlaceEnter {
+#learningContent .famous-place-listen:active {
+    transform: scale(0.96);
+}
+
+#learningContent .famous-place-listen:focus-visible {
+    outline: 3px solid #ffffff;
+    outline-offset: 3px;
+}
+
+/* ENTRANCE ANIMATION */
+
+@keyframes famousPlaceAppear {
     from {
         opacity: 0;
-        transform: translateY(12px);
+        transform: translateY(16px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
     }
 }
 
-/* TABLET */
-@media screen and (min-width: 601px) and (max-width: 1000px) {
-    #learningContent .famous-places-grid {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 12px;
-    }
+/* LARGE LAPTOPS */
 
-    #learningContent .famous-place-photo-wrap {
-        height: 125px;
+@media screen and (min-width: 1200px) {
+    #learningContent .famous-places-grid {
+        grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+        gap: 18px;
     }
 }
 
-/* MOBILE: TWO COLUMNS */
-@media screen and (max-width: 600px) {
-    #learningContent .famous-places-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 9px;
-        padding: 6px;
-    }
+/* SMALL LAPTOPS AND TABLETS */
 
-    #learningContent .famous-place-card {
-        border-radius: 12px;
+@media screen and (min-width: 601px) and (max-width: 1199px) {
+    #learningContent .famous-places-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+        gap: 12px;
+        padding: 10px;
     }
 
     #learningContent .famous-place-photo-wrap {
-        height: 105px;
+        height: 135px;
     }
 
     #learningContent .famous-place-name {
-        padding: 9px 4px 6px;
+        font-size: 14px;
+    }
+}
+
+/* MOBILE PHONES: EXACTLY 2 COLUMNS */
+
+@media screen and (max-width: 600px) {
+    #learningContent .famous-places-grid {
+        display: grid !important;
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        gap: 10px;
+        padding: 7px;
+    }
+
+    #learningContent .famous-place-card {
+        border-radius: 13px;
+    }
+
+    #learningContent .famous-place-photo-wrap {
+        height: 112px;
+    }
+
+    #learningContent .famous-place-name {
+        padding: 9px 5px 7px;
         font-size: 12px;
+        line-height: 1.35;
     }
 
     #learningContent .famous-place-listen {
         margin-bottom: 9px;
-        padding: 6px 9px;
+        padding: 7px 10px;
         font-size: 11px;
+    }
+
+    #learningContent .famous-place-number {
+        top: 6px;
+        left: 6px;
+        min-width: 24px;
+        padding: 4px 6px;
+        font-size: 10px;
     }
 }
 
+/* EXTRA SMALL PHONES */
+
+@media screen and (max-width: 360px) {
+    #learningContent .famous-places-grid {
+        gap: 7px;
+        padding: 5px;
+    }
+
+    #learningContent .famous-place-photo-wrap {
+        height: 95px;
+    }
+
+    #learningContent .famous-place-name {
+        font-size: 11px;
+    }
+
+    #learningContent .famous-place-listen {
+        padding: 6px 8px;
+        font-size: 10px;
+    }
+}
+
+/* ACCESSIBILITY: REDUCE ANIMATIONS WHEN REQUESTED */
+
 @media (prefers-reduced-motion: reduce) {
     #learningContent .famous-place-card,
-    #learningContent .famous-place-photo {
-        animation: none;
-        transition: none;
+    #learningContent .famous-place-photo,
+    #learningContent .famous-place-listen {
+        animation: none !important;
+        transition: none !important;
+    }
+
+    #learningContent .famous-place-card:hover,
+    #learningContent .famous-place-card:hover .famous-place-photo {
+        transform: none !important;
     }
 }
