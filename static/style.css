@@ -15696,3 +15696,359 @@ body {
     }
 }
 
+```css
+/* =====================================================
+   🪐 LUXURY SOLAR SYSTEM — PLANET CARDS
+   ===================================================== */
+
+.planet-space-section {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    width: 100%;
+    padding: 28px 16px;
+    border: 1px solid rgba(215, 180, 105, 0.35);
+    border-radius: 24px;
+    background:
+        radial-gradient(ellipse at 50% 0%,
+            rgba(92, 58, 155, 0.30), transparent 55%),
+        radial-gradient(ellipse at 10% 80%,
+            rgba(25, 72, 140, 0.20), transparent 50%),
+        linear-gradient(145deg, #080b20, #15112d 55%, #080d20);
+    box-shadow:
+        0 0 28px rgba(110, 75, 190, 0.14),
+        inset 0 0 35px rgba(255, 255, 255, 0.025);
+    color: #fff;
+}
+
+.planet-space-heading {
+    position: relative;
+    text-align: center;
+    margin: 0 auto 28px;
+}
+
+.planet-heading-icon {
+    display: inline-block;
+    color: #f7d88b;
+    font-size: 28px;
+    animation: planetStarGlow 2.5s ease-in-out infinite;
+}
+
+.planet-space-heading h2 {
+    margin: 7px 0;
+    color: #f8d98e;
+    font-size: clamp(25px, 3vw, 38px);
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    text-shadow: 0 0 18px rgba(248, 217, 142, 0.24);
+}
+
+.planet-space-heading p {
+    margin: 8px 0 0;
+    color: #d0cbe8;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.planet-heading-line {
+    width: 100px;
+    height: 2px;
+    margin: 15px auto 0;
+    border-radius: 10px;
+    background: linear-gradient(
+        90deg, transparent, #f5d58a, transparent
+    );
+}
+
+/* Laptop: 5 columns */
+
+.planet-luxury-grid {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 18px;
+    width: 100%;
+    align-items: stretch;
+}
+
+.planet-luxury-card {
+    min-width: 0;
+    overflow: hidden;
+    border: 1px solid rgba(222, 190, 115, 0.43);
+    border-radius: 17px;
+    background: linear-gradient(
+        160deg,
+        rgba(35, 31, 68, 0.97),
+        rgba(12, 17, 42, 0.98)
+    );
+    box-shadow:
+        0 8px 22px rgba(0, 0, 0, 0.24),
+        inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    transition:
+        transform 0.28s ease,
+        border-color 0.28s ease,
+        box-shadow 0.28s ease;
+    animation: planetCardAppear 0.55s ease both;
+}
+
+.planet-luxury-card:nth-child(2) { animation-delay: 0.04s; }
+.planet-luxury-card:nth-child(3) { animation-delay: 0.08s; }
+.planet-luxury-card:nth-child(4) { animation-delay: 0.12s; }
+.planet-luxury-card:nth-child(5) { animation-delay: 0.16s; }
+.planet-luxury-card:nth-child(6) { animation-delay: 0.20s; }
+.planet-luxury-card:nth-child(7) { animation-delay: 0.24s; }
+.planet-luxury-card:nth-child(8) { animation-delay: 0.28s; }
+
+.planet-luxury-card:hover {
+    transform: translateY(-6px);
+    border-color: #f7d88b;
+    box-shadow:
+        0 12px 30px rgba(0, 0, 0, 0.32),
+        0 0 20px rgba(231, 190, 96, 0.13);
+}
+
+.planet-image-wrap {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 4 / 3;
+    background:
+        radial-gradient(circle at center, #302653, #080b20 75%);
+    border-bottom: 1px solid rgba(226, 192, 117, 0.3);
+}
+
+.planet-image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.planet-luxury-card:hover .planet-image {
+    transform: scale(1.06);
+}
+
+.planet-image-fallback {
+    object-fit: contain;
+    padding: 8px;
+}
+
+.planet-number {
+    position: absolute;
+    z-index: 1;
+    top: 9px;
+    left: 9px;
+    padding: 5px 8px;
+    border: 1px solid rgba(255, 225, 159, 0.5);
+    border-radius: 7px;
+    background: rgba(8, 10, 28, 0.82);
+    color: #ffe5a5;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 0.7px;
+}
+
+.planet-card-content {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 13px 12px 14px;
+}
+
+.planet-name {
+    margin: 0 0 9px;
+    color: #ffdf91;
+    font-size: clamp(16px, 1.25vw, 21px);
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    text-align: center;
+    overflow-wrap: anywhere;
+    text-shadow: 0 0 12px rgba(255, 215, 130, 0.17);
+}
+
+.planet-colour {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin: 0 0 9px;
+    color: #d9d4ec;
+    font-size: 11px;
+    text-align: center;
+    line-height: 1.5;
+}
+
+.planet-gold-dot {
+    flex: 0 0 6px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #f6d58a;
+    box-shadow: 0 0 8px rgba(246, 213, 138, 0.7);
+}
+
+.planet-fact {
+    flex: 1;
+    margin: 0 0 13px;
+    color: #eeebf8;
+    font-size: 12px;
+    line-height: 1.65;
+    text-align: center;
+}
+
+.planet-listen-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    width: 100%;
+    min-height: 37px;
+    padding: 8px 10px;
+    border: 1px solid #e7c779;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #f7dfa0, #c69a43);
+    color: #171126;
+    font-size: 12px;
+    font-weight: 800;
+    cursor: pointer;
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.planet-listen-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(237, 194, 98, 0.24);
+}
+
+.planet-listen-btn:focus-visible {
+    outline: 2px solid #fff0be;
+    outline-offset: 3px;
+}
+
+.planet-footer-note {
+    margin: 25px 0 0;
+    color: #e8d39d;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+    text-align: center;
+}
+
+/* Smooth animations */
+
+@keyframes planetCardAppear {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes planetStarGlow {
+    0%, 100% {
+        opacity: 0.7;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.12);
+    }
+}
+
+/* Medium screens */
+
+@media (min-width: 601px) and (max-width: 1100px) {
+    .planet-luxury-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 14px;
+    }
+
+    .planet-space-section {
+        padding: 22px 12px;
+    }
+}
+
+/* Mobile: exactly 2 columns */
+
+@media (max-width: 600px) {
+    .planet-space-section {
+        padding: 18px 10px;
+        border-radius: 17px;
+    }
+
+    .planet-space-heading {
+        margin-bottom: 20px;
+    }
+
+    .planet-space-heading h2 {
+        font-size: 24px;
+        letter-spacing: 0.5px;
+    }
+
+    .planet-space-heading p {
+        font-size: 12px;
+    }
+
+    .planet-luxury-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+    }
+
+    .planet-luxury-card {
+        border-radius: 13px;
+    }
+
+    .planet-number {
+        top: 6px;
+        left: 6px;
+        padding: 4px 5px;
+        font-size: 8px;
+        letter-spacing: 0;
+    }
+
+    .planet-card-content {
+        padding: 10px 8px 11px;
+    }
+
+    .planet-name {
+        font-size: 16px;
+        margin-bottom: 7px;
+    }
+
+    .planet-colour {
+        font-size: 10px;
+        gap: 4px;
+    }
+
+    .planet-fact {
+        font-size: 11px;
+        line-height: 1.5;
+    }
+
+    .planet-listen-btn {
+        min-height: 35px;
+        padding: 7px 5px;
+        font-size: 11px;
+    }
+
+    .planet-footer-note {
+        font-size: 10px;
+        line-height: 1.6;
+    }
+}
+
+/* Respect reduced-motion settings */
+
+@media (prefers-reduced-motion: reduce) {
+    .planet-luxury-card,
+    .planet-image,
+    .planet-listen-btn,
+    .planet-heading-icon {
+        animation: none !important;
+        transition: none !important;
+    }
+}
+```
