@@ -5516,26 +5516,27 @@ const worldCountries = [
 ["Vietnam","vn"],["Yemen","ye"],["Zambia","zm"],
 ["Zimbabwe","zw"]
 ];
+/* ==========================================
+   🌍 COUNTRIES WORLD — RESPONSIVE VERSION
+   ========================================== */
 
 function openCountries() {
     const cards = worldCountries.map(([name, code], index) => {
         const flagURL = `https://flagcdn.com/w80/${code}.png`;
 
-        // India bhi same card design mein; only photo differs.
-        const imageURL = name === "India"
-            ? "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Shri_Ram_Janambhoomi_Mandir%2C_Ayodhya.jpg/960px-Shri_Ram_Janambhoomi_Mandir%2C_Ayodhya.jpg"
-            : "";
+        // India uses its own flag as the main picture.
+        const mainImage = name === "India" ? flagURL : flagURL;
 
         return `
             <article class="country-card"
-                style="animation-delay:${Math.min(index * 20, 400)}ms"
+                style="animation-delay:${Math.min(index * 25, 500)}ms"
                 onclick="speakCountry('${code}')">
 
                 <div class="country-photo-wrap">
                     <img
                         class="country-photo"
                         id="country-photo-${code}"
-                        src="${imageURL || flagURL}"
+                        src="${mainImage}"
                         alt="${escapeHTML(name)}"
                         loading="lazy"
                     >
@@ -5548,8 +5549,13 @@ function openCountries() {
                     >
                 </div>
 
-                <h3 class="country-name">${escapeHTML(name)}</h3>
-                <div class="country-listen">🔊 Tap to listen</div>
+                <h3 class="country-name">
+                    ${escapeHTML(name)}
+                </h3>
+
+                <div class="country-listen">
+                    🔊 Tap to listen
+                </div>
             </article>
         `;
     }).join("");
@@ -5558,14 +5564,26 @@ function openCountries() {
         "🌍",
         "Countries of the World",
         "Explore countries and their national flags!",
-        `<div class="countries-grid">${cards}</div>`
+        `<div class="countries-grid"
+            style="
+                display:grid;
+                grid-template-columns:repeat(3,minmax(0,1fr));
+                width:100%;
+                max-width:100%;
+                box-sizing:border-box;
+            ">
+            ${cards}
+        </div>`
     );
 
     loadCountryPhotos();
 }
 
+
+/* 🔊 COUNTRY PRONUNCIATION */
 function speakCountry(code) {
     const country = worldCountries.find(item => item[1] === code);
+
     if (!country || !("speechSynthesis" in window)) return;
 
     window.speechSynthesis.cancel();
@@ -5573,24 +5591,29 @@ function speakCountry(code) {
     const utterance = new SpeechSynthesisUtterance(country[0]);
     const voices = window.speechSynthesis.getVoices();
 
-    const maleVoice = voices.find(v =>
+    const preferredVoice = voices.find(v =>
         /^en(-|_)/i.test(v.lang) &&
-        /\b(david|mark|daniel|james|guy|male)\b/i.test(v.name)
+        /\b(david|mark|daniel|james|guy)\b/i.test(v.name)
     );
 
-    const englishVoice = voices.find(v => /^en(-|_)/i.test(v.lang));
+    const englishVoice = voices.find(v =>
+        /^en(-|_)/i.test(v.lang)
+    );
 
-    utterance.voice = maleVoice || englishVoice || null;
+    utterance.voice = preferredVoice || englishVoice || null;
     utterance.lang = utterance.voice?.lang || "en-US";
     utterance.rate = 0.78;
-    utterance.pitch = 0.9;
+    utterance.pitch = 0.95;
     utterance.volume = 1;
 
     window.speechSynthesis.speak(utterance);
 }
 
+
+/* 🖼️ LOAD COUNTRY PHOTOS */
 async function loadCountryPhotos() {
     for (const [name, code] of worldCountries) {
+        // India remains a flag card, not a Ram Mandir photo.
         if (name === "India") continue;
 
         const img = document.getElementById(`country-photo-${code}`);
@@ -5606,16 +5629,15 @@ async function loadCountryPhotos() {
 
             const data = await response.json();
 
+            // Keep the flag if a photo is unavailable.
             if (data.thumbnail?.source) {
                 img.src = data.thumbnail.source;
             }
         } catch (error) {
-            // Internet/photo unavailable: flag image remains as fallback.
+            // Flag remains visible if internet/photo loading fails.
         }
     }
 }
-
-
 /* =========================================================
    🏛️ FAMOUS PLACES
    ========================================================= */
