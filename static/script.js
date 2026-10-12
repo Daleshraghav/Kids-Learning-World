@@ -5442,8 +5442,9 @@ function showGKMenu() {
 
 
 
+
 /* =========================================================
-   🌍 COLOURFUL WORLD COUNTRIES
+   🌍 COUNTRIES WORLD — COMPLETE SECTION
    ========================================================= */
 
 const worldCountries = [
@@ -5517,66 +5518,83 @@ const worldCountries = [
 ];
 
 function openCountries() {
-    const content = `
-        <div class="countries-grid">
-            ${worldCountries.map(([name, code], index) => {
-                const flag = `https://flagcdn.com/w160/${code}.png`;
+    const cards = worldCountries.map(([name, code], index) => {
+        const flagURL = `https://flagcdn.com/w80/${code}.png`;
 
-                // India ke liye Ram Mandir; baaki countries ke
-                // liye Wikipedia se country ki representative photo.
-                const photo = name === "India"
-                    ? "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Shri_Ram_Janambhoomi_Mandir%2C_Ayodhya.jpg/960px-Shri_Ram_Janambhoomi_Mandir%2C_Ayodhya.jpg"
-                    : "";
+        // India bhi same card design mein; only photo differs.
+        const imageURL = name === "India"
+            ? "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Shri_Ram_Janambhoomi_Mandir%2C_Ayodhya.jpg/960px-Shri_Ram_Janambhoomi_Mandir%2C_Ayodhya.jpg"
+            : "";
 
-                return `
-                    <article class="country-card"
-                             style="animation-delay:${Math.min(index * 20, 500)}ms">
+        return `
+            <article class="country-card"
+                style="animation-delay:${Math.min(index * 20, 400)}ms"
+                onclick="speakCountry('${code}')">
 
-                        <div class="country-photo-wrap">
-                            <img
-                                class="country-photo"
-                                id="country-photo-${code}"
-                                src="${photo || flag}"
-                                alt="${escapeHTML(name)}"
-                                loading="lazy"
-                            >
+                <div class="country-photo-wrap">
+                    <img
+                        class="country-photo"
+                        id="country-photo-${code}"
+                        src="${imageURL || flagURL}"
+                        alt="${escapeHTML(name)}"
+                        loading="lazy"
+                    >
 
-                            <img
-                                class="country-flag"
-                                src="${flag}"
-                                alt="${escapeHTML(name)} flag"
-                                loading="lazy"
-                            >
-                        </div>
+                    <img
+                        class="country-flag"
+                        src="${flagURL}"
+                        alt="${escapeHTML(name)} flag"
+                        loading="lazy"
+                    >
+                </div>
 
-                        <h3 class="country-name">
-                            ${escapeHTML(name)}
-                        </h3>
-                    </article>
-                `;
-            }).join("")}
-        </div>
-    `;
+                <h3 class="country-name">${escapeHTML(name)}</h3>
+                <div class="country-listen">🔊 Tap to listen</div>
+            </article>
+        `;
+    }).join("");
 
     setupLearning(
         "🌍",
         "Countries of the World",
-        "Explore countries, real pictures and national flags!",
-        content
+        "Explore countries and their national flags!",
+        `<div class="countries-grid">${cards}</div>`
     );
 
     loadCountryPhotos();
+}
+
+function speakCountry(code) {
+    const country = worldCountries.find(item => item[1] === code);
+    if (!country || !("speechSynthesis" in window)) return;
+
+    window.speechSynthesis.cancel();
+
+    const utterance = new SpeechSynthesisUtterance(country[0]);
+    const voices = window.speechSynthesis.getVoices();
+
+    const maleVoice = voices.find(v =>
+        /^en(-|_)/i.test(v.lang) &&
+        /\b(david|mark|daniel|james|guy|male)\b/i.test(v.name)
+    );
+
+    const englishVoice = voices.find(v => /^en(-|_)/i.test(v.lang));
+
+    utterance.voice = maleVoice || englishVoice || null;
+    utterance.lang = utterance.voice?.lang || "en-US";
+    utterance.rate = 0.78;
+    utterance.pitch = 0.9;
+    utterance.volume = 1;
+
+    window.speechSynthesis.speak(utterance);
 }
 
 async function loadCountryPhotos() {
     for (const [name, code] of worldCountries) {
         if (name === "India") continue;
 
-        const photo = document.getElementById(
-            `country-photo-${code}`
-        );
-
-        if (!photo) continue;
+        const img = document.getElementById(`country-photo-${code}`);
+        if (!img) continue;
 
         try {
             const response = await fetch(
@@ -5588,11 +5606,11 @@ async function loadCountryPhotos() {
 
             const data = await response.json();
 
-            if (data.thumbnail && data.thumbnail.source) {
-                photo.src = data.thumbnail.source;
+            if (data.thumbnail?.source) {
+                img.src = data.thumbnail.source;
             }
         } catch (error) {
-            // Photo load na ho toh country flag fallback rahega.
+            // Internet/photo unavailable: flag image remains as fallback.
         }
     }
 }
