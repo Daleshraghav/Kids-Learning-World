@@ -5821,6 +5821,7 @@ async function loadFamousPlacePhotos() {
 }
 
 
+```javascript
 /* =========================================================
    🪐 LUXURY SOLAR SYSTEM — KIDS LEARNING WORLD
    ========================================================= */
@@ -5885,7 +5886,7 @@ function openSolarSystem() {
         }
     ];
 
-    const content = 
+    const content = `
         <section class="planet-space-section">
 
             <div class="planet-stars" aria-hidden="true">
@@ -5905,7 +5906,7 @@ function openSolarSystem() {
             </header>
 
             <div class="planet-luxury-grid">
-                ${planets.map(planet => 
+                ${planets.map(planet => `
                     <article class="planet-luxury-card">
 
                         <div class="planet-image-wrap">
@@ -5967,7 +5968,7 @@ function openSolarSystem() {
         content
     );
 }
-
+```
 /* =========================================================
    🐾 WILD ANIMALS
    ========================================================= */
