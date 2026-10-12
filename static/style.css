@@ -15568,3 +15568,131 @@ body {
         font-size: 11px;
     }
 }
+
+
+/* ==========================================
+   🌍 COUNTRIES WORLD — LUXURY GRID
+   Laptop: 5 columns | Mobile: 2 columns
+========================================== */
+
+/* Countries grid */
+#learningContent .countries-grid {
+    display: grid !important;
+    grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+    gap: 14px;
+    width: 100%;
+    padding: 12px;
+    box-sizing: border-box;
+}
+
+/* Luxury country card */
+#learningContent .country-card {
+    min-width: 0;
+    width: 100%;
+    overflow: hidden;
+    box-sizing: border-box;
+    text-align: center;
+    background: linear-gradient(145deg, #211a35, #100d1c) !important;
+    border: 1px solid #c9a64c !important;
+    border-radius: 17px !important;
+    box-shadow: 0 6px 18px rgba(19, 12, 35, 0.18);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+#learningContent .country-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px rgba(201, 166, 76, 0.25);
+}
+
+/* Country flag/image */
+#learningContent .country-card img {
+    display: block;
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+}
+
+/* Country name */
+#learningContent .country-card h3,
+#learningContent .country-name,
+#learningContent .country-card .country-title {
+    color: #ffdf86 !important;
+    font-weight: 800 !important;
+    text-align: center;
+    overflow-wrap: anywhere;
+    padding: 10px 5px 5px;
+    margin: 0;
+}
+
+/* Listen button */
+#learningContent .country-card button {
+    margin: 8px auto 12px;
+    max-width: calc(100% - 16px);
+    border: 1px solid #f5d77e !important;
+    border-radius: 25px !important;
+    background: linear-gradient(135deg, #b78b2e, #ffe6a0) !important;
+    color: #21162e !important;
+    font-weight: 800 !important;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+#learningContent .country-card button:hover {
+    transform: scale(1.04);
+}
+
+/* Tablet: 3 columns */
+@media (min-width: 601px) and (max-width: 1000px) {
+    #learningContent .countries-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+        gap: 12px;
+    }
+
+    #learningContent .country-card img {
+        height: 130px;
+    }
+}
+
+/* Mobile: 2 columns */
+@media (max-width: 600px) {
+    #learningContent .countries-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        gap: 10px;
+        padding: 6px;
+    }
+
+    #learningContent .country-card {
+        border-radius: 12px !important;
+    }
+
+    #learningContent .country-card img {
+        height: 105px;
+    }
+
+    #learningContent .country-card h3,
+    #learningContent .country-name,
+    #learningContent .country-card .country-title {
+        font-size: 13px !important;
+        line-height: 1.35;
+        padding: 8px 4px 5px;
+    }
+
+    #learningContent .country-card button {
+        font-size: 11px;
+        padding: 7px 10px;
+        margin: 6px auto 10px;
+    }
+}
+
+/* Reduced animation for accessibility */
+@media (prefers-reduced-motion: reduce) {
+    #learningContent .country-card,
+    #learningContent .country-card button {
+        transition: none;
+    }
+
+    #learningContent .country-card:hover {
+        transform: none;
+    }
+}
+
