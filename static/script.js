@@ -5639,93 +5639,105 @@ async function loadCountryPhotos() {
     }
 }
 
-```js
-/* ============================================
-   🏛️ FAMOUS PLACES — 50 REAL PHOTO CARDS
-   Laptop: 5 columns | Mobile: 2 columns
-   ============================================ */
+/* =========================================================
+   🏛️ FAMOUS PLACES — 50 PLACES
+   Photos + Luxury Cards + English Voice
+========================================================= */
 
 const famousPlacesData = [
-    ["Ram Mandir", "Ram Mandir"],
-    ["Taj Mahal", "Taj Mahal"],
-    ["India Gate", "India Gate"],
-    ["Red Fort", "Red Fort"],
-    ["Qutub Minar", "Qutb Minar"],
-    ["Golden Temple", "Golden Temple, Amritsar"],
-    ["Hawa Mahal", "Hawa Mahal"],
-    ["Mysore Palace", "Mysore Palace"],
-    ["Gateway of India", "Gateway of India"],
-    ["Statue of Unity", "Statue of Unity"],
+    { name: "Ram Mandir", country: "India", wiki: "Ram_Mandir" },
+    { name: "Taj Mahal", country: "India", wiki: "Taj_Mahal" },
+    { name: "India Gate", country: "India", wiki: "India_Gate" },
+    { name: "Red Fort", country: "India", wiki: "Red_Fort" },
+    { name: "Qutub Minar", country: "India", wiki: "Qutb_Minar" },
+    { name: "Golden Temple", country: "India", wiki: "Golden_Temple" },
+    { name: "Hawa Mahal", country: "India", wiki: "Hawa_Mahal" },
+    { name: "Mysore Palace", country: "India", wiki: "Mysore_Palace" },
+    { name: "Gateway of India", country: "India", wiki: "Gateway_of_India" },
+    { name: "Statue of Unity", country: "India", wiki: "Statue_of_Unity" },
 
-    ["Eiffel Tower", "Eiffel Tower"],
-    ["Great Wall of China", "Great Wall of China"],
-    ["Statue of Liberty", "Statue of Liberty"],
-    ["Big Ben", "Big Ben"],
-    ["Colosseum", "Colosseum"],
-    ["Pyramids of Giza", "Great Pyramid of Giza"],
-    ["Sydney Opera House", "Sydney Opera House"],
-    ["Leaning Tower of Pisa", "Leaning Tower of Pisa"],
-    ["Christ the Redeemer", "Christ the Redeemer"],
-    ["Machu Picchu", "Machu Picchu"],
+    { name: "Eiffel Tower", country: "France", wiki: "Eiffel_Tower" },
+    { name: "Great Wall of China", country: "China", wiki: "Great_Wall_of_China" },
+    { name: "Statue of Liberty", country: "USA", wiki: "Statue_of_Liberty" },
+    { name: "Big Ben", country: "UK", wiki: "Big_Ben" },
+    { name: "Colosseum", country: "Italy", wiki: "Colosseum" },
+    { name: "Pyramids of Giza", country: "Egypt", wiki: "Giza_pyramid_complex" },
+    { name: "Sydney Opera House", country: "Australia", wiki: "Sydney_Opera_House" },
+    { name: "Leaning Tower of Pisa", country: "Italy", wiki: "Leaning_Tower_of_Pisa" },
+    { name: "Christ the Redeemer", country: "Brazil", wiki: "Christ_the_Redeemer_(statue)" },
+    { name: "Machu Picchu", country: "Peru", wiki: "Machu_Picchu" },
 
-    ["Petra", "Petra"],
-    ["Burj Khalifa", "Burj Khalifa"],
-    ["Mount Fuji", "Mount Fuji"],
-    ["Angkor Wat", "Angkor Wat"],
-    ["Stonehenge", "Stonehenge"],
-    ["Acropolis of Athens", "Acropolis of Athens"],
-    ["Niagara Falls", "Niagara Falls"],
-    ["Grand Canyon", "Grand Canyon"],
-    ["Mount Everest", "Mount Everest"],
-    ["Tower Bridge", "Tower Bridge"],
+    { name: "Petra", country: "Jordan", wiki: "Petra" },
+    { name: "Burj Khalifa", country: "UAE", wiki: "Burj_Khalifa" },
+    { name: "Mount Fuji", country: "Japan", wiki: "Mount_Fuji" },
+    { name: "Angkor Wat", country: "Cambodia", wiki: "Angkor_Wat" },
+    { name: "Stonehenge", country: "UK", wiki: "Stonehenge" },
+    { name: "Acropolis of Athens", country: "Greece", wiki: "Acropolis_of_Athens" },
+    { name: "Niagara Falls", country: "Canada / USA", wiki: "Niagara_Falls" },
+    { name: "Grand Canyon", country: "USA", wiki: "Grand_Canyon" },
+    { name: "Mount Everest", country: "Nepal / China", wiki: "Mount_Everest" },
+    { name: "Tower Bridge", country: "UK", wiki: "Tower_Bridge" },
 
-    ["Louvre Museum", "Louvre"],
-    ["Sagrada Familia", "Sagrada Familia"],
-    ["Neuschwanstein Castle", "Neuschwanstein Castle"],
-    ["Brandenburg Gate", "Brandenburg Gate"],
-    ["St Basil's Cathedral", "Saint Basil's Cathedral"],
-    ["Hagia Sophia", "Hagia Sophia"],
-    ["Blue Mosque", "Blue Mosque, Istanbul"],
-    ["Forbidden City", "Forbidden City"],
-    ["Terracotta Army", "Terracotta Army"],
-    ["Marina Bay Sands", "Marina Bay Sands"],
+    { name: "Louvre Museum", country: "France", wiki: "Louvre" },
+    { name: "Sagrada Familia", country: "Spain", wiki: "Sagrada_Fam%C3%ADlia" },
+    { name: "Neuschwanstein Castle", country: "Germany", wiki: "Neuschwanstein_Castle" },
+    { name: "Brandenburg Gate", country: "Germany", wiki: "Brandenburg_Gate" },
+    { name: "St Basil's Cathedral", country: "Russia", wiki: "Saint_Basil%27s_Cathedral" },
+    { name: "Hagia Sophia", country: "Turkey", wiki: "Hagia_Sophia" },
+    { name: "Blue Mosque", country: "Turkey", wiki: "Blue_Mosque,_Istanbul" },
+    { name: "Forbidden City", country: "China", wiki: "Forbidden_City" },
+    { name: "Terracotta Army", country: "China", wiki: "Terracotta_Army" },
+    { name: "Marina Bay Sands", country: "Singapore", wiki: "Marina_Bay_Sands" },
 
-    ["Chichen Itza", "Chichen Itza"],
-    ["Easter Island Statues", "Moai"],
-    ["Alhambra", "Alhambra"],
-    ["Buckingham Palace", "Buckingham Palace"],
-    ["Mount Rushmore", "Mount Rushmore"],
-    ["Golden Gate Bridge", "Golden Gate Bridge"],
-    ["Lalibela Churches", "Rock-Hewn Churches, Lalibela"],
-    ["Victoria Falls", "Victoria Falls"],
-    ["Abu Simbel", "Abu Simbel temples"],
-    ["Kiyomizu-dera", "Kiyomizu-dera"]
+    { name: "Chichen Itza", country: "Mexico", wiki: "Chichen_Itza" },
+    { name: "Easter Island Statues", country: "Chile", wiki: "Moai" },
+    { name: "Alhambra", country: "Spain", wiki: "Alhambra" },
+    { name: "Buckingham Palace", country: "UK", wiki: "Buckingham_Palace" },
+    { name: "Mount Rushmore", country: "USA", wiki: "Mount_Rushmore" },
+    { name: "Golden Gate Bridge", country: "USA", wiki: "Golden_Gate_Bridge" },
+    { name: "Rock-Hewn Churches of Lalibela", country: "Ethiopia", wiki: "Rock-Hewn_Churches,_Lalibela" },
+    { name: "Victoria Falls", country: "Zambia / Zimbabwe", wiki: "Victoria_Falls" },
+    { name: "Abu Simbel", country: "Egypt", wiki: "Abu_Simbel" },
+    { name: "Kiyomizu-dera", country: "Japan", wiki: "Kiyomizu-dera" }
 ];
 
 
-/* MAIN CATEGORY FUNCTION */
+/* =========================================================
+   🏛️ OPEN FAMOUS PLACES
+========================================================= */
+
 function openFamousPlaces() {
-    const cards = famousPlacesData.map(([name, page], index) => `
+    window.currentAdventureMenu = "gk";
+    currentCategory = "famousplaces";
+
+    const cards = famousPlacesData.map((place, index) => `
         <article class="famous-place-card"
-                 style="animation-delay:${Math.min(index * 20, 500)}ms"
-                 onclick="speak('${escapeHTML(name).replace(/'/g, "\\'")}', {lang:'en-US'})">
+                 data-place-index="${index}">
 
             <div class="famous-place-photo-wrap">
+                <span class="famous-place-number">${index + 1}</span>
+
                 <img
                     class="famous-place-photo"
-                    id="famous-photo-${index}"
-                    src="https://placehold.co/600x400/17152b/f5d98b?text=Loading+Photo"
-                    alt="${escapeHTML(name)}"
-                    loading="lazy"
-                />
-                <span class="famous-place-number">${index + 1}</span>
+                    id="famous-place-photo-${index}"
+                    src="https://placehold.co/600x400/211a35/ffe7a0?text=Loading+Photo"
+                    alt="${escapeHTML(place.name)}"
+                    loading="${index < 10 ? "eager" : "lazy"}"
+                >
             </div>
 
-            <h3 class="famous-place-name">${escapeHTML(name)}</h3>
+            <h3 class="famous-place-name">
+                ${escapeHTML(place.name)}
+            </h3>
 
-            <button class="famous-place-listen"
-                    type="button"
-                    onclick="event.stopPropagation(); speak('${escapeHTML(name).replace(/'/g, "\\'")}', {lang:'en-US'})">
+            <p class="famous-place-country">
+                ${escapeHTML(place.country)}
+            </p>
+
+            <button
+                class="famous-place-listen"
+                type="button"
+                data-speak-index="${index}">
                 🔊 Listen
             </button>
         </article>
@@ -5733,52 +5745,87 @@ function openFamousPlaces() {
 
     setupLearning(
         "🏛️",
-        "Famous Places Around the World",
-        "Discover 50 amazing places with real photographs!",
-        `<div class="famous-places-grid">${cards}</div>`
+        "Famous Places of the World",
+        "Explore 50 amazing places around the world!",
+        `
+            <div class="famous-places-grid">
+                ${cards}
+            </div>
+        `
     );
+
+    // Safe click listeners: names with apostrophes also work.
+    learningContent
+        .querySelectorAll("[data-speak-index]")
+        .forEach(button => {
+            button.addEventListener("click", event => {
+                event.stopPropagation();
+
+                const index = Number(button.dataset.speakIndex);
+                const place = famousPlacesData[index];
+
+                if (place) {
+                    speak(place.name, {
+                        lang: "en-US",
+                        rate: 0.78,
+                        pitch: 0.9
+                    });
+                }
+            });
+        });
 
     loadFamousPlacePhotos();
 }
 
 
-/* LOAD REAL PHOTOS FROM WIKIPEDIA */
-async function loadFamousPlacePhotos() {
-    const currentCards = famousPlacesData.map((item, index) => ({
-        name: item[0],
-        page: item[1],
-        index
-    }));
+/* =========================================================
+   📸 LOAD REAL PLACE PHOTOS FROM WIKIPEDIA
+========================================================= */
 
-    for (const place of currentCards) {
-        const img = document.getElementById(`famous-photo-${place.index}`);
-        if (!img) continue;
+async function loadFamousPlacePhotos() {
+    const photoJobs = famousPlacesData.map(async (place, index) => {
+        const image = document.getElementById(
+            `famous-place-photo-${index}`
+        );
+
+        if (!image) return;
 
         try {
-            const url =
-                "https://en.wikipedia.org/api/rest_v1/page/summary/" +
-                encodeURIComponent(place.page.replaceAll(" ", "_"));
+            const title = place.wiki
+                .replace(/%27/g, "'")
+                .replace(/%C3%A1/gi, "á");
 
-            const response = await fetch(url);
-            if (!response.ok) continue;
+            const apiURL =
+                "https://en.wikipedia.org/api/rest_v1/page/summary/" +
+                encodeURIComponent(title);
+
+            const response = await fetch(apiURL);
+
+            if (!response.ok) {
+                throw new Error("Photo unavailable");
+            }
 
             const data = await response.json();
+
             if (data.thumbnail && data.thumbnail.source) {
-                img.src = data.thumbnail.source;
+                image.src = data.thumbnail.source;
+                image.alt = place.name;
             } else {
-                img.src =
-                    "https://placehold.co/600x400/17152b/f5d98b?text=" +
+                image.src =
+                    "https://placehold.co/600x400/211a35/ffe7a0?text=" +
                     encodeURIComponent(place.name);
             }
         } catch (error) {
-            // Keep a readable fallback if a photo cannot load.
-            img.src =
-                "https://placehold.co/600x400/17152b/f5d98b?text=" +
+            // Keep the page working if a photo cannot load.
+            image.src =
+                "https://placehold.co/600x400/211a35/ffe7a0?text=" +
                 encodeURIComponent(place.name);
         }
-    }
+    });
+
+    await Promise.allSettled(photoJobs);
 }
-```
+
 
 /* =========================================================
    🚩 FLAGS
