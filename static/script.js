@@ -5831,56 +5831,56 @@ function openSolarSystem() {
             order: 1,
             colour: "Rocky grey",
             fact: "Mercury is the closest planet to the Sun.",
-            image: "https://science.nasa.gov/wp-content/uploads/2023/09/mercury-messenger-globe.jpg"
+            image: "https://commons.wikimedia.org/wiki/Special:FilePath/Mercury_in_true_color.jpg"
         },
         {
             name: "Venus",
             order: 2,
             colour: "Yellowish white",
             fact: "Venus is the hottest planet in our Solar System.",
-            image: "https://science.nasa.gov/wp-content/uploads/2023/09/venus.jpg"
+            image: "https://commons.wikimedia.org/wiki/Special:FilePath/Venus_globe.jpg"
         },
         {
             name: "Earth",
             order: 3,
             colour: "Blue and green",
             fact: "Earth is the only known planet with life.",
-            image: "https://science.nasa.gov/wp-content/uploads/2023/05/earth.jpg"
+            image: "https://commons.wikimedia.org/wiki/Special:FilePath/The_Earth_seen_from_Apollo_17.jpg"
+
         },
         {
             name: "Mars",
             order: 4,
             colour: "Red",
             fact: "Mars is known as the Red Planet.",
-            image: "https://science.nasa.gov/wp-content/uploads/2023/09/mars.jpg"
+            image: "https://commons.wikimedia.org/wiki/Special:FilePath/OSIRIS_Mars_true_color.jpg"
         },
         {
             name: "Jupiter",
             order: 5,
             colour: "Cream and brown",
             fact: "Jupiter is the largest planet in our Solar System.",
-            image: "https://science.nasa.gov/wp-content/uploads/2023/09/jupiter.jpg"
-        },
+            image: "https://commons.wikimedia.org/wiki/Special:FilePath/Jupiter.jpg"
         {
             name: "Saturn",
             order: 6,
             colour: "Golden yellow",
             fact: "Saturn is famous for its beautiful rings.",
-            image: "https://science.nasa.gov/wp-content/uploads/2023/09/saturn.jpg"
+            image: "https://commons.wikimedia.org/wiki/Special:FilePath/Saturn_during_Equinox.jpg"
         },
         {
             name: "Uranus",
             order: 7,
             colour: "Pale blue",
             fact: "Uranus rotates on its side.",
-            image: "https://science.nasa.gov/wp-content/uploads/2023/09/uranus.jpg"
+            image: "https://commons.wikimedia.org/wiki/Special:FilePath/Uranus2.jpg"
         },
         {
             name: "Neptune",
             order: 8,
             colour: "Deep blue",
             fact: "Neptune is known for its powerful winds.",
-            image: "https://science.nasa.gov/wp-content/uploads/2023/09/neptune.jpg"
+            image: "https://commons.wikimedia.org/wiki/Special:FilePath/Neptune.jpg"
         }
     ];
 
