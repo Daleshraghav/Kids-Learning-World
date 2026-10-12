@@ -5821,57 +5821,72 @@ async function loadFamousPlacePhotos() {
 }
 
 
-
-
+```javascript
 function openSolarSystem() {
     const planets = [
         {
             name: "Mercury",
             colour: "Rocky grey",
             fact: "The smallest planet and closest to the Sun.",
-            image: "/static/images/planets/mercury.jpg"
+            image: "/static/images/planets/mercury.jpg",
+            emoji: "🌑",
+            gradient: "linear-gradient(135deg, #777777, #c7c7c7)"
         },
         {
             name: "Venus",
             colour: "Cream and yellow",
             fact: "Venus is the hottest planet in our Solar System.",
-            image: "/static/images/planets/venus.jpg"
+            image: "/static/images/planets/venus.jpg",
+            emoji: "🟡",
+            gradient: "linear-gradient(135deg, #b87b36, #ffe0a0)"
         },
         {
             name: "Earth",
             colour: "Blue and green",
             fact: "Earth is our home and supports life.",
-            image: "/static/images/planets/earth.jpg"
+            image: "/static/images/planets/earth.jpg",
+            emoji: "🌍",
+            gradient: "linear-gradient(135deg, #0759bd, #40b95a)"
         },
         {
             name: "Mars",
             colour: "Rusty red",
             fact: "Mars is known as the Red Planet.",
-            image: "/static/images/planets/mars.jpg"
+            image: "/static/images/planets/mars.jpg",
+            emoji: "🔴",
+            gradient: "linear-gradient(135deg, #8f281b, #ed7954)"
         },
         {
             name: "Jupiter",
             colour: "Orange and brown",
             fact: "Jupiter is the largest planet in our Solar System.",
-            image: "/static/images/planets/jupiter.jpg"
+            image: "/static/images/planets/jupiter.jpg",
+            emoji: "🟠",
+            gradient: "linear-gradient(135deg, #a65d32, #f3c18a)"
         },
         {
             name: "Saturn",
             colour: "Golden yellow",
             fact: "Saturn is famous for its beautiful rings.",
-            image: "/static/images/planets/saturn.jpg"
+            image: "/static/images/planets/saturn.jpg",
+            emoji: "🪐",
+            gradient: "linear-gradient(135deg, #b38b43, #f8e0a0)"
         },
         {
             name: "Uranus",
             colour: "Pale blue",
             fact: "Uranus rotates on its side.",
-            image: "/static/images/planets/uranus.jpg"
+            image: "/static/images/planets/uranus.jpg",
+            emoji: "🔵",
+            gradient: "linear-gradient(135deg, #60b9ca, #c4f4f8)"
         },
         {
             name: "Neptune",
             colour: "Deep blue",
             fact: "Neptune is known for its powerful winds.",
-            image: "/static/images/planets/neptune.jpg"
+            image: "/static/images/planets/neptune.jpg",
+            emoji: "🔵",
+            gradient: "linear-gradient(135deg, #1238a8, #5297ff)"
         }
     ];
 
@@ -5900,20 +5915,24 @@ function openSolarSystem() {
                                 loading="lazy"
                                 onerror="
                                     this.style.display='none';
-                                    this.nextElementSibling.style.display='flex';
+                                    this.parentElement.querySelector('.planet-image-fallback').style.display='flex';
                                 "
                             >
 
-                            <div class="planet-image-fallback">
-    <span>🪐</span>
-    <small>${planet.name}</small>
-</div>
+                            <div
+                                class="planet-image-fallback"
+                                style="display:none; background:${planet.gradient};"
+                            >
+                                <span>${planet.emoji}</span>
+                                <small>${planet.name}</small>
+                            </div>
+                        </div>
 
                         <div class="planet-card-details">
                             <h2>${planet.name}</h2>
 
                             <p class="planet-colour">
-                                <span>🟡</span>
+                                <span>●</span>
                                 Colour: ${planet.colour}
                             </p>
 
@@ -5924,7 +5943,7 @@ function openSolarSystem() {
                                 class="planet-listen-button"
                                 onclick="listenToPlanet('${planet.name}')"
                             >
-                                <span>🔊</span> Listen
+                                🔊 Listen
                             </button>
                         </div>
 
@@ -5933,9 +5952,7 @@ function openSolarSystem() {
             </div>
 
             <div class="solar-footer">
-                ✦ ━━━━━━━━━
-                <span>Discover&nbsp; • &nbsp;Learn&nbsp; • &nbsp;Explore</span>
-                ━━━━━━━━━ ✦
+                ✦ Discover • Learn • Explore ✦
             </div>
 
         </section>
@@ -5950,23 +5967,21 @@ function openSolarSystem() {
 }
 
 function listenToPlanet(name) {
-    if (typeof speak === "function") {
-        speak(name, { lang: "en-US" });
-        return;
-    }
-
     if ("speechSynthesis" in window) {
         window.speechSynthesis.cancel();
 
         const message = new SpeechSynthesisUtterance(name);
         message.lang = "en-US";
         message.rate = 0.85;
+        message.pitch = 1;
+        message.volume = 1;
 
         window.speechSynthesis.speak(message);
     } else {
         alert("Voice is not supported in this browser.");
     }
 }
+```
 
 /* =========================================================
    🐾 WILD ANIMALS
