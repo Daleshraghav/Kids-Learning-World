@@ -5822,92 +5822,81 @@ async function loadFamousPlacePhotos() {
 
 
 
-/* =====================================================
-   SOLAR SYSTEM — KIDS LEARNING WORLD
-   ===================================================== */
 
 function openSolarSystem() {
     const planets = [
         {
             name: "Mercury",
-            order: 1,
-            colour: "Rocky Grey",
+            colour: "Rocky grey",
             fact: "The smallest planet and closest to the Sun.",
             image: "/static/images/planets/mercury.jpg"
         },
         {
             name: "Venus",
-            order: 2,
-            colour: "Cream and Gold",
-            fact: "Venus is the hottest planet.",
+            colour: "Cream and yellow",
+            fact: "Venus is the hottest planet in our Solar System.",
             image: "/static/images/planets/venus.jpg"
         },
         {
             name: "Earth",
-            order: 3,
-            colour: "Blue and Green",
+            colour: "Blue and green",
             fact: "Earth is our home and supports life.",
             image: "/static/images/planets/earth.jpg"
         },
         {
             name: "Mars",
-            order: 4,
-            colour: "Rusty Red",
+            colour: "Rusty red",
             fact: "Mars is known as the Red Planet.",
             image: "/static/images/planets/mars.jpg"
         },
         {
             name: "Jupiter",
-            order: 5,
-            colour: "Orange and Brown",
-            fact: "Jupiter is the largest planet.",
+            colour: "Orange and brown",
+            fact: "Jupiter is the largest planet in our Solar System.",
             image: "/static/images/planets/jupiter.jpg"
         },
         {
             name: "Saturn",
-            order: 6,
-            colour: "Golden Yellow",
+            colour: "Golden yellow",
             fact: "Saturn is famous for its beautiful rings.",
             image: "/static/images/planets/saturn.jpg"
         },
         {
             name: "Uranus",
-            order: 7,
-            colour: "Pale Cyan",
-            fact: "Uranus rotates almost on its side.",
+            colour: "Pale blue",
+            fact: "Uranus rotates on its side.",
             image: "/static/images/planets/uranus.jpg"
         },
         {
             name: "Neptune",
-            order: 8,
-            colour: "Deep Blue",
-            fact: "Neptune has extremely fast winds.",
+            colour: "Deep blue",
+            fact: "Neptune is known for its powerful winds.",
             image: "/static/images/planets/neptune.jpg"
         }
     ];
 
     const content = `
-        <section class="planet-space-section">
+        <section class="solar-luxury">
 
-            <header class="planet-space-heading">
-                <span class="planet-heading-icon">🪐</span>
-                <h2>Our Solar System</h2>
+            <div class="solar-space-header">
+                <div class="solar-planet-symbol">🪐</div>
+                <h1>Our Solar System</h1>
                 <p>Discover all eight amazing planets</p>
-            </header>
+            </div>
 
             <div class="planet-luxury-grid">
-                ${planets.map(planet => `
+                ${planets.map((planet, index) => `
                     <article class="planet-luxury-card">
 
-                        <div class="planet-image-wrap">
+                        <div class="planet-image-area">
                             <span class="planet-number">
-                                PLANET ${planet.order}
+                                PLANET ${index + 1}
                             </span>
 
                             <img
-                                class="planet-image"
                                 src="${planet.image}"
-                                alt="${planet.name} planet"
+                                alt="${planet.name}"
+                                class="planet-realistic-image"
                                 loading="lazy"
                                 onerror="
                                     this.style.display='none';
@@ -5915,33 +5904,28 @@ function openSolarSystem() {
                                 "
                             >
 
-                            <div
-                                class="planet-image-error"
-                                style="display:none"
-                            >
-                                Image missing
+                            <div class="planet-image-fallback">
+                                <span>🪐</span>
+                                <small>Upload ${planet.name} image</small>
                             </div>
                         </div>
 
-                        <div class="planet-card-content">
-                            <h3 class="planet-name">
-                                ${planet.name}
-                            </h3>
+                        <div class="planet-card-details">
+                            <h2>${planet.name}</h2>
 
                             <p class="planet-colour">
-                                ✦ ${planet.colour}
+                                <span>🟡</span>
+                                Colour: ${planet.colour}
                             </p>
 
-                            <p class="planet-fact">
-                                ${planet.fact}
-                            </p>
+                            <p class="planet-fact">${planet.fact}</p>
 
                             <button
                                 type="button"
-                                class="planet-listen-btn"
-                                onclick="speak('${planet.name}', {lang:'en-US'})"
+                                class="planet-listen-button"
+                                onclick="listenToPlanet('${planet.name}')"
                             >
-                                🔊 Listen to Name
+                                <span>🔊</span> Listen
                             </button>
                         </div>
 
@@ -5949,18 +5933,40 @@ function openSolarSystem() {
                 `).join("")}
             </div>
 
-            <p class="planet-footer-note">
-                ✦ Discover • Learn • Explore ✦
-            </p>
+            <div class="solar-footer">
+                ✦ ━━━━━━━━━
+                <span>Discover&nbsp; • &nbsp;Learn&nbsp; • &nbsp;Explore</span>
+                ━━━━━━━━━ ✦
+            </div>
+
         </section>
     `;
 
     setupLearning(
         "🪐",
-        "Planets of the Solar System",
-        "Meet the eight planets of our cosmic neighbourhood!",
+        "Our Solar System",
+        "Discover all eight amazing planets",
         content
     );
+}
+
+function listenToPlanet(name) {
+    if (typeof speak === "function") {
+        speak(name, { lang: "en-US" });
+        return;
+    }
+
+    if ("speechSynthesis" in window) {
+        window.speechSynthesis.cancel();
+
+        const message = new SpeechSynthesisUtterance(name);
+        message.lang = "en-US";
+        message.rate = 0.85;
+
+        window.speechSynthesis.speak(message);
+    } else {
+        alert("Voice is not supported in this browser.");
+    }
 }
 
 /* =========================================================
