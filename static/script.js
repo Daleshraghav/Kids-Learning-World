@@ -5441,30 +5441,160 @@ function showGKMenu() {
 }
 
 
+
 /* =========================================================
-   🌎 COUNTRIES
+   🌍 COLOURFUL WORLD COUNTRIES
    ========================================================= */
 
+const worldCountries = [
+["Afghanistan","af"],["Albania","al"],["Algeria","dz"],
+["Andorra","ad"],["Angola","ao"],["Antigua and Barbuda","ag"],
+["Argentina","ar"],["Armenia","am"],["Australia","au"],
+["Austria","at"],["Azerbaijan","az"],["Bahamas","bs"],
+["Bahrain","bh"],["Bangladesh","bd"],["Barbados","bb"],
+["Belarus","by"],["Belgium","be"],["Belize","bz"],
+["Benin","bj"],["Bhutan","bt"],["Bolivia","bo"],
+["Bosnia and Herzegovina","ba"],["Botswana","bw"],["Brazil","br"],
+["Brunei","bn"],["Bulgaria","bg"],["Burkina Faso","bf"],
+["Burundi","bi"],["Cabo Verde","cv"],["Cambodia","kh"],
+["Cameroon","cm"],["Canada","ca"],["Central African Republic","cf"],
+["Chad","td"],["Chile","cl"],["China","cn"],
+["Colombia","co"],["Comoros","km"],["Congo","cg"],
+["Costa Rica","cr"],["Côte d’Ivoire","ci"],["Croatia","hr"],
+["Cuba","cu"],["Cyprus","cy"],["Czechia","cz"],
+["Democratic Republic of the Congo","cd"],["Denmark","dk"],
+["Djibouti","dj"],["Dominica","dm"],["Dominican Republic","do"],
+["Ecuador","ec"],["Egypt","eg"],["El Salvador","sv"],
+["Equatorial Guinea","gq"],["Eritrea","er"],["Estonia","ee"],
+["Eswatini","sz"],["Ethiopia","et"],["Fiji","fj"],
+["Finland","fi"],["France","fr"],["Gabon","ga"],
+["Gambia","gm"],["Georgia","ge"],["Germany","de"],
+["Ghana","gh"],["Greece","gr"],["Grenada","gd"],
+["Guatemala","gt"],["Guinea","gn"],["Guinea-Bissau","gw"],
+["Guyana","gy"],["Haiti","ht"],["Honduras","hn"],
+["Hungary","hu"],["Iceland","is"],["India","in"],
+["Indonesia","id"],["Iran","ir"],["Iraq","iq"],
+["Ireland","ie"],["Israel","il"],["Italy","it"],
+["Jamaica","jm"],["Japan","jp"],["Jordan","jo"],
+["Kazakhstan","kz"],["Kenya","ke"],["Kiribati","ki"],
+["Kuwait","kw"],["Kyrgyzstan","kg"],["Laos","la"],
+["Latvia","lv"],["Lebanon","lb"],["Lesotho","ls"],
+["Liberia","lr"],["Libya","ly"],["Liechtenstein","li"],
+["Lithuania","lt"],["Luxembourg","lu"],["Madagascar","mg"],
+["Malawi","mw"],["Malaysia","my"],["Maldives","mv"],
+["Mali","ml"],["Malta","mt"],["Marshall Islands","mh"],
+["Mauritania","mr"],["Mauritius","mu"],["Mexico","mx"],
+["Micronesia","fm"],["Moldova","md"],["Monaco","mc"],
+["Mongolia","mn"],["Montenegro","me"],["Morocco","ma"],
+["Mozambique","mz"],["Myanmar","mm"],["Namibia","na"],
+["Nauru","nr"],["Nepal","np"],["Netherlands","nl"],
+["New Zealand","nz"],["Nicaragua","ni"],["Niger","ne"],
+["Nigeria","ng"],["North Korea","kp"],["North Macedonia","mk"],
+["Norway","no"],["Oman","om"],["Pakistan","pk"],
+["Palau","pw"],["Palestine","ps"],["Panama","pa"],
+["Papua New Guinea","pg"],["Paraguay","py"],["Peru","pe"],
+["Philippines","ph"],["Poland","pl"],["Portugal","pt"],
+["Qatar","qa"],["Romania","ro"],["Russia","ru"],
+["Rwanda","rw"],["Saint Kitts and Nevis","kn"],["Saint Lucia","lc"],
+["Saint Vincent and the Grenadines","vc"],["Samoa","ws"],
+["San Marino","sm"],["Sao Tome and Principe","st"],
+["Saudi Arabia","sa"],["Senegal","sn"],["Serbia","rs"],
+["Seychelles","sc"],["Sierra Leone","sl"],["Singapore","sg"],
+["Slovakia","sk"],["Slovenia","si"],["Solomon Islands","sb"],
+["Somalia","so"],["South Africa","za"],["South Korea","kr"],
+["South Sudan","ss"],["Spain","es"],["Sri Lanka","lk"],
+["Sudan","sd"],["Suriname","sr"],["Sweden","se"],
+["Switzerland","ch"],["Syria","sy"],["Tajikistan","tj"],
+["Tanzania","tz"],["Thailand","th"],["Timor-Leste","tl"],
+["Togo","tg"],["Tonga","to"],["Trinidad and Tobago","tt"],
+["Tunisia","tn"],["Türkiye","tr"],["Turkmenistan","tm"],
+["Tuvalu","tv"],["Uganda","ug"],["Ukraine","ua"],
+["United Arab Emirates","ae"],["United Kingdom","gb"],
+["United States","us"],["Uruguay","uy"],["Uzbekistan","uz"],
+["Vanuatu","vu"],["Vatican City","va"],["Venezuela","ve"],
+["Vietnam","vn"],["Yemen","ye"],["Zambia","zm"],
+["Zimbabwe","zw"]
+];
+
 function openCountries() {
+    const content = `
+        <div class="countries-grid">
+            ${worldCountries.map(([name, code], index) => {
+                const flag = `https://flagcdn.com/w160/${code}.png`;
 
-    const data = [
-        ["India", "🇮🇳"],
-        ["Japan", "🇯🇵"],
-        ["USA", "🇺🇸"],
-        ["UK", "🇬🇧"],
-        ["France", "🇫🇷"],
-        ["Australia", "🇦🇺"],
-        ["Canada", "🇨🇦"],
-        ["Brazil", "🇧🇷"],
-        ["Germany", "🇩🇪"],
-        ["Italy", "🇮🇹"]
-    ];
+                // India ke liye Ram Mandir; baaki countries ke
+                // liye Wikipedia se country ki representative photo.
+                const photo = name === "India"
+                    ? "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Shri_Ram_Janambhoomi_Mandir%2C_Ayodhya.jpg/960px-Shri_Ram_Janambhoomi_Mandir%2C_Ayodhya.jpg"
+                    : "";
 
-    renderSimpleTopic(
-        "🌎",
-        "Countries",
-        data
+                return `
+                    <article class="country-card"
+                             style="animation-delay:${Math.min(index * 20, 500)}ms">
+
+                        <div class="country-photo-wrap">
+                            <img
+                                class="country-photo"
+                                id="country-photo-${code}"
+                                src="${photo || flag}"
+                                alt="${escapeHTML(name)}"
+                                loading="lazy"
+                            >
+
+                            <img
+                                class="country-flag"
+                                src="${flag}"
+                                alt="${escapeHTML(name)} flag"
+                                loading="lazy"
+                            >
+                        </div>
+
+                        <h3 class="country-name">
+                            ${escapeHTML(name)}
+                        </h3>
+                    </article>
+                `;
+            }).join("")}
+        </div>
+    `;
+
+    setupLearning(
+        "🌍",
+        "Countries of the World",
+        "Explore countries, real pictures and national flags!",
+        content
     );
+
+    loadCountryPhotos();
+}
+
+async function loadCountryPhotos() {
+    for (const [name, code] of worldCountries) {
+        if (name === "India") continue;
+
+        const photo = document.getElementById(
+            `country-photo-${code}`
+        );
+
+        if (!photo) continue;
+
+        try {
+            const response = await fetch(
+                "https://en.wikipedia.org/api/rest_v1/page/summary/" +
+                encodeURIComponent(name.replaceAll(" ", "_"))
+            );
+
+            if (!response.ok) continue;
+
+            const data = await response.json();
+
+            if (data.thumbnail && data.thumbnail.source) {
+                photo.src = data.thumbnail.source;
+            }
+        } catch (error) {
+            // Photo load na ho toh country flag fallback rahega.
+        }
+    }
 }
 
 
