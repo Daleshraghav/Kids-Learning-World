@@ -5638,30 +5638,147 @@ async function loadCountryPhotos() {
         }
     }
 }
-/* =========================================================
-   🏛️ FAMOUS PLACES
-   ========================================================= */
 
+```js
+/* ============================================
+   🏛️ FAMOUS PLACES — 50 REAL PHOTO CARDS
+   Laptop: 5 columns | Mobile: 2 columns
+   ============================================ */
+
+const famousPlacesData = [
+    ["Ram Mandir", "Ram Mandir"],
+    ["Taj Mahal", "Taj Mahal"],
+    ["India Gate", "India Gate"],
+    ["Red Fort", "Red Fort"],
+    ["Qutub Minar", "Qutb Minar"],
+    ["Golden Temple", "Golden Temple, Amritsar"],
+    ["Hawa Mahal", "Hawa Mahal"],
+    ["Mysore Palace", "Mysore Palace"],
+    ["Gateway of India", "Gateway of India"],
+    ["Statue of Unity", "Statue of Unity"],
+
+    ["Eiffel Tower", "Eiffel Tower"],
+    ["Great Wall of China", "Great Wall of China"],
+    ["Statue of Liberty", "Statue of Liberty"],
+    ["Big Ben", "Big Ben"],
+    ["Colosseum", "Colosseum"],
+    ["Pyramids of Giza", "Great Pyramid of Giza"],
+    ["Sydney Opera House", "Sydney Opera House"],
+    ["Leaning Tower of Pisa", "Leaning Tower of Pisa"],
+    ["Christ the Redeemer", "Christ the Redeemer"],
+    ["Machu Picchu", "Machu Picchu"],
+
+    ["Petra", "Petra"],
+    ["Burj Khalifa", "Burj Khalifa"],
+    ["Mount Fuji", "Mount Fuji"],
+    ["Angkor Wat", "Angkor Wat"],
+    ["Stonehenge", "Stonehenge"],
+    ["Acropolis of Athens", "Acropolis of Athens"],
+    ["Niagara Falls", "Niagara Falls"],
+    ["Grand Canyon", "Grand Canyon"],
+    ["Mount Everest", "Mount Everest"],
+    ["Tower Bridge", "Tower Bridge"],
+
+    ["Louvre Museum", "Louvre"],
+    ["Sagrada Familia", "Sagrada Familia"],
+    ["Neuschwanstein Castle", "Neuschwanstein Castle"],
+    ["Brandenburg Gate", "Brandenburg Gate"],
+    ["St Basil's Cathedral", "Saint Basil's Cathedral"],
+    ["Hagia Sophia", "Hagia Sophia"],
+    ["Blue Mosque", "Blue Mosque, Istanbul"],
+    ["Forbidden City", "Forbidden City"],
+    ["Terracotta Army", "Terracotta Army"],
+    ["Marina Bay Sands", "Marina Bay Sands"],
+
+    ["Chichen Itza", "Chichen Itza"],
+    ["Easter Island Statues", "Moai"],
+    ["Alhambra", "Alhambra"],
+    ["Buckingham Palace", "Buckingham Palace"],
+    ["Mount Rushmore", "Mount Rushmore"],
+    ["Golden Gate Bridge", "Golden Gate Bridge"],
+    ["Lalibela Churches", "Rock-Hewn Churches, Lalibela"],
+    ["Victoria Falls", "Victoria Falls"],
+    ["Abu Simbel", "Abu Simbel temples"],
+    ["Kiyomizu-dera", "Kiyomizu-dera"]
+];
+
+
+/* MAIN CATEGORY FUNCTION */
 function openFamousPlaces() {
+    const cards = famousPlacesData.map(([name, page], index) => `
+        <article class="famous-place-card"
+                 style="animation-delay:${Math.min(index * 20, 500)}ms"
+                 onclick="speak('${escapeHTML(name).replace(/'/g, "\\'")}', {lang:'en-US'})">
 
-    const data = [
-        ["Taj Mahal", "🕌"],
-        ["Eiffel Tower", "🗼"],
-        ["Great Wall of China", "🏯"],
-        ["Statue of Liberty", "🗽"],
-        ["Big Ben", "🕰️"],
-        ["Pyramids", "🔺"],
-        ["Colosseum", "🏛️"],
-        ["Sydney Opera House", "🎭"]
-    ];
+            <div class="famous-place-photo-wrap">
+                <img
+                    class="famous-place-photo"
+                    id="famous-photo-${index}"
+                    src="https://placehold.co/600x400/17152b/f5d98b?text=Loading+Photo"
+                    alt="${escapeHTML(name)}"
+                    loading="lazy"
+                />
+                <span class="famous-place-number">${index + 1}</span>
+            </div>
 
-    renderSimpleTopic(
+            <h3 class="famous-place-name">${escapeHTML(name)}</h3>
+
+            <button class="famous-place-listen"
+                    type="button"
+                    onclick="event.stopPropagation(); speak('${escapeHTML(name).replace(/'/g, "\\'")}', {lang:'en-US'})">
+                🔊 Listen
+            </button>
+        </article>
+    `).join("");
+
+    setupLearning(
         "🏛️",
-        "Famous Places",
-        data
+        "Famous Places Around the World",
+        "Discover 50 amazing places with real photographs!",
+        `<div class="famous-places-grid">${cards}</div>`
     );
+
+    loadFamousPlacePhotos();
 }
 
+
+/* LOAD REAL PHOTOS FROM WIKIPEDIA */
+async function loadFamousPlacePhotos() {
+    const currentCards = famousPlacesData.map((item, index) => ({
+        name: item[0],
+        page: item[1],
+        index
+    }));
+
+    for (const place of currentCards) {
+        const img = document.getElementById(`famous-photo-${place.index}`);
+        if (!img) continue;
+
+        try {
+            const url =
+                "https://en.wikipedia.org/api/rest_v1/page/summary/" +
+                encodeURIComponent(place.page.replaceAll(" ", "_"));
+
+            const response = await fetch(url);
+            if (!response.ok) continue;
+
+            const data = await response.json();
+            if (data.thumbnail && data.thumbnail.source) {
+                img.src = data.thumbnail.source;
+            } else {
+                img.src =
+                    "https://placehold.co/600x400/17152b/f5d98b?text=" +
+                    encodeURIComponent(place.name);
+            }
+        } catch (error) {
+            // Keep a readable fallback if a photo cannot load.
+            img.src =
+                "https://placehold.co/600x400/17152b/f5d98b?text=" +
+                encodeURIComponent(place.name);
+        }
+    }
+}
+```
 
 /* =========================================================
    🚩 FLAGS
