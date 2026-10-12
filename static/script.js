@@ -5905,10 +5905,9 @@ function openSolarSystem() {
                             >
 
                             <div class="planet-image-fallback">
-                                <span>🪐</span>
-                                <small>Upload ${planet.name} image</small>
-                            </div>
-                        </div>
+    <span>🪐</span>
+    <small>${planet.name}</small>
+</div>
 
                         <div class="planet-card-details">
                             <h2>${planet.name}</h2>
