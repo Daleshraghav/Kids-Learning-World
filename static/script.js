@@ -5339,48 +5339,6 @@ function destroyShape3D() {
 }
 
 /* =========================================================
-   🧠 MATH QUIZ
-   ========================================================= */
-
-function startMathQuiz() {
-
-    const questions = [
-        {
-            question: "5 + 8 = ?",
-            options: [13, 10, 18, 9],
-            answer: 13
-        },
-        {
-            question: "10 - 4 = ?",
-            options: [5, 6, 7, 8],
-            answer: 6
-        },
-        {
-            question: "7 × 4 = ?",
-            options: [26, 10, 28, 14],
-            answer: 28
-        },
-        {
-            question: "20 ÷ 5 = ?",
-            options: [2, 3, 4, 5],
-            answer: 4
-        },
-        {
-            question: "7 + 9 + 12 = ?",
-            options: [25, 29, 28, 11],
-            answer: 28
-        }
-    ];
-
-    startQuiz(
-        "Maths Quiz",
-        questions,
-        "math"
-    );
-}
-
-
-/* =========================================================
    🌍 GENERAL KNOWLEDGE
    ========================================================= */
 
