@@ -5365,12 +5365,6 @@ function showGKMenu() {
                 "openFamousPlaces()"
             )}
 
-            ${createWorldCard(
-                "🚩",
-                "Flags",
-                "Learn country flags",
-                "openFlags()"
-            )}
 
             ${createWorldCard(
                 "🪐",
@@ -5826,56 +5820,144 @@ async function loadFamousPlacePhotos() {
     await Promise.allSettled(photoJobs);
 }
 
-
-/* =========================================================
-   🚩 FLAGS
-   ========================================================= */
-
-function openFlags() {
-
-    const data = [
-        ["India", "🇮🇳"],
-        ["USA", "🇺🇸"],
-        ["UK", "🇬🇧"],
-        ["Japan", "🇯🇵"],
-        ["France", "🇫🇷"],
-        ["Germany", "🇩🇪"],
-        ["Canada", "🇨🇦"],
-        ["Australia", "🇦🇺"]
-    ];
-
-    renderSimpleTopic(
-        "🚩",
-        "Flags",
-        data
-    );
-}
-
-
-/* =========================================================
-   🪐 SOLAR SYSTEM
-   ========================================================= */
+/* =====================================================
+   🪐 LUXURY REALISTIC SOLAR SYSTEM
+   ===================================================== */
 
 function openSolarSystem() {
-
     const planets = [
-        ["Mercury", "☿️"],
-        ["Venus", "♀️"],
-        ["Earth", "🌍"],
-        ["Mars", "🔴"],
-        ["Jupiter", "🪐"],
-        ["Saturn", "🪐"],
-        ["Uranus", "🔵"],
-        ["Neptune", "🔵"]
+        {
+            name: "Mercury",
+            order: 1,
+            colour: "Rocky grey",
+            fact: "Mercury is the closest planet to the Sun.",
+            image: "https://science.nasa.gov/wp-content/uploads/2023/09/mercury-messenger-globe.jpg"
+        },
+        {
+            name: "Venus",
+            order: 2,
+            colour: "Yellowish white",
+            fact: "Venus is the hottest planet in our Solar System.",
+            image: "https://science.nasa.gov/wp-content/uploads/2023/09/venus.jpg"
+        },
+        {
+            name: "Earth",
+            order: 3,
+            colour: "Blue and green",
+            fact: "Earth is the only known planet with life.",
+            image: "https://science.nasa.gov/wp-content/uploads/2023/05/earth.jpg"
+        },
+        {
+            name: "Mars",
+            order: 4,
+            colour: "Red",
+            fact: "Mars is known as the Red Planet.",
+            image: "https://science.nasa.gov/wp-content/uploads/2023/09/mars.jpg"
+        },
+        {
+            name: "Jupiter",
+            order: 5,
+            colour: "Cream and brown",
+            fact: "Jupiter is the largest planet in our Solar System.",
+            image: "https://science.nasa.gov/wp-content/uploads/2023/09/jupiter.jpg"
+        },
+        {
+            name: "Saturn",
+            order: 6,
+            colour: "Golden yellow",
+            fact: "Saturn is famous for its beautiful rings.",
+            image: "https://science.nasa.gov/wp-content/uploads/2023/09/saturn.jpg"
+        },
+        {
+            name: "Uranus",
+            order: 7,
+            colour: "Pale blue",
+            fact: "Uranus rotates on its side.",
+            image: "https://science.nasa.gov/wp-content/uploads/2023/09/uranus.jpg"
+        },
+        {
+            name: "Neptune",
+            order: 8,
+            colour: "Deep blue",
+            fact: "Neptune is known for its powerful winds.",
+            image: "https://science.nasa.gov/wp-content/uploads/2023/09/neptune.jpg"
+        }
     ];
 
-    renderSimpleTopic(
+    const content = `
+        <section class="planet-space-section">
+
+            <div class="planet-space-heading">
+                <span class="planet-heading-icon">✦</span>
+                <h2>Solar System</h2>
+                <p>Explore the eight amazing planets in space</p>
+                <div class="planet-heading-line"></div>
+            </div>
+
+            <div class="planet-luxury-grid">
+
+                ${planets.map(planet => `
+                    <article class="planet-luxury-card">
+
+                        <div class="planet-image-wrap">
+                            <span class="planet-number">
+                                PLANET ${planet.order}
+                            </span>
+
+                            <img
+                                class="planet-image"
+                                src="${planet.image}"
+                                alt="${planet.name} planet"
+                                loading="lazy"
+                                onerror="
+                                    this.onerror=null;
+                                    this.src='https://placehold.co/600x400/111329/F5D58A?text=${planet.name}';
+                                    this.classList.add('planet-image-fallback');
+                                "
+                            >
+                        </div>
+
+                        <div class="planet-card-content">
+                            <h3 class="planet-name">${planet.name}</h3>
+
+                            <p class="planet-colour">
+                                <span class="planet-gold-dot"></span>
+                                Colour: ${planet.colour}
+                            </p>
+
+                            <p class="planet-fact">
+                                ${planet.fact}
+                            </p>
+
+                            <button
+                                type="button"
+                                class="planet-listen-btn"
+                                onclick="speak('${planet.name}', {lang:'en-US'})"
+                                aria-label="Listen to ${planet.name}"
+                            >
+                                <span>🔊</span> Listen
+                            </button>
+                        </div>
+
+                    </article>
+                `).join("")}
+
+            </div>
+
+            <p class="planet-footer-note">
+                ✦ Eight planets, one beautiful Solar System ✦
+            </p>
+
+        </section>
+    `;
+
+    setupLearning(
         "🪐",
-        "Planets",
-        planets
+        "Planets of the Solar System",
+        "Discover the planets, their colours and amazing facts!",
+        content
     );
 }
-
 
 /* =========================================================
    🐾 WILD ANIMALS
