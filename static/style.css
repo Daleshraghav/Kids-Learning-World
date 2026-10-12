@@ -15007,21 +15007,21 @@ body {
 }
 ```
 
-
-
 ```css
+
 /* ==========================================
-   🌍 COUNTRIES WORLD — FINAL RESPONSIVE CSS
-   Laptop: 3 columns | Phone: 2 columns
+   🌍 COUNTRIES WORLD — COMPLETE CSS
+   Laptop: 3 columns | Mobile: 2 columns
    ========================================== */
 
 #learningContent .countries-grid {
     display: grid !important;
     grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-    gap: 18px !important;
+    gap: 16px !important;
     width: 100% !important;
-    padding: 12px !important;
+    max-width: 100% !important;
     margin: 0 auto !important;
+    padding: 12px !important;
     box-sizing: border-box !important;
     align-items: stretch !important;
 }
@@ -15029,64 +15029,68 @@ body {
 #learningContent .countries-grid .country-card {
     display: flex !important;
     flex-direction: column !important;
-    min-width: 0 !important;
     width: 100% !important;
+    min-width: 0 !important;
     max-width: 100% !important;
     height: auto !important;
     margin: 0 !important;
     padding: 0 !important;
     overflow: hidden !important;
     box-sizing: border-box !important;
-    text-align: center !important;
     cursor: pointer;
+    text-align: center !important;
+
     border: 2px solid #ffffff !important;
-    border-radius: 20px !important;
+    border-radius: 18px !important;
+
     background: linear-gradient(
-        135deg, #fff0a8, #ffd9f3, #c9f0ff
+        135deg,
+        #fff0a8 0%,
+        #ffd6ef 50%,
+        #c8efff 100%
     ) !important;
-    box-shadow: 0 7px 20px #48288c2e;
-    animation: countryEnter .45s ease both;
+
+    box-shadow: 0 7px 20px #6538a52b;
+    animation: countryCardEnter .45s ease both;
     transition: transform .25s ease, box-shadow .25s ease;
 }
 
 #learningContent .countries-grid .country-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 12px 26px #783cdd44;
+    box-shadow: 0 12px 26px #7b2ff744;
 }
 
 #learningContent .countries-grid .country-photo-wrap {
     position: relative !important;
     display: block !important;
-    flex: 0 0 165px !important;
+    flex: 0 0 160px !important;
     width: 100% !important;
-    height: 165px !important;
-    min-height: 165px !important;
-    max-height: 165px !important;
+    height: 160px !important;
+    min-height: 160px !important;
+    max-height: 160px !important;
     margin: 0 !important;
     padding: 0 !important;
     overflow: hidden !important;
-    background: linear-gradient(
-        135deg, #ffdc83, #b9eaff, #efc8ff
-    ) !important;
+    background: linear-gradient(135deg, #b9eaff, #efc8ff);
 }
 
 #learningContent .countries-grid .country-photo {
-    display: block !important;
     position: absolute !important;
     inset: 0 !important;
+    display: block !important;
     width: 100% !important;
     height: 100% !important;
     max-width: none !important;
     max-height: none !important;
-    object-fit: cover !important;
-    object-position: center !important;
     margin: 0 !important;
     padding: 0 !important;
+    object-fit: cover !important;
+    object-position: center !important;
     transition: transform .35s ease;
 }
 
 #learningContent .countries-grid .country-card:hover .country-photo {
-    transform: scale(1.04);
+    transform: scale(1.05);
 }
 
 #learningContent .countries-grid .country-flag {
@@ -15095,13 +15099,13 @@ body {
     right: 8px !important;
     bottom: 8px !important;
     display: block !important;
-    width: 34px !important;
-    height: 23px !important;
-    max-width: 34px !important;
+    width: 32px !important;
+    height: 22px !important;
+    max-width: 32px !important;
     object-fit: cover !important;
-    border: 2px solid #fff !important;
+    border: 2px solid white !important;
     border-radius: 4px !important;
-    background: #fff !important;
+    background: white !important;
     box-shadow: 0 2px 8px #0004 !important;
 }
 
@@ -15109,45 +15113,68 @@ body {
     display: block !important;
     width: 100% !important;
     margin: 0 !important;
-    padding: 12px 6px 5px !important;
+    padding: 11px 5px 5px !important;
     box-sizing: border-box !important;
-    color: #5416a0 !important;
+    color: #50158f !important;
     font-size: 17px !important;
     font-weight: 900 !important;
     line-height: 1.35 !important;
     text-align: center !important;
     overflow-wrap: anywhere !important;
+    text-shadow: 0 1px 0 #ffffff;
 }
 
 #learningContent .countries-grid .country-listen {
     display: inline-block !important;
     align-self: center !important;
-    margin: 5px 0 12px !important;
+    margin: 5px 0 11px !important;
     padding: 7px 12px !important;
-    border-radius: 22px !important;
-    background: linear-gradient(90deg, #7b2ff7, #f107a3) !important;
-    color: #fff !important;
+    border-radius: 25px !important;
+    background: linear-gradient(90deg, #7928ca, #ff0080) !important;
+    color: #ffffff !important;
     font-size: 12px !important;
     font-weight: 800 !important;
 }
 
-/* Entrance animation */
-@keyframes countryEnter {
+/* Card entrance */
+@keyframes countryCardEnter {
     from {
         opacity: 0;
-        transform: translateY(12px);
+        transform: translateY(14px) scale(.98);
     }
+
     to {
         opacity: 1;
-        transform: translateY(0);
+        transform: translateY(0) scale(1);
     }
 }
 
-/* PHONE: exactly 2 columns */
+/* TABLETS AND SMALL LAPTOPS */
+@media screen and (min-width: 601px) and (max-width: 900px) {
+    #learningContent .countries-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+        gap: 11px !important;
+        padding: 9px !important;
+    }
+
+    #learningContent .countries-grid .country-photo-wrap {
+        flex-basis: 125px !important;
+        height: 125px !important;
+        min-height: 125px !important;
+        max-height: 125px !important;
+    }
+
+    #learningContent .countries-grid .country-name {
+        font-size: 14px !important;
+    }
+}
+
+/* MOBILE: 2 COLUMNS */
 @media screen and (max-width: 600px) {
     #learningContent .countries-grid {
+        display: grid !important;
         grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-        gap: 10px !important;
+        gap: 9px !important;
         padding: 7px !important;
     }
 
@@ -15165,8 +15192,8 @@ body {
     #learningContent .countries-grid .country-flag {
         right: 5px !important;
         bottom: 5px !important;
-        width: 27px !important;
-        height: 19px !important;
+        width: 26px !important;
+        height: 18px !important;
     }
 
     #learningContent .countries-grid .country-name {
@@ -15181,7 +15208,7 @@ body {
     }
 }
 
-/* Accessibility */
+/* REDUCED MOTION SUPPORT */
 @media (prefers-reduced-motion: reduce) {
     #learningContent .countries-grid .country-card,
     #learningContent .countries-grid .country-photo {
@@ -15189,4 +15216,3 @@ body {
         transition: none !important;
     }
 }
-```
