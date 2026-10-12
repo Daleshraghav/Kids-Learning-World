@@ -5820,8 +5820,9 @@ async function loadFamousPlacePhotos() {
     await Promise.allSettled(photoJobs);
 }
 
+```javascript
 /* =====================================================
-   🪐 LUXURY REALISTIC SOLAR SYSTEM
+   🪐 LUXURY SOLAR SYSTEM — FIXED VERSION
    ===================================================== */
 
 function openSolarSystem() {
@@ -5846,7 +5847,6 @@ function openSolarSystem() {
             colour: "Blue and green",
             fact: "Earth is the only known planet with life.",
             image: "https://commons.wikimedia.org/wiki/Special:FilePath/The_Earth_seen_from_Apollo_17.jpg"
-
         },
         {
             name: "Mars",
@@ -5861,6 +5861,7 @@ function openSolarSystem() {
             colour: "Cream and brown",
             fact: "Jupiter is the largest planet in our Solar System.",
             image: "https://commons.wikimedia.org/wiki/Special:FilePath/Jupiter.jpg"
+        },
         {
             name: "Saturn",
             order: 6,
@@ -5896,51 +5897,51 @@ function openSolarSystem() {
 
             <div class="planet-luxury-grid">
 
-                ${planets.map(planet => `
-                    <article class="planet-luxury-card">
+                ${planets.map(function (planet) {
+                    return `
+                        <article class="planet-luxury-card">
 
-                        <div class="planet-image-wrap">
-                            <span class="planet-number">
-                                PLANET ${planet.order}
-                            </span>
+                            <div class="planet-image-wrap">
+                                <span class="planet-number">
+                                    PLANET ${planet.order}
+                                </span>
 
-                            <img
-                                class="planet-image"
-                                src="${planet.image}"
-                                alt="${planet.name} planet"
-                                loading="lazy"
-                                onerror="
-                                    this.onerror=null;
-                                    this.src='https://placehold.co/600x400/111329/F5D58A?text=${planet.name}';
-                                    this.classList.add('planet-image-fallback');
-                                "
-                            >
-                        </div>
+                                <img
+                                    class="planet-image"
+                                    src="${planet.image}"
+                                    alt="${planet.name} planet"
+                                    loading="lazy"
+                                    onerror="this.onerror=null; this.src='https://placehold.co/600x400/111329/F5D58A?text=${planet.name}'; this.classList.add('planet-image-fallback');"
+                                >
+                            </div>
 
-                        <div class="planet-card-content">
-                            <h3 class="planet-name">${planet.name}</h3>
+                            <div class="planet-card-content">
+                                <h3 class="planet-name">
+                                    ${planet.name}
+                                </h3>
 
-                            <p class="planet-colour">
-                                <span class="planet-gold-dot"></span>
-                                Colour: ${planet.colour}
-                            </p>
+                                <p class="planet-colour">
+                                    <span class="planet-gold-dot"></span>
+                                    Colour: ${planet.colour}
+                                </p>
 
-                            <p class="planet-fact">
-                                ${planet.fact}
-                            </p>
+                                <p class="planet-fact">
+                                    ${planet.fact}
+                                </p>
 
-                            <button
-                                type="button"
-                                class="planet-listen-btn"
-                                onclick="speak('${planet.name}', {lang:'en-US'})"
-                                aria-label="Listen to ${planet.name}"
-                            >
-                                <span>🔊</span> Listen
-                            </button>
-                        </div>
+                                <button
+                                    type="button"
+                                    class="planet-listen-btn"
+                                    onclick="speak('${planet.name}', {lang:'en-US'})"
+                                    aria-label="Listen to ${planet.name}"
+                                >
+                                    🔊 Listen
+                                </button>
+                            </div>
 
-                    </article>
-                `).join("")}
+                        </article>
+                    `;
+                }).join("")}
 
             </div>
 
@@ -5958,7 +5959,7 @@ function openSolarSystem() {
         content
     );
 }
-
+```
 /* =========================================================
    🐾 WILD ANIMALS
    ========================================================= */
