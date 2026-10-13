@@ -5888,7 +5888,10 @@ function openSolarSystem() {
                         <div class="planet-number">PLANET 0${index + 1}</div>
 
                         <div class="planet-stage">
-                            <div class="planet-orbit-ring"></div>
+                           ${planet.name === "Saturn"
+    ? '<div class="planet-orbit-ring saturn-rings"></div>'
+    : ''
+}
                             <div class="planet-sphere planet-${planet.name.toLowerCase()}">
                                 <img
                                     class="planet-texture"
