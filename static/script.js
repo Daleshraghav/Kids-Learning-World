@@ -5821,140 +5821,102 @@ async function loadFamousPlacePhotos() {
 }
 
 
-```javascript
 function openSolarSystem() {
     const planets = [
         {
             name: "Mercury",
-            colour: "Rocky grey",
-            fact: "The smallest planet and closest to the Sun.",
-            image: "/static/images/planets/mercury.jpg",
-            emoji: "🌑",
-            gradient: "linear-gradient(135deg, #777777, #c7c7c7)"
+            texture: "https://www.solarsystemscope.com/textures/download/2k_mercury.jpg",
+            fact: "Mercury is the smallest planet and the closest to the Sun.",
+            colour: "Rocky Grey"
         },
         {
             name: "Venus",
-            colour: "Cream and yellow",
+            texture: "https://www.solarsystemscope.com/textures/download/2k_venus_surface.jpg",
             fact: "Venus is the hottest planet in our Solar System.",
-            image: "/static/images/planets/venus.jpg",
-            emoji: "🟡",
-            gradient: "linear-gradient(135deg, #b87b36, #ffe0a0)"
+            colour: "Golden Cream"
         },
         {
             name: "Earth",
-            colour: "Blue and green",
-            fact: "Earth is our home and supports life.",
-            image: "/static/images/planets/earth.jpg",
-            emoji: "🌍",
-            gradient: "linear-gradient(135deg, #0759bd, #40b95a)"
+            texture: "https://www.solarsystemscope.com/textures/download/2k_earth_daymap.jpg",
+            fact: "Earth is our home planet and has liquid water on its surface.",
+            colour: "Ocean Blue"
         },
         {
             name: "Mars",
-            colour: "Rusty red",
-            fact: "Mars is known as the Red Planet.",
-            image: "/static/images/planets/mars.jpg",
-            emoji: "🔴",
-            gradient: "linear-gradient(135deg, #8f281b, #ed7954)"
+            texture: "https://www.solarsystemscope.com/textures/download/2k_mars.jpg",
+            fact: "Mars is called the Red Planet because of its rusty surface.",
+            colour: "Ruby Red"
         },
         {
             name: "Jupiter",
-            colour: "Orange and brown",
-            fact: "Jupiter is the largest planet in our Solar System.",
-            image: "/static/images/planets/jupiter.jpg",
-            emoji: "🟠",
-            gradient: "linear-gradient(135deg, #a65d32, #f3c18a)"
+            texture: "https://www.solarsystemscope.com/textures/download/2k_jupiter.jpg",
+            fact: "Jupiter is the largest planet and has enormous cloud bands.",
+            colour: "Amber Gold"
         },
         {
             name: "Saturn",
-            colour: "Golden yellow",
-            fact: "Saturn is famous for its beautiful rings.",
-            image: "/static/images/planets/saturn.jpg",
-            emoji: "🪐",
-            gradient: "linear-gradient(135deg, #b38b43, #f8e0a0)"
+            texture: "https://www.solarsystemscope.com/textures/download/2k_saturn.jpg",
+            fact: "Saturn is famous for its spectacular rings.",
+            colour: "Champagne Gold"
         },
         {
             name: "Uranus",
-            colour: "Pale blue",
-            fact: "Uranus rotates on its side.",
-            image: "/static/images/planets/uranus.jpg",
-            emoji: "🔵",
-            gradient: "linear-gradient(135deg, #60b9ca, #c4f4f8)"
+            texture: "https://www.solarsystemscope.com/textures/download/2k_uranus.jpg",
+            fact: "Uranus rotates almost on its side.",
+            colour: "Ice Blue"
         },
         {
             name: "Neptune",
-            colour: "Deep blue",
-            fact: "Neptune is known for its powerful winds.",
-            image: "/static/images/planets/neptune.jpg",
-            emoji: "🔵",
-            gradient: "linear-gradient(135deg, #1238a8, #5297ff)"
+            texture: "https://www.solarsystemscope.com/textures/download/2k_neptune.jpg",
+            fact: "Neptune is a distant ice giant with extremely powerful winds.",
+            colour: "Royal Blue"
         }
     ];
 
     const content = `
         <section class="solar-luxury">
-
-            <div class="solar-space-header">
-                <div class="solar-planet-symbol">🪐</div>
-                <h1>Our Solar System</h1>
-                <p>Discover all eight amazing planets</p>
-            </div>
+            <header class="solar-space-header">
+                <span class="solar-eyebrow">THE COSMIC COLLECTION</span>
+                <h2>Our <span>Solar System</span></h2>
+                <p>Explore eight amazing planets in a beautiful 3D-style space.</p>
+                <div class="solar-header-line"></div>
+            </header>
 
             <div class="planet-luxury-grid">
                 ${planets.map((planet, index) => `
-                    <article class="planet-luxury-card">
+                    <article class="planet-luxury-card" style="--planet-delay:${index * 80}ms">
+                        <div class="planet-number">PLANET 0${index + 1}</div>
 
-                        <div class="planet-image-area">
-                            <span class="planet-number">
-                                PLANET ${index + 1}
-                            </span>
-
-                            <img
-                                src="${planet.image}"
-                                alt="${planet.name}"
-                                class="planet-realistic-image"
-                                loading="lazy"
-                                onerror="
-                                    this.style.display='none';
-                                    this.parentElement.querySelector('.planet-image-fallback').style.display='flex';
-                                "
-                            >
-
-                            <div
-                                class="planet-image-fallback"
-                                style="display:none; background:${planet.gradient};"
-                            >
-                                <span>${planet.emoji}</span>
-                                <small>${planet.name}</small>
+                        <div class="planet-stage">
+                            <div class="planet-orbit-ring"></div>
+                            <div class="planet-sphere planet-${planet.name.toLowerCase()}">
+                                <img
+                                    class="planet-texture"
+                                    src="${planet.texture}"
+                                    alt="${planet.name} planet"
+                                    loading="lazy"
+                                    onerror="this.style.display='none';this.parentElement.classList.add('planet-texture-missing')"
+                                >
+                                <div class="planet-shade"></div>
                             </div>
                         </div>
 
-                        <div class="planet-card-details">
-                            <h2>${planet.name}</h2>
+                        <h3 class="planet-title">${planet.name}</h3>
+                        <span class="planet-colour-label">${planet.colour}</span>
+                        <p class="planet-fact">${planet.fact}</p>
 
-                            <p class="planet-colour">
-                                <span>●</span>
-                                Colour: ${planet.colour}
-                            </p>
-
-                            <p class="planet-fact">${planet.fact}</p>
-
-                            <button
-                                type="button"
-                                class="planet-listen-button"
-                                onclick="listenToPlanet('${planet.name}')"
-                            >
-                                🔊 Listen
-                            </button>
-                        </div>
-
+                        <button class="planet-listen-button"
+                            type="button"
+                            onclick="listenToPlanet('${planet.name}', '${planet.fact.replace(/'/g, "\\'")}')">
+                            <span aria-hidden="true">♫</span> Listen & Learn
+                        </button>
                     </article>
                 `).join("")}
             </div>
 
-            <div class="solar-footer">
-                ✦ Discover • Learn • Explore ✦
-            </div>
-
+            <footer class="solar-footer">
+                <span>✦</span> KEEP EXPLORING THE UNIVERSE <span>✦</span>
+            </footer>
         </section>
     `;
 
@@ -5966,23 +5928,25 @@ function openSolarSystem() {
     );
 }
 
-function listenToPlanet(name) {
-    if ("speechSynthesis" in window) {
-        window.speechSynthesis.cancel();
-
-        const message = new SpeechSynthesisUtterance(name);
-        message.lang = "en-US";
-        message.rate = 0.85;
-        message.pitch = 1;
-        message.volume = 1;
-
-        window.speechSynthesis.speak(message);
-    } else {
+function listenToPlanet(name, fact) {
+    if (!("speechSynthesis" in window)) {
         alert("Voice is not supported in this browser.");
+        return;
     }
-}
-```
 
+    window.speechSynthesis.cancel();
+
+    const message = new SpeechSynthesisUtterance(
+        `${name}. ${fact}`
+    );
+
+    message.lang = "en-US";
+    message.rate = 0.85;
+    message.pitch = 1;
+    message.volume = 1;
+
+    window.speechSynthesis.speak(message);
+}
 /* =========================================================
    🐾 WILD ANIMALS
    ========================================================= */
