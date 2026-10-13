@@ -16175,3 +16175,137 @@ body {
         transition-duration: 0.01ms !important;
     }
 }
+
+/* =====================================
+   DEEP SPACE BACKGROUND
+   ===================================== */
+
+.solar-luxury {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+
+    background:
+        radial-gradient(
+            ellipse at 50% 20%,
+            rgba(29, 65, 117, 0.35),
+            transparent 48%
+        ),
+        radial-gradient(
+            circle at 15% 75%,
+            rgba(72, 44, 122, 0.17),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 85% 60%,
+            rgba(19, 85, 130, 0.16),
+            transparent 30%
+        ),
+        #020611;
+}
+
+/* Star-like points across space */
+.solar-luxury::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+
+    background-image:
+        radial-gradient(2px 2px at 8% 18%, #ffffff 80%, transparent),
+        radial-gradient(1px 1px at 20% 65%, #dceaff 80%, transparent),
+        radial-gradient(2px 2px at 32% 12%, #ffffff 80%, transparent),
+        radial-gradient(1px 1px at 46% 78%, #c5dcff 80%, transparent),
+        radial-gradient(2px 2px at 59% 27%, #ffffff 80%, transparent),
+        radial-gradient(1px 1px at 73% 83%, #ffffff 80%, transparent),
+        radial-gradient(2px 2px at 86% 16%, #dceaff 80%, transparent),
+        radial-gradient(1px 1px at 94% 48%, #ffffff 80%, transparent);
+
+    background-size: 280px 220px;
+    opacity: 0.75;
+}
+
+/* Keep cards above the star background */
+.solar-space-header,
+.planet-luxury-grid,
+.solar-footer {
+    position: relative;
+    z-index: 1;
+}
+
+/* =====================================
+   REMOVE RINGS FROM ALL OTHER PLANETS
+   ===================================== */
+
+.planet-orbit-ring {
+    display: none;
+}
+
+/* =====================================
+   SATURN'S RINGS ONLY
+   ===================================== */
+
+.planet-orbit-ring.saturn-rings {
+    display: block;
+    position: absolute;
+    z-index: 3;
+
+    width: 125%;
+    height: 42%;
+    left: -12.5%;
+    top: 29%;
+
+    border: 0;
+    border-radius: 50%;
+    transform: rotate(-22deg);
+
+    background:
+        radial-gradient(
+            ellipse at center,
+            transparent 0 39%,
+            rgba(245, 224, 181, 0.95) 40% 44%,
+            rgba(173, 145, 103, 0.9) 45% 49%,
+            rgba(240, 219, 174, 0.82) 50% 55%,
+            rgba(112, 91, 69, 0.9) 56% 60%,
+            transparent 61% 100%
+        );
+
+    filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.65));
+    pointer-events: none;
+}
+
+/* Planet sphere should sit inside Saturn's ring */
+.planet-saturn {
+    z-index: 2;
+}
+
+/* Remove old duplicate Saturn ring */
+.planet-saturn::before {
+    content: none !important;
+}
+
+/* Ensure rings don't block the image or voice button */
+.planet-stage {
+    overflow: visible;
+}
+
+/* Space-inspired card borders */
+.planet-luxury-card {
+    background:
+        linear-gradient(
+            145deg,
+            rgba(24, 42, 70, 0.94),
+            rgba(4, 11, 25, 0.97)
+        );
+
+    border-color: rgba(151, 183, 225, 0.28);
+}
+
+/* Respect mobile layout */
+@media (max-width: 600px) {
+    .planet-orbit-ring.saturn-rings {
+        width: 130%;
+        left: -15%;
+    }
+}
