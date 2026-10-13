@@ -16246,68 +16246,75 @@ body {
    SATURN'S RINGS ONLY
    ===================================== */
 
-.planet-orbit-ring.saturn-rings {
-    display: block;
+
+/* 🪐 REALISTIC SATURN + RINGS */
+.planet-orbit-ring {
+    display: block !important;
     position: absolute;
-    z-index: 3;
-
-    width: 125%;
-    height: 42%;
-    left: -12.5%;
-    top: 29%;
-
-    border: 0;
+    left: 50%;
+    top: 50%;
+    width: 175%;
+    height: 175%;
     border-radius: 50%;
-    transform: rotate(-22deg);
+    pointer-events: none;
 
+    /* Tilt Saturn's rings */
+    transform: translate(-50%, -50%) rotateX(72deg) rotateZ(-18deg);
+
+    /* Natural layered ring colors */
     background:
         radial-gradient(
             ellipse at center,
-            transparent 0 39%,
-            rgba(245, 224, 181, 0.95) 40% 44%,
-            rgba(173, 145, 103, 0.9) 45% 49%,
-            rgba(240, 219, 174, 0.82) 50% 55%,
-            rgba(112, 91, 69, 0.9) 56% 60%,
-            transparent 61% 100%
+            transparent 0%,
+            transparent 33%,
+            rgba(91, 64, 40, 0.95) 34%,
+            rgba(219, 191, 145, 0.95) 36%,
+            rgba(247, 225, 181, 0.92) 39%,
+            rgba(139, 108, 75, 0.9) 42%,
+            rgba(244, 220, 177, 0.95) 45%,
+            rgba(177, 143, 99, 0.92) 49%,
+            rgba(240, 218, 178, 0.95) 53%,
+            rgba(119, 91, 62, 0.85) 56%,
+            rgba(226, 202, 162, 0.9) 60%,
+            rgba(154, 122, 84, 0.8) 64%,
+            transparent 67%
         );
 
-    filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.65));
-    pointer-events: none;
-}
+    filter:
+        drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5))
+        drop-shadow(0 0 5px rgba(225, 195, 145, 0.2));
 
-/* Planet sphere should sit inside Saturn's ring */
-.planet-saturn {
     z-index: 2;
 }
 
-/* Remove old duplicate Saturn ring */
-.planet-saturn::before {
-    content: none !important;
-}
+/* Saturn's golden atmospheric surface */
+.planet-saturn {
+    position: relative;
+    overflow: visible !important;
+    border-radius: 50%;
 
-/* Ensure rings don't block the image or voice button */
-.planet-stage {
-    overflow: visible;
-}
-
-/* Space-inspired card borders */
-.planet-luxury-card {
     background:
-        linear-gradient(
-            145deg,
-            rgba(24, 42, 70, 0.94),
-            rgba(4, 11, 25, 0.97)
+        repeating-linear-gradient(
+            180deg,
+            #d9c39b 0%,
+            #f0dfba 7%,
+            #bba078 13%,
+            #ead7ae 19%,
+            #c6ad83 26%,
+            #f1dfb8 34%,
+            #ad9068 42%,
+            #e2cba0 50%,
+            #c0a27a 59%,
+            #f0dfba 68%,
+            #b39a76 77%,
+            #e7d2a8 87%,
+            #c6ad85 100%
         );
 
-    border-color: rgba(151, 183, 225, 0.28);
-}
-
-/* Respect mobile layout */
-@media (max-width: 600px) {
-    .planet-orbit-ring.saturn-rings {
-        width: 130%;
-        left: -15%;
-    }
+    box-shadow:
+        inset -18px -4px 25px rgba(25, 17, 10, 0.75),
+        inset 8px 2px 15px rgba(255, 240, 205, 0.45),
+        0 0 22px rgba(218, 187, 133, 0.18);
 }
 
 
@@ -16408,448 +16415,3 @@ body {
         height: 320px;
     }
 
-   
-/* =========================================================
-   🌌 REALISTIC 3D SOLAR SYSTEM
-   Add this block at the END of static/style.css
-========================================================= */
-
-.solar3d-root {
-    position: relative;
-    isolation: isolate;
-    width: 100%;
-    overflow: hidden;
-    padding: 22px 16px 32px;
-    border-radius: 24px;
-    color: #f7f8ff;
-    background:
-        radial-gradient(ellipse at 15% 15%, rgba(84, 53, 158, 0.32), transparent 36%),
-        radial-gradient(ellipse at 85% 30%, rgba(16, 102, 166, 0.24), transparent 36%),
-        radial-gradient(ellipse at 50% 100%, rgba(40, 23, 90, 0.3), transparent 45%),
-        linear-gradient(155deg, #030511 0%, #090d24 48%, #02040c 100%);
-    border: 1px solid rgba(133, 159, 255, 0.25);
-    box-shadow:
-        0 20px 60px rgba(0, 0, 0, 0.32),
-        inset 0 0 45px rgba(81, 105, 255, 0.06);
-    box-sizing: border-box;
-}
-
-.solar3d-root *,
-.solar3d-root *::before,
-.solar3d-root *::after {
-    box-sizing: border-box;
-}
-
-.solar3d-root::before,
-.solar3d-root::after {
-    content: "";
-    position: absolute;
-    pointer-events: none;
-    z-index: -1;
-    border-radius: 50%;
-    filter: blur(55px);
-}
-
-.solar3d-root::before {
-    width: 180px;
-    height: 180px;
-    top: 12%;
-    left: -100px;
-    background: rgba(95, 67, 255, 0.17);
-}
-
-.solar3d-root::after {
-    width: 200px;
-    height: 200px;
-    right: -120px;
-    bottom: 8%;
-    background: rgba(0, 177, 255, 0.12);
-}
-
-/* Heading */
-
-.solar3d-heading {
-    position: relative;
-    z-index: 1;
-    text-align: center;
-    padding: 8px 8px 22px;
-}
-
-.solar3d-eyebrow {
-    display: inline-block;
-    padding: 7px 13px;
-    margin-bottom: 12px;
-    border: 1px solid rgba(150, 171, 255, 0.35);
-    border-radius: 30px;
-    background: rgba(81, 94, 194, 0.13);
-    color: #b9caff;
-    font-size: 11px;
-    font-weight: 800;
-    letter-spacing: 2.5px;
-}
-
-.solar3d-heading h2 {
-    margin: 0;
-    color: #ffffff;
-    font-size: clamp(27px, 4vw, 44px);
-    font-weight: 900;
-    line-height: 1.2;
-    letter-spacing: -1px;
-    text-shadow: 0 0 28px rgba(105, 127, 255, 0.24);
-}
-
-.solar3d-heading h2 span {
-    background: linear-gradient(90deg, #8edcff, #b7a0ff, #ffd58a);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-.solar3d-heading > p {
-    margin: 12px 0;
-    color: #c2cbe4;
-    font-size: 14px;
-    line-height: 1.7;
-}
-
-.solar3d-tip {
-    display: inline-block;
-    margin-top: 4px;
-    padding: 8px 13px;
-    border-radius: 12px;
-    background: rgba(255, 255, 255, 0.055);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    color: #e1e8ff;
-    font-size: 12px;
-}
-
-/* 3D canvas area */
-
-.solar3d-viewport {
-    position: relative;
-    z-index: 1;
-    width: 100%;
-    height: 440px;
-    overflow: hidden;
-    border-radius: 20px;
-    border: 1px solid rgba(135, 159, 255, 0.23);
-    background:
-        radial-gradient(ellipse at 50% 50%, rgba(37, 52, 113, 0.15), transparent 65%),
-        linear-gradient(180deg, rgba(3, 7, 23, 0.65), rgba(2, 4, 12, 0.94));
-    box-shadow:
-        inset 0 0 45px rgba(77, 99, 255, 0.07),
-        0 14px 35px rgba(0, 0, 0, 0.2);
-}
-
-.solar3d-viewport canvas {
-    display: block;
-    width: 100%;
-    height: 100%;
-    outline: none;
-}
-
-.solar3d-loading {
-    position: absolute;
-    inset: 0;
-    z-index: 3;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 14px;
-    padding: 20px;
-    background: rgba(3, 6, 19, 0.94);
-    color: #dfe7ff;
-    text-align: center;
-    font-size: 13px;
-    transition: opacity 0.45s ease, visibility 0.45s ease;
-}
-
-.solar3d-loading p {
-    margin: 0;
-    line-height: 1.6;
-}
-
-.solar3d-loader {
-    width: 40px;
-    height: 40px;
-    border: 3px solid rgba(139, 161, 255, 0.2);
-    border-top-color: #9bb8ff;
-    border-right-color: #d1a9ff;
-    border-radius: 50%;
-    animation: solar3dSpin 0.9s linear infinite;
-}
-
-.solar3d-loading.solar3d-hidden {
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-}
-
-@keyframes solar3dSpin {
-    to {
-        transform: rotate(360deg);
-    }
-}
-
-.solar3d-caption {
-    position: absolute;
-    bottom: 12px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    align-items: center;
-    gap: 9px;
-    width: max-content;
-    max-width: calc(100% - 20px);
-    padding: 8px 12px;
-    border-radius: 30px;
-    border: 1px solid rgba(158, 178, 255, 0.2);
-    background: rgba(4, 8, 24, 0.8);
-    color: #dce4ff;
-    font-size: 10px;
-    font-weight: 800;
-    letter-spacing: 2px;
-    pointer-events: none;
-}
-
-.solar3d-caption span {
-    color: #a9baff;
-}
-
-/* Planet information */
-
-.solar3d-section-title {
-    position: relative;
-    z-index: 1;
-    margin: 35px 0 19px;
-    text-align: center;
-}
-
-.solar3d-section-title h3 {
-    margin: 0 0 8px;
-    color: #ffffff;
-    font-size: clamp(22px, 3vw, 30px);
-    font-weight: 850;
-}
-
-.solar3d-section-title p {
-    margin: 0;
-    color: #bac5e3;
-    font-size: 13px;
-    line-height: 1.7;
-}
-
-/* Cards */
-
-.solar3d-cards {
-    position: relative;
-    z-index: 1;
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 14px;
-}
-
-.solar3d-card {
-    min-width: 0;
-    padding: 18px 15px 16px;
-    border: 1px solid rgba(144, 165, 255, 0.2);
-    border-radius: 17px;
-    background:
-        linear-gradient(145deg, rgba(35, 46, 88, 0.72), rgba(10, 15, 37, 0.9));
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.17);
-    transition:
-        transform 0.22s ease,
-        border-color 0.22s ease,
-        box-shadow 0.22s ease;
-    overflow-wrap: anywhere;
-}
-
-.solar3d-card:hover {
-    transform: translateY(-4px);
-    border-color: rgba(159, 181, 255, 0.6);
-    box-shadow: 0 12px 30px rgba(36, 66, 163, 0.18);
-}
-
-.solar3d-card-number {
-    margin-bottom: 9px;
-    color: #aebeff;
-    font-size: 9px;
-    font-weight: 800;
-    letter-spacing: 1.8px;
-}
-
-.solar3d-card h3 {
-    margin: 0 0 9px;
-    color: #ffffff;
-    font-size: 20px;
-    font-weight: 850;
-}
-
-.solar3d-card p {
-    min-height: 78px;
-    margin: 0 0 15px;
-    color: #c8d1e9;
-    font-size: 12px;
-    line-height: 1.75;
-}
-
-.solar3d-voice {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    min-height: 40px;
-    padding: 9px 10px;
-    border: 1px solid rgba(172, 188, 255, 0.38);
-    border-radius: 11px;
-    background: linear-gradient(110deg, #465ad0, #7652c9);
-    color: #ffffff;
-    font-family: inherit;
-    font-size: 11px;
-    font-weight: 800;
-    line-height: 1.4;
-    cursor: pointer;
-    transition: transform 0.2s ease, filter 0.2s ease;
-}
-
-.solar3d-voice:hover {
-    filter: brightness(1.16);
-    transform: translateY(-2px);
-}
-
-.solar3d-voice:active {
-    transform: scale(0.97);
-}
-
-.solar3d-voice:focus-visible {
-    outline: 2px solid #b8d6ff;
-    outline-offset: 3px;
-}
-
-/* Footer */
-
-.solar3d-footer {
-    position: relative;
-    z-index: 1;
-    margin-top: 26px;
-    padding: 15px 10px 0;
-    border-top: 1px solid rgba(155, 173, 255, 0.15);
-    color: #c8d4ff;
-    text-align: center;
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 0.4px;
-}
-
-/* Tablet */
-
-@media (max-width: 900px) {
-    .solar3d-cards {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 12px;
-    }
-
-    .solar3d-viewport {
-        height: 480px;
-    }
-
-    .solar3d-card p {
-        min-height: 70px;
-    }
-}
-
-/* Mobile */
-
-@media (max-width: 560px) {
-    .solar3d-root {
-        padding: 16px 10px 24px;
-        border-radius: 17px;
-    }
-
-    .solar3d-heading {
-        padding: 8px 3px 17px;
-    }
-
-    .solar3d-eyebrow {
-        padding: 6px 10px;
-        font-size: 9px;
-        letter-spacing: 1.7px;
-    }
-
-    .solar3d-heading h2 {
-        font-size: 29px;
-    }
-
-    .solar3d-heading > p {
-        font-size: 12px;
-    }
-
-    .solar3d-tip {
-        font-size: 11px;
-    }
-
-    .solar3d-viewport {
-        height: 650px;
-        border-radius: 14px;
-    }
-
-    .solar3d-caption {
-        font-size: 9px;
-        letter-spacing: 1.4px;
-    }
-
-    .solar3d-section-title {
-        margin-top: 28px;
-    }
-
-    .solar3d-cards {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 9px;
-    }
-
-    .solar3d-card {
-        padding: 13px 10px 12px;
-        border-radius: 13px;
-    }
-
-    .solar3d-card-number {
-        font-size: 8px;
-        letter-spacing: 1px;
-    }
-
-    .solar3d-card h3 {
-        font-size: 17px;
-    }
-
-    .solar3d-card p {
-        min-height: 115px;
-        margin-bottom: 12px;
-        font-size: 11px;
-        line-height: 1.65;
-    }
-
-    .solar3d-voice {
-        min-height: 38px;
-        padding: 8px 5px;
-        font-size: 10px;
-    }
-}
-
-/* Respect reduced-motion settings */
-
-@media (prefers-reduced-motion: reduce) {
-    .solar3d-loader {
-        animation-duration: 2.5s;
-    }
-
-    .solar3d-card,
-    .solar3d-voice {
-        transition: none;
-    }
-}
-
-    .solar3d-info {
-        padding: 12px;
-    }
-}
