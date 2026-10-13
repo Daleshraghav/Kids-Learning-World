@@ -5821,135 +5821,335 @@ async function loadFamousPlacePhotos() {
 }
 
 
+
 function openSolarSystem() {
-    const planets = [
-        {
-            name: "Mercury",
-            texture: "https://www.solarsystemscope.com/textures/download/2k_mercury.jpg",
-            fact: "Mercury is the smallest planet and the closest to the Sun.",
-            colour: "Rocky Grey"
-        },
-        {
-            name: "Venus",
-            texture: "https://www.solarsystemscope.com/textures/download/2k_venus_surface.jpg",
-            fact: "Venus is the hottest planet in our Solar System.",
-            colour: "Golden Cream"
-        },
-        {
-            name: "Earth",
-            texture: "https://www.solarsystemscope.com/textures/download/2k_earth_daymap.jpg",
-            fact: "Earth is our home planet and has liquid water on its surface.",
-            colour: "Ocean Blue"
-        },
-        {
-            name: "Mars",
-            texture: "https://www.solarsystemscope.com/textures/download/2k_mars.jpg",
-            fact: "Mars is called the Red Planet because of its rusty surface.",
-            colour: "Ruby Red"
-        },
-        {
-            name: "Jupiter",
-            texture: "https://www.solarsystemscope.com/textures/download/2k_jupiter.jpg",
-            fact: "Jupiter is the largest planet and has enormous cloud bands.",
-            colour: "Amber Gold"
-        },
-        {
-            name: "Saturn",
-            texture: "https://www.solarsystemscope.com/textures/download/2k_saturn.jpg",
-            fact: "Saturn is famous for its spectacular rings.",
-            colour: "Champagne Gold"
-        },
-        {
-            name: "Uranus",
-            texture: "https://www.solarsystemscope.com/textures/download/2k_uranus.jpg",
-            fact: "Uranus rotates almost on its side.",
-            colour: "Ice Blue"
-        },
-        {
-            name: "Neptune",
-            texture: "https://www.solarsystemscope.com/textures/download/2k_neptune.jpg",
-            fact: "Neptune is a distant ice giant with extremely powerful winds.",
-            colour: "Royal Blue"
-        }
-    ];
-
-    const content = `
-        <section class="solar-luxury">
-            <header class="solar-space-header">
-                <span class="solar-eyebrow">THE COSMIC COLLECTION</span>
-                <h2>Our <span>Solar System</span></h2>
-                <p>Explore eight amazing planets in a beautiful 3D-style space.</p>
-                <div class="solar-header-line"></div>
-            </header>
-
-            <div class="planet-luxury-grid">
-                ${planets.map((planet, index) => `
-                    <article class="planet-luxury-card" style="--planet-delay:${index * 80}ms">
-                        <div class="planet-number">PLANET 0${index + 1}</div>
-
-                        <div class="planet-stage">
-                           ${planet.name === "Saturn"
-    ? '<div class="planet-orbit-ring saturn-rings"></div>'
-    : ''
-}
-                            <div class="planet-sphere planet-${planet.name.toLowerCase()}">
-                                <img
-                                    class="planet-texture"
-                                    src="${planet.texture}"
-                                    alt="${planet.name} planet"
-                                    loading="lazy"
-                                    onerror="this.style.display='none';this.parentElement.classList.add('planet-texture-missing')"
-                                >
-                                <div class="planet-shade"></div>
-                            </div>
-                        </div>
-
-                        <h3 class="planet-title">${planet.name}</h3>
-                        <span class="planet-colour-label">${planet.colour}</span>
-                        <p class="planet-fact">${planet.fact}</p>
-
-                        <button class="planet-listen-button"
-                            type="button"
-                            onclick="listenToPlanet('${planet.name}', '${planet.fact.replace(/'/g, "\\'")}')">
-                            <span aria-hidden="true">♫</span> Listen & Learn
-                        </button>
-                    </article>
-                `).join("")}
-            </div>
-
-            <footer class="solar-footer">
-                <span>✦</span> KEEP EXPLORING THE UNIVERSE <span>✦</span>
-            </footer>
-        </section>
-    `;
+    const content = document.getElementById("learningContent");
+    if (!content) return;
 
     setupLearning(
         "🪐",
-        "Our Solar System",
-        "Discover all eight amazing planets",
-        content
+        "Realistic Solar System",
+        "Explore our planets in beautiful 3D!",
+        `
+        <div class="solar3d-wrapper">
+            <div class="solar3d-heading">
+                <h2>🌌 Our Solar System</h2>
+                <p>Explore the planets of our amazing universe</p>
+            </div>
+
+            <div id="solar3d-scene" class="solar3d-scene">
+                <div class="solar3d-loading">Loading realistic planets...</div>
+            </div>
+
+            <div id="solar3d-info" class="solar3d-info">
+                Select a planet to explore it!
+            </div>
+
+            <div class="solar3d-credit">
+                Planet textures: Solar System Scope,
+                <a href="https://www.solarsystemscope.com/textures/"
+                   target="_blank" rel="noopener noreferrer">
+                   CC BY 4.0
+                </a>
+            </div>
+        </div>
+        `
     );
+
+    setTimeout(() => initSolarSystem3D(), 150);
 }
 
-function listenToPlanet(name, fact) {
-    if (!("speechSynthesis" in window)) {
-        alert("Voice is not supported in this browser.");
-        return;
+async function initSolarSystem3D() {
+    const container = document.getElementById("solar3d-scene");
+    if (!container || container.dataset.ready === "yes") return;
+    container.dataset.ready = "yes";
+
+    try {
+        const THREE = await import(
+            "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js"
+        );
+
+        if (!document.getElementById("solar3d-scene")) return;
+
+        const scene = new THREE.Scene();
+        scene.background = new THREE.Color("#030514");
+
+        const camera = new THREE.PerspectiveCamera(
+            45,
+            container.clientWidth / 420,
+            0.1,
+            100
+        );
+        camera.position.z = 13;
+
+        const renderer = new THREE.WebGLRenderer({
+            antialias: true,
+            alpha: false
+        });
+
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
+        renderer.setSize(container.clientWidth, 420);
+        renderer.outputColorSpace = THREE.SRGBColorSpace;
+        container.innerHTML = "";
+        container.appendChild(renderer.domElement);
+
+        scene.add(new THREE.AmbientLight(0xffffff, 1.5));
+
+        const sunlight = new THREE.DirectionalLight(0xffffff, 3);
+        sunlight.position.set(-5, 4, 8);
+        scene.add(sunlight);
+
+        // Stars in the background
+        const starPositions = [];
+        for (let i = 0; i < 1200; i++) {
+            starPositions.push(
+                (Math.random() - 0.5) * 70,
+                (Math.random() - 0.5) * 45,
+                -10 - Math.random() * 30
+            );
+        }
+
+        const starGeometry = new THREE.BufferGeometry();
+        starGeometry.setAttribute(
+            "position",
+            new THREE.Float32BufferAttribute(starPositions, 3)
+        );
+
+        const stars = new THREE.Points(
+            starGeometry,
+            new THREE.PointsMaterial({
+                color: 0xffffff,
+                size: 0.055
+            })
+        );
+        scene.add(stars);
+
+        const textureLoader = new THREE.TextureLoader();
+        const textureBase =
+            "https://www.solarsystemscope.com/textures/";
+
+        const planets = [
+            {
+                name: "Mercury",
+                texture: "2k_mercury.jpg",
+                radius: 0.48,
+                x: -4.8,
+                fact: "Mercury is the closest planet to the Sun."
+            },
+            {
+                name: "Venus",
+                texture: "2k_venus_surface.jpg",
+                radius: 0.65,
+                x: -3.4,
+                fact: "Venus is the hottest planet in our Solar System."
+            },
+            {
+                name: "Earth",
+                texture: "2k_earth_daymap.jpg",
+                radius: 0.69,
+                x: -1.9,
+                fact: "Earth is our home and has liquid water on its surface."
+            },
+            {
+                name: "Mars",
+                texture: "2k_mars.jpg",
+                radius: 0.57,
+                x: -0.3,
+                fact: "Mars is known as the Red Planet."
+            },
+            {
+                name: "Jupiter",
+                texture: "2k_jupiter.jpg",
+                radius: 1.05,
+                x: 1.7,
+                fact: "Jupiter is the largest planet in our Solar System."
+            },
+            {
+                name: "Saturn",
+                texture: "2k_saturn.jpg",
+                radius: 0.91,
+                x: 4.0,
+                fact: "Saturn is famous for its beautiful rings."
+            },
+            {
+                name: "Uranus",
+                texture: "2k_uranus.jpg",
+                radius: 0.73,
+                x: 5.6,
+                fact: "Uranus rotates on its side."
+            },
+            {
+                name: "Neptune",
+                texture: "2k_neptune.jpg",
+                radius: 0.71,
+                x: 7.0,
+                fact: "Neptune is a distant, deep-blue planet."
+            }
+        ];
+
+        const planetMeshes = [];
+
+        for (const planet of planets) {
+            const geometry = new THREE.SphereGeometry(
+                planet.radius,
+                48,
+                48
+            );
+
+            const material = new THREE.MeshStandardMaterial({
+                color: 0xffffff,
+                roughness: 0.88,
+                metalness: 0
+            });
+
+            const sphere = new THREE.Mesh(geometry, material);
+            sphere.position.x = planet.x;
+            sphere.userData.planet = planet;
+            scene.add(sphere);
+
+            planetMeshes.push(sphere);
+
+            textureLoader.load(
+                textureBase + planet.texture,
+                texture => {
+                    texture.colorSpace = THREE.SRGBColorSpace;
+                    material.map = texture;
+                    material.needsUpdate = true;
+                },
+                undefined,
+                () => {
+                    console.warn(
+                        "Planet texture could not load:",
+                        planet.name
+                    );
+                }
+            );
+
+            // Saturn's rings
+            if (planet.name === "Saturn") {
+                const ring = new THREE.Mesh(
+                    new THREE.RingGeometry(
+                        planet.radius * 1.25,
+                        planet.radius * 1.9,
+                        96
+                    ),
+                    new THREE.MeshStandardMaterial({
+                        color: 0xcbb58d,
+                        side: THREE.DoubleSide,
+                        transparent: true,
+                        opacity: 0.85,
+                        roughness: 1
+                    })
+                );
+
+                ring.rotation.x = Math.PI / 2.5;
+                sphere.add(ring);
+            }
+        }
+
+        // Drag to rotate; click a planet to learn about it
+        let dragging = false;
+        let previousX = 0;
+        let previousY = 0;
+        let rotationY = 0;
+        let rotationX = 0;
+
+        renderer.domElement.addEventListener("pointerdown", event => {
+            dragging = true;
+            previousX = event.clientX;
+            previousY = event.clientY;
+            renderer.domElement.setPointerCapture(event.pointerId);
+        });
+
+        renderer.domElement.addEventListener("pointermove", event => {
+            if (!dragging) return;
+
+            rotationY += (event.clientX - previousX) * 0.005;
+            rotationX += (event.clientY - previousY) * 0.003;
+
+            previousX = event.clientX;
+            previousY = event.clientY;
+        });
+
+        renderer.domElement.addEventListener("pointerup", () => {
+            dragging = false;
+        });
+
+        renderer.domElement.addEventListener("pointercancel", () => {
+            dragging = false;
+        });
+
+        const raycaster = new THREE.Raycaster();
+        const pointer = new THREE.Vector2();
+
+        renderer.domElement.addEventListener("click", event => {
+            const rect = renderer.domElement.getBoundingClientRect();
+
+            pointer.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+            pointer.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
+
+            raycaster.setFromCamera(pointer, camera);
+            const hits = raycaster.intersectObjects(planetMeshes);
+
+            if (hits.length) {
+                const planet = hits[0].object.userData.planet;
+                const info = document.getElementById("solar3d-info");
+
+                if (info) {
+                    info.innerHTML =
+                        "<strong>🪐 " + planet.name +
+                        "</strong><p>" + planet.fact + "</p>";
+
+                    if (typeof listenToPlanet === "function") {
+                        listenToPlanet(planet.name, planet.fact);
+                    }
+                }
+            }
+        });
+
+        let animationId;
+
+        function animate() {
+            animationId = requestAnimationFrame(animate);
+
+            planetMeshes.forEach((sphere, index) => {
+                sphere.rotation.y += 0.002 + index * 0.0001;
+            });
+
+            scene.rotation.y = rotationY;
+            scene.rotation.x = rotationX;
+
+            renderer.render(scene, camera);
+        }
+
+        animate();
+
+        // Keep the scene fitted to its container
+        const resizeObserver = new ResizeObserver(() => {
+            if (!container.isConnected) {
+                cancelAnimationFrame(animationId);
+                resizeObserver.disconnect();
+                renderer.dispose();
+                return;
+            }
+
+            const width = container.clientWidth;
+            if (!width) return;
+
+            camera.aspect = width / 420;
+            camera.updateProjectionMatrix();
+            renderer.setSize(width, 420);
+        });
+
+        resizeObserver.observe(container);
+
+    } catch (error) {
+        console.error("Solar System error:", error);
+        container.innerHTML =
+            '<p class="solar3d-loading">3D planets could not load. Please check your internet connection and refresh.</p>';
     }
-
-    window.speechSynthesis.cancel();
-
-    const message = new SpeechSynthesisUtterance(
-        `${name}. ${fact}`
-    );
-
-    message.lang = "en-US";
-    message.rate = 0.85;
-    message.pitch = 1;
-    message.volume = 1;
-
-    window.speechSynthesis.speak(message);
 }
+
 /* =========================================================
    🐾 WILD ANIMALS
    ========================================================= */
