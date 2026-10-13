@@ -16309,3 +16309,106 @@ body {
         left: -15%;
     }
 }
+
+
+/* REALISTIC 3D SOLAR SYSTEM */
+.solar3d-wrapper {
+    width: 100%;
+    padding: 18px;
+    overflow: hidden;
+    box-sizing: border-box;
+    color: #fff;
+    border-radius: 24px;
+    background:
+        radial-gradient(ellipse at top, #182958 0%, #080d22 48%, #02040d 100%);
+    border: 1px solid rgba(130, 170, 255, 0.35);
+    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.3);
+}
+
+.solar3d-heading {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.solar3d-heading h2 {
+    margin: 0 0 8px;
+    font-size: clamp(22px, 4vw, 34px);
+    color: #ffe58a;
+}
+
+.solar3d-heading p {
+    margin: 0;
+    color: #cbd9ff;
+}
+
+.solar3d-scene {
+    width: 100%;
+    height: 420px;
+    min-width: 0;
+    overflow: hidden;
+    border-radius: 18px;
+    background: #030514;
+    touch-action: pan-y;
+}
+
+.solar3d-scene canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+    cursor: grab;
+}
+
+.solar3d-scene canvas:active {
+    cursor: grabbing;
+}
+
+.solar3d-loading {
+    padding: 35px 12px;
+    text-align: center;
+    color: #ffe58a;
+}
+
+.solar3d-info {
+    margin-top: 15px;
+    padding: 15px;
+    text-align: center;
+    border-radius: 15px;
+    background: rgba(105, 133, 255, 0.12);
+    border: 1px solid rgba(155, 181, 255, 0.25);
+}
+
+.solar3d-info strong {
+    color: #ffe58a;
+    font-size: 21px;
+}
+
+.solar3d-info p {
+    margin: 8px 0 0;
+    color: #edf2ff;
+}
+
+.solar3d-credit {
+    margin-top: 13px;
+    text-align: center;
+    font-size: 12px;
+    color: #bdc8e8;
+}
+
+.solar3d-credit a {
+    color: #9fdcff;
+}
+
+@media (max-width: 600px) {
+    .solar3d-wrapper {
+        padding: 10px;
+        border-radius: 17px;
+    }
+
+    .solar3d-scene {
+        height: 320px;
+    }
+
+    .solar3d-info {
+        padding: 12px;
+    }
+}
