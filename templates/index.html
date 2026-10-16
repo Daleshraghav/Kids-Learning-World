@@ -1466,15 +1466,10 @@
     </section>
 
 
+<!-- JAVASCRIPT -->
 
-    <!-- =========================================================
-         JAVASCRIPT
-    ========================================================== -->
-
-    <script>
-/* =========================================
-   KIDS LEARNING WORLD — LAMP INTRO LOGIC
-========================================= */
+<!-- Lamp intro script: tumhara existing code isi tag ke andar rahega -->
+<script>
 (function () {
     "use strict";
 
@@ -1485,58 +1480,41 @@
 
     if (!intro || !lamp || !tapButton) return;
 
-    // Create lightweight golden floating particles.
     for (let i = 0; i < 22; i++) {
         const particle = document.createElement("span");
         particle.className = "kwl-light-particle";
-
         particle.style.setProperty("--px", (5 + Math.random() * 90) + "%");
         particle.style.setProperty("--py", (25 + Math.random() * 65) + "%");
         particle.style.setProperty("--ps", (2 + Math.random() * 4) + "px");
         particle.style.setProperty("--pd", (2.2 + Math.random() * 2.8) + "s");
         particle.style.setProperty("--delay", (Math.random() * 3) + "s");
-
         intro.appendChild(particle);
     }
 
     let lampActivated = false;
 
     function turnOnLamp() {
-        // Prevent repeated clicks from restarting the animation.
         if (lampActivated) return;
         lampActivated = true;
 
         intro.classList.add("kwl-lamp-on");
         lamp.setAttribute("aria-label", "Magic lamp is glowing");
-        tapButton.setAttribute("disabled", "disabled");
+        tapButton.disabled = true;
 
-        if (tapText) {
-            tapText.textContent = "MAGIC ACTIVATED!";
-        }
+        if (tapText) tapText.textContent = "MAGIC ACTIVATED!";
 
-        // Let the bright golden glow build up first.
-        window.setTimeout(function () {
-            intro.classList.add("kwl-flash");
-        }, 1650);
-
-        // Fade out the intro and reveal the existing home page.
-        window.setTimeout(function () {
-            intro.classList.add("kwl-intro-exit");
-        }, 2600);
-
-        // Remove the overlay so existing page controls work normally.
-        window.setTimeout(function () {
-            intro.remove();
-        }, 3800);
+        window.setTimeout(() => intro.classList.add("kwl-flash"), 1650);
+        window.setTimeout(() => intro.classList.add("kwl-intro-exit"), 2600);
+        window.setTimeout(() => intro.remove(), 3800);
     }
 
     lamp.addEventListener("click", turnOnLamp);
     tapButton.addEventListener("click", turnOnLamp);
 })();
+</script>
 
-        src="{{ url_for('static', filename='script.js') }}?v=4">
-    </script>
+<!-- Main website JavaScript: is tag ko alag hi rakho -->
+<script src="{{ url_for('static', filename='script.js') }}?v=5"></script>
 
 </body>
-
 </html>
