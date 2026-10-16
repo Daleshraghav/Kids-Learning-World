@@ -58,6 +58,84 @@
 
     
 <style>
+    
+/* FINAL TITLE + HOOK POSITION FIX */
+#kwlLampIntro .kwl-intro-brand {
+    z-index: 7 !important;
+    width: min(1100px, 94%) !important;
+    padding: 10px 14px 13px !important;
+    box-sizing: border-box !important;
+    border-radius: 16px !important;
+    background: radial-gradient(
+        ellipse at center,
+        rgba(20, 14, 8, .82) 0%,
+        rgba(10, 8, 6, .48) 68%,
+        transparent 100%
+    ) !important;
+}
+
+#kwlLampIntro .kwl-brand-name {
+    color: #ffe6ad !important;
+    font-weight: 900 !important;
+    text-shadow:
+        0 0 2px #fff4d2,
+        0 0 10px rgba(255, 196, 90, .95),
+        0 0 24px rgba(255, 160, 35, .65) !important;
+}
+
+#kwlLampIntro .kwl-brand-owner {
+    color: #fff0ce !important;
+    font-weight: 800 !important;
+    text-shadow:
+        0 1px 3px #000,
+        0 0 12px rgba(255, 188, 76, .7) !important;
+}
+
+#kwlLampIntro .kwl-ceiling-hook {
+    z-index: 5 !important;
+    top: 37% !important;
+    font-size: 42px !important;
+}
+
+#kwlLampIntro .kwl-lamp-stage {
+    top: 35% !important;
+    height: 65% !important;
+}
+
+@media (max-width: 760px) {
+    #kwlLampIntro .kwl-intro-brand {
+        top: max(4%, env(safe-area-inset-top)) !important;
+        width: 96% !important;
+        padding: 8px 5px 10px !important;
+    }
+
+    #kwlLampIntro .kwl-brand-name {
+        font-size: clamp(28px, 8.2vw, 40px) !important;
+        line-height: .98 !important;
+    }
+
+    #kwlLampIntro .kwl-brand-owner {
+        font-size: clamp(14px, 3.8vw, 17px) !important;
+    }
+
+    #kwlLampIntro .kwl-ceiling-hook {
+        top: 39% !important;
+        font-size: 42px !important;
+    }
+
+    #kwlLampIntro .kwl-lamp-stage {
+        top: 28% !important;
+        height: 70% !important;
+    }
+}
+
+@media (max-width: 380px) {
+    #kwlLampIntro .kwl-ceiling-hook {
+        top: 39% !important;
+        font-size: 38px !important;
+    }
+}
+
 
     
 /* ============================================
@@ -1557,13 +1635,18 @@
     <svg class="kwl-rope-svg" id="kwlRopeSvg"
          aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
         <defs>
-            <linearGradient id="kwlRopeGradient" x1="0" y1="0" x2="1" y2="0">
-                <stop offset="0%" stop-color="#50331a"/>
-                <stop offset="22%" stop-color="#d5ad70"/>
-                <stop offset="45%" stop-color="#f2d5a0"/>
-                <stop offset="70%" stop-color="#947047"/>
-                <stop offset="100%" stop-color="#392313"/>
-            </linearGradient>
+           
+<linearGradient id="kwlRopeGradient"
+                x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="#fff9e8"/>
+    <stop offset="16%" stop-color="#d6a34e"/>
+    <stop offset="32%" stop-color="#fff5d8"/>
+    <stop offset="50%" stop-color="#b7833e"/>
+    <stop offset="68%" stop-color="#fff8e5"/>
+    <stop offset="84%" stop-color="#d4a253"/>
+    <stop offset="100%" stop-color="#fff0c7"/>
+</linearGradient>
+
         </defs>
         <path id="kwlRopeShadow" class="kwl-rope-shadow" d=""/>
         <path id="kwlRopePath" class="kwl-rope-path" d=""/>
@@ -2266,13 +2349,24 @@
     let startDragX = 0;
     let startDragY = 0;
 
-    const HOLD_TO_DRAG_MS = 2000;
+   const HOLD_TO_DRAG_MS = 1000;
 
 
 function updateRope() {
     if (!intro.isConnected) return;
 
     const introRect = intro.getBoundingClientRect();
+    
+const ropeSvg = document.getElementById("kwlRopeSvg");
+
+if (ropeSvg) {
+    ropeSvg.setAttribute(
+        "viewBox",
+        `0 0 ${introRect.width} ${introRect.height}`
+    );
+    ropeSvg.setAttribute("preserveAspectRatio", "none");
+}
+
     const hookRect = hook.getBoundingClientRect();
     const lampRect = lamp.getBoundingClientRect();
 
@@ -2373,17 +2467,11 @@ function updateRope() {
 
     lamp.addEventListener("pointermove", function (event) {
         if (activePointerId !== event.pointerId) return;
-
-        if (!dragging) {
-            const moved = Math.hypot(
-                event.clientX - startX,
-                event.clientY - startY
-            );
-
-            // Cancel the hold if the finger moves before two seconds.
-            if (moved > 12) clearHoldTimer();
-            return;
-        }
+if (!dragging) {
+    // Keep the 1-second hold timer active.
+    // Dragging starts only after the timer completes.
+    return;
+}
 
         dragX = startDragX + event.clientX - startX;
         dragY = startDragY + event.clientY - startY;
