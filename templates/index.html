@@ -1708,8 +1708,26 @@
         window.setTimeout(() => intro.remove(), 3800);
     }
 
-    lamp.addEventListener("click", turnOnLamp);
-    tapButton.addEventListener("click", turnOnLamp);
+   
+/* Only clicking the lamp turns its light on */
+lamp.addEventListener("click", turnOnLamp);
+
+/* Tapping the prompt only points toward the lamp */
+tapButton.addEventListener("click", function () {
+    if (lampActivated) return;
+
+    intro.classList.remove("kwl-pointing");
+
+    // Restart the pointing animation
+    void intro.offsetWidth;
+
+    intro.classList.add("kwl-pointing");
+
+    window.setTimeout(function () {
+        intro.classList.remove("kwl-pointing");
+    }, 1500);
+});
+
 })();
 </script>
 
