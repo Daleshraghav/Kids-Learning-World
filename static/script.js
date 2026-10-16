@@ -591,11 +591,12 @@ function goHome() {
 
 function goBackFromLearning() {
 
-    // Current page ka title check karo
-    const pageTitle = learningTitle
-        ? learningTitle.textContent.trim()
-        : "";
-
+       // Main Learning Menu se Back karne par Home Page kholo
+    if (pageTitle === "Choose Your Learning World") {
+        goHome();
+        return;
+    }
+   
     // More Learning topics se Back par main learning menu kholo
     const moreLearningTopics = [
         "abc",
