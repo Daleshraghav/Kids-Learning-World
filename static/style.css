@@ -16120,3 +16120,37 @@ body {
         font-size: 15px;
     }
 }
+
+
+#kwlLampIntro .kwl-rope-shadow {
+    stroke: #080706 !important;
+    stroke-width: 11px !important;
+    opacity: .98 !important;
+}
+
+#kwlLampIntro .kwl-rope-path {
+    stroke-width: 7px !important;
+    filter:
+        drop-shadow(0 1px 2px #000)
+        drop-shadow(0 0 2px rgba(255, 207, 126, .4)) !important;
+}
+
+#kwlLampIntro .kwl-rope-highlight {
+    stroke: #fff7df !important;
+    stroke-width: 2px !important;
+    opacity: .96 !important;
+}
+
+@media (max-width: 760px) {
+    #kwlLampIntro .kwl-rope-shadow {
+        stroke-width: 10px !important;
+    }
+
+    #kwlLampIntro .kwl-rope-path {
+        stroke-width: 6px !important;
+    }
+
+    #kwlLampIntro .kwl-rope-highlight {
+        stroke-width: 1.7px !important;
+    }
+}
