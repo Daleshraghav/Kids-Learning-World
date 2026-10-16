@@ -552,10 +552,6 @@ function openLearningMenu() {
     learningPage.style.display = "block";
     learningPage.classList.add("learning-menu-page");
 
-    if (learningIcon) {
-        learningIcon.textContent = "🌟";
-    }
-
     if (learningTitle) {
         learningTitle.textContent = "Choose Your Learning World";
     }
