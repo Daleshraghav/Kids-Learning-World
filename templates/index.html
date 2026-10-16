@@ -60,6 +60,334 @@
 <style>
 
     
+/* ============================================
+   GOLD LANTERN — FINAL RESPONSIVE DESIGN
+============================================ */
+
+#kwlLampIntro {
+    background: #030303 !important;
+    background-image: radial-gradient(
+        ellipse at 50% 48%,
+        #17130e 0%,
+        #090909 44%,
+        #010101 100%
+    ) !important;
+    overflow: hidden;
+    isolation: isolate;
+}
+
+#kwlIntroStars,
+.kwl-intro-stars {
+    pointer-events: none;
+}
+
+#kwlLampIntro .kwl-intro-layout {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    padding: 0;
+    display: block;
+    overflow: hidden;
+}
+
+#kwlLampIntro .kwl-intro-brand {
+    position: absolute;
+    z-index: 5;
+    top: 5%;
+    left: 50%;
+    width: min(1100px, 94%);
+    padding: 0 8px;
+    transform: translateX(-50%);
+    text-align: center;
+    animation: kwlBrandAppear 1.2s ease both;
+}
+
+#kwlLampIntro .kwl-brand-crown {
+    display: block;
+    margin-bottom: 5px;
+    color: #ffdc98;
+    font-size: clamp(19px, 2.5vw, 28px);
+    filter: drop-shadow(0 0 10px rgba(255, 183, 65, .5));
+}
+
+#kwlLampIntro .kwl-brand-name {
+    margin: 0;
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0 .24em;
+    color: #ffe0a0;
+    font-size: clamp(29px, 5.2vw, 68px);
+    line-height: 1.08;
+    font-weight: 800;
+    letter-spacing: -1.5px;
+    text-shadow:
+        0 1px 0 #81501c,
+        0 3px 0 #3c250f,
+        0 0 18px rgba(255, 180, 61, .45);
+}
+
+#kwlLampIntro .kwl-brand-name span {
+    display: inline;
+    color: #ffe0a0;
+    text-shadow: inherit;
+}
+
+#kwlLampIntro .kwl-brand-owner {
+    margin: 7px 0 0;
+    color: #e8c78f;
+    font-size: clamp(14px, 2vw, 23px);
+    font-style: italic;
+    letter-spacing: .3px;
+    text-shadow: 0 0 12px rgba(255, 182, 62, .28);
+}
+
+#kwlLampIntro .kwl-brand-line {
+    display: block;
+    width: min(310px, 60%);
+    height: 2px;
+    margin: 10px auto 0;
+    background: linear-gradient(90deg, transparent, #dca64e, transparent);
+    box-shadow: 0 0 12px rgba(255, 184, 68, .4);
+}
+
+/* Hook */
+#kwlLampIntro .kwl-ceiling-hook {
+    position: absolute;
+    z-index: 4;
+    top: 23%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 29px;
+    line-height: 1;
+    filter: grayscale(.7) sepia(.65) brightness(1.15)
+            drop-shadow(0 0 5px rgba(222, 167, 78, .4));
+    pointer-events: none;
+}
+
+/* Rope sits behind the lamp */
+#kwlLampIntro .kwl-rope-svg {
+    position: absolute;
+    z-index: 2;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+    pointer-events: none;
+}
+
+#kwlLampIntro .kwl-rope-shadow {
+    fill: none;
+    stroke: #000;
+    stroke-width: 9;
+    stroke-linecap: round;
+    opacity: .8;
+}
+
+#kwlLampIntro .kwl-rope-path {
+    fill: none;
+    stroke: url(#kwlRopeGradient);
+    stroke-width: 5;
+    stroke-linecap: round;
+    filter: drop-shadow(0 1px 2px #000);
+}
+
+#kwlLampIntro .kwl-rope-highlight {
+    fill: none;
+    stroke: rgba(255, 226, 170, .62);
+    stroke-width: 1.15;
+    stroke-linecap: round;
+    opacity: .8;
+}
+
+/* Hanging lamp position */
+#kwlLampIntro .kwl-lamp-stage {
+    position: absolute;
+    z-index: 3;
+    top: 31%;
+    left: 50%;
+    width: min(460px, 94vw);
+    height: 64%;
+    min-height: 0;
+    max-height: none;
+    margin: 0;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    perspective: 900px;
+    overflow: visible;
+}
+
+#kwlLampIntro .kwl-lamp {
+    --drag-x: 0px;
+    --drag-y: 0px;
+    position: relative;
+    z-index: 3;
+    flex: 0 0 auto;
+    translate: var(--drag-x) var(--drag-y);
+    touch-action: none;
+    user-select: none;
+    -webkit-user-select: none;
+    cursor: grab;
+    transform-origin: top center;
+    animation: kwlHangingIdle 4s ease-in-out infinite;
+    will-change: translate, transform;
+}
+
+#kwlLampIntro .kwl-lamp.kwl-dragging {
+    animation: none !important;
+    cursor: grabbing;
+    transition: none !important;
+}
+
+#kwlLampIntro .kwl-lamp-halo {
+    width: 230px;
+    height: 340px;
+    background: #ff9f1c;
+    opacity: 0;
+    filter: blur(72px);
+    transition: opacity 1s ease, transform 1.2s ease;
+}
+
+#kwlLampIntro .kwl-intro-floor {
+    position: absolute;
+    z-index: 1;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 22%;
+    background: radial-gradient(
+        ellipse at 50% 100%,
+        rgba(166, 99, 24, .16),
+        transparent 68%
+    );
+    pointer-events: none;
+}
+
+/* Light-on state */
+#kwlLampIntro.kwl-lamp-on .kwl-lamp {
+    animation: kwlHangingGlow .18s ease-in-out infinite alternate;
+}
+
+@keyframes kwlHangingIdle {
+    0%, 100% { transform: rotate(-1deg) scale(.88); }
+    50% { transform: rotate(1deg) scale(.88); }
+}
+
+@keyframes kwlHangingGlow {
+    from { transform: rotate(-.5deg) scale(.88); }
+    to { transform: rotate(.5deg) scale(.89); }
+}
+
+/* Phones */
+@media (max-width: 760px) {
+    #kwlLampIntro .kwl-intro-brand {
+        top: max(4%, env(safe-area-inset-top));
+        width: 96%;
+        padding: 0 5px;
+    }
+
+    #kwlLampIntro .kwl-brand-crown {
+        font-size: 18px;
+        margin-bottom: 4px;
+    }
+
+    #kwlLampIntro .kwl-brand-name {
+        gap: 0 .2em;
+        font-size: clamp(25px, 7.2vw, 39px);
+        line-height: 1.08;
+        letter-spacing: -.8px;
+    }
+
+    #kwlLampIntro .kwl-brand-owner {
+        margin-top: 5px;
+        font-size: clamp(13px, 3.8vw, 17px);
+    }
+
+    #kwlLampIntro .kwl-brand-line {
+        margin-top: 7px;
+    }
+
+    #kwlLampIntro .kwl-ceiling-hook {
+        top: 24%;
+        font-size: 25px;
+    }
+
+    #kwlLampIntro .kwl-lamp-stage {
+        top: 29%;
+        width: 100%;
+        height: 68%;
+    }
+
+    #kwlLampIntro .kwl-lamp {
+        animation-name: kwlPhoneHangingIdle;
+    }
+
+    #kwlLampIntro.kwl-lamp-on .kwl-lamp {
+        animation-name: kwlPhoneHangingGlow;
+    }
+
+    #kwlLampIntro .kwl-rope-path {
+        stroke-width: 4;
+    }
+
+    #kwlLampIntro .kwl-rope-shadow {
+        stroke-width: 7;
+    }
+
+    #kwlLampIntro .kwl-intro-floor {
+        height: 18%;
+    }
+}
+
+@keyframes kwlPhoneHangingIdle {
+    0%, 100% { transform: rotate(-1deg) scale(.66); }
+    50% { transform: rotate(1deg) scale(.66); }
+}
+
+@keyframes kwlPhoneHangingGlow {
+    from { transform: rotate(-.5deg) scale(.66); }
+    to { transform: rotate(.5deg) scale(.68); }
+}
+
+@media (max-width: 380px) {
+    #kwlLampIntro .kwl-brand-name {
+        font-size: 25px;
+    }
+
+    #kwlLampIntro .kwl-ceiling-hook {
+        top: 25%;
+        font-size: 22px;
+    }
+
+    #kwlLampIntro .kwl-lamp-stage {
+        top: 31%;
+    }
+
+    #kwlLampIntro .kwl-lamp {
+        animation-name: kwlTinyPhoneHangingIdle;
+    }
+
+    #kwlLampIntro.kwl-lamp-on .kwl-lamp {
+        animation-name: kwlTinyPhoneHangingGlow;
+    }
+}
+
+@keyframes kwlTinyPhoneHangingIdle {
+    0%, 100% { transform: rotate(-1deg) scale(.58); }
+    50% { transform: rotate(1deg) scale(.58); }
+}
+
+@keyframes kwlTinyPhoneHangingGlow {
+    from { transform: rotate(-.5deg) scale(.58); }
+    to { transform: rotate(.5deg) scale(.60); }
+}
+
+    
 /* =========================================
    MOBILE LAMP INTRO — PREMIUM GOLD EDITION
 ========================================= */
@@ -985,37 +1313,60 @@
      KIDS LEARNING WORLD — LAMP INTRO HTML
 ========================================= -->
 
+
+<!-- KIDS LEARNING WORLD — GOLD LANTERN INTRO -->
+
 <div id="kwlLampIntro" role="dialog" aria-label="Kids Learning World intro">
     <div class="kwl-intro-stars" aria-hidden="true"></div>
     <div class="kwl-intro-floor" aria-hidden="true"></div>
     <div class="kwl-screen-flash" aria-hidden="true"></div>
 
+    <!-- Ceiling hook -->
+    <div class="kwl-ceiling-hook" id="kwlCeilingHook" aria-hidden="true">🪝</div>
+
+    <!-- Flexible rope: JavaScript updates its shape while dragging -->
+    <svg class="kwl-rope-svg" id="kwlRopeSvg"
+         aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+            <linearGradient id="kwlRopeGradient" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%" stop-color="#50331a"/>
+                <stop offset="22%" stop-color="#d5ad70"/>
+                <stop offset="45%" stop-color="#f2d5a0"/>
+                <stop offset="70%" stop-color="#947047"/>
+                <stop offset="100%" stop-color="#392313"/>
+            </linearGradient>
+        </defs>
+        <path id="kwlRopeShadow" class="kwl-rope-shadow" d=""/>
+        <path id="kwlRopePath" class="kwl-rope-path" d=""/>
+        <path id="kwlRopeHighlight" class="kwl-rope-highlight" d=""/>
+    </svg>
+
     <div class="kwl-intro-layout">
 
-        <!-- WEBSITE BRAND -->
+        <!-- GOLD BRAND -->
         <section class="kwl-intro-brand">
             <span class="kwl-brand-crown" aria-hidden="true">♛</span>
+
             <h1 class="kwl-brand-name">
-                Kids
-                <span>Learning</span>
-                World
+                <span class="kwl-word-kids">Kids</span>
+                <span class="kwl-word-learning">Learning</span>
+                <span class="kwl-word-world">World</span>
             </h1>
+
             <p class="kwl-brand-owner">by Dalesh Raghav 🎀</p>
             <span class="kwl-brand-line"></span>
         </section>
 
         <!-- LAMP -->
-        <section class="kwl-lamp-stage" aria-label="Magic lamp">
+        <section class="kwl-lamp-stage" id="kwlLampStage" aria-label="Hanging magic lamp">
             <div class="kwl-lamp-halo" aria-hidden="true"></div>
             <div class="kwl-light-beam" aria-hidden="true"></div>
             <div class="kwl-lamp-reflection" aria-hidden="true"></div>
 
-            <button
-                type="button"
-                class="kwl-lamp"
-                id="kwlLampButton"
-                aria-label="Turn on the magic lamp"
-            >
+            <button type="button"
+                    class="kwl-lamp"
+                    id="kwlLampButton"
+                    aria-label="Click to light the magic lamp. Hold for two seconds to move it.">
                 <span class="kwl-lamp-handle"></span>
                 <span class="kwl-lamp-cap"></span>
 
@@ -1030,26 +1381,6 @@
                 <span class="kwl-lamp-switch"></span>
             </button>
         </section>
-
-        <!-- TAP PROMPT -->
-        <section class="kwl-tap-area">
-            <button
-                type="button"
-                class="kwl-tap-button"
-                id="kwlTapButton"
-            >
-                <span class="kwl-tap-icon" aria-hidden="true">☝</span>
-                <span id="kwlTapText">TAP TO LAMP</span>
-            </button>
-
-            <p class="kwl-tap-caption">
-                Turn on the magic light<br>
-                and begin your learning journey!
-            </p>
-
-            <span class="kwl-tap-arrow" aria-hidden="true">↙</span>
-        </section>
-
     </div>
 </div>
 
@@ -1668,66 +1999,201 @@
 
 <!-- JAVASCRIPT -->
 
-<!-- Lamp intro script: tumhara existing code isi tag ke andar rahega -->
 <script>
 (function () {
     "use strict";
 
     const intro = document.getElementById("kwlLampIntro");
     const lamp = document.getElementById("kwlLampButton");
-    const tapButton = document.getElementById("kwlTapButton");
-    const tapText = document.getElementById("kwlTapText");
+    const stage = document.getElementById("kwlLampStage");
+    const hook = document.getElementById("kwlCeilingHook");
+    const ropeShadow = document.getElementById("kwlRopeShadow");
+    const ropePath = document.getElementById("kwlRopePath");
+    const ropeHighlight = document.getElementById("kwlRopeHighlight");
 
-    if (!intro || !lamp || !tapButton) return;
+    if (!intro || !lamp || !stage || !hook || !ropePath) return;
 
-    for (let i = 0; i < 22; i++) {
+    // Decorative golden particles
+    for (let i = 0; i < 26; i++) {
         const particle = document.createElement("span");
         particle.className = "kwl-light-particle";
         particle.style.setProperty("--px", (5 + Math.random() * 90) + "%");
-        particle.style.setProperty("--py", (25 + Math.random() * 65) + "%");
-        particle.style.setProperty("--ps", (2 + Math.random() * 4) + "px");
-        particle.style.setProperty("--pd", (2.2 + Math.random() * 2.8) + "s");
-        particle.style.setProperty("--delay", (Math.random() * 3) + "s");
+        particle.style.setProperty("--py", (20 + Math.random() * 75) + "%");
+        particle.style.setProperty("--ps", (2 + Math.random() * 3) + "px");
+        particle.style.setProperty("--pd", (2 + Math.random() * 3) + "s");
+        particle.style.setProperty("--delay", (Math.random() * 2) + "s");
         intro.appendChild(particle);
     }
 
     let lampActivated = false;
+    let holdTimer = null;
+    let dragging = false;
+    let suppressNextClick = false;
+    let activePointerId = null;
+    let startX = 0;
+    let startY = 0;
+    let dragX = 0;
+    let dragY = 0;
+    let startDragX = 0;
+    let startDragY = 0;
+
+    const HOLD_TO_DRAG_MS = 2000;
+
+    function updateRope() {
+        const introRect = intro.getBoundingClientRect();
+        const hookRect = hook.getBoundingClientRect();
+        const lampRect = lamp.getBoundingClientRect();
+
+        const sx = hookRect.left + hookRect.width / 2 - introRect.left;
+        const sy = hookRect.bottom - introRect.top - 1;
+
+        // Rope attaches close to the center of the lamp's upper handle.
+        const ex = lampRect.left + lampRect.width / 2 - introRect.left;
+        const ey = lampRect.top + 12 - introRect.top;
+
+        const dx = ex - sx;
+        const dy = ey - sy;
+        const distance = Math.max(35, dy);
+        const sag = Math.min(65, Math.abs(dx) * 0.18 + 10);
+
+        const path = [
+            "M", sx, sy,
+            "C", sx + dx * 0.12, sy + distance * 0.36,
+            ex - dx * 0.12, ey - distance * 0.32 + sag,
+            ex, ey
+        ].join(" ");
+
+        ropePath.setAttribute("d", path);
+        if (ropeShadow) ropeShadow.setAttribute("d", path);
+        if (ropeHighlight) ropeHighlight.setAttribute("d", path);
+    }
+
+    function clearHoldTimer() {
+        if (holdTimer !== null) {
+            window.clearTimeout(holdTimer);
+            holdTimer = null;
+        }
+    }
 
     function turnOnLamp() {
         if (lampActivated) return;
         lampActivated = true;
 
         intro.classList.add("kwl-lamp-on");
-        lamp.setAttribute("aria-label", "Magic lamp is glowing");
-        tapButton.disabled = true;
+        lamp.setAttribute("aria-label", "Magic lamp glowing");
 
-        if (tapText) tapText.textContent = "MAGIC ACTIVATED!";
+        window.setTimeout(function () {
+            intro.classList.add("kwl-flash");
+        }, 1500);
 
-        window.setTimeout(() => intro.classList.add("kwl-flash"), 1650);
-        window.setTimeout(() => intro.classList.add("kwl-intro-exit"), 2600);
-        window.setTimeout(() => intro.remove(), 3800);
+        window.setTimeout(function () {
+            intro.classList.add("kwl-intro-exit");
+        }, 2500);
+
+        window.setTimeout(function () {
+            intro.remove();
+        }, 3600);
     }
 
-   
-/* Only clicking the lamp turns its light on */
-lamp.addEventListener("click", turnOnLamp);
+    lamp.addEventListener("pointerdown", function (event) {
+        if (lampActivated || event.button > 0) return;
 
-/* Tapping the prompt only points toward the lamp */
-tapButton.addEventListener("click", function () {
-    if (lampActivated) return;
+        activePointerId = event.pointerId;
+        startX = event.clientX;
+        startY = event.clientY;
+        startDragX = dragX;
+        startDragY = dragY;
+        dragging = false;
+        suppressNextClick = false;
 
-    intro.classList.remove("kwl-pointing");
+        clearHoldTimer();
 
-    // Restart the pointing animation
-    void intro.offsetWidth;
+        // A quick tap lights the lamp; a two-second hold starts dragging.
+        holdTimer = window.setTimeout(function () {
+            if (activePointerId !== event.pointerId || lampActivated) return;
 
-    intro.classList.add("kwl-pointing");
+            dragging = true;
+            suppressNextClick = true;
+            lamp.classList.add("kwl-dragging");
 
-    window.setTimeout(function () {
-        intro.classList.remove("kwl-pointing");
-    }, 1500);
-});
+            try {
+                lamp.setPointerCapture(event.pointerId);
+            } catch (_) {
+                // Pointer capture may not be available in every browser.
+            }
+        }, HOLD_TO_DRAG_MS);
+    });
 
+    lamp.addEventListener("pointermove", function (event) {
+        if (activePointerId !== event.pointerId) return;
+
+        if (!dragging) {
+            const moved = Math.hypot(
+                event.clientX - startX,
+                event.clientY - startY
+            );
+
+            // Cancel the hold if the finger moves before two seconds.
+            if (moved > 12) clearHoldTimer();
+            return;
+        }
+
+        dragX = startDragX + event.clientX - startX;
+        dragY = startDragY + event.clientY - startY;
+
+        // Keep the lantern near the screen and away from extreme positions.
+        const limitX = Math.min(window.innerWidth * 0.36, 180);
+        const limitY = Math.min(window.innerHeight * 0.22, 150);
+
+        dragX = Math.max(-limitX, Math.min(limitX, dragX));
+        dragY = Math.max(-limitY, Math.min(limitY, dragY));
+
+        lamp.style.setProperty("--drag-x", dragX + "px");
+        lamp.style.setProperty("--drag-y", dragY + "px");
+
+        updateRope();
+    });
+
+    function endPointer(event) {
+        if (activePointerId !== event.pointerId) return;
+
+        clearHoldTimer();
+
+        if (dragging) {
+            suppressNextClick = true;
+            lamp.classList.remove("kwl-dragging");
+        }
+
+        dragging = false;
+        activePointerId = null;
+
+        // A short release leaves the normal click event free to light the lamp.
+        window.setTimeout(function () {
+            suppressNextClick = false;
+        }, 100);
+    }
+
+    lamp.addEventListener("pointerup", endPointer);
+    lamp.addEventListener("pointercancel", endPointer);
+
+    lamp.addEventListener("click", function (event) {
+        if (suppressNextClick) {
+            event.preventDefault();
+            event.stopPropagation();
+            suppressNextClick = false;
+            return;
+        }
+
+        turnOnLamp();
+    });
+
+    window.addEventListener("resize", updateRope);
+    window.addEventListener("load", updateRope);
+
+    // Wait for layout and fonts before aligning the rope.
+    requestAnimationFrame(function () {
+        requestAnimationFrame(updateRope);
+    });
 })();
 </script>
 
