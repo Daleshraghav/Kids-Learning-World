@@ -56,10 +56,802 @@
     <link rel="stylesheet"
           href="{{ url_for('static', filename='style.css') }}?v=3">
 
+    
+<style>
+/* =========================================
+   KIDS LEARNING WORLD — LAMP INTRO
+   Is CSS ko index.html ke <head> mein rakho
+========================================= */
+
+#kwlLampIntro,
+#kwlLampIntro * {
+    box-sizing: border-box;
+}
+
+#kwlLampIntro {
+    --lamp-gold: #ffc45b;
+    position: fixed;
+    inset: 0;
+    z-index: 999999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    isolation: isolate;
+    color: #fff5df;
+    background:
+        radial-gradient(ellipse at 52% 70%,
+            rgba(116, 67, 19, .19), transparent 40%),
+        radial-gradient(ellipse at 50% 0%,
+            #242424 0%, #0b0b0b 48%, #020202 100%);
+    font-family: Arial, Helvetica, sans-serif;
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 1.1s ease, visibility 1.1s ease;
+}
+
+#kwlLampIntro.kwl-intro-exit {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.kwl-intro-stars {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image:
+        radial-gradient(circle, #ffd98b 1px, transparent 2px),
+        radial-gradient(circle, #fff1ca 1px, transparent 2px);
+    background-size: 97px 113px, 151px 167px;
+    background-position: 10px 20px, 65px 72px;
+    opacity: .28;
+    animation: kwlStars 7s linear infinite alternate;
+}
+
+.kwl-intro-floor {
+    position: absolute;
+    left: -10%;
+    right: -10%;
+    bottom: -4%;
+    height: 25%;
+    background:
+        radial-gradient(ellipse at 50% 0%,
+            rgba(255, 173, 54, .22), transparent 54%),
+        linear-gradient(180deg, #17120c, #020202 70%);
+    border-top: 1px solid rgba(255, 193, 94, .13);
+    transform: perspective(300px) rotateX(5deg);
+    pointer-events: none;
+}
+
+.kwl-intro-floor::after {
+    content: "";
+    position: absolute;
+    left: 25%;
+    right: 25%;
+    top: 0;
+    height: 100%;
+    background: radial-gradient(ellipse,
+        rgba(255, 173, 54, .18), transparent 68%);
+    filter: blur(18px);
+}
+
+.kwl-intro-layout {
+    position: relative;
+    z-index: 2;
+    width: min(1180px, 100%);
+    min-height: 100%;
+    padding: 32px;
+    display: grid;
+    grid-template-columns: 1fr minmax(230px, .9fr) 1fr;
+    align-items: center;
+    gap: 22px;
+}
+
+.kwl-intro-brand {
+    position: relative;
+    z-index: 3;
+    text-align: center;
+    animation: kwlBrandAppear 1.3s ease both;
+}
+
+.kwl-brand-crown {
+    display: block;
+    font-size: clamp(28px, 4vw, 45px);
+    margin-bottom: 6px;
+    filter: drop-shadow(0 0 12px rgba(255, 188, 74, .4));
+}
+
+.kwl-brand-name {
+    margin: 0;
+    font-size: clamp(31px, 4.1vw, 62px);
+    line-height: 1.02;
+    font-weight: 900;
+    letter-spacing: -1.5px;
+    color: #ffe1a0;
+    text-shadow:
+        0 2px 0 #a15c1b,
+        0 5px 15px rgba(255, 170, 52, .35);
+}
+
+.kwl-brand-name span {
+    display: block;
+    color: #8bd5ff;
+    text-shadow:
+        0 2px 0 #205a9a,
+        0 5px 18px rgba(63, 168, 255, .32);
+}
+
+.kwl-brand-owner {
+    margin: 19px 0 0;
+    color: #ffdc9c;
+    font-size: clamp(15px, 1.5vw, 21px);
+    font-style: italic;
+    letter-spacing: .5px;
+}
+
+.kwl-brand-line {
+    display: block;
+    width: 70%;
+    height: 2px;
+    margin: 13px auto 0;
+    border-radius: 100%;
+    background: linear-gradient(90deg, transparent, #ffc45b, transparent);
+    box-shadow: 0 0 10px rgba(255, 186, 70, .5);
+}
+
+.kwl-lamp-stage {
+    position: relative;
+    height: min(590px, 75vh);
+    min-height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    perspective: 900px;
+}
+
+.kwl-lamp-halo {
+    position: absolute;
+    width: 240px;
+    height: 360px;
+    border-radius: 50%;
+    background: #ffae32;
+    opacity: 0;
+    filter: blur(65px);
+    transform: scale(.35);
+    transition: opacity 1s ease, transform 1.3s ease;
+}
+
+.kwl-lamp-reflection {
+    position: absolute;
+    bottom: 6%;
+    width: 230px;
+    height: 48px;
+    border-radius: 50%;
+    background: #ffb43d;
+    opacity: .06;
+    filter: blur(17px);
+    transform: scaleX(.8);
+    transition: opacity 1s ease, transform 1.3s ease;
+}
+
+.kwl-lamp {
+    position: relative;
+    z-index: 2;
+    width: 210px;
+    height: 440px;
+    flex-shrink: 0;
+    cursor: pointer;
+    border: 0;
+    padding: 0;
+    background: transparent;
+    color: inherit;
+    -webkit-tap-highlight-color: transparent;
+    filter: drop-shadow(0 20px 20px rgba(0, 0, 0, .75));
+    animation: kwlLampFloat 4s ease-in-out infinite;
+}
+
+.kwl-lamp:focus-visible {
+    outline: 2px solid #ffd37a;
+    outline-offset: 12px;
+    border-radius: 18px;
+}
+
+.kwl-lamp-handle {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 50%;
+    width: 112px;
+    height: 125px;
+    border: 6px solid #171717;
+    border-bottom: 0;
+    border-radius: 70px 70px 0 0;
+    transform: translateX(-50%);
+    box-shadow:
+        inset 2px 0 2px #5c5c5c,
+        3px 0 3px #000;
+}
+
+.kwl-lamp-handle::after {
+    content: "";
+    position: absolute;
+    inset: 4px 5px 0;
+    border: 1px solid rgba(255, 192, 89, .24);
+    border-bottom: 0;
+    border-radius: 60px 60px 0 0;
+}
+
+.kwl-lamp-cap {
+    position: absolute;
+    z-index: 4;
+    top: 103px;
+    left: 50%;
+    width: 176px;
+    height: 70px;
+    transform: translateX(-50%);
+    border-radius: 40% 40% 48% 48%;
+    background: linear-gradient(100deg,
+        #080808 0%, #343434 22%, #111 54%, #050505 100%);
+    box-shadow:
+        inset 0 5px 5px rgba(255,255,255,.09),
+        0 8px 12px rgba(0,0,0,.8);
+}
+
+.kwl-lamp-cap::after {
+    content: "";
+    position: absolute;
+    left: -13px;
+    right: -13px;
+    bottom: -8px;
+    height: 18px;
+    border-radius: 50%;
+    background: linear-gradient(#47413a, #0a0a0a 65%);
+    border-bottom: 2px solid #8b642e;
+}
+
+.kwl-lamp-glass {
+    position: absolute;
+    z-index: 2;
+    top: 157px;
+    left: 50%;
+    width: 126px;
+    height: 195px;
+    transform: translateX(-50%);
+    overflow: hidden;
+    border-left: 5px solid #202020;
+    border-right: 5px solid #202020;
+    border-radius: 18px 18px 27px 27px;
+    background: linear-gradient(90deg,
+        rgba(255,255,255,.07),
+        rgba(255,255,255,.015) 25%,
+        rgba(255,255,255,.035) 70%,
+        rgba(255,255,255,.08));
+    box-shadow:
+        inset 8px 0 8px rgba(255,255,255,.025),
+        inset -8px 0 8px rgba(0,0,0,.5);
+}
+
+.kwl-lamp-glass::before,
+.kwl-lamp-glass::after {
+    content: "";
+    position: absolute;
+    top: 14px;
+    bottom: 14px;
+    width: 3px;
+    border-radius: 5px;
+    background: linear-gradient(transparent, #45413b, #111, #5c4c36, transparent);
+}
+
+.kwl-lamp-glass::before { left: 8px; }
+.kwl-lamp-glass::after { right: 8px; }
+
+.kwl-lamp-wick {
+    position: absolute;
+    left: 50%;
+    bottom: 15px;
+    width: 21px;
+    height: 155px;
+    transform: translateX(-50%);
+    border-radius: 10px 10px 2px 2px;
+    background: linear-gradient(90deg, #2b1c0b, #b17b2b 35%, #211507);
+    opacity: .45;
+    transition: all .9s ease;
+}
+
+.kwl-lamp-flame {
+    position: absolute;
+    z-index: 3;
+    left: 50%;
+    bottom: 19px;
+    width: 15px;
+    height: 112px;
+    border-radius: 60% 60% 30% 30%;
+    transform: translateX(-50%) scaleY(.04);
+    transform-origin: center bottom;
+    opacity: 0;
+    background: linear-gradient(90deg,
+        #ff9d1b, #fff6bd 45%, #fff 55%, #ffb22e);
+    box-shadow: 0 0 0 transparent;
+    transition: transform .85s cubic-bezier(.2,.8,.2,1),
+                opacity .5s ease,
+                box-shadow 1s ease;
+}
+
+.kwl-lamp-frame {
+    position: absolute;
+    z-index: 5;
+    top: 158px;
+    left: 40px;
+    width: 130px;
+    height: 198px;
+    border-left: 5px solid #171717;
+    border-right: 5px solid #171717;
+    border-radius: 12px 12px 23px 23px;
+    pointer-events: none;
+    box-shadow:
+        inset 3px 0 1px rgba(255,255,255,.08),
+        3px 0 2px rgba(0,0,0,.5);
+}
+
+.kwl-lamp-base {
+    position: absolute;
+    z-index: 6;
+    bottom: 12px;
+    left: 50%;
+    width: 172px;
+    height: 80px;
+    transform: translateX(-50%);
+    border-radius: 18px 18px 30px 30px;
+    background: linear-gradient(100deg,
+        #090909 0%, #292929 28%, #101010 60%, #030303 100%);
+    border-top: 5px solid #3b352b;
+    box-shadow:
+        inset 0 8px 9px rgba(255,255,255,.05),
+        0 12px 14px rgba(0,0,0,.8);
+}
+
+.kwl-lamp-base::before {
+    content: "";
+    position: absolute;
+    top: -10px;
+    left: 10px;
+    right: 10px;
+    height: 14px;
+    border-radius: 50%;
+    background: linear-gradient(#6b512d, #17120c 60%);
+}
+
+.kwl-lamp-switch {
+    position: absolute;
+    z-index: 7;
+    bottom: 32px;
+    left: 50%;
+    width: 29px;
+    height: 29px;
+    transform: translateX(-50%);
+    border: 3px solid #9c7338;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 25%, #444, #050505 70%);
+    box-shadow: 0 0 0 2px #080808;
+    transition: box-shadow .5s ease, background .5s ease;
+}
+
+.kwl-lamp-side-glint {
+    position: absolute;
+    z-index: 4;
+    top: 174px;
+    left: 54px;
+    width: 3px;
+    height: 125px;
+    border-radius: 10px;
+    background: rgba(255,255,255,.15);
+    filter: blur(1px);
+    pointer-events: none;
+}
+
+.kwl-tap-area {
+    position: relative;
+    z-index: 3;
+    justify-self: center;
+    width: 100%;
+    max-width: 290px;
+    text-align: center;
+    animation: kwlBrandAppear 1.4s .2s ease both;
+}
+
+.kwl-tap-button {
+    width: 100%;
+    min-height: 78px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 13px;
+    padding: 13px 18px;
+    border: 1px solid rgba(255, 199, 104, .9);
+    border-radius: 50px;
+    background: linear-gradient(130deg,
+        rgba(255, 194, 91, .12),
+        rgba(255, 255, 255, .015));
+    color: #ffe4ad;
+    font-size: 18px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    cursor: pointer;
+    box-shadow:
+        0 0 12px rgba(255, 177, 58, .2),
+        inset 0 0 12px rgba(255, 194, 91, .04);
+    animation: kwlTapPulse 1.8s ease-in-out infinite;
+}
+
+.kwl-tap-icon {
+    font-size: 27px;
+    filter: drop-shadow(0 0 7px rgba(255, 188, 71, .75));
+}
+
+.kwl-tap-caption {
+    margin: 15px 0 0;
+    color: #bcb4a5;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.kwl-tap-arrow {
+    display: block;
+    margin: 13px auto 0;
+    color: #ffc45b;
+    font-size: 32px;
+    animation: kwlArrowBounce 1.3s ease-in-out infinite;
+}
+
+/* LAMP ON — activated by JavaScript */
+
+#kwlLampIntro.kwl-lamp-on .kwl-lamp-halo {
+    opacity: .62;
+    transform: scale(1.25);
+}
+
+#kwlLampIntro.kwl-lamp-on .kwl-lamp-reflection {
+    opacity: .8;
+    transform: scaleX(1.55);
+}
+
+#kwlLampIntro.kwl-lamp-on .kwl-lamp-flame {
+    opacity: 1;
+    transform: translateX(-50%) scaleY(1);
+    box-shadow:
+        0 0 12px 5px #fff5c4,
+        0 0 28px 14px #ffc247,
+        0 0 65px 28px rgba(255, 151, 24, .8),
+        0 0 110px 48px rgba(255, 171, 45, .48);
+    animation: kwlFlameFlicker .14s ease-in-out infinite alternate;
+}
+
+#kwlLampIntro.kwl-lamp-on .kwl-lamp-wick {
+    background: linear-gradient(90deg, #6c390a, #fff0a5 45%, #d47a16);
+    box-shadow: 0 0 22px #ffb72d;
+}
+
+#kwlLampIntro.kwl-lamp-on .kwl-lamp-glass {
+    background: linear-gradient(90deg,
+        rgba(255,177,54,.2),
+        rgba(255,248,211,.08),
+        rgba(255,177,54,.19));
+    box-shadow:
+        inset 0 0 25px rgba(255,187,65,.28),
+        0 0 22px rgba(255,163,40,.5);
+}
+
+#kwlLampIntro.kwl-lamp-on .kwl-lamp-switch {
+    background: radial-gradient(circle, #fff4b4, #ffae24 65%, #7e4810);
+    box-shadow: 0 0 20px 7px rgba(255,173,43,.8);
+}
+
+#kwlLampIntro.kwl-lamp-on .kwl-tap-button {
+    animation: none;
+    color: #fff5cf;
+    background: rgba(255, 188, 70, .17);
+    box-shadow:
+        0 0 28px rgba(255, 183, 63, .65),
+        inset 0 0 18px rgba(255, 216, 128, .12);
+}
+
+.kwl-light-beam {
+    position: absolute;
+    z-index: 1;
+    left: 50%;
+    top: 29%;
+    width: 0;
+    height: 0;
+    opacity: 0;
+    transform: translateX(-50%);
+    border-left: 90px solid transparent;
+    border-right: 90px solid transparent;
+    border-bottom: 360px solid rgba(255, 191, 77, .1);
+    filter: blur(18px);
+    transition: opacity 1s ease, transform 1.2s ease;
+    pointer-events: none;
+}
+
+#kwlLampIntro.kwl-lamp-on .kwl-light-beam {
+    opacity: 1;
+    transform: translateX(-50%) scale(1.8);
+}
+
+.kwl-screen-flash {
+    position: absolute;
+    z-index: 10;
+    inset: 0;
+    opacity: 0;
+    background: #fff0b7;
+    pointer-events: none;
+}
+
+#kwlLampIntro.kwl-flash .kwl-screen-flash {
+    animation: kwlScreenFlash .95s ease-out forwards;
+}
+
+.kwl-light-particle {
+    position: absolute;
+    z-index: 4;
+    left: var(--px);
+    top: var(--py);
+    width: var(--ps);
+    height: var(--ps);
+    border-radius: 50%;
+    background: #ffd77b;
+    opacity: 0;
+    box-shadow: 0 0 10px 2px rgba(255,190,66,.8);
+    pointer-events: none;
+}
+
+#kwlLampIntro.kwl-lamp-on .kwl-light-particle {
+    animation: kwlParticleRise var(--pd) ease-out var(--delay) infinite;
+}
+
+@keyframes kwlStars {
+    from { transform: translateY(0); opacity: .18; }
+    to { transform: translateY(-18px); opacity: .4; }
+}
+
+@keyframes kwlLampFloat {
+    0%, 100% { transform: translateY(0) rotateY(-2deg); }
+    50% { transform: translateY(-7px) rotateY(2deg); }
+}
+
+@keyframes kwlBrandAppear {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes kwlTapPulse {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 0 12px rgba(255,177,58,.2);
+    }
+    50% {
+        transform: scale(1.035);
+        box-shadow: 0 0 27px rgba(255,177,58,.5);
+    }
+}
+
+@keyframes kwlArrowBounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(7px); }
+}
+
+@keyframes kwlFlameFlicker {
+    from { filter: brightness(1); }
+    to { filter: brightness(1.25); }
+}
+
+@keyframes kwlScreenFlash {
+    0% { opacity: 0; }
+    25% { opacity: .78; }
+    100% { opacity: 0; }
+}
+
+@keyframes kwlParticleRise {
+    0% { opacity: 0; transform: translateY(15px) scale(.5); }
+    20% { opacity: .9; }
+    100% { opacity: 0; transform: translateY(-120px) scale(0); }
+}
+
+/* PHONE LAYOUT */
+@media (max-width: 760px) {
+    .kwl-intro-layout {
+        width: 100%;
+        min-height: 100%;
+        padding: 24px 16px 20px;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto minmax(270px, 1fr) auto;
+        gap: 0;
+        align-content: center;
+    }
+
+    .kwl-intro-brand {
+        align-self: end;
+        padding-top: 8px;
+    }
+
+    .kwl-brand-crown {
+        font-size: 25px;
+        margin-bottom: 4px;
+    }
+
+    .kwl-brand-name {
+        font-size: clamp(30px, 9vw, 45px);
+        letter-spacing: -1px;
+    }
+
+    .kwl-brand-owner {
+        margin-top: 8px;
+        font-size: 15px;
+    }
+
+    .kwl-brand-line {
+        margin-top: 8px;
+        width: 48%;
+    }
+
+    .kwl-lamp-stage {
+        height: 100%;
+        min-height: 290px;
+        max-height: 390px;
+        margin: 0 auto;
+        width: 100%;
+    }
+
+    .kwl-lamp {
+        transform: scale(.77);
+        transform-origin: center center;
+        margin: -20px 0;
+    }
+
+    .kwl-lamp-halo {
+        width: 190px;
+        height: 270px;
+    }
+
+    .kwl-tap-area {
+        align-self: start;
+        max-width: 270px;
+        margin: 0 auto 10px;
+    }
+
+    .kwl-tap-button {
+        min-height: 58px;
+        font-size: 16px;
+        padding: 10px 15px;
+    }
+
+    .kwl-tap-caption {
+        margin-top: 8px;
+        font-size: 12px;
+    }
+
+    .kwl-tap-arrow {
+        display: none;
+    }
+
+    .kwl-intro-floor {
+        height: 18%;
+    }
+}
+
+@media (max-width: 380px) {
+    .kwl-intro-layout {
+        padding: 17px 12px;
+        grid-template-rows: auto minmax(245px, 1fr) auto;
+    }
+
+    .kwl-brand-name {
+        font-size: 29px;
+    }
+
+    .kwl-lamp {
+        transform: scale(.68);
+    }
+
+    .kwl-lamp-stage {
+        min-height: 255px;
+    }
+
+    .kwl-tap-button {
+        min-height: 54px;
+        font-size: 14px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    #kwlLampIntro *,
+    #kwlLampIntro *::before,
+    #kwlLampIntro *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+    }
+}
+</style>
+
+
 </head>
 
 
 <body>
+
+    
+<!-- =========================================
+     KIDS LEARNING WORLD — LAMP INTRO HTML
+========================================= -->
+
+<div id="kwlLampIntro" role="dialog" aria-label="Kids Learning World intro">
+    <div class="kwl-intro-stars" aria-hidden="true"></div>
+    <div class="kwl-intro-floor" aria-hidden="true"></div>
+    <div class="kwl-screen-flash" aria-hidden="true"></div>
+
+    <div class="kwl-intro-layout">
+
+        <!-- WEBSITE BRAND -->
+        <section class="kwl-intro-brand">
+            <span class="kwl-brand-crown" aria-hidden="true">♛</span>
+            <h1 class="kwl-brand-name">
+                Kids
+                <span>Learning</span>
+                World
+            </h1>
+            <p class="kwl-brand-owner">by Dalesh Raghav 🎀</p>
+            <span class="kwl-brand-line"></span>
+        </section>
+
+        <!-- LAMP -->
+        <section class="kwl-lamp-stage" aria-label="Magic lamp">
+            <div class="kwl-lamp-halo" aria-hidden="true"></div>
+            <div class="kwl-light-beam" aria-hidden="true"></div>
+            <div class="kwl-lamp-reflection" aria-hidden="true"></div>
+
+            <button
+                type="button"
+                class="kwl-lamp"
+                id="kwlLampButton"
+                aria-label="Turn on the magic lamp"
+            >
+                <span class="kwl-lamp-handle"></span>
+                <span class="kwl-lamp-cap"></span>
+
+                <span class="kwl-lamp-glass">
+                    <span class="kwl-lamp-wick"></span>
+                    <span class="kwl-lamp-flame"></span>
+                </span>
+
+                <span class="kwl-lamp-frame"></span>
+                <span class="kwl-lamp-side-glint"></span>
+                <span class="kwl-lamp-base"></span>
+                <span class="kwl-lamp-switch"></span>
+            </button>
+        </section>
+
+        <!-- TAP PROMPT -->
+        <section class="kwl-tap-area">
+            <button
+                type="button"
+                class="kwl-tap-button"
+                id="kwlTapButton"
+            >
+                <span class="kwl-tap-icon" aria-hidden="true">☝</span>
+                <span id="kwlTapText">TAP TO LAMP</span>
+            </button>
+
+            <p class="kwl-tap-caption">
+                Turn on the magic light<br>
+                and begin your learning journey!
+            </p>
+
+            <span class="kwl-tap-arrow" aria-hidden="true">↙</span>
+        </section>
+
+    </div>
+</div>
 
 
     <!-- =========================================================
@@ -680,6 +1472,71 @@
     ========================================================== -->
 
     <script
+        
+<script>
+/* =========================================
+   KIDS LEARNING WORLD — LAMP INTRO LOGIC
+========================================= */
+(function () {
+    "use strict";
+
+    const intro = document.getElementById("kwlLampIntro");
+    const lamp = document.getElementById("kwlLampButton");
+    const tapButton = document.getElementById("kwlTapButton");
+    const tapText = document.getElementById("kwlTapText");
+
+    if (!intro || !lamp || !tapButton) return;
+
+    // Create lightweight golden floating particles.
+    for (let i = 0; i < 22; i++) {
+        const particle = document.createElement("span");
+        particle.className = "kwl-light-particle";
+
+        particle.style.setProperty("--px", (5 + Math.random() * 90) + "%");
+        particle.style.setProperty("--py", (25 + Math.random() * 65) + "%");
+        particle.style.setProperty("--ps", (2 + Math.random() * 4) + "px");
+        particle.style.setProperty("--pd", (2.2 + Math.random() * 2.8) + "s");
+        particle.style.setProperty("--delay", (Math.random() * 3) + "s");
+
+        intro.appendChild(particle);
+    }
+
+    let lampActivated = false;
+
+    function turnOnLamp() {
+        // Prevent repeated clicks from restarting the animation.
+        if (lampActivated) return;
+        lampActivated = true;
+
+        intro.classList.add("kwl-lamp-on");
+        lamp.setAttribute("aria-label", "Magic lamp is glowing");
+        tapButton.setAttribute("disabled", "disabled");
+
+        if (tapText) {
+            tapText.textContent = "MAGIC ACTIVATED!";
+        }
+
+        // Let the bright golden glow build up first.
+        window.setTimeout(function () {
+            intro.classList.add("kwl-flash");
+        }, 1650);
+
+        // Fade out the intro and reveal the existing home page.
+        window.setTimeout(function () {
+            intro.classList.add("kwl-intro-exit");
+        }, 2600);
+
+        // Remove the overlay so existing page controls work normally.
+        window.setTimeout(function () {
+            intro.remove();
+        }, 3800);
+    }
+
+    lamp.addEventListener("click", turnOnLamp);
+    tapButton.addEventListener("click", turnOnLamp);
+})();
+</script>
+
         src="{{ url_for('static', filename='script.js') }}?v=4">
     </script>
 
